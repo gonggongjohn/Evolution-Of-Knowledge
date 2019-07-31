@@ -1,0 +1,16 @@
+[
+{
+  "modid": "eok",
+  "name": "Evolution Of Knowledge",
+  "description": "A MC Mod Giving A Panoramic Overview Of S&T Evolution In Human History.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["GONGGONGJOHN","Os-Ir","zi_jing"],
+  "credits": "Mojang and Forge Development Team",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
