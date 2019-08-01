@@ -21,39 +21,47 @@ import java.io.IOException;
 import java.util.List;
 
 public class GUIRefractingTelescope extends GuiContainer {
-    public static final String TEXTURE_PATH = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
-    public static final ResourceLocation TEXTURE = new ResourceLocation(TEXTURE_PATH);
+    public static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
+    public static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
+    public static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
+    public static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
     private Slot paperSlot;
 
     public GUIRefractingTelescope(ContainerRefractingTelescope inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 256;
-        this.ySize = 240;
+        this.ySize = 256;
         this.paperSlot = inventorySlotsIn.getPaperSlot();
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(TEXTURE);
+        this.mc.getTextureManager().bindTexture(TEXTUREBACK);
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
-        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
     public void initGui(){
         super.initGui();
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + 195, offsetY + 180, 45, 8, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + 10, offsetY + 200, 18, 18, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks){
                 if(this.visible){
                     GlStateManager.color(1.0F, 1.0F, 1.0F);
-                    mc.getTextureManager().bindTexture(TEXTURE);
-                    this.drawTexturedModalRect(this.x, this.y, 0, 248, this.width, this.height);
+                    mc.getTextureManager().bindTexture(TEXTURECOMP);
+                    this.drawTexturedModalRect(this.x, this.y, 0, 0, this.width, this.height);
                 }
             }
         });
@@ -68,21 +76,10 @@ public class GUIRefractingTelescope extends GuiContainer {
             int temp;
             if(compound == null) {
                 temp = 0;
-                compound = new NBTTagCompound();
             }
             else temp = compound.getInteger("data.universe");
             final int num = temp + 1;
-            Item paperTT = new ItemPapyrus(){
-                @Override
-                public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
-                    tooltip.add("Experiment Data:Universe x " + num);
-                }
-            };
-            ItemStack stackTT = new ItemStack(paperTT);
-            compound.setInteger("data.universe", num);
-            stackTT.setTagCompound(compound);
 
-            this.paperSlot.putStack(stackTT);
         }
     }
 }

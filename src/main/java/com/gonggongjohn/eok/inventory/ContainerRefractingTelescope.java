@@ -15,7 +15,7 @@ public class ContainerRefractingTelescope extends Container {
     public ContainerRefractingTelescope(EntityPlayer player) {
         super();
 
-        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(items, 0, 18, 19){
+        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(items, 0, 205, 235){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
@@ -23,7 +23,7 @@ public class ContainerRefractingTelescope extends Container {
         });
 
         for(int i = 0; i < 9; ++i){
-            this.addSlotToContainer(new Slot(player.inventory, i, 46 + i * 18, 214));
+            this.addSlotToContainer(new Slot(player.inventory, i, 40 + i * 18, 235));
         }
     }
 
