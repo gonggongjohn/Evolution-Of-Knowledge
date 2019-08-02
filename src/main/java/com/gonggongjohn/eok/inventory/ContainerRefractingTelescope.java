@@ -5,10 +5,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerRefractingTelescope extends Container {
+public class ContainerRefractingTelescope extends Container implements IButtonHandler{
     protected Slot paperSlot;
     private ItemStackHandler items = new ItemStackHandler(1);
 
@@ -49,7 +50,26 @@ public class ContainerRefractingTelescope extends Container {
         }
     }
 
-    public Slot getPaperSlot(){
-        return this.paperSlot;
+    public void updateSlot(){
+        ItemStack stack = this.paperSlot.getStack();
+        if(stack == null| stack.isEmpty()) return;
+        NBTTagCompound compound = stack.getTagCompound();
+        int temp;
+        if(compound == null) {
+            temp = 0;
+            compound = new NBTTagCompound();
+        }
+        else temp = compound.getInteger("data.universe");
+        compound.setInteger("data.universe", ++temp);
+        stack.setTagCompound(compound);
+        this.paperSlot.putStack(stack);
+    }
+
+    @Override
+    public void onButtonPress(int buttonID) {
+        System.out.println("1243124213421354235213532151253151");
+        if(buttonID == 0){
+            updateSlot();
+        }
     }
 }

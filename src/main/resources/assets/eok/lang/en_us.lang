@@ -5,3 +5,5 @@ item.convexLens.name=Convex Lens
 item.concaveLens.name=Concave Lens
 
 itemGroup.eoktab=Evolution Of Knowledge
+
+tooltip.data.universe=Universe Observation Data x %d

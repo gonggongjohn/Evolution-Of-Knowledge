@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.client.gui;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import com.gonggongjohn.eok.items.ItemPapyrus;
+import com.gonggongjohn.eok.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -25,13 +26,13 @@ public class GUIRefractingTelescope extends GuiContainer {
     public static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
     public static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
     public static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    private Slot paperSlot;
+    public ContainerRefractingTelescope containerRT;
 
     public GUIRefractingTelescope(ContainerRefractingTelescope inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 256;
         this.ySize = 256;
-        this.paperSlot = inventorySlotsIn.getPaperSlot();
+        this.containerRT = inventorySlotsIn;
     }
 
     @Override
@@ -70,16 +71,7 @@ public class GUIRefractingTelescope extends GuiContainer {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0){
-            ItemStack stack = this.paperSlot.getStack();
-            if(stack == null| stack.isEmpty()) return;
-            NBTTagCompound compound = stack.getTagCompound();
-            int temp;
-            if(compound == null) {
-                temp = 0;
-            }
-            else temp = compound.getInteger("data.universe");
-            final int num = temp + 1;
-
+            EOK.getNetwork().sendToServer(new PacketGuiButton(button.id));
         }
     }
 }
