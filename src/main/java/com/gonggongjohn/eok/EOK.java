@@ -1,8 +1,8 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.hardcoremc.HardcoreMC;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 
-import hardcoremc.HardcoreMC;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;

@@ -1,4 +1,4 @@
-package hardcoremc;
+package com.gonggongjohn.eok.hardcoremc;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
