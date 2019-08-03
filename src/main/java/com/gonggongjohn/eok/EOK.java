@@ -1,6 +1,8 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.hardcoremc.HardcoreMC;
 import com.gonggongjohn.eok.network.PacketGuiButton;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
@@ -43,6 +45,7 @@ public class EOK
     public void init(FMLInitializationEvent event)
     {
         proxy.init(event);
+        HardcoreMC.setup();
     }
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event){
