@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok;
 
-import com.gonggongjohn.eok.hardcoremc.HardcoreMC;
 import com.gonggongjohn.eok.network.PacketGuiButton;
+import com.gonggongjohn.eok.tweakers.TweakersMain;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -45,7 +45,7 @@ public class EOK
     public void init(FMLInitializationEvent event)
     {
         proxy.init(event);
-        HardcoreMC.setup();
+        TweakersMain.setup();
     }
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event){

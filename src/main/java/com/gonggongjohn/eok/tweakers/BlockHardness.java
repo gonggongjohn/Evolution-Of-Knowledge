@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.hardcoremc;
+package com.gonggongjohn.eok.tweakers;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
