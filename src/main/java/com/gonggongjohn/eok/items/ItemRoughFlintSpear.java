@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /*
  * 警告：
- * 这只是一段临时代码
+ * 这只是一段临时代码，以后要重写
  * 大多数内容都是直接从net.minecraft.item.ItemSword里复制来的
  */
 
