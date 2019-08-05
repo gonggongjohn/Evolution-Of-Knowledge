@@ -2,6 +2,7 @@ package com.gonggongjohn.eok.tweakers;
 
 import java.util.ArrayList;
 
+import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.utils.ListAxes;
 
 import net.minecraft.init.Blocks;
@@ -13,6 +14,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class TreeTweaker {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void BreakSpeed(PlayerEvent.BreakSpeed event) {
+		if (ConfigHandler.disableBareHandedCuttingOfTrees == false)
+			return;
+		
 		if (!(event.getState().getBlock() == Blocks.LOG || event.getState().getBlock() == Blocks.LOG2))
 			return;
 		
