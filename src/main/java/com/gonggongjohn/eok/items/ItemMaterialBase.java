@@ -2,9 +2,10 @@ package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
+import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.item.Item;
 
-public class ItemMaterialBase extends Item implements IHasModel{
+public class ItemMaterialBase extends Item implements IHasModel {
     public ItemMaterialBase(String name){
         this.setUnlocalizedName(name);
         this.setRegistryName(name);

@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.items;
+package com.gonggongjohn.eok.utils;
 
 public interface IHasModel {
     public void registerModel();

@@ -1,14 +1,18 @@
 item.papyrus.name=Papyrus
-item.refractingTelescope.name=Refracting Telescope
+item.refracting_telescope.name=Refracting Telescope
 item.flint_fragment.name=Flint Fragment
 item.chipped_flint_fragment.name=Chipped Flint Fragment
 item.polished_flint_fragment.name=Polished Flint Fragment
 
-item.convexLens.name=Convex Lens
-item.concaveLens.name=Concave Lens
+item.convex_lens.name=Convex Lens
+item.concave_lens.name=Concave Lens
 item.eok_symbol.name=The EOK Symbol
 item.plant_fiber.name=Plant Fiber
 item.short_stick.name=Short Stick
+item.tube.name=Tube
+item.rubber_mat.name=Rubber Mat
+
+tile.stone_table.name=Stone Table
 
 itemGroup.eoktab=Evolution Of Knowledge
 

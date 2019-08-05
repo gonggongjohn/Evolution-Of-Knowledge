@@ -2,10 +2,10 @@ package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-import net.minecraft.creativetab.CreativeTabs;
+import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.item.Item;
 
-public class ItemPapyrus extends Item implements IHasModel{
+public class ItemPapyrus extends Item implements IHasModel {
     private final String name = "papyrus";
     public ItemPapyrus(){
         this.setUnlocalizedName(name);

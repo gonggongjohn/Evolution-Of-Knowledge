@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "eok:items/concavelens"
+    "layer0": "eok:items/refracting_telescope"
   }
 }

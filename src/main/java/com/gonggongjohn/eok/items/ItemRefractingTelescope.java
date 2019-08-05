@@ -3,7 +3,7 @@ package com.gonggongjohn.eok.items;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-import net.minecraft.creativetab.CreativeTabs;
+import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemRefractingTelescope extends Item implements IHasModel {
-    private final String name = "refractingTelescope";
+    private final String name = "refracting_telescope";
     public ItemRefractingTelescope(){
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
