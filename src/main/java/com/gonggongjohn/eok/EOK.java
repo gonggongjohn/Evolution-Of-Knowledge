@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok;
 
+import org.apache.logging.log4j.core.Logger;
+
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
@@ -29,13 +31,15 @@ public class EOK
     public static CommonProxy proxy;
 
     public static final CreativeTabs tabEOK = new EOKTab();
+	private static org.apache.logging.log4j.Logger logger;
 
     private SimpleNetworkWrapper network;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-		proxy.preInit(event);
+		logger = event.getModLog();
+    	proxy.preInit(event);
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
@@ -58,5 +62,9 @@ public class EOK
 
     public static SimpleNetworkWrapper getNetwork(){
         return instance.network;
+    }
+    
+    public static org.apache.logging.log4j.Logger getLogger() {
+    	return logger;
     }
 }

@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok.tweakers;
 
+import com.gonggongjohn.eok.handlers.ConfigHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
@@ -17,6 +19,8 @@ public class BlockHardness {
 	//大多数机器硬度为5
 	
 	public static void setup() {
+		if(ConfigHandler.modifyBlockHardness == false)
+			return;
 		tweakModBlocks();
 		tweakVanillaBlocks();
 	}

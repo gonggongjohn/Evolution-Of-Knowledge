@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,36 +12,33 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
-    public void preInit(FMLPreInitializationEvent event){
+	public void preInit(FMLPreInitializationEvent event) {
+		new ConfigHandler(event);
+	}
 
-    }
+	public void init(FMLInitializationEvent event) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(EOK.instance, new GUIHandler());
+	}
 
-    public void init(FMLInitializationEvent event){
-        NetworkRegistry.INSTANCE.registerGuiHandler(EOK.instance, new GUIHandler());
-    }
+	public void postInit(FMLPostInitializationEvent event) {
 
-    public void postInit(FMLPostInitializationEvent event){
+	}
 
-    }
+	public void registerItemRenderer(Item item, int meta, String id) {
 
-    public void registerItemRenderer(Item item, int meta, String id){
+	}
 
-    }
+	public IThreadListener getThreadListener(MessageContext context) {
+		if (context.side.isServer()) {
+			return context.getServerHandler().player.mcServer;
+		} else
+			return null;
+	}
 
-    public IThreadListener getThreadListener(MessageContext context)
-    {
-        if (context.side.isServer())
-        {
-            return context.getServerHandler().player.mcServer;
-        }
-        else return null;
-    }
-
-    public EntityPlayer getPlayer(MessageContext context){
-        if (context.side.isServer())
-        {
-            return context.getServerHandler().player;
-        }
-        else return null;
-    }
+	public EntityPlayer getPlayer(MessageContext context) {
+		if (context.side.isServer()) {
+			return context.getServerHandler().player;
+		} else
+			return null;
+	}
 }
