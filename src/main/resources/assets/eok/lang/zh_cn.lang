@@ -3,6 +3,7 @@ item.refracting_telescope.name=折射望远镜
 item.flint_fragment.name=燧石碎片
 item.chipped_flint_fragment.name=打制过的燧石碎片
 item.polished_flint_fragment.name=磨制过的燧石碎片
+item.rough_flint_spear.name=粗制燧石矛
 
 item.convex_lens.name=凸透镜
 item.concave_lens.name=凹透镜
@@ -11,6 +12,8 @@ item.plant_fiber.name=植物纤维
 item.short_stick.name=短木棍
 item.tube.name=试管
 item.rubber_mat.name=橡胶垫
+item.simple_hemp_rope.name=简易麻绳
+item.strong_hemp_rope.name=坚固麻绳
 
 tile.stone_table.name=石桌
 

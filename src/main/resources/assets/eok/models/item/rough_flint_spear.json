@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "eok:items/rough_flint_spear"
+    }
+}

@@ -22,6 +22,7 @@ public class BlockStoneTable extends Block implements IHasModel {
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
+        this.setHardness(5.0F);
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
     }
