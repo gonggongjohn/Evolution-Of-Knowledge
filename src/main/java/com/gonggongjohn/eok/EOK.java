@@ -27,7 +27,7 @@ public class EOK
     @Mod.Instance
     public static EOK instance;
 
-    @SidedProxy(clientSide = "com.gonggongjohn.eok.ClientProxy", serverSide = "com.gonggongjohn.eok.CommonProoxy")
+    @SidedProxy(clientSide = "com.gonggongjohn.eok.ClientProxy", serverSide = "com.gonggongjohn.eok.CommonProxy")
     public static CommonProxy proxy;
 
     public static final CreativeTabs tabEOK = new EOKTab();

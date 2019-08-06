@@ -21,3 +21,4 @@ tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
 itemGroup.eoktab=Evolution Of Knowledge
 
 tooltip.data.universe=Universe Observation Data x %d
+tooltip.item.rough_flint_spear=§aAttack damage: §d%1f(%2f hearts)

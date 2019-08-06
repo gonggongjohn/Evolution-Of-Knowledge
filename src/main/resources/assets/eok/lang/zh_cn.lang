@@ -21,3 +21,4 @@ tile.two_barrel_vacuum_pump.name=双筒真空泵
 itemGroup.eoktab=从无知到先知
 
 tooltip.data.universe=宇宙观测数据 x %d
+tooltip.item.rough_flint_spear=§a攻击伤害: §d%1f(%2f 心)
