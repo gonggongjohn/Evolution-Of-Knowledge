@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import net.minecraft.init.Items;
 
 public class ListAxes extends ArrayList{
+	
+	/*
+	 * 等待重写
+	 */
+	
 	public ListAxes() {
 		this.add(Items.WOODEN_AXE);
 		this.add(Items.IRON_AXE);
