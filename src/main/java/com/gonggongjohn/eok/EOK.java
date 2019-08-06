@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import org.apache.logging.log4j.core.Logger;
 
 import com.gonggongjohn.eok.network.PacketGuiButton;
@@ -40,6 +41,7 @@ public class EOK
     {
 		logger = event.getModLog();
     	proxy.preInit(event);
+    	CapabilityHandler.setupCapabilities();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
