@@ -5,7 +5,6 @@ import java.util.List;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-import com.gonggongjohn.eok.utils.ToolMaterials;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
