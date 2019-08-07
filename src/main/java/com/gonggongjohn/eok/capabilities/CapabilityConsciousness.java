@@ -35,6 +35,10 @@ public class CapabilityConsciousness {
     public static class Implementation implements IConsciousness{
         private float conV;
 
+        public Implementation() {
+            this.conV = 100.0F;
+        }
+
         @Override
         public float getConsciousnessValue() {
             return this.conV;

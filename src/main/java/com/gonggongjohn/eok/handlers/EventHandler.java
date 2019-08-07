@@ -6,10 +6,12 @@ import com.gonggongjohn.eok.capabilities.IConsciousness;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -56,6 +58,14 @@ public class EventHandler {
         if(event.getOriginal().hasCapability(capability, null) && event.getEntityPlayer().hasCapability(capability, null)){
             NBTBase nbt = storage.writeNBT(capability, event.getOriginal().getCapability(capability, null), null);
             storage.readNBT(capability, event.getEntityPlayer().getCapability(capability, null), null, nbt);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
+        if (event.player instanceof EntityPlayerMP)
+        {
+            CapabilityConsciousness.Implementation consciousness = new CapabilityConsciousness.Implementation();
         }
     }
 }

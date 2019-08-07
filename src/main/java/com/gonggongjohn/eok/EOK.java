@@ -1,6 +1,8 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.core.Logger;
 
 import com.gonggongjohn.eok.network.PacketGuiButton;
@@ -52,6 +54,7 @@ public class EOK
     {
         proxy.init(event);
         TweakersMain.setup();
+        MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
     }
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event){
