@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
@@ -16,42 +17,38 @@ public class CapabilityConsciousness {
         @Nullable
         @Override
         public NBTBase writeNBT(Capability<IConsciousness> capability, IConsciousness instance, EnumFacing side) {
-            NBTTagList list = new NBTTagList();
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setFloat("consciousness", instance.getConsciousnessValue());
-            list.set(0, compound);
-            return list;
+            compound.setDouble("consciousness", instance.getConsciousnessValue());
+            return compound;
         }
 
         @Override
         public void readNBT(Capability<IConsciousness> capability, IConsciousness instance, EnumFacing side, NBTBase nbt) {
-            NBTTagList list = (NBTTagList) nbt;
-            NBTTagCompound compound = list.getCompoundTagAt(0);
-            float conV = compound.getFloat("consciousness");
+            NBTTagCompound compound =(NBTTagCompound) nbt;
+            double conV = 100.0D;
+            if(compound.hasKey("consciousness")) {
+                conV = compound.getDouble("consciousness");
+            }
             instance.setConsciousnessValue(conV);
         }
     }
 
     public static class Implementation implements IConsciousness{
-        private float conV;
-
-        public Implementation() {
-            this.conV = 100.0F;
-        }
+        private double conV = 100.0D;
 
         @Override
-        public float getConsciousnessValue() {
+        public double getConsciousnessValue() {
             return this.conV;
         }
 
         @Override
-        public void setConsciousnessValue(float conV) {
+        public void setConsciousnessValue(double conV) {
             this.conV = conV;
         }
 
     }
 
-    public static class ProvidePlayer implements ICapabilitySerializable<NBTTagCompound>{
+    public static class ProvidePlayer implements ICapabilitySerializable<NBTTagCompound>, ICapabilityProvider {
         private IConsciousness consciousness = new Implementation();
         private Capability.IStorage<IConsciousness> storage = CapabilityHandler.capConsciousness.getStorage();
 
@@ -80,8 +77,8 @@ public class CapabilityConsciousness {
 
         @Override
         public void deserializeNBT(NBTTagCompound nbt) {
-            NBTTagList list = (NBTTagList) nbt.getTag("consciousness");
-            storage.readNBT(CapabilityHandler.capConsciousness, consciousness, null, list);
+            NBTTagCompound compound = nbt.getCompoundTag("consciousness");
+            storage.readNBT(CapabilityHandler.capConsciousness, consciousness, null, compound);
         }
     }
 }

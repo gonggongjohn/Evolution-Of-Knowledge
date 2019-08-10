@@ -33,7 +33,7 @@ public class PlayerVitalSigns {
             int width = resolution.getScaledWidth();
             int height = resolution.getScaledHeight();
             EntityPlayerSP player = Minecraft.getMinecraft().player;
-            float conV = 1.0F;
+            double conV = 0.0F;
             if(player.hasCapability(CapabilityHandler.capConsciousness, null)) {
                 IConsciousness consciousness = (IConsciousness) player.getCapability(CapabilityHandler.capConsciousness, null);
                 conV = consciousness.getConsciousnessValue();
@@ -43,10 +43,12 @@ public class PlayerVitalSigns {
         }
     }
 
-    private void drawConsciousness(int width, int height, float conV){
-        int left = width /2 + 10;
+    private void drawConsciousness(int width, int height, double conV){
+        int left = width - 50;
         int top = height - GuiIngameForge.right_height;
+        drawTexturedModalRect(left - 20, top - 2, 0, 19, 16, 10);
         drawTexturedModalRect(left, top, 0, 48, 48, 6);
+        drawTexturedModalRect(left, top, 0, 68, (int)(46 * (conV / 100.0F)), 5);
     }
 
     private static void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height)

@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityConsciousness;
 import com.gonggongjohn.eok.capabilities.IConsciousness;
+import com.gonggongjohn.eok.network.PacketConsciousness;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,30 +43,4 @@ public class EventHandler {
         }
     }
 
-    @SubscribeEvent
-    public void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event){
-        if(event.getObject() instanceof EntityPlayer){
-            ICapabilitySerializable<NBTTagCompound> provider = new CapabilityConsciousness.ProvidePlayer();
-            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), provider);
-        }
-    }
-
-    @SubscribeEvent
-    public void onPlayerClone(PlayerEvent.Clone event){
-        Capability<IConsciousness> capability = CapabilityHandler.capConsciousness;
-        Capability.IStorage<IConsciousness> storage = capability.getStorage();
-
-        if(event.getOriginal().hasCapability(capability, null) && event.getEntityPlayer().hasCapability(capability, null)){
-            NBTBase nbt = storage.writeNBT(capability, event.getOriginal().getCapability(capability, null), null);
-            storage.readNBT(capability, event.getEntityPlayer().getCapability(capability, null), null, nbt);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
-        if (event.player instanceof EntityPlayerMP)
-        {
-            CapabilityConsciousness.Implementation consciousness = new CapabilityConsciousness.Implementation();
-        }
-    }
 }

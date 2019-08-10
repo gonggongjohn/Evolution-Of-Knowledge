@@ -1,7 +1,9 @@
 package com.gonggongjohn.eok;
 
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
+import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import com.gonggongjohn.eok.network.PacketConsciousness;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.core.Logger;
 
@@ -43,10 +45,12 @@ public class EOK
     {
 		logger = event.getModLog();
     	proxy.preInit(event);
+    	MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
     	CapabilityHandler.setupCapabilities();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
+		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
     }
 
     @EventHandler
