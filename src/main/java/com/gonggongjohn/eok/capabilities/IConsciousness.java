@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.capabilities;
 
 public interface IConsciousness {
-    public float getConsciousnessValue();
-    public void setConsciousnessValue(float conV);
+    public double getConsciousnessValue();
+    public void setConsciousnessValue(double conV);
 }

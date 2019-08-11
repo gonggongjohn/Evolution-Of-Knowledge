@@ -1,11 +1,14 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
+import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import com.gonggongjohn.eok.network.PacketConsciousness;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.core.Logger;
 
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
-import com.gonggongjohn.eok.utils.EOKToolMaterials;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -42,10 +45,12 @@ public class EOK
     {
 		logger = event.getModLog();
     	proxy.preInit(event);
+    	MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
     	CapabilityHandler.setupCapabilities();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
+		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
     }
 
     @EventHandler
@@ -53,6 +58,7 @@ public class EOK
     {
         proxy.init(event);
         TweakersMain.setup();
+        MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
     }
 	@EventHandler
     public void postInit(FMLPostInitializationEvent event){

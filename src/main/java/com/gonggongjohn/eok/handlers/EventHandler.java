@@ -3,16 +3,16 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityConsciousness;
 import com.gonggongjohn.eok.capabilities.IConsciousness;
-import com.gonggongjohn.eok.utils.EOKToolMaterials;
-
+import com.gonggongjohn.eok.network.PacketConsciousness;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -43,24 +43,4 @@ public class EventHandler {
         }
     }
 
-    
-    
-    @SubscribeEvent
-    public void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event){
-        if(event.getObject() instanceof EntityPlayer){
-            ICapabilitySerializable<NBTTagCompound> provider = new CapabilityConsciousness.ProvidePlayer();
-            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), provider);
-        }
-    }
-
-    @SubscribeEvent
-    public void onPlayerClone(PlayerEvent.Clone event){
-        Capability<IConsciousness> capability = CapabilityHandler.capConsciousness;
-        Capability.IStorage<IConsciousness> storage = capability.getStorage();
-
-        if(event.getOriginal().hasCapability(capability, null) && event.getEntityPlayer().hasCapability(capability, null)){
-            NBTBase nbt = storage.writeNBT(capability, event.getOriginal().getCapability(capability, null), null);
-            storage.readNBT(capability, event.getEntityPlayer().getCapability(capability, null), null, nbt);
-        }
-    }
 }
