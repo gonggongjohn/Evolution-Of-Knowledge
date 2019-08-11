@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.utils.EOKToolMaterials;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +15,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class ClientProxy extends CommonProxy{
     public void preInit(FMLPreInitializationEvent event){
-        super.preInit(event);
+    	EOKToolMaterials.setupClient();
+    	super.preInit(event);
     }
 
     public void init(FMLInitializationEvent event){

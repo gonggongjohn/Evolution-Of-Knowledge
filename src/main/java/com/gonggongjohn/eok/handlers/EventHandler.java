@@ -3,6 +3,8 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityConsciousness;
 import com.gonggongjohn.eok.capabilities.IConsciousness;
+import com.gonggongjohn.eok.utils.EOKToolMaterials;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -40,6 +43,8 @@ public class EventHandler {
         }
     }
 
+    
+    
     @SubscribeEvent
     public void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event){
         if(event.getObject() instanceof EntityPlayer){

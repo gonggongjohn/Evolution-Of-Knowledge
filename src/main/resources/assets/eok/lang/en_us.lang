@@ -4,6 +4,7 @@ item.flint_fragment.name=Flint Fragment
 item.chipped_flint_fragment.name=Chipped Flint Fragment
 item.polished_flint_fragment.name=Polished Flint Fragment
 item.rough_flint_spear.name=Rough Flint Spear
+item.rough_flint_axe.name=Rough Flint Axe
 
 item.convex_lens.name=Convex Lens
 item.concave_lens.name=Concave Lens
@@ -14,6 +15,7 @@ item.tube.name=Tube
 item.rubber_mat.name=Rubber Mat
 item.simple_hemp_rope.name=Simple Hemp Rope
 item.strong_hemp_rope.name=Strong Hemp Rope
+item.default_tool_axe.name=Unknown Axe
 
 tile.stone_table.name=Stone Table
 tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
@@ -22,3 +24,9 @@ itemGroup.eoktab=Evolution Of Knowledge
 
 tooltip.data.universe=Universe Observation Data x %d
 tooltip.item.rough_flint_spear=§aAttack damage: §d%1f(%2f hearts)
+tooltip.toolbase.material_name=§aMaterial: §d%1s
+tooltip.toolbase.harvest_level=§aHarvest Level: §d%2d
+tooltip.toolbase.attack_damage=§aAttack Damage: §d%5f(%6f hearts)
+tooltip.toolbase.durability=§aDurability: §d%3d / %4d 
+
+materials.CHIPPED_FLINT.name=Chipped Flint

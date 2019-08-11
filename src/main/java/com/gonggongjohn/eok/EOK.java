@@ -5,6 +5,7 @@ import org.apache.logging.log4j.core.Logger;
 
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
+import com.gonggongjohn.eok.utils.EOKToolMaterials;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;

@@ -4,6 +4,7 @@ item.flint_fragment.name=燧石碎片
 item.chipped_flint_fragment.name=打制过的燧石碎片
 item.polished_flint_fragment.name=磨制过的燧石碎片
 item.rough_flint_spear.name=粗制燧石矛
+item.rough_flint_axe.name=粗制燧石斧
 
 item.convex_lens.name=凸透镜
 item.concave_lens.name=凹透镜
@@ -14,6 +15,7 @@ item.tube.name=试管
 item.rubber_mat.name=橡胶垫
 item.simple_hemp_rope.name=简易麻绳
 item.strong_hemp_rope.name=坚固麻绳
+item.default_tool_axe.name=未知 斧
 
 tile.stone_table.name=石桌
 tile.two_barrel_vacuum_pump.name=双筒真空泵
@@ -22,3 +24,9 @@ itemGroup.eoktab=从无知到先知
 
 tooltip.data.universe=宇宙观测数据 x %d
 tooltip.item.rough_flint_spear=§a攻击伤害: §d%1f(%2f 心)
+tooltip.toolbase.material_name=§a材料: §d%1s
+tooltip.toolbase.harvest_level=§a挖掘等级: §d%2d
+tooltip.toolbase.attack_damage=§a攻击伤害: §d%5f(%6f 心)
+tooltip.toolbase.durability=§a耐久度: §d%3d / %4d 
+
+materials.CHIPPED_FLINT.name=打制的燧石
