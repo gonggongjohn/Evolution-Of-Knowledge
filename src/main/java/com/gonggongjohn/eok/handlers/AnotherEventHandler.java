@@ -2,8 +2,11 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityConsciousness;
+import com.gonggongjohn.eok.capabilities.CapabilityMindActivity;
 import com.gonggongjohn.eok.capabilities.IConsciousness;
+import com.gonggongjohn.eok.capabilities.IMindActivity;
 import com.gonggongjohn.eok.network.PacketConsciousness;
+import com.gonggongjohn.eok.network.PacketMindActivity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,19 +24,26 @@ public class AnotherEventHandler {
     @SubscribeEvent
     public void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event){
         if(event.getObject() instanceof EntityPlayer){
-            ICapabilitySerializable<NBTTagCompound> provider = new CapabilityConsciousness.ProvidePlayer();
-            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), provider);
+            ICapabilitySerializable<NBTTagCompound> providerConsciousness = new CapabilityConsciousness.ProvidePlayer();
+            ICapabilitySerializable<NBTTagCompound> providerMindActivity = new CapabilityMindActivity.ProvidePlayer();
+            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), providerConsciousness);
+            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "mindActivity"), providerMindActivity);
         }
     }
 
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event){
-        Capability<IConsciousness> capability = CapabilityHandler.capConsciousness;
-        Capability.IStorage<IConsciousness> storage = capability.getStorage();
-
-        if(event.getOriginal().hasCapability(capability, null) && event.getEntityPlayer().hasCapability(capability, null)){
-            NBTBase nbt = storage.writeNBT(capability, event.getOriginal().getCapability(capability, null), null);
-            storage.readNBT(capability, event.getEntityPlayer().getCapability(capability, null), null, nbt);
+        Capability<IConsciousness> capabilityConsciousness = CapabilityHandler.capConsciousness;
+        Capability.IStorage<IConsciousness> storageConsciousness = capabilityConsciousness.getStorage();
+        Capability<IMindActivity> capabilityMindActivity = CapabilityHandler.capMindActivity;
+        Capability.IStorage<IMindActivity> storageMindActivity = capabilityMindActivity.getStorage();
+        if(event.getOriginal().hasCapability(capabilityConsciousness, null) && event.getEntityPlayer().hasCapability(capabilityConsciousness, null)){
+            NBTBase nbt = storageConsciousness.writeNBT(capabilityConsciousness, event.getOriginal().getCapability(capabilityConsciousness, null), null);
+            storageConsciousness.readNBT(capabilityConsciousness, event.getEntityPlayer().getCapability(capabilityConsciousness, null), null, nbt);
+        }
+        if(event.getOriginal().hasCapability(capabilityMindActivity, null) && event.getEntityPlayer().hasCapability(capabilityMindActivity, null)){
+            NBTBase nbt = storageMindActivity.writeNBT(capabilityMindActivity, event.getOriginal().getCapability(capabilityMindActivity, null), null);
+            storageMindActivity.readNBT(capabilityMindActivity, event.getEntityPlayer().getCapability(capabilityMindActivity, null), null, nbt);
         }
     }
 
@@ -49,6 +59,15 @@ public class AnotherEventHandler {
 
                 message.compound = new NBTTagCompound();
                 message.compound.setTag("consciousness", storage.writeNBT(CapabilityHandler.capConsciousness, consciousness, null));
+                EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
+            }
+            if(player.hasCapability(CapabilityHandler.capMindActivity, null)){
+                PacketMindActivity message = new PacketMindActivity();
+                IMindActivity mindActivity = player.getCapability(CapabilityHandler.capMindActivity, null);
+                Capability.IStorage<IMindActivity> storage = CapabilityHandler.capMindActivity.getStorage();
+
+                message.compound = new NBTTagCompound();
+                message.compound.setTag("mindActivity", storage.writeNBT(CapabilityHandler.capMindActivity, mindActivity, null));
                 EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
             }
         }

@@ -19,6 +19,7 @@ item.default_tool_axe.name=Unknown Axe
 
 tile.stone_table.name=Stone Table
 tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
+tile.elementary_research_table.name=Elementary Research Table
 
 itemGroup.eoktab=Evolution Of Knowledge
 

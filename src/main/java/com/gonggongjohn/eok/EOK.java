@@ -3,7 +3,9 @@ package com.gonggongjohn.eok;
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import com.gonggongjohn.eok.handlers.ResearchHandler;
 import com.gonggongjohn.eok.network.PacketConsciousness;
+import com.gonggongjohn.eok.network.PacketMindActivity;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.core.Logger;
 
@@ -40,17 +42,20 @@ public class EOK
 
     private SimpleNetworkWrapper network;
 
+    public static ResearchHandler researches;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
 		logger = event.getModLog();
     	proxy.preInit(event);
     	MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
+        researches = new ResearchHandler();
     	CapabilityHandler.setupCapabilities();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
 		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
+		network.registerMessage(new PacketMindActivity.Handler(), PacketMindActivity.class, 2, Side.CLIENT);
     }
 
     @EventHandler

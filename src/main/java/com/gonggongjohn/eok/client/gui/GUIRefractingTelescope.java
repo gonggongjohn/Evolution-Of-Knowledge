@@ -24,11 +24,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class GUIRefractingTelescope extends GuiContainer {
-    public static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
-    public static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
-    public static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
-    public static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    public ContainerRefractingTelescope containerRT;
+    private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
+    private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
+    private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
+    private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
+    private ContainerRefractingTelescope containerRT;
 
     public GUIRefractingTelescope(ContainerRefractingTelescope inventorySlotsIn) {
         super(inventorySlotsIn);

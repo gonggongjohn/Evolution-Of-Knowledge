@@ -19,6 +19,7 @@ item.default_tool_axe.name=未知 斧
 
 tile.stone_table.name=石桌
 tile.two_barrel_vacuum_pump.name=双筒真空泵
+tile.elementary_research_table.name=初级研究台
 
 itemGroup.eoktab=从无知到先知
 

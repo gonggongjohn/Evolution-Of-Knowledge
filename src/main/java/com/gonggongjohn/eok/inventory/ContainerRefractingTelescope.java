@@ -67,7 +67,6 @@ public class ContainerRefractingTelescope extends Container implements IButtonHa
 
     @Override
     public void onButtonPress(int buttonID) {
-        System.out.println("1243124213421354235213532151253151");
         if(buttonID == 0){
             updateSlot();
         }
