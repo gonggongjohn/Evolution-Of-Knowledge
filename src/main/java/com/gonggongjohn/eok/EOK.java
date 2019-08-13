@@ -9,7 +9,9 @@ import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketMindActivity;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
+import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ReportedException;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -46,8 +48,9 @@ public class EOK {
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		if (Loader.isModLoaded("torcherino") || Loader.isModLoaded("projecte")) {
-			logger.info("You has been ENRAGED the FOREST BAT because some mods are loaded");
-			System.exit(-1);
+			CrashReport cr = CrashReport.makeCrashReport(new IllegalAccessError(),
+					String.format("You has been ENRAGED the FOREST BAT because some mods are loaded"));
+			throw new ReportedException(cr);
 		}
 		proxy.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
