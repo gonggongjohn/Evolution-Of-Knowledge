@@ -16,6 +16,7 @@ item.rubber_mat.name=Rubber Mat
 item.simple_hemp_rope.name=Simple Hemp Rope
 item.strong_hemp_rope.name=Strong Hemp Rope
 item.default_tool_axe.name=Unknown Axe
+item.torcherino.name=Torcherino
 
 tile.stone_table.name=Stone Table
 tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
@@ -29,5 +30,10 @@ tooltip.toolbase.material_name=§aMaterial: §d%1s
 tooltip.toolbase.harvest_level=§aHarvest Level: §d%2d
 tooltip.toolbase.attack_damage=§aAttack Damage: §d%5f(%6f hearts)
 tooltip.toolbase.durability=§aDurability: §d%3d / %4d 
+tooltip.torcherino=§4Please take the risks it brings by yourself.
 
 materials.CHIPPED_FLINT.name=Chipped Flint
+
+messages.torcherino_crafted.msg=§4Do you really want to use it?
+messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
+messages.torcherino_use.msg2=§4You'll get the punishment you deserve.

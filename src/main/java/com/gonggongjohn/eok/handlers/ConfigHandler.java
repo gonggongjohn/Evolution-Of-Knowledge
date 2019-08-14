@@ -12,6 +12,7 @@ public class ConfigHandler {
 
 	public static boolean modifyBlockHardness;
 	public static boolean disableBareHandedCuttingOfTrees;
+	public static boolean torcherinoExploding;
 
 	public ConfigHandler(FMLPreInitializationEvent event) {
 		ProgressBar progress = ProgressManager.push("Loading config", 1);
@@ -30,7 +31,9 @@ public class ConfigHandler {
 		disableBareHandedCuttingOfTrees = config.getBoolean("disableBareHandedCuttingOfTrees",
 				Configuration.CATEGORY_GENERAL, true,
 				"Disable bare-handed cutting of trees. If it is set to true, players will only be able to chop trees with axes. ");
-		
+
+		torcherinoExploding = config.getBoolean("torcherinoExploding", Configuration.CATEGORY_GENERAL, true,
+				"Whether to explode when using the EOK torchino");
 
 		config.save();
 		EOK.instance.getLogger().info("Config loaded successfully");

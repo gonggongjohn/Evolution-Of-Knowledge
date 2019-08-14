@@ -49,7 +49,7 @@ public class EOK {
 		logger = event.getModLog();
 		if (Loader.isModLoaded("torcherino") || Loader.isModLoaded("projecte")) {
 			CrashReport cr = CrashReport.makeCrashReport(new IllegalAccessError(),
-					String.format("You has been ENRAGED the FOREST BAT because some mods are loaded"));
+					String.format("You have ENRAGED the FOREST BAT because some mods are loaded"));
 			throw new ReportedException(cr);
 		}
 		proxy.preInit(event);

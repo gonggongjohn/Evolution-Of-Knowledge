@@ -8,6 +8,7 @@ import com.gonggongjohn.eok.items.ItemPapyrus;
 import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
 import com.gonggongjohn.eok.items.ItemRefractingTelescope;
 import com.gonggongjohn.eok.items.ItemRoughFlintSpear;
+import com.gonggongjohn.eok.items.Torcherino;
 import com.gonggongjohn.eok.utils.EOKToolMaterials;
 
 import net.minecraft.item.Item;
@@ -24,7 +25,8 @@ public class ItemHandler {
     public static final Item chippedFlintFragment = new ItemChippedFlintFragment();
     public static final Item polishedFlintFragment = new ItemPolishedFlintFragment();
     public static final Item roughFlintSpear = new ItemRoughFlintSpear();
-    public static final Item roughFlintAxe = new EOKItemAxe(EOKToolMaterials.CHIPPED_FLINT,"rough_flint_axe");;
+    public static final Item roughFlintAxe = new EOKItemAxe(EOKToolMaterials.CHIPPED_FLINT,"rough_flint_axe");
+    public static final Item Torcherino = new Torcherino();
 
     public static final Item convexLens = new ItemMaterialBase("convex_lens");
     public static final Item concaveLens = new ItemMaterialBase("concave_lens");

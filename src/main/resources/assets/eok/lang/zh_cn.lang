@@ -16,6 +16,7 @@ item.rubber_mat.name=橡胶垫
 item.simple_hemp_rope.name=简易麻绳
 item.strong_hemp_rope.name=坚固麻绳
 item.default_tool_axe.name=未知 斧
+item.torcherino.name=加速火把
 
 tile.stone_table.name=石桌
 tile.two_barrel_vacuum_pump.name=双筒真空泵
@@ -29,5 +30,10 @@ tooltip.toolbase.material_name=§a材料: §d%1s
 tooltip.toolbase.harvest_level=§a挖掘等级: §d%2d
 tooltip.toolbase.attack_damage=§a攻击伤害: §d%5f(%6f 心)
 tooltip.toolbase.durability=§a耐久度: §d%3d / %4d 
+tooltip.torcherino=§4请自己承担它带来的风险。
 
 materials.CHIPPED_FLINT.name=打制的燧石
+
+messages.torcherino_crafted.msg=§4你真的要使用它吗？
+messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
+messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
