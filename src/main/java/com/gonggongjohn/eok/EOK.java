@@ -29,7 +29,7 @@ public class EOK {
 	public static final String MODID = "eok";
 	public static final String NAME = "Evolution Of Knowledge";
 	public static final String VERSION = "0.0.1";
-	public static final String DEPENDENCIES = "required-after:tmc@[1.2.2,);";
+	public static final String DEPENDENCIES = "required-after:tmc@[1.2.3,);";
 
 	@Mod.Instance
 	public static EOK instance;
