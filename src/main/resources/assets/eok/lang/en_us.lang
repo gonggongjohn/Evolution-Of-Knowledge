@@ -17,6 +17,9 @@ item.simple_hemp_rope.name=Simple Hemp Rope
 item.strong_hemp_rope.name=Strong Hemp Rope
 item.default_tool_axe.name=Unknown Axe
 item.torcherino.name=Torcherino
+item.machineGun.name=Machine Gun
+
+item.machine_gun.description=Still Developing
 
 tile.stone_table.name=Stone Table
 tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
