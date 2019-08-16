@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.handlers.ResearchHandler;
 import com.gonggongjohn.eok.network.PacketConsciousness;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketMindActivity;
+import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
 import net.minecraft.crash.CrashReport;
@@ -60,6 +61,7 @@ public class EOK {
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
 		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
 		network.registerMessage(new PacketMindActivity.Handler(), PacketMindActivity.class, 2, Side.CLIENT);
+		network.registerMessage(new PacketResearchData.Handler(), PacketResearchData.class, 3, Side.CLIENT);
 	}
 
 	@EventHandler

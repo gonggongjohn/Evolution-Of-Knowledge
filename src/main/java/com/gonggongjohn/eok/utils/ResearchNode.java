@@ -6,10 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResearchNode {
+    private int index;
     private String unlocalizedName;
     private ResearchNode[] fatherNodes;
 
-    public ResearchNode(String unlocalizedName,@Nullable ResearchNode... fatherNodes) {
+    public ResearchNode(int index, String unlocalizedName,@Nullable ResearchNode... fatherNodes) {
+        this.index = index;
         this.unlocalizedName = unlocalizedName;
         this.fatherNodes = fatherNodes;
     }

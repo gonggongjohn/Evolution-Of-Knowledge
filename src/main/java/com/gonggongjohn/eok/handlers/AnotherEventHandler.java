@@ -1,12 +1,10 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.capabilities.CapabilityConsciousness;
-import com.gonggongjohn.eok.capabilities.CapabilityMindActivity;
-import com.gonggongjohn.eok.capabilities.IConsciousness;
-import com.gonggongjohn.eok.capabilities.IMindActivity;
+import com.gonggongjohn.eok.capabilities.*;
 import com.gonggongjohn.eok.network.PacketConsciousness;
 import com.gonggongjohn.eok.network.PacketMindActivity;
+import com.gonggongjohn.eok.network.PacketResearchData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,8 +24,10 @@ public class AnotherEventHandler {
         if(event.getObject() instanceof EntityPlayer){
             ICapabilitySerializable<NBTTagCompound> providerConsciousness = new CapabilityConsciousness.ProvidePlayer();
             ICapabilitySerializable<NBTTagCompound> providerMindActivity = new CapabilityMindActivity.ProvidePlayer();
+            ICapabilitySerializable<NBTTagCompound> providerResearchData = new CapabilityResearchData.ProvidePlayer();
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), providerConsciousness);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "mindActivity"), providerMindActivity);
+            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "researchData"), providerResearchData);
         }
     }
 
@@ -37,6 +37,8 @@ public class AnotherEventHandler {
         Capability.IStorage<IConsciousness> storageConsciousness = capabilityConsciousness.getStorage();
         Capability<IMindActivity> capabilityMindActivity = CapabilityHandler.capMindActivity;
         Capability.IStorage<IMindActivity> storageMindActivity = capabilityMindActivity.getStorage();
+        Capability<IResearchData> capabilityResearchData = CapabilityHandler.capResearchData;
+        Capability.IStorage<IResearchData> storageResearchData = capabilityResearchData.getStorage();
         if(event.getOriginal().hasCapability(capabilityConsciousness, null) && event.getEntityPlayer().hasCapability(capabilityConsciousness, null)){
             NBTBase nbt = storageConsciousness.writeNBT(capabilityConsciousness, event.getOriginal().getCapability(capabilityConsciousness, null), null);
             storageConsciousness.readNBT(capabilityConsciousness, event.getEntityPlayer().getCapability(capabilityConsciousness, null), null, nbt);
@@ -44,6 +46,10 @@ public class AnotherEventHandler {
         if(event.getOriginal().hasCapability(capabilityMindActivity, null) && event.getEntityPlayer().hasCapability(capabilityMindActivity, null)){
             NBTBase nbt = storageMindActivity.writeNBT(capabilityMindActivity, event.getOriginal().getCapability(capabilityMindActivity, null), null);
             storageMindActivity.readNBT(capabilityMindActivity, event.getEntityPlayer().getCapability(capabilityMindActivity, null), null, nbt);
+        }
+        if(event.getOriginal().hasCapability(capabilityResearchData, null) && event.getEntityPlayer().hasCapability(capabilityResearchData, null)){
+            NBTBase nbt = storageResearchData.writeNBT(capabilityResearchData, event.getOriginal().getCapability(capabilityResearchData, null), null);
+            storageResearchData.readNBT(capabilityResearchData, event.getEntityPlayer().getCapability(capabilityResearchData, null), null, nbt);
         }
     }
 
@@ -69,6 +75,15 @@ public class AnotherEventHandler {
                 message.compound = new NBTTagCompound();
                 message.compound.setTag("mindActivity", storage.writeNBT(CapabilityHandler.capMindActivity, mindActivity, null));
                 EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
+            }
+            if(player.hasCapability(CapabilityHandler.capResearchData, null)){
+                PacketResearchData mesage = new PacketResearchData();
+                IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
+                Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
+
+                mesage.compound = new NBTTagCompound();
+                mesage.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
+                EOK.getNetwork().sendTo(mesage, (EntityPlayerMP) player);
             }
         }
     }

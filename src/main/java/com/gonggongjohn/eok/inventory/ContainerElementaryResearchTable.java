@@ -15,18 +15,22 @@ public class ContainerElementaryResearchTable extends Container implements IButt
     public ContainerElementaryResearchTable(EntityPlayer player) {
         super();
 
-        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(items, 0, 225, 20){
+        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(items, 0, 224, 15){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
             }
         });
-        this.addSlotToContainer(this.toolSlot = new SlotItemHandler(items, 1, 225, 60){
+        this.addSlotToContainer(this.toolSlot = new SlotItemHandler(items, 1, 224, 46){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
             }
         });
+
+        for(int i = 0; i < 9; ++i){
+            this.addSlotToContainer(new Slot(player.inventory, i, 47 + i * 18, 174));
+        }
     }
 
 

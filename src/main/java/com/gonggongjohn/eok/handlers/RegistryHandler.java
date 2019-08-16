@@ -20,7 +20,7 @@ public class RegistryHandler {
     }
 
     @SubscribeEvent
-        public static void onBlockRegister(RegistryEvent.Register<Block> event){
+    public static void onBlockRegister(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(BlockHandler.blocks.toArray(new Block[0]));
         GameRegistry.registerTileEntity(TEElementaryResearchTable.class, new ResourceLocation(EOK.MODID, "te_elementary_research_table"));
     }

@@ -8,8 +8,8 @@ import java.util.List;
 public class ResearchHandler {
     public HashMap<String, String> researchRelations = new HashMap<String, String>();
 
-    public ResearchNode test1 = new ResearchNode("test1");
-    public ResearchNode test2 = new ResearchNode("test2", test1);
+    public ResearchNode test1 = new ResearchNode(0, "test1");
+    public ResearchNode test2 = new ResearchNode(0, "test2", test1);
 
     public ResearchHandler() {
         initChildren(test1);
