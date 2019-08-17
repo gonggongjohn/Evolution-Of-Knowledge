@@ -40,3 +40,5 @@ materials.CHIPPED_FLINT.name=打制的燧石
 messages.torcherino_crafted.msg=§4你真的要使用它吗？
 messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
+
+entity.entity_smalldew.name=微露

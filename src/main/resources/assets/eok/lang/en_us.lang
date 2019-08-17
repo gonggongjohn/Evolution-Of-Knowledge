@@ -40,3 +40,5 @@ materials.CHIPPED_FLINT.name=Chipped Flint
 messages.torcherino_crafted.msg=§4Do you really want to use it?
 messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
+
+entity.entity_smalldew.name=Smalldew
