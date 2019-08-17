@@ -24,7 +24,7 @@ public class CapabilityResearchData {
         @Override
         public void readNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side, NBTBase nbt){
             NBTTagCompound compound = (NBTTagCompound) nbt;
-            int[] finArray = new int[100];
+            int[] finArray = new int[]{4,1,2,3,4};
             if(compound.hasKey("finishedResearch")){
                 finArray = compound.getIntArray("finishedResearch");
             }
@@ -33,7 +33,7 @@ public class CapabilityResearchData {
     }
 
     public static class Implementation implements IResearchData{
-        private int[] finArray;
+        private int[] finArray = new int[]{4,1,2,3,4};
 
         @Override
         public int[] getFinishedResearch(){

@@ -1,11 +1,14 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.capabilities.IResearchData;
+import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -23,6 +26,14 @@ public class GUIElementaryResearchTable extends GuiContainer {
         this.ySize = 192;
     }
 
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glPushMatrix();
@@ -36,6 +47,10 @@ public class GUIElementaryResearchTable extends GuiContainer {
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
         this.drawTexturedModalRect(offsetX + 10, offsetY + 148, 0, 33, 90, 16);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
     }
 
     @Override
@@ -57,11 +72,32 @@ public class GUIElementaryResearchTable extends GuiContainer {
                 }
             }
         });
+
+        EntityPlayer player = Minecraft.getMinecraft().player;
+        int[] finArray = new int[300];
+        if(player.hasCapability(CapabilityHandler.capResearchData, null)){
+            IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
+            finArray = researchData.getFinishedResearch();
+            for(int i = 1; i <= finArray[0]; i++){
+                this.buttonList.add(new ButtonElementaryResearchTable(i, finArray[i], offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32));
+            }
+
+        }
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         super.actionPerformed(button);
         //TODO
+    }
+
+    private int calcButtonLeftPos(int index){
+        if (index % 2 != 0) return 9;
+        else return 42;
+    }
+
+    private int calcButtonTopPos(int index){
+        if (index % 2 == 0) return 9 + 36 * (index / 2 - 1);
+        else return 9 + 36 * (index / 2);
     }
 }

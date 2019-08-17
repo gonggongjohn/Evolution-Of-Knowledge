@@ -17,7 +17,7 @@ item.simple_hemp_rope.name=简易麻绳
 item.strong_hemp_rope.name=坚固麻绳
 item.default_tool_axe.name=未知 斧
 item.torcherino.name=加速火把
-item.machine_gun.name=机枪
+item.machineGun.name=机枪
 
 item.machine_gun.description=仍处于开发阶段
 
@@ -40,3 +40,9 @@ materials.CHIPPED_FLINT.name=打制的燧石
 messages.torcherino_crafted.msg=§4你真的要使用它吗？
 messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
+
+research.gui.pre=研究节点：
+research.gravity.name=重力
+research.temperature.name=温度
+research.test1.name=测试研究1
+research.test2.name=测试研究2
