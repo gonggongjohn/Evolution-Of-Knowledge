@@ -14,15 +14,17 @@ public class ButtonElementaryResearchTable extends GuiButton {
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/elementary_research_table_components.png";
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
     private ResearchNode researchNode;
+    private int offsetY;
 
-    public ButtonElementaryResearchTable(int buttonId, int researchId, int x, int y, int widthIn, int heightIn) {
+    public ButtonElementaryResearchTable(int buttonId, int researchId, int x, int y, int widthIn, int heightIn, int offsetY) {
         super(buttonId, x, y, widthIn, heightIn, "");
         this.researchNode = ResearchHandler.researchDict.get(researchId);
+        this.offsetY = offsetY;
     }
 
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        this.visible = this.y >= 5 && this.y <= 140;
+        this.visible = this.y >= (offsetY + 5) && this.y <= (offsetY + 140);
 
         if (this.visible) {
             GL11.glPushMatrix();
@@ -33,7 +35,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
             mc.getTextureManager().bindTexture(TEXTURECOMP);
             this.drawTexturedModalRect(this.x, this.y, 64, 0, this.width, this.height);
             int relx = mouseX - this.x, rely = mouseY - this.y;
-            if(relx >= 0 && rely <= 0 && relx < this.width && rely < this.height){
+            if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
                 String name = I18n.format("research.gui.pre") + I18n.format("research." + this.researchNode.getUnlocalizedName() + ".name");
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0x404040);
             }

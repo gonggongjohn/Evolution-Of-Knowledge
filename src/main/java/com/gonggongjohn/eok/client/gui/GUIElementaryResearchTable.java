@@ -35,8 +35,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GL11.glPushMatrix();
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) { GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -79,7 +78,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
             IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
             finArray = researchData.getFinishedResearch();
             for(int i = 1; i <= finArray[0]; i++){
-                this.buttonList.add(new ButtonElementaryResearchTable(i, finArray[i], offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32));
+                this.buttonList.add(new ButtonElementaryResearchTable(i, finArray[i], offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32, offsetY));
             }
 
         }
