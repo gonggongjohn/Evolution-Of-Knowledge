@@ -8,12 +8,7 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/*
- * 
- * 模型似乎存在少量bug，导致右胳膊渲染有瑕疵
- * 等待修复
- * 
- */
+
 
 
 @SideOnly(Side.CLIENT)
