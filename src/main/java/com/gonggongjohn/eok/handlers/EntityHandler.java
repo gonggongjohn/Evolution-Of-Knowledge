@@ -3,7 +3,7 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.entity.EntityBullet;
 import com.gonggongjohn.eok.entity.EntitySmalldew;
-import com.gonggongjohn.eok.entity.RenderSmalldew;
+import com.gonggongjohn.eok.entity.render.RenderSmalldew;
 import com.gonggongjohn.eok.utils.EntityRenderFactory;
 
 import net.minecraft.client.renderer.entity.Render;
@@ -21,7 +21,7 @@ public class EntityHandler {
 				"entity_bullet", 0, EOK.instance, 128, 1, true);
 
 		EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.smalldew"), EntitySmalldew.class,
-				"entity_smalldew", 1, EOK.instance, 64, 3, true, 0x0066CC, 0xCCE5FF);
+				"entity_smalldew", 1, EOK.instance, 64, 1, true, 0x0066CC, 0xCCE5FF);
 	}
 	
 	@SideOnly(Side.CLIENT)

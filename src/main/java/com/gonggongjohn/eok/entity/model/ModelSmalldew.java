@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.entity;
+package com.gonggongjohn.eok.entity.model;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;

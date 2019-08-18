@@ -1,6 +1,8 @@
-package com.gonggongjohn.eok.entity;
+package com.gonggongjohn.eok.entity.render;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.entity.EntitySmalldew;
+import com.gonggongjohn.eok.entity.model.ModelSmalldew;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
@@ -41,7 +43,7 @@ public class RenderSmalldew extends RenderLiving<EntitySmalldew>{
 		super(rendermanagerIn, new ModelSmalldew(0.0F, false), 0.5F);
 		this.smallArms = false;
         
-		/*this.addLayer(new LayerBipedArmor(this));
+		this.addLayer(new LayerBipedArmor(this));
         this.addLayer(new LayerHeldItem(this));
         this.addLayer(new LayerArrow(this));
         //this.addLayer(new LayerDeadmau5Head(this));
@@ -49,7 +51,7 @@ public class RenderSmalldew extends RenderLiving<EntitySmalldew>{
         //this.addLayer(new LayerCustomHead(this.getMainModel().bipedHead));
         this.addLayer(new LayerElytra(this));
         //this.addLayer(new LayerEntityOnShoulder(renderManager));
-         */
+         
          
 	}
 	
