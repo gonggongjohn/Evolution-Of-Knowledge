@@ -2,7 +2,6 @@ package com.gonggongjohn.eok.tweakers;
 
 import com.gonggongjohn.eok.handlers.ConfigHandler;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 

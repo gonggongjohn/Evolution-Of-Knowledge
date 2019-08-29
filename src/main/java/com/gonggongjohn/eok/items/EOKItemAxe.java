@@ -2,7 +2,6 @@ package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.EOKToolMaterial;
-import com.gonggongjohn.eok.utils.EOKToolMaterials;
 import com.gonggongjohn.eok.utils.ToolBase;
 
 public class EOKItemAxe extends ToolBase{

@@ -6,8 +6,6 @@ import com.gonggongjohn.eok.entity.EntitySmalldew;
 import com.gonggongjohn.eok.entity.render.RenderSmalldew;
 import com.gonggongjohn.eok.utils.EntityRenderFactory;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

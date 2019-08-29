@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import com.gonggongjohn.eok.utils.EOKToolMaterial;
 
 public class ToolBase extends Item implements IHasModel {
 

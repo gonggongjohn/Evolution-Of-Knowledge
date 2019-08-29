@@ -17,7 +17,7 @@ public class ConfigHandler {
 	public ConfigHandler(FMLPreInitializationEvent event) {
 		ProgressBar progress = ProgressManager.push("Loading config", 1);
 
-		EOK.instance.getLogger().info("Loading config...");
+		EOK.getLogger().info("Loading config...");
 
 		progress.step("modifyBlockHardness");
 
@@ -36,7 +36,7 @@ public class ConfigHandler {
 				"Whether to explode when using the EOK torchino");
 
 		config.save();
-		EOK.instance.getLogger().info("Config loaded successfully");
+		EOK.getLogger().info("Config loaded successfully");
 		ProgressManager.pop(progress);
 
 	}

@@ -77,7 +77,8 @@ public class ModelSmalldew extends ModelBiped {
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+    @Override
+	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     {
         super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         GlStateManager.pushMatrix();
@@ -127,7 +128,8 @@ public class ModelSmalldew extends ModelBiped {
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
+    @Override
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         copyModelAngles(this.bipedLeftLeg, this.bipedLeftLegwear);
@@ -146,7 +148,8 @@ public class ModelSmalldew extends ModelBiped {
         }
     }
 
-    public void setVisible(boolean visible)
+    @Override
+	public void setVisible(boolean visible)
     {
         super.setVisible(visible);
         this.bipedLeftArmwear.showModel = visible;
@@ -158,13 +161,14 @@ public class ModelSmalldew extends ModelBiped {
         this.bipedDeadmau5Head.showModel = visible;
     }
 
-    public void postRenderArm(float scale, EnumHandSide side)
+    @Override
+	public void postRenderArm(float scale, EnumHandSide side)
     {
         ModelRenderer modelrenderer = this.getArmForSide(side);
 
         if (this.smallArms)
         {
-            float f = 0.5F * (float)(side == EnumHandSide.RIGHT ? 1 : -1);
+            float f = 0.5F * (side == EnumHandSide.RIGHT ? 1 : -1);
             modelrenderer.rotationPointX += f;
             modelrenderer.postRender(scale);
             modelrenderer.rotationPointX -= f;

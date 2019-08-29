@@ -1,16 +1,29 @@
 package com.gonggongjohn.eok.entity.ai;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
+/*
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ * 该文件已弃置！！
+ */
+
+
+@Deprecated	//别看这个，这是段垃圾代码
 public class EntityAISelfDefense extends EntityAIBase {
 
 	private final EntityLiving entity;
 
+	
 	public EntityAISelfDefense(EntityLiving entity) {
 		this.entity = entity;
 	}

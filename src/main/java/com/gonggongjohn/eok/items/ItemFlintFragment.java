@@ -42,7 +42,7 @@ public class ItemFlintFragment extends Item implements IHasModel {
 		// 先判断是否是对石头或圆石右键
 		if (worldIn.getBlockState(pos).getBlock() == Blocks.STONE
 				|| worldIn.getBlockState(pos).getBlock() == Blocks.COBBLESTONE) {
-			player.swingArm(hand.MAIN_HAND);
+			player.swingArm(EnumHand.MAIN_HAND);
 			worldIn.playSound(player.posX, player.posY, player.posZ, SoundEvents.BLOCK_STONE_PLACE,
 					SoundCategory.BLOCKS, 0.8F, 1.0F, true);
 
@@ -50,19 +50,19 @@ public class ItemFlintFragment extends Item implements IHasModel {
 			Random rand = new Random();
 			int i = rand.nextInt(100);
 			if (i < 15) {
-				if (!worldIn.isRemote && player.getHeldItem(hand.MAIN_HAND).getCount() != 1) {
+				if (!worldIn.isRemote && player.getHeldItem(EnumHand.MAIN_HAND).getCount() != 1) {
 					// 物品数量-1
-					ItemStack itemstack = player.getHeldItem(hand.MAIN_HAND); // 获取手持物品
+					ItemStack itemstack = player.getHeldItem(EnumHand.MAIN_HAND); // 获取手持物品
 					int count = itemstack.getCount();
-					player.setHeldItem(hand.MAIN_HAND, new ItemStack(ItemHandler.flintFragment, count - 1)); // 数量-1
+					player.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(ItemHandler.flintFragment, count - 1)); // 数量-1
 
 					// 生成掉落物
 					ItemStack drops = new ItemStack(ItemHandler.chippedFlintFragment, 1);
 					EntityItem entityitem = new EntityItem(worldIn, player.posX, player.posY, player.posZ, drops);
 					worldIn.spawnEntity(entityitem);
-				} else if (!worldIn.isRemote && player.getHeldItem(hand.MAIN_HAND).getCount() == 1) {
+				} else if (!worldIn.isRemote && player.getHeldItem(EnumHand.MAIN_HAND).getCount() == 1) {
 					// 物品数量-1
-					player.setHeldItem(hand.MAIN_HAND, ItemStack.EMPTY); // 因为物品数量=1，物品数量不能为0，所以直接清除它
+					player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY); // 因为物品数量=1，物品数量不能为0，所以直接清除它
 
 					// 生成掉落物
 					ItemStack drops = new ItemStack(ItemHandler.chippedFlintFragment, 1);

@@ -1,6 +1,5 @@
 package com.gonggongjohn.eok.items;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.gonggongjohn.eok.EOK;
@@ -15,11 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
