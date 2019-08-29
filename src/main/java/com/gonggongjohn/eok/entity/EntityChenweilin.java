@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySmalldew extends EntityNPCBase{
+public class EntityChenweilin extends EntityNPCBase{
 
-	public EntitySmalldew(World worldIn) {
+	public EntityChenweilin(World worldIn) {
 		super(worldIn);
 	}
 
@@ -20,7 +20,7 @@ public class EntitySmalldew extends EntityNPCBase{
 	@Override
 	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
 		ItemStack egg = new ItemStack(Items.SPAWN_EGG, 1);
-		ItemMonsterPlacer.applyEntityIdToItemStack(egg, new ResourceLocation("eok:entity.smalldew"));
+		ItemMonsterPlacer.applyEntityIdToItemStack(egg, new ResourceLocation("eok:entity.chenweilin"));
 		this.entityDropItem(egg, 0.0F);
 		super.dropFewItems(wasRecentlyHit, lootingModifier);
 	}
@@ -34,7 +34,6 @@ public class EntitySmalldew extends EntityNPCBase{
 	protected void initEntityAI() {
 		super.initEntityAI();
 	}
-
 	
-
+	
 }

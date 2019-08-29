@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 @SideOnly(Side.CLIENT)
-public class ModelSmalldew extends ModelBiped {
+public class ModelNPC extends ModelBiped {
 	public ModelRenderer bipedLeftArmwear;
     public ModelRenderer bipedRightArmwear;
     public ModelRenderer bipedLeftLegwear;
@@ -22,7 +22,7 @@ public class ModelSmalldew extends ModelBiped {
     private final ModelRenderer bipedDeadmau5Head;
     private final boolean smallArms;
 
-    public ModelSmalldew(float modelSize, boolean smallArmsIn)
+    public ModelNPC(float modelSize, boolean smallArmsIn)
     {
         super(modelSize, 0.0F, 64, 64);
         this.smallArms = smallArmsIn;
