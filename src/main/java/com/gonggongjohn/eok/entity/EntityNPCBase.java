@@ -1,5 +1,8 @@
 package com.gonggongjohn.eok.entity;
 
+import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.handlers.GUIHandler;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,6 +13,8 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class EntityNPCBase extends EntityCreature {
@@ -64,6 +69,20 @@ public abstract class EntityNPCBase extends EntityCreature {
 		
 		super.initEntityAI();
 	}
+
+
+
+	@Override
+	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
+		if(player.world.isRemote) return super.processInteract(player, hand);
+		//System.out.println("open this gui!");
+		BlockPos pos = player.getPosition();
+		player.openGui(EOK.instance, GUIHandler.GUIMerchant, player.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ());
+		
+		return super.processInteract(player, hand);
+	}
+	
+	
 	
 	
 

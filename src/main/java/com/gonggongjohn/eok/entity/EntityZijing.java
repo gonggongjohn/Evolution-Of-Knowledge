@@ -1,8 +1,10 @@
 package com.gonggongjohn.eok.entity;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -35,6 +37,10 @@ public class EntityZijing extends EntityNPCBase{
 		super.initEntityAI();
 	}
 	
+	@Override
+	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
+		return super.processInteract(player, hand);
+	}
 	
 
 }
