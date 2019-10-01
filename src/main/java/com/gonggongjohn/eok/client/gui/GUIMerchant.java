@@ -1,19 +1,30 @@
 package com.gonggongjohn.eok.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
+import com.gonggongjohn.eok.EOK;
 
-public class GUIMerchant extends GuiContainer{
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+
+public class GUIMerchant extends GuiContainer {
+
+	public final ResourceLocation TEXTURE = new ResourceLocation(EOK.MODID + ":textures/gui/container/merchant.png");
 
 	public GUIMerchant(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
-		// TODO 自动生成的构造函数存根
+		this.xSize = 206;
+		this.ySize = 226;
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		// TODO 自动生成的方法存根
-		
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		this.mc.getTextureManager().bindTexture(TEXTURE);
+		int offsetX = (this.width - this.xSize) / 2;
+		int offsetY = (this.height - this.xSize) / 2;
+		this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
+
 	}
 
 	@Override
@@ -39,6 +50,5 @@ public class GUIMerchant extends GuiContainer{
 		// TODO 自动生成的方法存根
 		super.onGuiClosed();
 	}
-	
 
 }
