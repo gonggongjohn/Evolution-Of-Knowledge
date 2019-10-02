@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok.utils;
 
+//TODO 重写
+
 @Deprecated
 public interface IToolBase {
 	public float attackDamage();

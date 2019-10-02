@@ -14,6 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+//TODO 重写
+
+@Deprecated
 public class ToolBase extends Item implements IHasModel {
 
 	public String materialName = "NULL";

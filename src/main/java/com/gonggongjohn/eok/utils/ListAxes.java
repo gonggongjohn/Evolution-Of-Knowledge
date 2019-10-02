@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import net.minecraft.init.Items;
 
+//TODO 重写
+
+@Deprecated
 public class ListAxes extends ArrayList{
 	
 	/*

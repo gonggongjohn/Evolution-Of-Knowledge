@@ -23,7 +23,7 @@ public class GUIHandler implements IGuiHandler {
             case GUIElementaryResearchTable:
                 return new ContainerElementaryResearchTable(player);
             case GUIMerchant:
-            	return new ContainerMerchant();
+            	return new ContainerMerchant(player);
             default:
                 return null;
 
@@ -38,7 +38,7 @@ public class GUIHandler implements IGuiHandler {
             case GUIElementaryResearchTable:
                 return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player));
             case GUIMerchant:
-            	return new GUIMerchant(new ContainerMerchant());
+            	return new GUIMerchant(new ContainerMerchant(player));
             default:
                 return null;
         }

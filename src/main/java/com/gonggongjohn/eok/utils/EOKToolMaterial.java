@@ -1,5 +1,8 @@
 package com.gonggongjohn.eok.utils;
 
+//TODO 重写
+
+@Deprecated
 public class EOKToolMaterial {
 	public String name;
 	public float attackDamage;
