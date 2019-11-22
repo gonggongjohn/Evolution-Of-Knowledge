@@ -18,6 +18,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.ArrayList;
+
 public class AnotherEventHandler {
     @SubscribeEvent
     public void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event){
@@ -80,7 +82,13 @@ public class AnotherEventHandler {
                 PacketResearchData mesage = new PacketResearchData();
                 IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
                 Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
-
+                ArrayList<Integer> finList = researchData.getFinishedResearch();
+                if(finList.size() == 0){
+                    finList.add(1);
+                    researchData.setFinishedResearch(finList);
+                    NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
+                    storage.readNBT(CapabilityHandler.capResearchData, player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
+                }
                 mesage.compound = new NBTTagCompound();
                 mesage.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
                 EOK.getNetwork().sendTo(mesage, (EntityPlayerMP) player);

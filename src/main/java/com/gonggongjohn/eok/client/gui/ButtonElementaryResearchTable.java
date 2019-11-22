@@ -34,11 +34,13 @@ public class ButtonElementaryResearchTable extends GuiButton {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             mc.getTextureManager().bindTexture(TEXTURECOMP);
             this.drawTexturedModalRect(this.x, this.y, 64, 0, this.width, this.height);
+            /*
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
                 String name = I18n.format("research.gui.pre") + I18n.format("research." + this.researchNode.getUnlocalizedName() + ".name");
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0x404040);
             }
+            */
             GL11.glPopMatrix();
         }
     }

@@ -1,8 +1,8 @@
 package com.gonggongjohn.eok.capabilities;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IResearchData {
-    public int[] getFinishedResearch();
-    public void setFinishedResearch(int[] finArray);
+    public ArrayList<Integer> getFinishedResearch();
+    public void setFinishedResearch(ArrayList<Integer> finArray);
 }

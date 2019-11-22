@@ -10,6 +10,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class CapabilityResearchData {
     public static class Storage implements Capability.IStorage<IResearchData>{
@@ -17,32 +18,37 @@ public class CapabilityResearchData {
         @Override
         public NBTBase writeNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side){
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setIntArray("finishedResearch", instance.getFinishedResearch());
+            ArrayList<Integer> finList = instance.getFinishedResearch();
+            for(int i = 0; i < finList.size(); i++) {
+                compound.setInteger("" + i, finList.get(i));
+            }
             return compound;
         }
 
         @Override
         public void readNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side, NBTBase nbt){
             NBTTagCompound compound = (NBTTagCompound) nbt;
-            int[] finArray = new int[]{4,1,2,3,4};
-            if(compound.hasKey("finishedResearch")){
-                finArray = compound.getIntArray("finishedResearch");
+            ArrayList<Integer> finList = new ArrayList<Integer>();
+            if(compound.getSize() != 0){
+                for(int i =0; i < compound.getSize(); i++){
+                    finList.add(compound.getInteger("" + i));
+                }
             }
-            instance.setFinishedResearch(finArray);
+            instance.setFinishedResearch(finList);
         }
     }
 
     public static class Implementation implements IResearchData{
-        private int[] finArray = new int[]{4,1,2,3,4};
+        private ArrayList<Integer> finList = new ArrayList<>();
 
         @Override
-        public int[] getFinishedResearch(){
-            return this.finArray;
+        public ArrayList<Integer> getFinishedResearch(){
+            return this.finList;
         }
 
         @Override
-        public void setFinishedResearch(int[] finArray) {
-            this.finArray = finArray;
+        public void setFinishedResearch(ArrayList<Integer> finList) {
+            this.finList = finList;
         }
     }
 

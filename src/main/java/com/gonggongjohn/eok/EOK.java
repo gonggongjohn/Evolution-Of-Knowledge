@@ -10,6 +10,7 @@ import com.gonggongjohn.eok.network.PacketMindActivity;
 import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
+import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
@@ -45,6 +46,8 @@ public class EOK {
 
 	public static ResearchHandler researches;
 
+	public ResearchDict researchDict = new ResearchDict();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
@@ -56,6 +59,8 @@ public class EOK {
 		proxy.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
 		researches = new ResearchHandler();
+		researchDict.initName();
+		researchDict.initRelation();
 		CapabilityHandler.setupCapabilities();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);

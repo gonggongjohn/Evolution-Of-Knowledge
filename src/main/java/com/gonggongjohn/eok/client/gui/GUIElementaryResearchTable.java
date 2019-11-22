@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUIElementaryResearchTable extends GuiContainer {
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/elementary_research_table.png";
@@ -73,12 +74,14 @@ public class GUIElementaryResearchTable extends GuiContainer {
         });
 
         EntityPlayer player = Minecraft.getMinecraft().player;
-        int[] finArray = new int[300];
+        ArrayList<Integer> finList = new ArrayList<Integer>();
         if(player.hasCapability(CapabilityHandler.capResearchData, null)){
             IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
-            finArray = researchData.getFinishedResearch();
-            for(int i = 1; i <= finArray[0]; i++){
-                this.buttonList.add(new ButtonElementaryResearchTable(i, finArray[i], offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32, offsetY));
+            finList = researchData.getFinishedResearch();
+            if(finList.size() != 0) {
+                for (int i = 1; i <= finList.size(); i++) {
+                    this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1), offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32, offsetY));
+                }
             }
 
         }
