@@ -6,14 +6,14 @@ import com.gonggongjohn.eok.utils.ResearchNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class ButtonElementaryResearchTable extends GuiButton {
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/elementary_research_table_components.png";
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    private ResearchNode researchNode;
+    @SuppressWarnings("unused")
+	private ResearchNode researchNode;
     private int offsetY;
 
     public ButtonElementaryResearchTable(int buttonId, int researchId, int x, int y, int widthIn, int heightIn, int offsetY) {

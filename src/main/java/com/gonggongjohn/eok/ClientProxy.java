@@ -1,8 +1,6 @@
 package com.gonggongjohn.eok;
 
 import com.gonggongjohn.eok.handlers.EntityHandler;
-import com.gonggongjohn.eok.utils.EOKToolMaterials;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,25 +13,29 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class ClientProxy extends CommonProxy{
-    public void preInit(FMLPreInitializationEvent event){
-    	EOKToolMaterials.setupClient();
+    @Override
+	public void preInit(FMLPreInitializationEvent event){
     	EntityHandler.registerRenders();
     	super.preInit(event);
     }
 
-    public void init(FMLInitializationEvent event){
+    @Override
+	public void init(FMLInitializationEvent event){
         super.init(event);
     }
 
-    public void postInit(FMLPostInitializationEvent event){
+    @Override
+	public void postInit(FMLPostInitializationEvent event){
         super.postInit(event);
     }
 
-    public void registerItemRenderer(Item item, int meta, String id){
+    @Override
+	public void registerItemRenderer(Item item, int meta, String id){
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
     }
 
-    public IThreadListener getThreadListener(MessageContext context){
+    @Override
+	public IThreadListener getThreadListener(MessageContext context){
         if (context.side.isClient())
         {
             return Minecraft.getMinecraft();
@@ -44,7 +46,8 @@ public class ClientProxy extends CommonProxy{
         }
     }
 
-    public EntityPlayer getPlayer(MessageContext context)
+    @Override
+	public EntityPlayer getPlayer(MessageContext context)
     {
         if (context.side.isClient())
         {

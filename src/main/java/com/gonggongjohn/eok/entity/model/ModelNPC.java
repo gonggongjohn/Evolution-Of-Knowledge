@@ -85,7 +85,6 @@ public class ModelNPC extends ModelBiped {
 
         if (this.isChild)
         {
-            float f = 2.0F;
             GlStateManager.scale(0.5F, 0.5F, 0.5F);
             GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
             this.bipedLeftLegwear.render(scale);

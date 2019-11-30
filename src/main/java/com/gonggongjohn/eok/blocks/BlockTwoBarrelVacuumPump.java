@@ -40,7 +40,8 @@ public class BlockTwoBarrelVacuumPump extends Block implements IHasModel {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;

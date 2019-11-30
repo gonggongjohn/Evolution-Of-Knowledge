@@ -2,33 +2,24 @@ package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
-import com.gonggongjohn.eok.items.ItemPapyrus;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.List;
 
 public class GUIRefractingTelescope extends GuiContainer {
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
     private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    private ContainerRefractingTelescope containerRT;
+    @SuppressWarnings("unused")
+	private ContainerRefractingTelescope containerRT;
 
     public GUIRefractingTelescope(ContainerRefractingTelescope inventorySlotsIn) {
         super(inventorySlotsIn);

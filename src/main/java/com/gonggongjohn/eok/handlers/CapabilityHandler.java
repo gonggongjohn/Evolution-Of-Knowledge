@@ -13,7 +13,8 @@ public class CapabilityHandler {
     @CapabilityInject(IResearchData.class)
     public static Capability<IResearchData> capResearchData;
 
-    public static void setupCapabilities(){
+    @SuppressWarnings("deprecation")
+	public static void setupCapabilities(){
         CapabilityManager.INSTANCE.register(IConsciousness.class, new CapabilityConsciousness.Storage(), CapabilityConsciousness.Implementation.class);
         CapabilityManager.INSTANCE.register(IMindActivity.class, new CapabilityMindActivity.Storage(), CapabilityMindActivity.Implementation.class);
         CapabilityManager.INSTANCE.register(IResearchData.class, new CapabilityResearchData.Storage(), CapabilityResearchData.Implementation.class);

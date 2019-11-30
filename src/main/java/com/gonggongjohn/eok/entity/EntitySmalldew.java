@@ -1,14 +1,11 @@
 package com.gonggongjohn.eok.entity;
 
-import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntitySmalldew extends EntityNPCBase{

@@ -2,8 +2,6 @@ package com.gonggongjohn.eok.items;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.entity.EntityBullet;
 import com.gonggongjohn.eok.handlers.ItemHandler;
@@ -31,7 +29,7 @@ public class ItemMachineGun extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List tooltip, ITooltipFlag flagIn) {
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(I18n.format("item.machine_gun.description"));
 	}
 

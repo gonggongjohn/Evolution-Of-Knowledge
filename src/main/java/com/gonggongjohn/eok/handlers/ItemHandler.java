@@ -3,7 +3,6 @@ package com.gonggongjohn.eok.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gonggongjohn.eok.items.EOKItemAxe;
 import com.gonggongjohn.eok.items.ItemChippedFlintFragment;
 import com.gonggongjohn.eok.items.ItemFlintFragment;
 import com.gonggongjohn.eok.items.ItemMachineGun;
@@ -13,8 +12,6 @@ import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
 import com.gonggongjohn.eok.items.ItemRefractingTelescope;
 import com.gonggongjohn.eok.items.ItemRoughFlintSpear;
 import com.gonggongjohn.eok.items.Torcherino;
-import com.gonggongjohn.eok.utils.EOKToolMaterials;
-
 import net.minecraft.item.Item;
 
 public class ItemHandler {
@@ -26,7 +23,6 @@ public class ItemHandler {
 	public static final Item chippedFlintFragment = new ItemChippedFlintFragment();
 	public static final Item polishedFlintFragment = new ItemPolishedFlintFragment();
 	public static final Item roughFlintSpear = new ItemRoughFlintSpear();
-	public static final Item roughFlintAxe = new EOKItemAxe(EOKToolMaterials.CHIPPED_FLINT, "rough_flint_axe");
 	public static final Item Torcherino = new Torcherino();
 	public static final Item MACHINE_GUN = new ItemMachineGun();
 

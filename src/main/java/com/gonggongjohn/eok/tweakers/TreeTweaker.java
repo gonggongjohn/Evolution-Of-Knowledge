@@ -1,11 +1,8 @@
 package com.gonggongjohn.eok.tweakers;
 
-import java.util.ArrayList;
-
 import com.gonggongjohn.eok.handlers.ConfigHandler;
-import com.gonggongjohn.eok.utils.ListAxes;
-
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemAxe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -26,9 +23,8 @@ public class TreeTweaker {
 		if(event.getEntityPlayer().inventory.getCurrentItem() == null)
 			return;
 		
-		ArrayList ListAxes = new ListAxes();
 		//如果玩家没有拿斧头，则将挖掘速度设为0
-		if (!ListAxes.contains(event.getEntityPlayer().inventory.getCurrentItem().getItem())) {
+		if (event.getEntityPlayer().inventory.getCurrentItem().getItem() instanceof ItemAxe) {
 			event.setNewSpeed(0.0F);
 		}
 	}

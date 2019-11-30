@@ -3,21 +3,17 @@ package com.gonggongjohn.eok.network;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.IButtonHandler;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-
 import javax.annotation.Nullable;
 
 public class PacketGuiButton implements IMessage {
     private int buttonID;
-    private NBTTagCompound compound;
     @SuppressWarnings("unused")
+	private NBTTagCompound compound;
     @Deprecated
     public PacketGuiButton() {}
 

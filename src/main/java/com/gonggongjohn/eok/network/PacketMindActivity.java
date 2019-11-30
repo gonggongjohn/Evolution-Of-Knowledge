@@ -1,6 +1,5 @@
 package com.gonggongjohn.eok.network;
 
-import com.gonggongjohn.eok.capabilities.IConsciousness;
 import com.gonggongjohn.eok.capabilities.IMindActivity;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import io.netty.buffer.ByteBuf;

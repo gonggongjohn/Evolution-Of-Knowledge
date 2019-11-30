@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResearchNode {
-    private int index;
+    @SuppressWarnings("unused")
+	private int index;
     private String unlocalizedName;
     private ResearchNode[] fatherNodes;
 

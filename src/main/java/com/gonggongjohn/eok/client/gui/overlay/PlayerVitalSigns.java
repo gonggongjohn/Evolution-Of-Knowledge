@@ -37,11 +37,11 @@ public class PlayerVitalSigns {
             double conV = 0.0D;
             double maV = 0.0D;
             if(player.hasCapability(CapabilityHandler.capConsciousness, null)) {
-                IConsciousness consciousness = (IConsciousness) player.getCapability(CapabilityHandler.capConsciousness, null);
+                IConsciousness consciousness = player.getCapability(CapabilityHandler.capConsciousness, null);
                 conV = consciousness.getConsciousnessValue();
             }
             if(player.hasCapability(CapabilityHandler.capMindActivity, null)){
-                IMindActivity mindActivity = (IMindActivity) player.getCapability(CapabilityHandler.capMindActivity, null);
+                IMindActivity mindActivity = player.getCapability(CapabilityHandler.capMindActivity, null);
                 maV = mindActivity.getMindActivityValue();
             }
             Minecraft.getMinecraft().getTextureManager().bindTexture(ICONS);
@@ -73,10 +73,10 @@ public class PlayerVitalSigns {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        buffer.pos((double)(x + 0), (double)(y + height), 0.0D).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + height) * f1)).endVertex();;
-        buffer.pos((double)(x + width), (double)(y + height), 0.0D).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + height) * f1)).endVertex();
-        buffer.pos((double)(x + width), (double)(y + 0), 0.0D).tex((double)((float)(textureX + width) * f), (double)((float)(textureY + 0) * f1)).endVertex();
-        buffer.pos((double)(x + 0), (double)(y + 0), 0.0D).tex((double)((float)(textureX + 0) * f), (double)((float)(textureY + 0) * f1)).endVertex();
+        buffer.pos(x + 0, y + height, 0.0D).tex((textureX + 0) * f, (textureY + height) * f1).endVertex();;
+        buffer.pos(x + width, y + height, 0.0D).tex((textureX + width) * f, (textureY + height) * f1).endVertex();
+        buffer.pos(x + width, y + 0, 0.0D).tex((textureX + width) * f, (textureY + 0) * f1).endVertex();
+        buffer.pos(x + 0, y + 0, 0.0D).tex((textureX + 0) * f, (textureY + 0) * f1).endVertex();
         tessellator.draw();
     }
 }
