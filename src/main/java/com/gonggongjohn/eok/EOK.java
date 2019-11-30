@@ -5,6 +5,7 @@ import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.ResearchHandler;
 import com.gonggongjohn.eok.network.PacketConsciousness;
+import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketMindActivity;
 import com.gonggongjohn.eok.network.PacketResearchData;
@@ -67,6 +68,8 @@ public class EOK {
 		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
 		network.registerMessage(new PacketMindActivity.Handler(), PacketMindActivity.class, 2, Side.CLIENT);
 		network.registerMessage(new PacketResearchData.Handler(), PacketResearchData.class, 3, Side.CLIENT);
+		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
+		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 	}
 
 	@EventHandler

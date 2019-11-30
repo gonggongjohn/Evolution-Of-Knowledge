@@ -17,6 +17,10 @@ public class ButtonData {
 	private int txtcolor;
 	private boolean customTxtColor = false;
 
+	public ButtonData() {
+
+	}
+
 	public boolean isCustomTxtColor() {
 		return customTxtColor;
 	}
@@ -113,15 +117,4 @@ public class ButtonData {
 		this.txtcolor = txtcolor;
 	}
 
-	/*
-	 * public ButtonData(int posX, int posY, int width, int height, int textureX,
-	 * int textureY, int textureX2, int textureY2, ResourceLocation texture, String
-	 * text, int txtcolor) { this.posX = posX; this.posY = posY; this.width = width;
-	 * this.height = height; this.textureX = textureX; this.textureY = textureY;
-	 * this.textureX2 = textureX2; this.textureY2 = textureY2; this.texture =
-	 * texture; this.text = text; this.txtcolor = txtcolor; }
-	 */
-	public ButtonData() {
-
-	}
 }

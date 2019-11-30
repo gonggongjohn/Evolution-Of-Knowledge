@@ -3,6 +3,7 @@ package com.gonggongjohn.eok;
 import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
+import com.gonggongjohn.eok.handlers.TradeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -21,6 +22,7 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(EOK.instance, new GUIHandler());
+		TradeHandler.setup();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

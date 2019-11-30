@@ -5,10 +5,17 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 
 public class ButtonBuilder {
-
+	
+	/**
+	 * @param id 按钮ID
+	 * @param buttondata 按钮信息（可以在多个按钮上使用同一个buttondata）
+	 * @return
+	 */
 	public static GuiButton CommonButton(int id, ButtonData buttondata) {
 
 		final int posX = buttondata.getPosX();
@@ -31,6 +38,9 @@ public class ButtonBuilder {
 				if (this.visible) {
 
 					GL11.glPushMatrix();
+					GlStateManager.enableBlend();
+			        OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+			        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 					mc.getTextureManager().bindTexture(TEXTURE);
 

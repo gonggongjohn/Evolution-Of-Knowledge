@@ -35,7 +35,7 @@ public class ContainerRefractingTelescope extends Container implements IButtonHa
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index){
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ContainerRefractingTelescope extends Container implements IButtonHa
 
         if(playerIn.isServerWorld()){
             ItemStack paperStack = this.paperSlot.getStack();
-            if(paperStack != null){
+            if(paperStack != null && !paperStack.isEmpty()){
                 playerIn.dropItem(paperStack, false);
             }
         }

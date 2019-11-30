@@ -75,7 +75,6 @@ public abstract class EntityNPCBase extends EntityCreature {
 	@Override
 	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
 		if(player.world.isRemote) return super.processInteract(player, hand);
-		//System.out.println("open this gui!");
 		BlockPos pos = player.getPosition();
 		player.openGui(EOK.instance, GUIHandler.GUIMerchant, player.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ());
 		
