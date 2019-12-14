@@ -56,7 +56,7 @@ public class AnotherEventHandler {
     }
 
     @SubscribeEvent
-    public static void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
+    public void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
         if (!event.player.world.isRemote)
         {
             EntityPlayer player = event.player;

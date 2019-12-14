@@ -32,7 +32,7 @@ public class PacketResearchData implements IMessage {
         @Override
         public IMessage onMessage(PacketResearchData message, MessageContext ctx) {
             if(ctx.side == Side.CLIENT) {
-                final NBTBase nbt = message.compound.getTag("researchData");
+                final NBTBase nbt = message.compound.getTag("finishedResearch");
                 Minecraft.getMinecraft().addScheduledTask(new Runnable() {
                     @Override
                     public void run() {

@@ -42,10 +42,10 @@ messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
 
 research.gui.pre=研究节点：
-research.gravity.name=重力
-research.temperature.name=温度
-research.test1.name=测试研究1
-research.test2.name=测试研究2
+research.root.name=根研究
+research.elementary_arithmetic.name=数学：初等算术
+research.power.name=数学：乘方
+research.logarithm.name=数学：对数运算
 
 entity.entity_smalldew.name=gonggongjohn
 entity.entity_chenwe_i_lin.name=Chenwe_i_lin
@@ -54,3 +54,5 @@ entity.entity_zijing.name=zijing_233
 
 gui.merchant.title=商人
 gui.merchant.button.buy=购买
+
+

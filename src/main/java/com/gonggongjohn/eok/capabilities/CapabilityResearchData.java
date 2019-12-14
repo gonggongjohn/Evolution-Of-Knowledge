@@ -29,7 +29,7 @@ public class CapabilityResearchData {
         public void readNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side, NBTBase nbt){
             NBTTagCompound compound = (NBTTagCompound) nbt;
             ArrayList<Integer> finList = new ArrayList<Integer>();
-            if(compound.getSize() != 0){
+            if(compound != null && compound.getSize() != 0){
                 for(int i =0; i < compound.getSize(); i++){
                     finList.add(compound.getInteger("" + i));
                 }

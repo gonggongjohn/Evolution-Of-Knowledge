@@ -47,7 +47,7 @@ public class EOK {
 
 	public static ResearchHandler researches;
 
-	public ResearchDict researchDict = new ResearchDict();
+	public static ResearchDict researchDict = new ResearchDict();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
