@@ -34,6 +34,7 @@ tooltip.toolbase.harvest_level=§aHarvest Level: §d%2d
 tooltip.toolbase.attack_damage=§aAttack Damage: §d%5f(%6f hearts)
 tooltip.toolbase.durability=§aDurability: §d%3d / %4d 
 tooltip.torcherino=§4Please take the risks it brings by yourself.
+tooltip.data.research=Contain Research :
 
 materials.CHIPPED_FLINT.name=Chipped Flint
 

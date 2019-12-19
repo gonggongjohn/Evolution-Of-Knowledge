@@ -3,27 +3,43 @@ package com.gonggongjohn.eok.client.gui;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
+import com.gonggongjohn.eok.network.PacketGuiButton;
+import com.gonggongjohn.eok.network.PacketInverseReseachData;
+import com.gonggongjohn.eok.network.PacketResearchData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class GUIElementaryResearchTable extends GuiContainer {
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/elementary_research_table.png";
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/elementary_research_table_components.png";
+    private static final String TEXTURE_PAPER = EOK.MODID + ":" + "textures/gui/container/paper_background.png";
     private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    public GUIElementaryResearchTable(Container inventorySlotsIn) {
+    private static final ResourceLocation TEXTUREPAPER = new ResourceLocation(TEXTURE_PAPER);
+    private ArrayList<Integer> finList;
+    private Slot invPaperSlot;
+    public GUIElementaryResearchTable(ContainerElementaryResearchTable inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 256;
         this.ySize = 192;
+        this.invPaperSlot = inventorySlotsIn.getPaperSlot();
     }
 
 
@@ -44,7 +60,13 @@ public class GUIElementaryResearchTable extends GuiContainer {
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
-        this.drawTexturedModalRect(offsetX + 10, offsetY + 148, 0, 33, 90, 16);
+        this.mc.getTextureManager().bindTexture(TEXTURECOMP);
+        this.drawTexturedModalRect(offsetX + 166, offsetY + 146, 0, 33, 90, 16);
+        ItemStack testT = this.invPaperSlot.getStack();
+        if(this.invPaperSlot.getHasStack()){
+            this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
+            this.drawTexturedModalRect(offsetX + 80, offsetY + 6, 0, 0, 131, 132);
+        }
         GL11.glPopMatrix();
     }
 
@@ -56,7 +78,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     public void initGui() {
         super.initGui();
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + 219, offsetY + 129, 32, 32, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + 218, offsetY + 104, 32, 32, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks){
                 if(this.visible){
@@ -73,13 +95,13 @@ public class GUIElementaryResearchTable extends GuiContainer {
         });
 
         EntityPlayer player = Minecraft.getMinecraft().player;
-        ArrayList<Integer> finList = new ArrayList<Integer>();
+        finList = new ArrayList<Integer>();
         if(player.hasCapability(CapabilityHandler.capResearchData, null)){
             IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
             finList = researchData.getFinishedResearch();
             if(finList.size() != 0) {
                 for (int i = 1; i <= finList.size(); i++) {
-                    this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1), offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 32, 32, offsetY));
+                    this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1), offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 20, 20, offsetY));
                 }
             }
 
@@ -89,7 +111,44 @@ public class GUIElementaryResearchTable extends GuiContainer {
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         super.actionPerformed(button);
-        //TODO
+        if (button.id >= 1 && button.id <= finList.size()) {
+            int activeResearchID = ((ButtonElementaryResearchTable) button).getResearchId();
+            EOK.getNetwork().sendToServer(new PacketGuiButton(activeResearchID));
+        }
+        if (button.id == 0) {
+            ItemStack stack = this.invPaperSlot.getStack();
+            int[] temp;
+            if (stack == null | stack.isEmpty()) return;
+            NBTTagCompound compound = stack.getTagCompound();
+            if (compound == null) return;
+            else {
+                temp = compound.getIntArray("data.research");
+                HashSet<Integer> relation = new HashSet<Integer>();
+                int result;
+                for (int i = 0; i < temp.length; i++) {
+                    relation.add(temp[i]);
+                }
+                if (EOK.researchDict.researchRelationDict.containsKey(relation)) {
+                    result = EOK.researchDict.researchRelationDict.get(relation);
+                    finList.add(result);
+                    //Add result to player's capability
+                    EntityPlayer player = Minecraft.getMinecraft().player;
+                    if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
+                        PacketInverseReseachData message = new PacketInverseReseachData();
+                        IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
+                        Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
+                        ArrayList<Integer> finListT = researchData.getFinishedResearch();
+                        finListT.add(result);
+                        researchData.setFinishedResearch(finListT);
+                        NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
+                        storage.readNBT(CapabilityHandler.capResearchData, player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
+                        message.compound = new NBTTagCompound();
+                        message.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
+                        EOK.getNetwork().sendToServer(message);
+                    }
+                }
+            }
+        }
     }
 
     private int calcButtonLeftPos(int index){

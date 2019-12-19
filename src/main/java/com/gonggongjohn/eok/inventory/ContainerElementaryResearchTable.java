@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -29,14 +30,30 @@ public class ContainerElementaryResearchTable extends Container implements IButt
         });
 
         for(int i = 0; i < 9; ++i){
-            this.addSlotToContainer(new Slot(player.inventory, i, 47 + i * 18, 174));
+            this.addSlotToContainer(new Slot(player.inventory, i, 6 + i * 18, 147));
         }
     }
 
 
     @Override
-    public void onButtonPress(int buttonID) {
-
+    public void onButtonPress(int activeResearchID) {
+        ItemStack stack = this.paperSlot.getStack();
+        if(stack == null| stack.isEmpty()) return;
+        NBTTagCompound compound = stack.getTagCompound();
+        int[] temp,extensionTemp;
+        if(compound == null) {
+            extensionTemp = new int[]{activeResearchID};
+            compound = new NBTTagCompound();
+        }
+        else{
+            temp = compound.getIntArray("data.research");
+            extensionTemp = new int[temp.length + 1];
+            for(int i = 0; i < temp.length; i++) extensionTemp[i]=temp[i];
+            extensionTemp[temp.length + 1] = activeResearchID;
+        }
+        compound.setIntArray("data.research", extensionTemp);
+        stack.setTagCompound(compound);
+        this.paperSlot.putStack(stack);
     }
 
     @Override
@@ -47,5 +64,9 @@ public class ContainerElementaryResearchTable extends Container implements IButt
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index){
         return null;
+    }
+
+    public Slot getPaperSlot(){
+        return this.paperSlot;
     }
 }

@@ -27,6 +27,18 @@ public class EventHandler {
                 str += I18n.format("tooltip.data.universe", value);
                 tooltip.add(str);
             }
+            if(compound != null && compound.hasKey("data.research")){
+                int[] researchIDs = compound.getIntArray("data.research");
+                List<String> tooltip = event.getToolTip();
+                String str = "";
+                str += I18n.format("tooltip.data.research");
+                tooltip.add(str);
+                for(int i = 0; i < researchIDs.length; i++){
+                    String strResearch = "";
+                    strResearch += I18n.format("research." + EOK.researchDict.researchNameDict.get(researchIDs[i]) + ".name");
+                    tooltip.add(strResearch);
+                }
+            }
         }
     }
 

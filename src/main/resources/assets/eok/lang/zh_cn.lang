@@ -34,6 +34,7 @@ tooltip.toolbase.harvest_level=§a挖掘等级: §d%2d
 tooltip.toolbase.attack_damage=§a攻击伤害: §d%5f(%6f 心)
 tooltip.toolbase.durability=§a耐久度: §d%3d / %4d 
 tooltip.torcherino=§4请自己承担它带来的风险。
+tooltip.data.research=包含的研究：
 
 materials.CHIPPED_FLINT.name=打制的燧石
 

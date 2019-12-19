@@ -46,4 +46,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
         }
     }
 
+    public int getResearchId(){
+        return this.researchId;
+    }
 }

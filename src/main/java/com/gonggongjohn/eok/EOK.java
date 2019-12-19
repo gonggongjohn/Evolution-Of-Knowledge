@@ -4,11 +4,7 @@ import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.ResearchHandler;
-import com.gonggongjohn.eok.network.PacketConsciousness;
-import com.gonggongjohn.eok.network.PacketGUIMerchant;
-import com.gonggongjohn.eok.network.PacketGuiButton;
-import com.gonggongjohn.eok.network.PacketMindActivity;
-import com.gonggongjohn.eok.network.PacketResearchData;
+import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
 import com.gonggongjohn.eok.utils.ResearchDict;
@@ -70,6 +66,7 @@ public class EOK {
 		network.registerMessage(new PacketResearchData.Handler(), PacketResearchData.class, 3, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
+		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 	}
 
 	@EventHandler
