@@ -16,13 +16,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
 public class BlockElementaryResearchTable extends BlockContainer implements IHasModel {
     public final String name = "elementary_research_table";
+    public static final AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 2.0D);
 
     public BlockElementaryResearchTable() {
         super(Material.ROCK);
@@ -58,6 +61,11 @@ public class BlockElementaryResearchTable extends BlockContainer implements IHas
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TEElementaryResearchTable();
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return ELEMENTARY_RESEARCH_TABLE_AABB;
     }
 
     @Override

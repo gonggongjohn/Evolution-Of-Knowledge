@@ -49,7 +49,7 @@ public class ContainerElementaryResearchTable extends Container implements IButt
             temp = compound.getIntArray("data.research");
             extensionTemp = new int[temp.length + 1];
             for(int i = 0; i < temp.length; i++) extensionTemp[i]=temp[i];
-            extensionTemp[temp.length + 1] = activeResearchID;
+            extensionTemp[temp.length] = activeResearchID;
         }
         compound.setIntArray("data.research", extensionTemp);
         stack.setTagCompound(compound);

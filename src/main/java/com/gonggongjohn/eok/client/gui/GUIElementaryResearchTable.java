@@ -33,7 +33,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
     private static final ResourceLocation TEXTUREPAPER = new ResourceLocation(TEXTURE_PAPER);
-    private ArrayList<Integer> finList;
+    private ArrayList<Integer> lastFinList,finList = new ArrayList<Integer>();
     private Slot invPaperSlot;
     public GUIElementaryResearchTable(ContainerElementaryResearchTable inventorySlotsIn) {
         super(inventorySlotsIn);
@@ -67,6 +67,13 @@ public class GUIElementaryResearchTable extends GuiContainer {
             this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
             this.drawTexturedModalRect(offsetX + 80, offsetY + 6, 0, 0, 131, 132);
         }
+        if(finList != null && !finList.isEmpty() && lastFinList !=null && !lastFinList.isEmpty()) {
+            if (finList.size() > lastFinList.size() || this.buttonList.size() < (finList.size() + 1)) {
+                int indexNew = finList.size();
+                this.buttonList.add(new ButtonElementaryResearchTable(indexNew, finList.get(indexNew - 1), offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 20, 20, offsetY));
+            }
+        }
+        lastFinList = finList;
         GL11.glPopMatrix();
     }
 
@@ -95,7 +102,6 @@ public class GUIElementaryResearchTable extends GuiContainer {
         });
 
         EntityPlayer player = Minecraft.getMinecraft().player;
-        finList = new ArrayList<Integer>();
         if(player.hasCapability(CapabilityHandler.capResearchData, null)){
             IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
             finList = researchData.getFinishedResearch();
@@ -138,13 +144,15 @@ public class GUIElementaryResearchTable extends GuiContainer {
                         IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
                         Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
                         ArrayList<Integer> finListT = researchData.getFinishedResearch();
-                        finListT.add(result);
-                        researchData.setFinishedResearch(finListT);
-                        NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
-                        storage.readNBT(CapabilityHandler.capResearchData, player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
-                        message.compound = new NBTTagCompound();
-                        message.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
-                        EOK.getNetwork().sendToServer(message);
+                        if(!finListT.contains(result)) {
+                            finListT.add(result);
+                            researchData.setFinishedResearch(finListT);
+                            NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
+                            storage.readNBT(CapabilityHandler.capResearchData, player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
+                            message.compound = new NBTTagCompound();
+                            message.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
+                            EOK.getNetwork().sendToServer(message);
+                        }
                     }
                 }
             }
