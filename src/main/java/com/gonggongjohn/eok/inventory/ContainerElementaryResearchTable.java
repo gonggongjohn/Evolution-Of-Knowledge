@@ -1,28 +1,39 @@
 package com.gonggongjohn.eok.inventory;
 
+import com.gonggongjohn.eok.tile.TEElementaryResearchTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerElementaryResearchTable extends Container implements IButtonHandler{
     protected Slot paperSlot;
-    protected Slot toolSlot;
-    private ItemStackHandler items = new ItemStackHandler(2);
+    protected Slot penSlot;
+    protected Slot inkSlot;
 
-    public ContainerElementaryResearchTable(EntityPlayer player) {
+    protected TEElementaryResearchTable teERT;
+
+    public ContainerElementaryResearchTable(EntityPlayer player, TileEntity tileEntity) {
         super();
 
-        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(items, 0, 224, 15){
+        this.addSlotToContainer(this.paperSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN), 0, 229, 12){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
             }
         });
-        this.addSlotToContainer(this.toolSlot = new SlotItemHandler(items, 1, 224, 46){
+        this.addSlotToContainer(this.penSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), 0, 229, 36){
+            @Override
+            public int getItemStackLimit(ItemStack stack){
+                return 1;
+            }
+        });
+        this.addSlotToContainer(this.inkSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.EAST), 0, 229, 60){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
@@ -30,7 +41,7 @@ public class ContainerElementaryResearchTable extends Container implements IButt
         });
 
         for(int i = 0; i < 9; ++i){
-            this.addSlotToContainer(new Slot(player.inventory, i, 6 + i * 18, 147));
+            this.addSlotToContainer(new Slot(player.inventory, i, 9 + i * 16, 141));
         }
     }
 

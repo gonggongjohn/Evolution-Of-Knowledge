@@ -6,14 +6,11 @@ import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketInverseReseachData;
-import com.gonggongjohn.eok.network.PacketResearchData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -38,7 +35,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     public GUIElementaryResearchTable(ContainerElementaryResearchTable inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 256;
-        this.ySize = 192;
+        this.ySize = 166;
         this.invPaperSlot = inventorySlotsIn.getPaperSlot();
     }
 
@@ -62,15 +59,14 @@ public class GUIElementaryResearchTable extends GuiContainer {
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
         this.mc.getTextureManager().bindTexture(TEXTURECOMP);
         this.drawTexturedModalRect(offsetX + 166, offsetY + 146, 0, 33, 90, 16);
-        ItemStack testT = this.invPaperSlot.getStack();
-        if(this.invPaperSlot.getHasStack()){
+        if(this.invPaperSlot != null && this.invPaperSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")){
             this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
-            this.drawTexturedModalRect(offsetX + 80, offsetY + 6, 0, 0, 131, 132);
+            this.drawTexturedModalRect(offsetX + 67, offsetY + 10, 0, 0, 153, 126);
         }
         if(finList != null && !finList.isEmpty() && lastFinList !=null && !lastFinList.isEmpty()) {
             if (finList.size() > lastFinList.size() || this.buttonList.size() < (finList.size() + 1)) {
                 int indexNew = finList.size();
-                this.buttonList.add(new ButtonElementaryResearchTable(indexNew, finList.get(indexNew - 1), offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 20, 20, offsetY));
+                this.buttonList.add(new ButtonElementaryResearchTable(indexNew, finList.get(indexNew - 1), offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 18, 18, offsetY));
             }
         }
         lastFinList = finList;
@@ -85,7 +81,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     public void initGui() {
         super.initGui();
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + 218, offsetY + 104, 32, 32, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + 225, offsetY + 114, 22, 22, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks){
                 if(this.visible){
@@ -95,7 +91,11 @@ public class GUIElementaryResearchTable extends GuiContainer {
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                     mc.getTextureManager().bindTexture(TEXTURECOMP);
-                    this.drawTexturedModalRect(this.x, this.y, 0, 0, this.width, this.height);
+                    int relx = mouseX - this.x, rely = mouseY - this.y;
+                    if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
+                        this.drawTexturedModalRect(this.x, this.y, 44, 0, this.width, this.height);
+                    else
+                        this.drawTexturedModalRect(this.x, this.y, 0, 0, this.width, this.height);
                     GL11.glPopMatrix();
                 }
             }
@@ -107,7 +107,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
             finList = researchData.getFinishedResearch();
             if(finList.size() != 0) {
                 for (int i = 1; i <= finList.size(); i++) {
-                    this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1), offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 20, 20, offsetY));
+                    this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1), offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 18, 18, offsetY));
                 }
             }
 
@@ -136,7 +136,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
                 }
                 if (EOK.researchDict.researchRelationDict.containsKey(relation)) {
                     result = EOK.researchDict.researchRelationDict.get(relation);
-                    finList.add(result);
+                    if(!finList.contains(result)) finList.add(result);
                     //Add result to player's capability
                     EntityPlayer player = Minecraft.getMinecraft().player;
                     if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
@@ -160,12 +160,12 @@ public class GUIElementaryResearchTable extends GuiContainer {
     }
 
     private int calcButtonLeftPos(int index){
-        if (index % 2 != 0) return 9;
-        else return 42;
+        if (index % 2 != 0) return 13;
+        else return 37;
     }
 
     private int calcButtonTopPos(int index){
-        if (index % 2 == 0) return 9 + 36 * (index / 2 - 1);
-        else return 9 + 36 * (index / 2);
+        if (index % 2 == 0) return 14 + 25 * (index / 2 - 1);
+        else return 14 + 25 * (index / 2);
     }
 }

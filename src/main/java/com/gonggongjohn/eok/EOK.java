@@ -3,7 +3,6 @@ package com.gonggongjohn.eok;
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
-import com.gonggongjohn.eok.handlers.ResearchHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
@@ -41,8 +40,6 @@ public class EOK {
 
 	private SimpleNetworkWrapper network;
 
-	public static ResearchHandler researches;
-
 	public static ResearchDict researchDict = new ResearchDict();
 
 	@EventHandler
@@ -55,7 +52,6 @@ public class EOK {
 		}
 		proxy.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
-		researches = new ResearchHandler();
 		researchDict.initName();
 		researchDict.initRelation();
 		CapabilityHandler.setupCapabilities();

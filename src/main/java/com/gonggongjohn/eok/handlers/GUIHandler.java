@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -21,7 +22,7 @@ public class GUIHandler implements IGuiHandler {
             case GUIRefractingTelescope:
                 return new ContainerRefractingTelescope(player);
             case GUIElementaryResearchTable:
-                return new ContainerElementaryResearchTable(player);
+                return new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z)));
             case GUIMerchant:
             	return new ContainerMerchant(player);
             default:
@@ -36,7 +37,7 @@ public class GUIHandler implements IGuiHandler {
             case GUIRefractingTelescope:
                 return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));
             case GUIElementaryResearchTable:
-                return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player));
+                return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z))));
             case GUIMerchant:
             	return new GUIMerchant(new ContainerMerchant(player));
             default:

@@ -1,9 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.handlers.ResearchHandler;
-import com.gonggongjohn.eok.utils.ResearchDict;
-import com.gonggongjohn.eok.utils.ResearchNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -35,7 +32,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             mc.getTextureManager().bindTexture(TEXTURECOMP);
-            this.drawTexturedModalRect(this.x, this.y, 64, 0, this.width, this.height);
+            this.drawTexturedModalRect(this.x, this.y, 66, 0, this.width, this.height);
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
 
