@@ -1,5 +1,8 @@
 {
   "variants":{
-    "normal": { "model": "eok:elementary_research_table" }
+    "facing=east": { "model": "eok:elementary_research_table", "y": 90 },
+    "facing=south": { "model": "eok:elementary_research_table", "y": 180 },
+    "facing=west": { "model": "eok:elementary_research_table", "y": 270 },
+    "facing=north": { "model": "eok:elementary_research_table" }
   }
 }
