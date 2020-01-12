@@ -26,7 +26,7 @@ public class ResearchDict {
     private HashSet<Integer> createSet(int... element){
         HashSet<Integer> relationSet = new HashSet<Integer>();
         for(int i = 0; i < element.length; i++)
-        relationSet.add(i);
+        relationSet.add(element[i]);
         return relationSet;
     }
 }

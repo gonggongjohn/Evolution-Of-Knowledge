@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok.network;
 
+import com.gonggongjohn.eok.CommonProxy;
+import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import io.netty.buffer.ByteBuf;
@@ -14,7 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketResearchData implements IMessage {
+public class PacketInverseReseachData implements IMessage {
     public NBTTagCompound compound;
 
     @Override
@@ -27,16 +29,16 @@ public class PacketResearchData implements IMessage {
         ByteBufUtils.writeTag(buf, compound);
     }
 
-    public static class Handler implements IMessageHandler<PacketResearchData, IMessage>{
+    public static class Handler implements IMessageHandler<PacketInverseReseachData, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketResearchData message, MessageContext ctx) {
-            if(ctx.side == Side.CLIENT) {
+        public IMessage onMessage(PacketInverseReseachData message, MessageContext ctx) {
+            if(ctx.side == Side.SERVER) {
                 final NBTBase nbt = message.compound.getTag("finishedResearch");
                 Minecraft.getMinecraft().addScheduledTask(new Runnable() {
                     @Override
                     public void run() {
-                        EntityPlayer player = Minecraft.getMinecraft().player;
+                        EntityPlayer player = EOK.getProxy().getPlayer(ctx);
                         if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
                             IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
                             Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();

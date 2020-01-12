@@ -12,7 +12,8 @@ import javax.annotation.Nullable;
 
 public class TEElementaryResearchTable extends TileEntity implements ITickable {
     protected ItemStackHandler paperSlot = new ItemStackHandler();
-    protected ItemStackHandler toolSlot = new ItemStackHandler();
+    protected ItemStackHandler penSlot = new ItemStackHandler();
+    protected ItemStackHandler inkSlot = new ItemStackHandler();
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
@@ -27,7 +28,7 @@ public class TEElementaryResearchTable extends TileEntity implements ITickable {
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)){
             @SuppressWarnings("unchecked")
-            T result = (T) (facing == EnumFacing.DOWN ? paperSlot : toolSlot);
+            T result = (T) ((facing == EnumFacing.EAST) ? inkSlot : (facing == EnumFacing.DOWN ? paperSlot : penSlot));
             return result;
         }
         return super.getCapability(capability, facing);
@@ -37,14 +38,16 @@ public class TEElementaryResearchTable extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.paperSlot.deserializeNBT(compound.getCompoundTag("paperSlot"));
-        this.toolSlot.deserializeNBT(compound.getCompoundTag("toolSlot"));
+        this.penSlot.deserializeNBT(compound.getCompoundTag("penSlot"));
+        this.inkSlot.deserializeNBT(compound.getCompoundTag("inkSlot"));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("paperSlot", this.paperSlot.serializeNBT());
-        compound.setTag("toolSlot", this.toolSlot.serializeNBT());
+        compound.setTag("penSlot", this.penSlot.serializeNBT());
+        compound.setTag("inkSlot", this.inkSlot.serializeNBT());
         return super.writeToNBT(compound);
     }
 
