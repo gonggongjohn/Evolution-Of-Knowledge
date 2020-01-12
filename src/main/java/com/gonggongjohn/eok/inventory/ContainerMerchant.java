@@ -68,7 +68,6 @@ public class ContainerMerchant extends Container {
 
 	public ContainerMerchant(EntityPlayer player) {
 		super();
-
 		this.addSlotToContainer(slot1);
 		this.addSlotToContainer(slot2);
 		this.addSlotToContainer(slot3);

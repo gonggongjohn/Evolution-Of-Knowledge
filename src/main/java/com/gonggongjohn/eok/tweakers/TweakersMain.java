@@ -4,16 +4,21 @@ import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.common.ProgressManager.ProgressBar;
 
 public class TweakersMain {
-	public static void setup() {
-		ProgressBar progress = ProgressManager.push("Initializating tweakers", 4);
-		progress.step("BlockHardnessTweaker");
+	public static void preInit() {
+		
+	}
+	
+	public static void init() {
+		ProgressBar progress = ProgressManager.push("Initializating tweakers", 0);
 		BlockHardness.setup();
-		progress.step("LeavesTweaker");
 		new LeavesTweaker();
-		progress.step("TreeTweaker");
 		new TreeTweaker();
-		progress.step("GravelTweaker");
 		new GravelTweaker();
+		BrightnessTweaker.tweak();
 		ProgressManager.pop(progress);
+	}
+	
+	public static void postInit() {
+		
 	}
 }

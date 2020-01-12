@@ -18,7 +18,7 @@ public class BlockHardness {
 	//大多数机器硬度为5
 	
 	public static void setup() {
-		if(ConfigHandler.modifyBlockHardness == false)
+		if(ConfigHandler.increaseBlockHardness == false)
 			return;
 		tweakModBlocks();
 		tweakVanillaBlocks();

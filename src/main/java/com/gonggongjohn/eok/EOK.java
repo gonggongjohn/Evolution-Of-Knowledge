@@ -63,6 +63,7 @@ public class EOK {
 		researchDict.initName();
 		researchDict.initRelation();
 		CapabilityHandler.setupCapabilities();
+		TweakersMain.preInit();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
 		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
@@ -75,13 +76,14 @@ public class EOK {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
-		TweakersMain.setup();
+		TweakersMain.init();
 		MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
+		TweakersMain.postInit();
 	}
 
 	public static CommonProxy getProxy() {

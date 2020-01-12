@@ -12,7 +12,6 @@ public class EntityOsIr extends EntityNPCBase{
 
 	public EntityOsIr(World worldIn) {
 		super(worldIn);
-		// TODO 自动生成的构造函数存根
 	}
 
 	@Override

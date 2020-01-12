@@ -24,6 +24,12 @@ item.machine_gun.description=仍处于开发阶段
 tile.stone_table.name=石桌
 tile.two_barrel_vacuum_pump.name=双筒真空泵
 tile.elementary_research_table.name=初级研究台
+tile.trunk_oak.name=橡树树干
+tile.trunk_birch.name=白桦树干
+tile.trunk_jungle.name=丛林树干
+tile.trunk_spruce.name=云杉树干
+tile.trunk_acacia.name=金合欢树干
+tile.trunk_dark_oak.name=深色橡树树干
 
 itemGroup.eoktab=从无知到先知
 

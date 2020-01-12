@@ -24,6 +24,12 @@ item.machine_gun.description=Still Developing
 tile.stone_table.name=Stone Table
 tile.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
 tile.elementary_research_table.name=Elementary Research Table
+tile.trunk_oak.name=Oak Trunk
+tile.trunk_birch.name=Birch Trunk
+tile.trunk_jungle.name=Jungle Trunk
+tile.trunk_spruce.name=Spruce Trunk
+tile.trunk_acacia.name=Acacia Trunk
+tile.trunk_dark_oak.name=Dark Oak Trunk
 
 itemGroup.eoktab=Evolution Of Knowledge
 

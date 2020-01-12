@@ -62,13 +62,11 @@ public class EntityAISelfDefense extends EntityAIBase {
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		// TODO 自动生成的方法存根
 		return super.shouldContinueExecuting();
 	}
 
 	@Override
 	public void resetTask() {
-		// TODO 自动生成的方法存根
 		super.resetTask();
 	}
 
