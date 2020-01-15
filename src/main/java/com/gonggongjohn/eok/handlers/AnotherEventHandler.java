@@ -27,9 +27,11 @@ public class AnotherEventHandler {
             ICapabilitySerializable<NBTTagCompound> providerConsciousness = new CapabilityConsciousness.ProvidePlayer();
             ICapabilitySerializable<NBTTagCompound> providerMindActivity = new CapabilityMindActivity.ProvidePlayer();
             ICapabilitySerializable<NBTTagCompound> providerResearchData = new CapabilityResearchData.ProvidePlayer();
+            ICapabilitySerializable<NBTTagCompound> providerSeconds = new CapabilitySeconds.ProvidePlayer();
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), providerConsciousness);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "mindActivity"), providerMindActivity);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "researchData"), providerResearchData);
+            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "seconds"),providerSeconds);
         }
     }
 
@@ -41,6 +43,8 @@ public class AnotherEventHandler {
         Capability.IStorage<IMindActivity> storageMindActivity = capabilityMindActivity.getStorage();
         Capability<IResearchData> capabilityResearchData = CapabilityHandler.capResearchData;
         Capability.IStorage<IResearchData> storageResearchData = capabilityResearchData.getStorage();
+        Capability<ISeconds> capabilitySeconds=CapabilityHandler.capSeconds;
+        Capability.IStorage<ISeconds> storageSeconds=capabilitySeconds.getStorage();
         if(event.getOriginal().hasCapability(capabilityConsciousness, null) && event.getEntityPlayer().hasCapability(capabilityConsciousness, null)){
             NBTBase nbt = storageConsciousness.writeNBT(capabilityConsciousness, event.getOriginal().getCapability(capabilityConsciousness, null), null);
             storageConsciousness.readNBT(capabilityConsciousness, event.getEntityPlayer().getCapability(capabilityConsciousness, null), null, nbt);
@@ -52,6 +56,10 @@ public class AnotherEventHandler {
         if(event.getOriginal().hasCapability(capabilityResearchData, null) && event.getEntityPlayer().hasCapability(capabilityResearchData, null)){
             NBTBase nbt = storageResearchData.writeNBT(capabilityResearchData, event.getOriginal().getCapability(capabilityResearchData, null), null);
             storageResearchData.readNBT(capabilityResearchData, event.getEntityPlayer().getCapability(capabilityResearchData, null), null, nbt);
+        }
+        if(event.getOriginal().hasCapability(capabilitySeconds, null) && event.getEntityPlayer().hasCapability(capabilitySeconds, null)){
+            NBTBase nbt = storageSeconds.writeNBT(capabilitySeconds, event.getOriginal().getCapability(capabilitySeconds, null), null);
+            storageSeconds.readNBT(capabilitySeconds, event.getEntityPlayer().getCapability(capabilitySeconds, null), null, nbt);
         }
     }
 

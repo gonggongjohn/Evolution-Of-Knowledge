@@ -1,9 +1,11 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.client.gui.GUIElementaryResearchTable;
+import com.gonggongjohn.eok.client.gui.GUIFirstMachine;
 import com.gonggongjohn.eok.client.gui.GUIRefractingTelescope;
 import com.gonggongjohn.eok.client.gui.GUIMerchant;
 import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
+import com.gonggongjohn.eok.inventory.ContainerFirstMachine;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +17,7 @@ public class GUIHandler implements IGuiHandler {
     public static final int GUIRefractingTelescope = 1;
     public static final int GUIElementaryResearchTable = 2;
     public static final int GUIMerchant = 3;
+    public static final int GUIFirstMachine=4;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -25,6 +28,8 @@ public class GUIHandler implements IGuiHandler {
                 return new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z)));
             case GUIMerchant:
             	return new ContainerMerchant(player);
+            case GUIFirstMachine:
+                return new ContainerFirstMachine(player);
             default:
                 return null;
 
@@ -40,6 +45,8 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z))));
             case GUIMerchant:
             	return new GUIMerchant(new ContainerMerchant(player));
+            case GUIFirstMachine:
+                return new GUIFirstMachine(new ContainerFirstMachine(player));
             default:
                 return null;
         }

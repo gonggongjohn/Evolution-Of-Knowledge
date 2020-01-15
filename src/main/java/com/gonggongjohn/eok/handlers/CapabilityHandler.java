@@ -12,11 +12,14 @@ public class CapabilityHandler {
     public static Capability<IMindActivity> capMindActivity;
     @CapabilityInject(IResearchData.class)
     public static Capability<IResearchData> capResearchData;
+    @CapabilityInject(ISeconds.class)
+    public static Capability<ISeconds> capSeconds;
 
     @SuppressWarnings("deprecation")
 	public static void setupCapabilities(){
         CapabilityManager.INSTANCE.register(IConsciousness.class, new CapabilityConsciousness.Storage(), CapabilityConsciousness.Implementation.class);
         CapabilityManager.INSTANCE.register(IMindActivity.class, new CapabilityMindActivity.Storage(), CapabilityMindActivity.Implementation.class);
         CapabilityManager.INSTANCE.register(IResearchData.class, new CapabilityResearchData.Storage(), CapabilityResearchData.Implementation.class);
+        CapabilityManager.INSTANCE.register(ISeconds.class, new CapabilitySeconds.Storage(),CapabilitySeconds.Implementation.class);
     }
 }
