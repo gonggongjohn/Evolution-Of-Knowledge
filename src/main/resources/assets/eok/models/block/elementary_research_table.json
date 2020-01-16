@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"0": "eok:blocks/elementary_research_table",
 		"particle": "eok:blocks/elementary_research_table"

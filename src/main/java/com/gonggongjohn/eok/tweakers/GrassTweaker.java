@@ -5,6 +5,9 @@ import com.gonggongjohn.eok.handlers.ItemHandler;
 
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,10 +20,10 @@ public class GrassTweaker {
 	public static void des(BlockEvent.HarvestDropsEvent event) {
 		if (!event.getWorld().isRemote) {
 			if (event.getState().getBlock() instanceof BlockTallGrass) {
-				event.getDrops().add(new ItemStack(ItemHandler.plantFiber));
+				event.getDrops().add(new ItemStack(Blocks.TALLGRASS, 1, 1));
 				event.setDropChance(1.0F);
 				event.getWorld().spawnEntity(new EntityItem(event.getWorld(), event.getPos().getZ(),
-						event.getPos().getX(), event.getPos().getY(), new ItemStack(ItemHandler.plantFiber)));
+						event.getPos().getX(), event.getPos().getY(), new ItemStack(Blocks.TALLGRASS, 1, 1)));
 			}
 		}
 	}

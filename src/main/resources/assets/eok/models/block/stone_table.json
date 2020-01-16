@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
-		"1": "eok:blocks/stone_table",
-		"particle": "eok:blocks/stone_table"
+		"1": "eok:blocks/stone_table"
 	},
 	"elements": [
 		{
@@ -64,36 +64,5 @@
 				"down": {"uv": [8, 3.5, 10, 5.5], "texture": "#1"}
 			}
 		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [67, 0, 0],
-			"translation": [-6, 5, 26.5]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [67, 0, 0],
-			"translation": [-6, 5, 26.5]
-		},
-		"firstperson_righthand": {
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"firstperson_lefthand": {
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"ground": {
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"gui": {
-			"rotation": [45, 45, 0],
-			"translation": [-0.5, -1, 0],
-			"scale": [0.6, 0.6, 0.6]
-		},
-		"head": {
-			"translation": [0, 14.5, 0]
-		},
-		"fixed": {
-			"rotation": [-90, 0, 0],
-			"translation": [0, 0, -8]
-		}
-	}
+	]
 }
