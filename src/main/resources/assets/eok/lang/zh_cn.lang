@@ -1,65 +1,66 @@
-item.papyrus.name=莎草纸
-item.refracting_telescope.name=折射望远镜
-item.flint_fragment.name=燧石碎片
-item.chipped_flint_fragment.name=打制过的燧石碎片
-item.polished_flint_fragment.name=磨制过的燧石碎片
-item.rough_flint_spear.name=粗制燧石矛
-item.rough_flint_axe.name=粗制燧石斧
+item.papyrus.name=鑾庤崏绾�
+item.refracting_telescope.name=鎶樺皠鏈涜繙闀�
+item.flint_fragment.name=鐕х煶纰庣墖
+item.chipped_flint_fragment.name=鎵撳埗杩囩殑鐕х煶纰庣墖
+item.polished_flint_fragment.name=纾ㄥ埗杩囩殑鐕х煶纰庣墖
+item.rough_flint_spear.name=绮楀埗鐕х煶鐭�
+item.rough_flint_axe.name=绮楀埗鐕х煶鏂�
+item.fire_stick.name = 起火棍
 
-item.convex_lens.name=凸透镜
-item.concave_lens.name=凹透镜
-item.eok_symbol.name=EOK的标志
-item.plant_fiber.name=植物纤维
-item.short_stick.name=短木棍
-item.tube.name=试管
-item.rubber_mat.name=橡胶垫
-item.simple_hemp_rope.name=简易麻绳
-item.strong_hemp_rope.name=坚固麻绳
-item.default_tool_axe.name=未知 斧
-item.torcherino.name=加速火把
-item.machineGun.name=机枪
+item.convex_lens.name=鍑搁�忛暅
+item.concave_lens.name=鍑归�忛暅
+item.eok_symbol.name=EOK鐨勬爣蹇�
+item.plant_fiber.name=妞嶇墿绾ょ淮
+item.short_stick.name=鐭湪妫�
+item.tube.name=璇曠
+item.rubber_mat.name=姗¤兌鍨�
+item.simple_hemp_rope.name=绠�鏄撻夯缁�
+item.strong_hemp_rope.name=鍧氬浐楹荤怀
+item.default_tool_axe.name=鏈煡 鏂�
+item.torcherino.name=鍔犻�熺伀鎶�
+item.machineGun.name=鏈烘灙
 
-item.machine_gun.description=仍处于开发阶段
+item.machine_gun.description=浠嶅浜庡紑鍙戦樁娈�
 
-tile.stone_table.name=石桌
-tile.two_barrel_vacuum_pump.name=双筒真空泵
-tile.elementary_research_table.name=初级研究台
-tile.trunk_oak.name=橡树树干
-tile.trunk_birch.name=白桦树干
-tile.trunk_jungle.name=丛林树干
-tile.trunk_spruce.name=云杉树干
-tile.trunk_acacia.name=金合欢树干
-tile.trunk_dark_oak.name=深色橡树树干
+tile.stone_table.name=鐭虫
+tile.two_barrel_vacuum_pump.name=鍙岀瓛鐪熺┖娉�
+tile.elementary_research_table.name=鍒濈骇鐮旂┒鍙�
+tile.trunk_oak.name=姗℃爲鏍戝共
+tile.trunk_birch.name=鐧芥ˇ鏍戝共
+tile.trunk_jungle.name=涓涙灄鏍戝共
+tile.trunk_spruce.name=浜戞潐鏍戝共
+tile.trunk_acacia.name=閲戝悎娆㈡爲骞�
+tile.trunk_dark_oak.name=娣辫壊姗℃爲鏍戝共
 
-itemGroup.eoktab=从无知到先知
+itemGroup.eoktab=浠庢棤鐭ュ埌鍏堢煡
 
-tooltip.data.universe=宇宙观测数据 x %d
-tooltip.item.rough_flint_spear=§a攻击伤害: §d%1f(%2f 心)
-tooltip.toolbase.material_name=§a材料: §d%1s
-tooltip.toolbase.harvest_level=§a挖掘等级: §d%2d
-tooltip.toolbase.attack_damage=§a攻击伤害: §d%5f(%6f 心)
-tooltip.toolbase.durability=§a耐久度: §d%3d / %4d 
-tooltip.torcherino=§4请自己承担它带来的风险。
-tooltip.data.research=包含的研究：
+tooltip.data.universe=瀹囧畽瑙傛祴鏁版嵁 x %d
+tooltip.item.rough_flint_spear=搂a鏀诲嚮浼ゅ: 搂d%1f(%2f 蹇�)
+tooltip.toolbase.material_name=搂a鏉愭枡: 搂d%1s
+tooltip.toolbase.harvest_level=搂a鎸栨帢绛夌骇: 搂d%2d
+tooltip.toolbase.attack_damage=搂a鏀诲嚮浼ゅ: 搂d%5f(%6f 蹇�)
+tooltip.toolbase.durability=搂a鑰愪箙搴�: 搂d%3d / %4d 
+tooltip.torcherino=搂4璇疯嚜宸辨壙鎷呭畠甯︽潵鐨勯闄┿��
+tooltip.data.research=鍖呭惈鐨勭爺绌讹細
 
-materials.CHIPPED_FLINT.name=打制的燧石
+materials.CHIPPED_FLINT.name=鎵撳埗鐨勭嚙鐭�
 
-messages.torcherino_crafted.msg=§4你真的要使用它吗？
-messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
-messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
+messages.torcherino_crafted.msg=搂4浣犵湡鐨勮浣跨敤瀹冨悧锛�
+messages.torcherino_use.msg=搂4浣犳縺鎬掍簡妫灄铦欒潬锛侊紒锛�
+messages.torcherino_use.msg2=搂4浣犲皢寰楀埌浣犲簲鏈夌殑鎯╃綒銆�
 
-research.gui.pre=研究节点：
-research.root.name=根研究
-research.elementary_arithmetic.name=数学：初等算术
-research.power.name=数学：乘方
-research.logarithm.name=数学：对数运算
+research.gui.pre=鐮旂┒鑺傜偣锛�
+research.root.name=鏍圭爺绌�
+research.elementary_arithmetic.name=鏁板锛氬垵绛夌畻鏈�
+research.power.name=鏁板锛氫箻鏂�
+research.logarithm.name=鏁板锛氬鏁拌繍绠�
 
 entity.entity_smalldew.name=gonggongjohn
 entity.entity_chenwe_i_lin.name=Chenwe_i_lin
 entity.entity_osir.name=Os_Ir
 entity.entity_zijing.name=zijing_233
 
-gui.merchant.title=商人
-gui.merchant.button.buy=购买
+gui.merchant.title=鍟嗕汉
+gui.merchant.button.buy=璐拱
 
 
