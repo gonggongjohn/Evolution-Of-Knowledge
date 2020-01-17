@@ -18,6 +18,7 @@ item.strong_hemp_rope.name=坚固麻绳
 item.default_tool_axe.name=未知 斧
 item.torcherino.name=加速火把
 item.machineGun.name=机枪
+item.fire_stick.name = 起火棍
 
 item.machine_gun.description=仍处于开发阶段
 
