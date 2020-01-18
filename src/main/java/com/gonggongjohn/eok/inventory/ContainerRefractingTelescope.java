@@ -52,7 +52,7 @@ public class ContainerRefractingTelescope extends Container implements IButtonHa
 
     public void updateSlot(){
         ItemStack stack = this.paperSlot.getStack();
-        if(stack == null| stack.isEmpty()) return;
+        if(stack == null || stack.isEmpty()) return;
         NBTTagCompound compound = stack.getTagCompound();
         int temp;
         if(compound == null) {
