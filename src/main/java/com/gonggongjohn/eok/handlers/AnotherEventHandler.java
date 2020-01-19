@@ -139,5 +139,4 @@ public class AnotherEventHandler {
             EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
         }
     }
-
 }
