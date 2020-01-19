@@ -52,6 +52,6 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if(checkStructure(2, "structure_elementary_research_table")) createMultiBlock();
+        if(checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table")) createMultiBlock();
     }
 }

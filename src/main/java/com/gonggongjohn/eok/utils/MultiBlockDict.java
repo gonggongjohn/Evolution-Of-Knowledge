@@ -6,22 +6,31 @@ import net.minecraft.block.Block;
 import java.util.HashMap;
 
 public class MultiBlockDict {
+    public HashMap<String, String[]> structureDictLinear = new HashMap<String, String[]>();
     public HashMap<String, String[][]> structureDict2D = new HashMap<String, String[][]>();
     public HashMap<String, String[][][]> structureDict3D = new HashMap<String, String[][][]>();
 
-    public String[][] STRElementaryResearchTable;
+    public String[] STRElementaryResearchTable;
 
     public MultiBlockDict(){
 
     }
 
     public void initStructure(){
-        STRElementaryResearchTable = createStructure2D(new Block[][]{{BlockHandler.blockStone},{BlockHandler.blockStone}});
+        STRElementaryResearchTable = createStructureLinear(new Block[]{BlockHandler.blockStone, BlockHandler.blockStone});
     }
 
 
     public void initDict(){
-        structureDict2D.put("structrue_elementary_research_table", STRElementaryResearchTable);
+        structureDictLinear.put("structure_elementary_research_table", STRElementaryResearchTable);
+    }
+
+    private String[] createStructureLinear(Block[] origin){
+        String[] temp = new String[origin.length];
+        for(int i = 0; i < origin.length; i++){
+            temp[i] = origin[i].getUnlocalizedName();
+        }
+        return temp;
     }
 
     private String[][] createStructure2D(Block[][] origin){
