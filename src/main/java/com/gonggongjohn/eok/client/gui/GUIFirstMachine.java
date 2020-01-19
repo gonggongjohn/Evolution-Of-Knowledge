@@ -1,14 +1,21 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.capabilities.ISeconds;
+import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.inventory.ContainerFirstMachine;
 import com.gonggongjohn.eok.network.PacketGuiButton;
+import com.gonggongjohn.eok.network.PacketSeconds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
@@ -49,7 +56,7 @@ public class GUIFirstMachine extends GuiContainer {
     public void initGui(){
         super.initGui();
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + 10, offsetY + 200, 18, 18, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + 225, offsetY + 114, 22, 22, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks){
                 if(this.visible){
@@ -62,8 +69,21 @@ public class GUIFirstMachine extends GuiContainer {
     }
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+        super.actionPerformed(button);
         if(button.id == 0){
-            EOK.getNetwork().sendToServer(new PacketGuiButton(button.id));
+            EntityPlayer player=Minecraft.getMinecraft().player;
+            PacketSeconds message =new PacketSeconds();
+            if(player.hasCapability(CapabilityHandler.capSeconds,null))
+            {
+                ISeconds seconds=player.getCapability(CapabilityHandler.capSeconds,null);
+                Capability.IStorage<ISeconds> storage=CapabilityHandler.capSeconds.getStorage();
+                int tmp=seconds.getSecondsValue();
+                seconds.setSecondsValue(tmp+1);
+                message.compound=new NBTTagCompound();
+                message.compound.setTag("seconds",storage.writeNBT(CapabilityHandler.capSeconds,seconds,null));
+                EOK.getNetwork().sendToServer(message);
+            }
+            //EOK.getNetwork().sendToServer(new PacketGuiButton(button.id));
         }
     }
 

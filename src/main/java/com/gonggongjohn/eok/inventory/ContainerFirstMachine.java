@@ -16,14 +16,14 @@ public class ContainerFirstMachine extends Container implements IButtonHandler {
     public ContainerFirstMachine(EntityPlayer player)
     {
         super();
-        this.addSlotToContainer(this.gouSlot = new SlotItemHandler(items, 0, 224, 15){
+        this.addSlotToContainer(this.gouSlot = new SlotItemHandler(items, 0, 229, 12){
             @Override
             public int getItemStackLimit(ItemStack stack){
                 return 1;
             }
         });
         for(int i = 0; i < 9; ++i){
-            this.addSlotToContainer(new Slot(player.inventory, i, 40 + i * 18, 235));
+            this.addSlotToContainer(new Slot(player.inventory, i, 9 + i * 16, 141));
         }
     }
     @Override

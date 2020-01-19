@@ -5,6 +5,7 @@ import com.gonggongjohn.eok.capabilities.*;
 import com.gonggongjohn.eok.network.PacketConsciousness;
 import com.gonggongjohn.eok.network.PacketMindActivity;
 import com.gonggongjohn.eok.network.PacketResearchData;
+import com.gonggongjohn.eok.network.PacketSeconds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -101,6 +102,17 @@ public class AnotherEventHandler {
                 mesage.compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
                 EOK.getNetwork().sendTo(mesage, (EntityPlayerMP) player);
             }
+            if(player.hasCapability(CapabilityHandler.capSeconds,null))
+            {
+                PacketSeconds message=new PacketSeconds();
+                ISeconds seconds=player.getCapability(CapabilityHandler.capSeconds,null);
+                Capability.IStorage<ISeconds> storage =CapabilityHandler.capSeconds.getStorage();
+
+                message.compound=new NBTTagCompound();
+                message.compound.setTag("seconds",storage.writeNBT(CapabilityHandler.capSeconds,seconds,null));
+
+                EOK.getNetwork().sendTo(message, (EntityPlayerMP)player);
+            }
         }
     }
 
@@ -127,4 +139,5 @@ public class AnotherEventHandler {
             EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
         }
     }
+
 }

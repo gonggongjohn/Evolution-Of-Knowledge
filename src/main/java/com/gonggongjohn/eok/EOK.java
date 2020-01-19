@@ -64,6 +64,7 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
+		network.registerMessage(new PacketSeconds.Handler(),PacketSeconds.class,999,Side.CLIENT);
 	}
 
 	@EventHandler
