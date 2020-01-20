@@ -13,7 +13,7 @@ public class BlockDriedHaystack extends Block {
     {
         super(Material.GRASS);
         this.setRegistryName(name);
-        this.setHardness(1.0F);
+        this.setHardness(0.5F);
         this.setCreativeTab(EOK.tabEOK);
         this.setUnlocalizedName(name);
         BlockHandler.blocks.add(this);
