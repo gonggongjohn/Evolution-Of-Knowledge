@@ -45,11 +45,9 @@ public class EventHandler {
             }
         }
     }
-    
     @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void tweakGamma(GuiOpenEvent event) {
     	BrightnessTweaker.tweak();
     }
-
 }

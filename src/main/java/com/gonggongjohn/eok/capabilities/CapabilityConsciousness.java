@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.capabilities;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

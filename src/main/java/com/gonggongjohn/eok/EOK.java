@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
+import com.gonggongjohn.eok.utils.MultiBlockDict;
 import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,6 +45,8 @@ public class EOK {
 
 	public static ResearchDict researchDict = new ResearchDict();
 
+	public static MultiBlockDict multiBlockDict = new MultiBlockDict();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
@@ -67,11 +70,14 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGUIScreen.Handler(), PacketTestGUIScreen.class, 7, Side.CLIENT);
+		network.registerMessage(new PacketSeconds.Handler(),PacketSeconds.class,999,Side.CLIENT);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
+		multiBlockDict.initStructure();
+		multiBlockDict.initDict();
 		TweakersMain.init();
 		MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
 	}

@@ -1,8 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.blocks.BlockElementaryResearchTable;
-import com.gonggongjohn.eok.blocks.BlockStoneTable;
-import com.gonggongjohn.eok.blocks.BlockTwoBarrelVacuumPump;
+import com.gonggongjohn.eok.blocks.*;
 import net.minecraft.block.Block;
 
 import java.util.ArrayList;
@@ -14,4 +12,7 @@ public class BlockHandler {
     public static final Block blockStone = new BlockStoneTable();
     public static final Block blockTwoBarrelVacuumPump = new BlockTwoBarrelVacuumPump();
     public static final Block blockElementaryResearchTable = new BlockElementaryResearchTable();
+    public static final Block blockFirstMachine = new BlockFirstMachine();
+    public static final Block blockHaystack=new BlockHaystack();
+    public static final Block blockDriedHaystack=new BlockDriedHaystack();
 }

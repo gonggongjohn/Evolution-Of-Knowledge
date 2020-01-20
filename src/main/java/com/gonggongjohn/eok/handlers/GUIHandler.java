@@ -9,37 +9,42 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GUIHandler implements IGuiHandler {
-	public static final int GUIRefractingTelescope = 1;
-	public static final int GUIElementaryResearchTable = 2;
+
+    public static final int GUIRefractingTelescope = 1;
+    public static final int GUIElementaryResearchTable = 2;
 	public static final int GUIMerchant = 3;
 	public static final int GUIContainerTest = 4;
+    public static final int GUIFirstMachine = 5;
 
-	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		switch (ID) {
-		case GUIRefractingTelescope:
-			return new ContainerRefractingTelescope(player);
-		case GUIElementaryResearchTable:
-			return new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z)));
-		case GUIMerchant:
-			return new ContainerMerchant(player);
-		default:
-			return null;
+    @Override
+    public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
+        switch (ID){
+            case GUIRefractingTelescope:
+                return new ContainerRefractingTelescope(player);
+            case GUIElementaryResearchTable:
+                return new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z)));
+            case GUIMerchant:
+            	return new ContainerMerchant(player);
+            case GUIFirstMachine:
+                return new ContainerFirstMachine(player);
+            default:
+				return null;
 		}
 	}
 
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		switch (ID) {
-		case GUIRefractingTelescope:
-			return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));
-		case GUIElementaryResearchTable:
-			return new GUIElementaryResearchTable(
-					new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z))));
-		case GUIMerchant:
-			return new GUIMerchant(new ContainerMerchant(player));
-		default:
-			return null;
-		}
-	}
+    @Override
+    public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
+        switch (ID){
+            case GUIRefractingTelescope:
+                return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));
+            case GUIElementaryResearchTable:
+                return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z))));
+            case GUIMerchant:
+            	return new GUIMerchant(new ContainerMerchant(player));
+            case GUIFirstMachine:
+                return new GUIFirstMachine(new ContainerFirstMachine(player));
+            default:
+                return null;
+        }
+    }
 }

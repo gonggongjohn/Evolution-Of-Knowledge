@@ -17,6 +17,7 @@ public class ItemHandler {
 	public static final Item roughFlintSpear = new ItemRoughFlintSpear();
 	public static final Item Torcherino = new Torcherino();
 	public static final Item MACHINE_GUN = new ItemMachineGun();
+	public static final Item fireStick = new ItemFireStick();
 
 	public static final Item convexLens = new ItemMaterialBase("convex_lens");
 	public static final Item concaveLens = new ItemMaterialBase("concave_lens");
