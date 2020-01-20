@@ -33,6 +33,9 @@ tile.trunk_jungle.name=Jungle Trunk
 tile.trunk_spruce.name=Spruce Trunk
 tile.trunk_acacia.name=Acacia Trunk
 tile.trunk_dark_oak.name=Dark Oak Trunk
+tile.haystack.name=Haystack
+tile.dried_haystack.name=Dried Haystack
+tile.decomposed_haystack.name=Decomposed Haystack
 
 itemGroup.eoktab=Evolution Of Knowledge
 

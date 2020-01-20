@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.tile.TEHaystack;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,7 @@ public class BlockHaystack extends BlockContainer{
         this.setCreativeTab(EOK.tabEOK);
         this.setRegistryName(name);
         this.setHardness(0.5F);
+        this.setSoundType(SoundType.PLANT);
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
     }

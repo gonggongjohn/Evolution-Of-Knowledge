@@ -15,4 +15,5 @@ public class BlockHandler {
     public static final Block blockFirstMachine = new BlockFirstMachine();
     public static final Block blockHaystack=new BlockHaystack();
     public static final Block blockDriedHaystack=new BlockDriedHaystack();
+    public static final Block blockDecomposedHaystack= new BlockDecomposedHaystack();
 }
