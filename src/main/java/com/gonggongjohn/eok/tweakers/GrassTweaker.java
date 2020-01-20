@@ -1,13 +1,9 @@
 package com.gonggongjohn.eok.tweakers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.handlers.ItemHandler;
-
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;

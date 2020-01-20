@@ -31,6 +31,9 @@ tile.trunk_jungle.name=Bois d'aca.jou
 tile.trunk_spruce.name=Bois d'Épicéa
 tile.trunk_acacia.name=Bois d'acacia
 tile.trunk_dark_oak.name=Bois de chêne noir
+tile.haystack.name=草垛
+tile.dried_haystack.name=干草垛
+tile.decomposed_haystack.name=腐烂的草垛
 
 itemGroup.eoktab=De l'Ignorance au Prophète
 

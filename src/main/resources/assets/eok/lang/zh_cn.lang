@@ -1,3 +1,5 @@
+commands.eoktestscreen.usage=eoktestscreen
+
 item.papyrus.name=莎草纸
 item.refracting_telescope.name=折射望远镜
 item.flint_fragment.name=燧石碎片
@@ -31,6 +33,9 @@ tile.trunk_jungle.name=丛林树干
 tile.trunk_spruce.name=云杉树干
 tile.trunk_acacia.name=金合欢树干
 tile.trunk_dark_oak.name=深色橡树树干
+tile.haystack.name=草垛
+tile.dried_haystack.name=干草垛
+tile.decomposed_haystack.name=腐烂的草垛
 
 itemGroup.eoktab=从无知到先知
 

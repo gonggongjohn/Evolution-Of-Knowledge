@@ -1,26 +1,23 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.client.gui.GUIElementaryResearchTable;
-import com.gonggongjohn.eok.client.gui.GUIFirstMachine;
-import com.gonggongjohn.eok.client.gui.GUIRefractingTelescope;
-import com.gonggongjohn.eok.client.gui.GUIMerchant;
-import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
-import com.gonggongjohn.eok.inventory.ContainerFirstMachine;
-import com.gonggongjohn.eok.inventory.ContainerMerchant;
-import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
+import com.gonggongjohn.eok.client.gui.*;
+import com.gonggongjohn.eok.inventory.*;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GUIHandler implements IGuiHandler {
+
     public static final int GUIRefractingTelescope = 1;
     public static final int GUIElementaryResearchTable = 2;
-    public static final int GUIMerchant = 3;
-    public static final int GUIFirstMachine=4;
+	public static final int GUIMerchant = 3;
+	public static final int GUIContainerTest = 4;
+    public static final int GUIFirstMachine = 5;
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
         switch (ID){
             case GUIRefractingTelescope:
                 return new ContainerRefractingTelescope(player);
@@ -31,13 +28,12 @@ public class GUIHandler implements IGuiHandler {
             case GUIFirstMachine:
                 return new ContainerFirstMachine(player);
             default:
-                return null;
-
-        }
-    }
+				return null;
+		}
+	}
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
         switch (ID){
             case GUIRefractingTelescope:
                 return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));

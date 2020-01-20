@@ -3,16 +3,7 @@ package com.gonggongjohn.eok.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gonggongjohn.eok.items.ItemChippedFlintFragment;
-import com.gonggongjohn.eok.items.ItemFireStick;
-import com.gonggongjohn.eok.items.ItemFlintFragment;
-import com.gonggongjohn.eok.items.ItemMachineGun;
-import com.gonggongjohn.eok.items.ItemMaterialBase;
-import com.gonggongjohn.eok.items.ItemPapyrus;
-import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
-import com.gonggongjohn.eok.items.ItemRefractingTelescope;
-import com.gonggongjohn.eok.items.ItemRoughFlintSpear;
-import com.gonggongjohn.eok.items.Torcherino;
+import com.gonggongjohn.eok.items.*;
 import net.minecraft.item.Item;
 
 public class ItemHandler {
