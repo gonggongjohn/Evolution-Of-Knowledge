@@ -5,5 +5,5 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IMultiBlock {
-    public boolean checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName);
+    public int[] checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName);
 }

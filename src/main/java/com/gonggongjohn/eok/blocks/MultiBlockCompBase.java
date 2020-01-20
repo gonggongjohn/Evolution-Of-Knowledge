@@ -17,20 +17,20 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
     }
 
     @Override
-    public boolean checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName) {
+    public int[] checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName) {
         if(dimensionNum == 1) return checkLinear(worldIn, pos, state, structureName);
         else if(dimensionNum == 2) return check2D(worldIn, pos, state, structureName);
         else if(dimensionNum == 3) return check3D(worldIn, pos, state, structureName);
-        return false;
+        return new int[]{0, 0, 0, 0};
     }
 
     public void createMultiBlock(){
         EOK.getLogger().info("structure complete");
     }
 
-    private boolean checkLinear(World worldIn, BlockPos pos, IBlockState state, String structureName){
+    private int[] checkLinear(World worldIn, BlockPos pos, IBlockState state, String structureName){
         String[] structure = EOK.multiBlockDict.structureDictLinear.get(structureName);
-        if(structure == null) return false;
+        if(structure == null) return new int[]{0, 0, 0, 0};
         int arrayCur, facingCur = 0;
         //1是数组头，2是数组尾
         if(state.getBlock().getUnlocalizedName().equals(structure[0])) arrayCur = 1;
@@ -56,20 +56,26 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
             for(int i = 2; i < structure.length - 1; i++){
                 posTransX = posTransX + transformMatrix2D[facingCur][0];
                 posTransZ = posTransZ + transformMatrix2D[facingCur][1];
-                if (arrayCur == 1 && !(worldIn.getBlockState(new BlockPos(posTransX, posY, posTransZ)).getBlock().getUnlocalizedName() == structure[i])) return false;
-                else if (arrayCur == 2 && !(worldIn.getBlockState(new BlockPos(posTransX, posY, posTransZ)).getBlock().getUnlocalizedName() == structure[structure.length - 1 - i])) return false;
+                if (arrayCur == 1 && !(worldIn.getBlockState(new BlockPos(posTransX, posY, posTransZ)).getBlock().getUnlocalizedName() == structure[i])) return new int[]{0, 0, 0, 0};
+                else if (arrayCur == 2 && !(worldIn.getBlockState(new BlockPos(posTransX, posY, posTransZ)).getBlock().getUnlocalizedName() == structure[structure.length - 1 - i])) return new int[]{0, 0, 0, 0};
             }
-            return true;
+            return new int[]{1, transformMatrix2D[facingCur][0], 0, transformMatrix2D[facingCur][1]};
         }
-        return false;
+        return new int[]{0, 0, 0, 0};
     }
 
-    private boolean check2D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        return false;
+    private int[] check2D(World worldIn, BlockPos pos, IBlockState state, String structureName){
+        String[][] structure = EOK.multiBlockDict.structureDict2D.get(structureName);
+        if(structure == null) return new int[]{0, 0, 0, 0};
+        //TODO
+        return new int[]{0, 0, 0, 0};
     }
 
-    private boolean check3D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        return false;
+    private int[] check3D(World worldIn, BlockPos pos, IBlockState state, String structureName){
+        String[][][] structure = EOK.multiBlockDict.structureDict3D.get(structureName);
+        if(structure == null) return new int[]{0, 0, 0, 0};
+        //TODO
+        return new int[]{0, 0, 0, 0};
     }
 
 }

@@ -40,7 +40,7 @@ public class BlockElementaryResearchTable extends BlockContainer implements IHas
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setHardness(5.0F);
-        this.setCreativeTab(EOK.tabEOK);
+        //this.setCreativeTab(EOK.tabEOK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));

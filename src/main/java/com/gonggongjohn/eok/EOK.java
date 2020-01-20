@@ -43,7 +43,7 @@ public class EOK {
 
 	public static ResearchDict researchDict = new ResearchDict();
 
-	public static MultiBlockDict multiBlockDict = new MultiBlockDict();
+	public static MultiBlockDict multiBlockDict;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -73,6 +73,7 @@ public class EOK {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
+		multiBlockDict = new MultiBlockDict();
 		multiBlockDict.initStructure();
 		multiBlockDict.initDict();
 		TweakersMain.init();

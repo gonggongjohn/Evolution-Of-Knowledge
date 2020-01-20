@@ -6,11 +6,13 @@ import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +21,7 @@ import net.minecraft.world.World;
 public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
     private final String name = "stone_table";
     public static final AxisAlignedBB STONE_TABLE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockStoneTable() {
         super(Material.ROCK);
@@ -52,6 +55,13 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        if(checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table")) createMultiBlock();
+        int[] checkResult = checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table");
+        if(checkResult[0] == 1){
+            EnumFacing facing;
+            facing = checkResult[1] == 0 ? (checkResult[3] == 1 ? EnumFacing.NORTH : EnumFacing.SOUTH) : (checkResult[1] == 1 ? EnumFacing.WEST : EnumFacing.EAST);
+            BlockPos sideBlockPos = new BlockPos(pos.getX() + checkResult[1], pos.getY(), pos.getZ() + checkResult[3]);
+            worldIn.setBlockToAir(sideBlockPos);
+            worldIn.setBlockState(pos, BlockHandler.blockElementaryResearchTable.getDefaultState().withProperty(FACING, facing));
+        }
     }
 }
