@@ -23,8 +23,9 @@ public class ItemHayTorch extends Item implements IHasModel {
 
 	public ItemHayTorch() {
 		
-		this.maxStackSize = 64;
-		this.setMaxDamage(64);
+		this.maxStackSize = 1;
+		this.setMaxDamage(4);
+		
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
@@ -37,7 +38,6 @@ public class ItemHayTorch extends Item implements IHasModel {
 		
 		EOK.proxy.registerItemRenderer(this, 0, "inventory");
 	}
-	
 	
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float fitZ) {
 		
@@ -59,10 +59,19 @@ public class ItemHayTorch extends Item implements IHasModel {
 	            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)playerIn, pos, itemStack);
 	        }
 	        
-			return EnumActionResult.SUCCESS;
+	        if(itemStack.getItemDamage() == 4) {
+	        	
+	        	//damage = 4（使用5次后），获得木棍
+	    		//ItemStack itemStackStick = new ItemStack(Item.getItemById(280), 1);
+	        	//damage = 4（使用5次后），获得熄灭的肝草火把
+	        	ItemStack itemStackDeadHayTorch = new ItemStack(ItemHandler.deadHayTorch, 1);
+	    		playerIn.setHeldItem(EnumHand.MAIN_HAND, itemStackDeadHayTorch);
+	        }
 		}
+		
+		itemStack.damageItem(1, playerIn);
+    	return EnumActionResult.SUCCESS;
 	}
-	
 	
 	public boolean tryOnFire(World worldIn, BlockPos pos, EntityPlayer playerIn) {
 		

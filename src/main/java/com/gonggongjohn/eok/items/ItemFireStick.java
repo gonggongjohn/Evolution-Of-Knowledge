@@ -25,14 +25,13 @@ public class ItemFireStick extends Item implements IHasModel {
 	public ItemFireStick() {
 		
 		this.maxStackSize = 1;
-		this.setMaxDamage(64);
+		
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		
 		ItemHandler.items.add(this);
 	}
-
 	
 	@Override
 	public void registerModel() {
@@ -40,14 +39,12 @@ public class ItemFireStick extends Item implements IHasModel {
 		EOK.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
-	
     public BlockPos getFirePos(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing) {
         
     	pos = pos.offset(facing);
 
         return pos;
     }
-    
 
 	@Override									 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {

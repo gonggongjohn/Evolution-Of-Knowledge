@@ -30,4 +30,5 @@ public class ItemHandler {
 	public static final Item simple_hemp_rope = new ItemMaterialBase("simple_hemp_rope");
 	public static final Item strong_hemp_rope = new ItemMaterialBase("strong_hemp_rope");
 	public static final Item driedHay = new ItemMaterialBase("dried_hay");
+	public static final Item deadHayTorch = new ItemMaterialBase("dead_hay_torch");
 }

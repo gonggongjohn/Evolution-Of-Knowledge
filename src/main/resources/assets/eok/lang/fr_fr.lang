@@ -19,8 +19,9 @@ item.default_tool_axe.name=Hache(defaute)
 item.torcherino.name=Ne touchez pas ça!
 item.machineGun.name=Mitrailleuse
 item.fire_stick.name=Bois au Feu
-item.hay_torch.name=干草火把
-item.dried_hay.name=干草
+item.hay_torch.name=肝草火把
+item.dead_hay_torch.name=熄灭的肝草火把
+item.dried_hay.name=肝草
 
 item.machine_gun.description=en construction ...
 
