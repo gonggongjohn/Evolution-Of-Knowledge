@@ -21,6 +21,8 @@ item.default_tool_axe.name=未知 斧
 item.torcherino.name=加速火把
 item.machineGun.name=机枪
 item.fire_stick.name=起火棍
+item.hay_torch.name=干草火把
+item.dried_hay.name=干草
 
 item.machine_gun.description=仍处于开发阶段
 

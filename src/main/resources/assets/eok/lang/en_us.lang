@@ -21,6 +21,8 @@ item.default_tool_axe.name=Unknown Axe
 item.torcherino.name=Torcherino
 item.machineGun.name=Machine Gun
 item.fire_stick.name=Fire Stick
+item.hay_torch.name=Hay Torch
+item.dried_hay.name=Dried Hay
 
 item.machine_gun.description=Still Developing
 

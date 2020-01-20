@@ -29,14 +29,17 @@ public class ItemFireStick extends Item implements IHasModel {
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
+		
 		ItemHandler.items.add(this);
 	}
 
+	
 	@Override
 	public void registerModel() {
 		
 		EOK.proxy.registerItemRenderer(this, 0, "inventory");
 	}
+	
 	
     public BlockPos getFirePos(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing) {
         
@@ -44,6 +47,7 @@ public class ItemFireStick extends Item implements IHasModel {
 
         return pos;
     }
+    
 
 	@Override									 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
