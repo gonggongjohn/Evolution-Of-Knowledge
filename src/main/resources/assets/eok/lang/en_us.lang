@@ -1,3 +1,5 @@
+commands.eoktestscreen.usage=eoktestscreen
+
 item.papyrus.name=Papyrus
 item.refracting_telescope.name=Refracting Telescope
 item.flint_fragment.name=Flint Fragment

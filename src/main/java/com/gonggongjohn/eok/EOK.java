@@ -3,6 +3,7 @@ package com.gonggongjohn.eok;
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
+import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -64,6 +66,7 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
+		network.registerMessage(new PacketTestGUIScreen.Handler(), PacketTestGUIScreen.class, 7, Side.CLIENT);
 	}
 
 	@EventHandler
@@ -77,6 +80,11 @@ public class EOK {
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
 		TweakersMain.postInit();
+	}
+	
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event) {
+		CommandHandler.registerCommands(event);
 	}
 
 	public static CommonProxy getProxy() {
