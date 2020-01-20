@@ -8,12 +8,12 @@ public class TEHaystack extends TileEntity implements ITickable {
     private int sec=0,drystate=0,decomposedstate=0;
     private boolean canDry()
     {
-        return world.canSeeSky(getPos().up())&&!world.isRaining();
+        return ((world.canSeeSky(getPos().up()))&&(!world.isRainingAt(getPos().up())));
     }
     @Override
     public void update() {
-        final int dryseconds=60;//晾干时间（单位：秒）
-        final int decomposedseconds=60;//腐烂时间（单位：秒）
+        final int dryseconds=5;//晾干时间（单位：秒）
+        final int decomposedseconds=5;//腐烂时间（单位：秒）
         if (!world.isRemote) {
             if (sec < 20) sec++;
             else {
@@ -27,7 +27,7 @@ public class TEHaystack extends TileEntity implements ITickable {
                     }
                 }
                 else
-                    if(decomposedstate<60){++decomposedstate;}
+                    if(decomposedstate<decomposedseconds){++decomposedstate;}
                     else
                     {
                         decomposedstate=0;
