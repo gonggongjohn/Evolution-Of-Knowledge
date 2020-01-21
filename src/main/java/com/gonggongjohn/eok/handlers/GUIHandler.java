@@ -15,6 +15,7 @@ public class GUIHandler implements IGuiHandler {
 	public static final int GUIMerchant = 3;
 	public static final int GUIContainerTest = 4;
     public static final int GUIFirstMachine = 5;
+    public static final int GUIHayTorchBase = 6;
 
     @Override
     public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
@@ -27,6 +28,8 @@ public class GUIHandler implements IGuiHandler {
             	return new ContainerMerchant(player);
             case GUIFirstMachine:
                 return new ContainerFirstMachine(player);
+            case GUIHayTorchBase:
+                return new ContainerHayTorchBase(player, world.getTileEntity(new BlockPos(x, y, z))); 
             default:
 				return null;
 		}
@@ -43,6 +46,8 @@ public class GUIHandler implements IGuiHandler {
             	return new GUIMerchant(new ContainerMerchant(player));
             case GUIFirstMachine:
                 return new GUIFirstMachine(new ContainerFirstMachine(player));
+            case GUIHayTorchBase:
+                return new GUIHayTorchBase(new ContainerHayTorchBase(player, world.getTileEntity(new BlockPos(x, y, z)))); 
             default:
                 return null;
         }

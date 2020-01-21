@@ -37,6 +37,7 @@ tile.trunk_dark_oak.name=Bois de chêne noir
 tile.haystack.name=草垛
 tile.dried_haystack.name=干草垛
 tile.decomposed_haystack.name=腐烂的草垛
+tile.hay_torch_base.name=肝草火把底座
 
 itemGroup.eoktab=De l'Ignorance au Prophète
 

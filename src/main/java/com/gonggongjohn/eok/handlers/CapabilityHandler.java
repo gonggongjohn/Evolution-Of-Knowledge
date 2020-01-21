@@ -14,6 +14,8 @@ public class CapabilityHandler {
     public static Capability<IResearchData> capResearchData;
     @CapabilityInject(ISeconds.class)
     public static Capability<ISeconds> capSeconds;
+    @CapabilityInject(IHayTorch.class)
+    public static Capability<IHayTorch> capHayTorchBase;
 
     @SuppressWarnings("deprecation")
 	public static void setupCapabilities(){
@@ -21,5 +23,6 @@ public class CapabilityHandler {
         CapabilityManager.INSTANCE.register(IMindActivity.class, new CapabilityMindActivity.Storage(), CapabilityMindActivity.Implementation.class);
         CapabilityManager.INSTANCE.register(IResearchData.class, new CapabilityResearchData.Storage(), CapabilityResearchData.Implementation.class);
         CapabilityManager.INSTANCE.register(ISeconds.class, new CapabilitySeconds.Storage(),CapabilitySeconds.Implementation.class);
+        CapabilityManager.INSTANCE.register(IHayTorch.class, new CapabilityHayTorchBase.Storage(),CapabilityHayTorchBase.Implementation.class);
     }
 }
