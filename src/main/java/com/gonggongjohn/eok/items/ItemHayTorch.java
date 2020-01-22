@@ -58,7 +58,9 @@ public class ItemHayTorch extends Item implements IHasModel {
 	        	
 	            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)playerIn, pos, itemStack);
 	        }
-	        
+
+	        if(worldIn.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.log")) ;  //TODO
+
 	        if(itemStack.getItemDamage() == 4) {
 	        	
 	        	//damage = 4（使用5次后），获得木棍
