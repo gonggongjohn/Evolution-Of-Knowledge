@@ -21,12 +21,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockHayTorchBase extends BlockContainer implements IHasModel {
+public class BlockHayTorchBaseHasHayTorch extends BlockContainer implements IHasModel {
 	
-    public final String name = "hay_torch_base";
-    public static final AxisAlignedBB HAY_TORCH_BASE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public final String name = "hay_torch_base_has_hay_torch";
+    public static final AxisAlignedBB HAY_TORCH_BASE_HAS_HAY_TORCH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    public BlockHayTorchBase() {
+    public BlockHayTorchBaseHasHayTorch() {
     	
         super(Material.WOOD);
         
@@ -34,6 +34,7 @@ public class BlockHayTorchBase extends BlockContainer implements IHasModel {
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         this.setHardness(7.0F);
+        this.setLightLevel(1);
         
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
@@ -53,7 +54,7 @@ public class BlockHayTorchBase extends BlockContainer implements IHasModel {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     	
-        return HAY_TORCH_BASE_AABB;
+        return HAY_TORCH_BASE_HAS_HAY_TORCH_AABB;
     }
     @Override
     public void registerModel() {

@@ -40,6 +40,7 @@ tile.haystack.name=Haystack
 tile.dried_haystack.name=Dried Haystack
 tile.decomposed_haystack.name=Decomposed Haystack
 tile.hay_torch_base.name=Hay Torch Base
+tile.hay_torch_base_has_hay_torch.name=Hay Torch Base
 
 itemGroup.eoktab=Evolution Of Knowledge
 

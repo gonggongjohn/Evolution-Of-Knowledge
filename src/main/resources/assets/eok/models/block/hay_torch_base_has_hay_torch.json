@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "eok:blocks/hay_torch_base_has_hay_torch",
+        "down": "eok:blocks/hay_torch_base_has_hay_torch",
+        "up": "eok:blocks/hay_torch_base_has_hay_torch",
+        "north": "eok:blocks/hay_torch_base_has_hay_torch",
+        "south": "eok:blocks/hay_torch_base_has_hay_torch",
+        "west": "eok:blocks/hay_torch_base_has_hay_torch",
+        "east": "eok:blocks/hay_torch_base_has_hay_torch"
+    }
+}
