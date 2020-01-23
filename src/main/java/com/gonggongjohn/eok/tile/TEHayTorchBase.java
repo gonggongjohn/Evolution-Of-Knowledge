@@ -15,6 +15,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TEHayTorchBase extends TileEntity implements ITickable {
     
+    private boolean hasHayTorch = false;
     protected ItemStackHandler hayTorch = new ItemStackHandler();
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
@@ -57,34 +58,15 @@ public class TEHayTorchBase extends TileEntity implements ITickable {
     @Override
     public void update() {
     	
-    	if(hayTorch.getStackInSlot(0).getItem() == ItemHandler.driedHay) {
+    	if(hayTorch.getStackInSlot(0).getItem() == ItemHandler.hayTorch && hasHayTorch == false) {
     		
-    		System.out.println("Dired Hay Added");
+    		System.out.println("Hay Torch Added");
+    		hasHayTorch = true;
 
     		world.setBlockState(getPos(), BlockHandler.blockHayTorchBaseLit.getDefaultState());
     		
     		hayTorch.setStackInSlot(0, ItemStack.EMPTY);
     	}
-    	/*
-    	if(hayTorch.getStackInSlot(0) == ItemStack.EMPTY) {
-    		
-    		System.out.println("Add");
-
-    		//world.setBlockState(getPos(), BlockHandler.blockHayTorchBaseHasHaTorch.getDefaultState());
-    		
-    		hayTorch.setStackInSlot(0, new ItemStack(ItemHandler.eokSymbol, 1));
-    	}
-    	*/
-    	
-    	/*
-    	if(hayTorch.getStackInSlot(0) == ItemStack.EMPTY) {
-    		
-    		System.out.println("Empty");
-
-    		world.setBlockState(getPos(),BlockHandler.blockHayTorchBase.getDefaultState());
-    				
-    	}
-    	*/
     	
         if(!this.world.isRemote) {
         	

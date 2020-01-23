@@ -60,6 +60,16 @@ public class ContainerHayTorchBaseLit extends Container {
     public void onContainerClosed(EntityPlayer playerIn) {
     	
         super.onContainerClosed(playerIn);
+        
+        if(playerIn.isServerWorld()) {
+        	
+            ItemStack itemStack = this.haySlot.getStack();
+            if(itemStack != ItemStack.EMPTY) {
+            	
+                playerIn.dropItem(itemStack, false);
+                haySlot.putStack(ItemStack.EMPTY);
+            }
+        }
     }
 
     public Slot getHaySlot() {
