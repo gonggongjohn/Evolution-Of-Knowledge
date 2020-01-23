@@ -1,9 +1,9 @@
 package com.gonggongjohn.eok.tile;
 
 import javax.annotation.Nullable;
+
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,12 +13,28 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TEHayTorchBase extends TileEntity implements ITickable {
-    
+public class TEHayTorchBaseLit extends TileEntity implements ITickable {
+	
+    private int sec = 0; 
+    private int changeSecond = 0;
     protected ItemStackHandler hayTorch = new ItemStackHandler();
+    
+    private boolean change(int changeSecond) {
+    	
+    	if(changeSecond > 10) {
+    		
+    		return true;
+    	}
+    	else {
+    		
+    		return false;
+    	}
+	
+    }
+    
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    	
         if(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)) {
         	
             return true;
@@ -43,27 +59,51 @@ public class TEHayTorchBase extends TileEntity implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
     	
         super.readFromNBT(compound);
-        this.hayTorch.deserializeNBT(compound.getCompoundTag("hayTorch"));
+        this.hayTorch.deserializeNBT(compound.getCompoundTag("damage"));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
     	
         super.writeToNBT(compound);
-        compound.setTag("hayTorch", this.hayTorch.serializeNBT());
+        compound.setTag("damage", this.hayTorch.serializeNBT());
         return super.writeToNBT(compound);
     }
     
     @Override
     public void update() {
     	
-    	if(hayTorch.getStackInSlot(0).getItem() == ItemHandler.driedHay) {
-    		
-    		System.out.println("Dired Hay Added");
-
-    		world.setBlockState(getPos(), BlockHandler.blockHayTorchBaseLit.getDefaultState());
-    		
-    		hayTorch.setStackInSlot(0, ItemStack.EMPTY);
+        if (!world.isRemote) {
+        	
+            if (sec < 20) {
+            	
+            	sec++;
+            }
+            else {
+            	
+                sec = 0;
+                if(changeSecond < 20) {
+                	
+    	        	if(hayTorch.getStackInSlot(0) == ItemStack.EMPTY) {
+    	        		
+    	        		System.out.println("  " + changeSecond);
+    	        		changeSecond++;
+    	        		
+    	            	if(change(changeSecond)) {
+    	
+    	            		world.setBlockState(getPos(), BlockHandler.blockHayTorchBase.getDefaultState());
+    	            	}
+    	        	} 
+    	        	else if (hayTorch.getStackInSlot(0).getItem() == ItemHandler.driedHay) {
+    		    		
+    		    		System.out.println("Dired Hay Added");
+    		    		
+    		    		changeSecond = 0;
+    		    		
+    		    		hayTorch.setStackInSlot(0, ItemStack.EMPTY);
+    		    	}
+                }
+            }
     	}
     	/*
     	if(hayTorch.getStackInSlot(0) == ItemStack.EMPTY) {
@@ -85,9 +125,5 @@ public class TEHayTorchBase extends TileEntity implements ITickable {
     				
     	}
     	*/
-    	
-        if(!this.world.isRemote) {
-        	
-        }
     }
 }

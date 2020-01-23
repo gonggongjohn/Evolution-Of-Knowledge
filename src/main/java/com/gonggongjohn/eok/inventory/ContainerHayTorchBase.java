@@ -12,22 +12,11 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerHayTorchBase extends Container {
 	
     protected Slot torchSlot;
-    
-    //private ItemStackHandler items = new ItemStackHandler(1);
 
     public ContainerHayTorchBase(EntityPlayer player, TileEntity tileEntity) {
     	
         super();
-        
-        /*
-        this.addSlotToContainer(this.torchSlot = new SlotItemHandler(items, 0, 80, 36){
-            @Override
-            public int getItemStackLimit(ItemStack stack){
-                return 1;
-            }
-        });
-        */
-        
+
         this.addSlotToContainer(this.torchSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), 0, 80, 36) {
             
         	@Override
@@ -69,18 +58,13 @@ public class ContainerHayTorchBase extends Container {
     public void onContainerClosed(EntityPlayer playerIn) {
     	
         super.onContainerClosed(playerIn);
-
-        //ItemStack itemStack = this.torchSlot.getStack();
-            
-        /*
-        if(itemStack.getItem() == ItemHandler.hayTorch) {
-            	
-        	
+  
+        if(playerIn.isServerWorld()){
+            ItemStack gouStack = this.torchSlot.getStack();
+            if(gouStack != ItemStack.EMPTY){
+                playerIn.dropItem(gouStack, false);
+            }
         }
-        else {
-        	
-        }
-        */
     }
 
     public Slot getTorchSlot() {

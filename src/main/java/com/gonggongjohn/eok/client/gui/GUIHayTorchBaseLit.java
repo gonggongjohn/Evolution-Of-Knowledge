@@ -1,17 +1,18 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.inventory.ContainerHayTorchBase;
+import com.gonggongjohn.eok.inventory.ContainerHayTorchBaseLit;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 //import org.lwjgl.opengl.GL11;
 
-public class GUIHayTorchBaseHasHayTorch extends GuiContainer {
+public class GUIHayTorchBaseLit extends GuiContainer {
 	
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/hay_torch_base.png";  
     private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);   
     
-    public GUIHayTorchBaseHasHayTorch(ContainerHayTorchBase inventorySlotIn) {
+    public GUIHayTorchBaseLit(ContainerHayTorchBaseLit inventorySlotIn) {
     	
         super(inventorySlotIn);
     }
@@ -37,7 +38,7 @@ public class GUIHayTorchBaseHasHayTorch extends GuiContainer {
         
         this.mc.getTextureManager().bindTexture(TEXTUREBACK);
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(offsetX,offsetY,0,0,xSize,ySize);
+        this.drawTexturedModalRect(offsetX, offsetY, 0, 0, xSize, ySize);
         
         //GL11.glPopMatrix();
     }

@@ -4,6 +4,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.tile.TEElementaryResearchTable;
 import com.gonggongjohn.eok.tile.TEFirstMachine;
 import com.gonggongjohn.eok.tile.TEHayTorchBase;
+import com.gonggongjohn.eok.tile.TEHayTorchBaseLit;
 import com.gonggongjohn.eok.tile.TEHaystack;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.Block;
@@ -29,6 +30,7 @@ public class RegistryHandler {
         GameRegistry.registerTileEntity(TEFirstMachine.class,new ResourceLocation(EOK.MODID,"te_first_machine"));
         GameRegistry.registerTileEntity(TEHaystack.class,new ResourceLocation(EOK.MODID,"te_haystack"));
         GameRegistry.registerTileEntity(TEHayTorchBase.class,new ResourceLocation(EOK.MODID, "te_hay_torch_base"));
+        GameRegistry.registerTileEntity(TEHayTorchBaseLit.class,new ResourceLocation(EOK.MODID, "te_hay_torch_base_lit"));
     }
 
     @SubscribeEvent

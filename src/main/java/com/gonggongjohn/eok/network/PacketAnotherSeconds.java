@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.network;
 
-import com.gonggongjohn.eok.capabilities.IHayTorch;
+import com.gonggongjohn.eok.capabilities.IAnotherSeconds;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -14,12 +14,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketHayTorchBase implements IMessage {
+public class PacketAnotherSeconds implements IMessage {
 	
     public NBTTagCompound compound;
 
     @Override
-    public void fromBytes(ByteBuf buf) {
+    public void fromBytes(ByteBuf buf){
     	
         compound = ByteBufUtils.readTag(buf);
     }
@@ -27,28 +27,29 @@ public class PacketHayTorchBase implements IMessage {
     @Override
     public void toBytes(ByteBuf buf) {
     	
-        ByteBufUtils.writeTag(buf,compound);
+        ByteBufUtils.writeTag(buf, compound);
     }
 
-    public static class Handler implements IMessageHandler<PacketHayTorchBase, IMessage> {
+    public static class Handler implements IMessageHandler<PacketAnotherSeconds,IMessage>
+    {
     	
         @Override
-        public IMessage onMessage(PacketHayTorchBase message, MessageContext ctx) {
+        public IMessage onMessage(PacketAnotherSeconds message, MessageContext ctx)
+        {
         	
-            if(ctx.side == Side.CLIENT) {
+            if(ctx.side == Side.CLIENT)
+            {
             	
-                final NBTBase nbt = message.compound.getTag("hayTorchState");
-                
-                Minecraft.getMinecraft().addScheduledTask(new Runnable() {
-                    
-                	public void run() {
+                final NBTBase nbt = message.compound.getTag("damage");
+                Minecraft.getMinecraft().addScheduledTask(new Runnable(){
+                    public void run() {
                     	
                         EntityPlayer player = Minecraft.getMinecraft().player;
-                        if(player.hasCapability(CapabilityHandler.capHayTorchBase,null)) {
+                        if(player.hasCapability(CapabilityHandler.capAnotherSeconds, null)) {
                         	
-                            IHayTorch hayTorchState = player.getCapability(CapabilityHandler.capHayTorchBase,null);
-                            Capability.IStorage<IHayTorch> storage = CapabilityHandler.capHayTorchBase.getStorage();
-                            storage.readNBT(CapabilityHandler.capHayTorchBase, hayTorchState, null, nbt);
+                            IAnotherSeconds anotherSeconds = player.getCapability(CapabilityHandler.capAnotherSeconds, null);
+                            Capability.IStorage<IAnotherSeconds> storage = CapabilityHandler.capAnotherSeconds.getStorage();
+                            storage.readNBT(CapabilityHandler.capAnotherSeconds, anotherSeconds, null, nbt);
                         }
                     }
                 });

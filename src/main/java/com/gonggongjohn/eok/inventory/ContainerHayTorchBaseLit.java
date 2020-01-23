@@ -1,6 +1,5 @@
 package com.gonggongjohn.eok.inventory;
 
-import com.gonggongjohn.eok.handlers.ItemHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -10,19 +9,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerHayTorchBaseHasHayTorch extends Container {
+public class ContainerHayTorchBaseLit extends Container {
 	
-    protected Slot torchSlot;
-    
-    //private ItemStackHandler items = new ItemStackHandler(1);
+    protected Slot haySlot;
 
-    public ContainerHayTorchBaseHasHayTorch(EntityPlayer player, TileEntity tileEntity) {
+    public ContainerHayTorchBaseLit(EntityPlayer player, TileEntity tileEntity) {
     	
         super();
         
-        torchSlot.putStack(new ItemStack(ItemHandler.hayTorch, 1));
-        
-        this.addSlotToContainer(this.torchSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), 0, 80, 36) {
+        this.addSlotToContainer(this.haySlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), 0, 80, 36) {
             
         	@Override
             public int getItemStackLimit(ItemStack stack) {
@@ -51,11 +46,13 @@ public class ContainerHayTorchBaseHasHayTorch extends Container {
     
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
+    	
         return true;
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    	
         return null;
     }
     
@@ -63,19 +60,10 @@ public class ContainerHayTorchBaseHasHayTorch extends Container {
     public void onContainerClosed(EntityPlayer playerIn) {
     	
         super.onContainerClosed(playerIn);
-            
-        /*
-        if(itemStack.getItem() == ItemHandler.hayTorch) {
-            	
-        	
-        }
-        else {
-        	
-        }
-        */
     }
 
-    public Slot getTorchSlot() {
-        return this.torchSlot;
+    public Slot getHaySlot() {
+    	
+        return this.haySlot;
     }
 }

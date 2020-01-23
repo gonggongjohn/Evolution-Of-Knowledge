@@ -4,7 +4,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-import com.gonggongjohn.eok.tile.TEHayTorchBase;
+import com.gonggongjohn.eok.tile.TEHayTorchBaseLit;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,12 +21,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockHayTorchBaseHasHayTorch extends BlockContainer implements IHasModel {
+public class BlockHayTorchBaseLit extends BlockContainer implements IHasModel {
 	
-    public final String name = "hay_torch_base_has_hay_torch";
-    public static final AxisAlignedBB HAY_TORCH_BASE_HAS_HAY_TORCH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public final String name = "hay_torch_base_lit";
+    public static final AxisAlignedBB HAY_TORCH_BASE_LIT_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-    public BlockHayTorchBaseHasHayTorch() {
+    public BlockHayTorchBaseLit() {
     	
         super(Material.WOOD);
         
@@ -54,7 +54,7 @@ public class BlockHayTorchBaseHasHayTorch extends BlockContainer implements IHas
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     	
-        return HAY_TORCH_BASE_HAS_HAY_TORCH_AABB;
+        return HAY_TORCH_BASE_LIT_AABB;
     }
     @Override
     public void registerModel() {
@@ -66,7 +66,7 @@ public class BlockHayTorchBaseHasHayTorch extends BlockContainer implements IHas
         
         if(!worldIn.isRemote) {
         	
-            int id = GUIHandler.GUIHayTorchBase;
+            int id = GUIHandler.GUIHayTorchBaseLit;
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
@@ -75,7 +75,7 @@ public class BlockHayTorchBaseHasHayTorch extends BlockContainer implements IHas
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
     	
-    	return new TEHayTorchBase();
+    	return new TEHayTorchBaseLit();
     }
     
     @Override
