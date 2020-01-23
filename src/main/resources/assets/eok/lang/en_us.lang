@@ -65,6 +65,10 @@ research.elementary_arithmetic.name=Math:Elementary Arithmetic
 research.power.name=Math:Power
 research.logarithm.name=Math:Logarithm
 
+inspiration.get.pre=Get Inspiration:
+inspiration.root.name=Root Inspiration
+inspiration.fire_preservation.name=Fire Is Preservable!
+
 entity.entity_smalldew.name=gonggongjohn
 entity.entity_chenwe_i_lin.name=Chenwe_i_lin
 entity.entity_osir.name=Os_Ir
