@@ -10,12 +10,16 @@ import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.network.PacketSeconds;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -183,17 +187,28 @@ public class AnotherEventHandler {
             EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
         }
     }
+    /**玩家右键拾取材料的事件*/
     @SubscribeEvent
     public void onPlayerRightClicked(PlayerInteractEvent.RightClickBlock event)
     {
         if(!event.getWorld().isRemote)
         {
             BlockPos pos=event.getPos();
-            if(event.getWorld().getBlockState(pos).equals(BlockHandler.blockStoneRock.getDefaultState()))
-                event.getWorld().destroyBlock(pos,true);
+            IBlockState state=event.getWorld().getBlockState(pos);
+            if(state.equals(BlockHandler.blockStoneRock.getDefaultState()))
+            {
+                event.getWorld().setBlockToAir(pos);
+                event.getWorld().spawnEntity(new EntityItem(event.getWorld(),pos.getX(),pos.getY(),pos.getZ(),new ItemStack(BlockHandler.blockStoneRock)));
+            }
+            else if(state.equals(BlockHandler.blockStick.getDefaultState()))
+            {
+                event.getWorld().setBlockToAir(pos);
+                event.getWorld().spawnEntity(new EntityItem(event.getWorld(),pos.getX(),pos.getY(),pos.getZ(),new ItemStack(Items.STICK)));
+            }
         }
     }
 
+    /**描述方块下方方块被破坏时上方方块自然掉落的事件*/
     @SubscribeEvent
     public void onDownBlockDestroyed(BlockEvent.BreakEvent event)
     {
@@ -203,8 +218,26 @@ public class AnotherEventHandler {
             IBlockState state=event.getWorld().getBlockState(pos.up());
             if(state.equals(BlockHandler.blockStoneRock.getDefaultState()))
             {
-                event.getWorld().destroyBlock(pos.up(),true);
+                event.getWorld().setBlockToAir(pos.up());
+                event.getWorld().spawnEntity(new EntityItem(event.getWorld(),pos.getX(),pos.getY(),pos.getZ(),new ItemStack(BlockHandler.blockStoneRock)));
             }
+            else if(state.equals(BlockHandler.blockStick.getDefaultState()))
+            {
+                event.getWorld().setBlockToAir(pos.up());
+                event.getWorld().spawnEntity(new EntityItem(event.getWorld(),pos.getX(),pos.getY(),pos.getZ(),new ItemStack(Items.STICK)));
+            }
+        }
+    }
+    /** 描述玩家破坏方块时方块不掉落本身的事件*/
+    @SubscribeEvent
+    public void onDestroyedButNotDropItself(BlockEvent.HarvestDropsEvent event)
+    {
+        World world=event.getWorld();
+        BlockPos pos=event.getPos();
+        if(event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick)));
+        {
+            event.setDropChance(0.0F);
+            world.spawnEntity(new EntityItem(world,pos.getX(),pos.getY(),pos.getZ(),new ItemStack(Items.STICK)));
         }
     }
 }

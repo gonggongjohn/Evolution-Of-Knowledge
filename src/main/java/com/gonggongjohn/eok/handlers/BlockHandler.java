@@ -19,6 +19,7 @@ public class BlockHandler {
     public static final Block blockHayTorchBase = new BlockHayTorchBase();
     public static final Block blockHayTorchBaseLit = new BlockHayTorchBaseLit();
     public static final Block blockStoneRock=new BlockStoneRock();
+    public static final Block blockStick=new BlockStick();
 
     public static final Block blockTest2DCore = new BlockTest2DCore();
     public static final Block blockTest3DCore = new BlockTest3DCore();
