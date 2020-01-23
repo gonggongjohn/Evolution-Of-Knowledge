@@ -76,6 +76,7 @@ public class EOK {
 		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 9, Side.CLIENT);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.SERVER);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 13, Side.CLIENT);
+		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 14, Side.CLIENT);
 	}
 
 	@EventHandler

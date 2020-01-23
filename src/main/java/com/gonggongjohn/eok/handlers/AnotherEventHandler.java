@@ -2,12 +2,7 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.*;
-import com.gonggongjohn.eok.network.PacketAnotherSeconds;
-import com.gonggongjohn.eok.network.PacketConsciousness;
-import com.gonggongjohn.eok.network.PacketHayTorchBase;
-import com.gonggongjohn.eok.network.PacketMindActivity;
-import com.gonggongjohn.eok.network.PacketResearchData;
-import com.gonggongjohn.eok.network.PacketSeconds;
+import com.gonggongjohn.eok.network.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,12 +28,14 @@ public class AnotherEventHandler {
             ICapabilitySerializable<NBTTagCompound> providerSeconds = new CapabilitySeconds.ProvidePlayer();
             ICapabilitySerializable<NBTTagCompound> providerHayTorchState = new CapabilityHayTorchBase.ProvidePlayer();  
             ICapabilitySerializable<NBTTagCompound> providerAnotherSeconds = new CapabilityAnotherSeconds.ProvidePlayer();
+            ICapabilitySerializable<NBTTagCompound> providerInspirations = new CapabilityInspirations.ProvidePlayer();
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "consciousness"), providerConsciousness);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "mindActivity"), providerMindActivity);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "researchData"), providerResearchData);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "seconds"),providerSeconds);
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "hayTorchState"), providerHayTorchState);     
             event.addCapability(new ResourceLocation(EOK.MODID + ":" + "damage"), providerAnotherSeconds);
+            event.addCapability(new ResourceLocation(EOK.MODID + ":" + "inspirations"), providerInspirations);
         }
     }
 
@@ -56,6 +53,9 @@ public class AnotherEventHandler {
         Capability.IStorage<IHayTorch> storageHayTorchState = capabilityHayTorchState.getStorage();
         Capability<IAnotherSeconds> capabilityAnotherSeconds = CapabilityHandler.capAnotherSeconds;
         Capability.IStorage<IAnotherSeconds> storageAnotherSeconds = capabilityAnotherSeconds.getStorage();
+        Capability<IInspirations> capabilityInspirations = CapabilityHandler.capInspirations;
+        Capability.IStorage<IInspirations> storageInspirations = capabilityInspirations.getStorage();
+
         if(event.getOriginal().hasCapability(capabilityConsciousness, null) && event.getEntityPlayer().hasCapability(capabilityConsciousness, null)){
             NBTBase nbt = storageConsciousness.writeNBT(capabilityConsciousness, event.getOriginal().getCapability(capabilityConsciousness, null), null);
             storageConsciousness.readNBT(capabilityConsciousness, event.getEntityPlayer().getCapability(capabilityConsciousness, null), null, nbt);
@@ -79,6 +79,10 @@ public class AnotherEventHandler {
         if(event.getOriginal().hasCapability(capabilityAnotherSeconds, null) && event.getEntityPlayer().hasCapability(capabilityAnotherSeconds, null)){
             NBTBase nbt = storageAnotherSeconds.writeNBT(capabilityAnotherSeconds, event.getOriginal().getCapability(capabilityAnotherSeconds, null), null);
             storageAnotherSeconds.readNBT(capabilityAnotherSeconds, event.getEntityPlayer().getCapability(capabilityAnotherSeconds, null), null, nbt);
+        }
+        if(event.getOriginal().hasCapability(capabilityInspirations, null) && event.getEntityPlayer().hasCapability(capabilityInspirations, null)){
+            NBTBase nbt = storageInspirations.writeNBT(capabilityInspirations, event.getOriginal().getCapability(capabilityInspirations, null), null);
+            storageInspirations.readNBT(capabilityInspirations, event.getEntityPlayer().getCapability(capabilityInspirations, null), null, nbt);
         }
     }
 
@@ -152,6 +156,15 @@ public class AnotherEventHandler {
                 message.compound.setTag("damage", storage.writeNBT(CapabilityHandler.capAnotherSeconds, anotherSeconds, null));
 
                 EOK.getNetwork().sendTo(message, (EntityPlayerMP)player);
+            }
+            if(player.hasCapability(CapabilityHandler.capInspirations, null)){
+                PacketInspirations message = new PacketInspirations();
+                IInspirations inspirations = player.getCapability(CapabilityHandler.capInspirations, null);
+                Capability.IStorage<IInspirations> storage = CapabilityHandler.capInspirations.getStorage();
+
+                message.compound = new NBTTagCompound();
+                message.compound.setTag("inspirations", storage.writeNBT(CapabilityHandler.capInspirations, inspirations, null));
+                EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
             }
         }
     }
