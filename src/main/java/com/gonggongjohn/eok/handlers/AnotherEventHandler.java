@@ -169,7 +169,7 @@ public class AnotherEventHandler {
             else {
                 double conV = consciousness.getConsciousnessValue();
                 if(conV >= 0.0D) {
-                    consciousness.setConsciousnessValue(conV - 0.005D);
+                    consciousness.setConsciousnessValue(conV - 1.0/24000.0);
                 }
             }
             player.getEntityData().setTag(CapabilityHandler.capConsciousness.getName(), storage.writeNBT(CapabilityHandler.capConsciousness, consciousness, null));

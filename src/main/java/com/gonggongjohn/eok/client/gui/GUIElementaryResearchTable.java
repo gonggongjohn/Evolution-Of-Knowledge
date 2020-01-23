@@ -124,7 +124,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
         if (button.id == 0) {
             ItemStack stack = this.invPaperSlot.getStack();
             int[] temp;
-            if (stack == null | stack.isEmpty()) return;
+            if (stack == null || stack.isEmpty()) return;
             NBTTagCompound compound = stack.getTagCompound();
             if (compound == null) return;
             else {
