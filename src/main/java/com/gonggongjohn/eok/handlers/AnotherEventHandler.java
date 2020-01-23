@@ -8,16 +8,20 @@ import com.gonggongjohn.eok.network.PacketHayTorchBase;
 import com.gonggongjohn.eok.network.PacketMindActivity;
 import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.network.PacketSeconds;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -177,6 +181,30 @@ public class AnotherEventHandler {
             message.compound = new NBTTagCompound();
             message.compound.setTag("consciousness", storage.writeNBT(CapabilityHandler.capConsciousness, consciousness, null));
             EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
+        }
+    }
+    @SubscribeEvent
+    public void onPlayerRightClicked(PlayerInteractEvent.RightClickBlock event)
+    {
+        if(!event.getWorld().isRemote)
+        {
+            BlockPos pos=event.getPos();
+            if(event.getWorld().getBlockState(pos).equals(BlockHandler.blockStoneRock.getDefaultState()))
+                event.getWorld().destroyBlock(pos,true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onDownBlockDestroyed(BlockEvent.BreakEvent event)
+    {
+        if(!event.getWorld().isRemote)
+        {
+            BlockPos pos=event.getPos();
+            IBlockState state=event.getWorld().getBlockState(pos.up());
+            if(state.equals(BlockHandler.blockStoneRock.getDefaultState()))
+            {
+                event.getWorld().destroyBlock(pos.up(),true);
+            }
         }
     }
 }
