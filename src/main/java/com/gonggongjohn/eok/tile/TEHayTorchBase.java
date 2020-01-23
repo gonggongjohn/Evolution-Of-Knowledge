@@ -57,7 +57,7 @@ public class TEHayTorchBase extends TileEntity implements ITickable {
     @Override
     public void update() {
     	
-    	if(hayTorch.getStackInSlot(0).getItem() == ItemHandler.driedHay) {
+    	if(hayTorch.getStackInSlot(0).getItem() == ItemHandler.hayTorch) {
     		
     		System.out.println("Dired Hay Added");
 

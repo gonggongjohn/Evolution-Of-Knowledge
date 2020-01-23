@@ -59,10 +59,13 @@ public class ContainerHayTorchBase extends Container {
     	
         super.onContainerClosed(playerIn);
   
-        if(playerIn.isServerWorld()){
-            ItemStack gouStack = this.torchSlot.getStack();
-            if(gouStack != ItemStack.EMPTY){
-                playerIn.dropItem(gouStack, false);
+        if(playerIn.isServerWorld()) {
+        	
+            ItemStack itemStack = this.torchSlot.getStack();
+            if(itemStack != ItemStack.EMPTY) {
+            	
+                playerIn.dropItem(itemStack, false);
+                torchSlot.putStack(ItemStack.EMPTY);
             }
         }
     }
