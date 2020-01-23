@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class BlockStoneRock extends Block {
     public final String name="block_stone_rock";
-    public final static AxisAlignedBB Block_Stone_Rock_AABB=new AxisAlignedBB(0.35D,0.0D,0.35D,0.65D,0.2D,0.65D);
+    public final static AxisAlignedBB Block_Stone_Rock_AABB=new AxisAlignedBB(0.375D,0.0D,0.375D,0.625D,0.1875D,0.625D);
 
     public BlockStoneRock()
     {
