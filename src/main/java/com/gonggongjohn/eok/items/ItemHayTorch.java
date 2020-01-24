@@ -4,7 +4,6 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.IInspirations;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-import com.gonggongjohn.eok.network.PacketInspirations;
 import com.gonggongjohn.eok.network.PacketInverseInspirations;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.advancements.CriteriaTriggers;
