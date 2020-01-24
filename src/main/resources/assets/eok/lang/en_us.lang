@@ -65,6 +65,7 @@ research.elementary_arithmetic.name=Math:Elementary Arithmetic
 research.power.name=Math:Power
 research.logarithm.name=Math:Logarithm
 
+inspiration.query.pre=You have acquired following inspirations:
 inspiration.get.pre=Get Inspiration:
 inspiration.root.name=Root Inspiration
 inspiration.fire_preservation.name=Fire Is Preservable!

@@ -65,6 +65,7 @@ research.elementary_arithmetic.name=Mathématiques：Calcul arithmétique
 research.power.name=Mathématiques：Calcul de puissance
 research.logarithm.name=Mathématiques：Calcul logarithmique
 
+inspiration.query.pre=你已经获得了以下这些灵感：
 inspiration.get.pre=获得灵感：
 inspiration.root.name=根灵感
 inspiration.fire_preservation.name=火是可以被驻存的!
