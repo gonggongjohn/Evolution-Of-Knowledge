@@ -65,12 +65,15 @@ research.elementary_arithmetic.name=Mathématiques：Calcul arithmétique
 research.power.name=Mathématiques：Calcul de puissance
 research.logarithm.name=Mathématiques：Calcul logarithmique
 
-entity.entity_smalldew.name=gonggongjohngugugugugugugugugugugugugugugugugugugu
+inspiration.get.pre=获得灵感：
+inspiration.root.name=根灵感
+inspiration.fire_preservation.name=火是可以被驻存的!
+
+entity.entity_smalldew.name=gonggongjohn
 entity.entity_chenwe_i_lin.name=Chenwe_i_lin
 entity.entity_osir.name=Os_Ir
 entity.entity_zijing.name=zijing_233
 
 gui.merchant.title=Marchand
 gui.merchant.button.buy=Acheter
-
 
