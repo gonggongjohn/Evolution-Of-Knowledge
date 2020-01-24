@@ -38,7 +38,7 @@ public class ItemVirus extends Item implements IHasModel {
 		System.out.println("EOK留言：新年快乐，EOK祝大家健康，真心希望2020年新型冠状肺炎病毒带来的危机能尽快被控制和解除，2020年1月25日。");
 		
 	    playerIn.addPotionEffect(new PotionEffect(MobEffects.POISON, 1200, 5));
-	    playerIn.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1000, 3));
+	    playerIn.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 1000, 5));
 	    playerIn.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 1200, 4));
 	    playerIn.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1000, 5));
 	    playerIn.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1000, 5));
@@ -48,5 +48,4 @@ public class ItemVirus extends Item implements IHasModel {
 		
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
-
 }
