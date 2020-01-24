@@ -30,22 +30,19 @@ public class ToolBase extends Item implements IHasModel {
 	public float efficiency = 1.0F;
 
 	public ToolBase() {
-		
-		
+
 		this.setUnlocalizedName(name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		this.setHarvestLevel(this.getClass().getName(), this.harvestLevel);
 	}
 
-
-	
-	
 	@Override
 	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		
+
 		NBTTagCompound nbt = stack.getTagCompound();
-		if(nbt == null) nbt = new NBTTagCompound();
+		if (nbt == null)
+			nbt = new NBTTagCompound();
 		nbt.setString("EOKToolMaterial", this.materialName);
 		nbt.setFloat("attackDamage", this.attackDamage);
 		nbt.setInteger("maxDamage", this.maxDamage);
@@ -54,9 +51,6 @@ public class ToolBase extends Item implements IHasModel {
 		nbt.setFloat("efficiency", this.efficiency);
 		super.onCreated(stack, worldIn, playerIn);
 	}
-
-
-
 
 	@Override
 	public void registerModel() {
@@ -76,23 +70,11 @@ public class ToolBase extends Item implements IHasModel {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("tooltip.toolbase.material_name",this.materialName));
+		tooltip.add(I18n.format("tooltip.toolbase.material_name", this.materialName));
 		tooltip.add(I18n.format("tooltip.toolbase.harvest_level", this.harvestLevel));
-		tooltip.add(I18n.format("tooltip.toolbase.attack_damage", this.attackDamage,this.attackDamage/2));
-		tooltip.add(I18n.format("tooltip.toolbase.durability", this.maxDamage-this.getDamage(stack),this.maxDamage));
+		tooltip.add(I18n.format("tooltip.toolbase.attack_damage", this.attackDamage, this.attackDamage / 2));
+		tooltip.add(I18n.format("tooltip.toolbase.durability", this.maxDamage - this.getDamage(stack), this.maxDamage));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
-
-	@Override
-	public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
-		// TODO 自动生成的方法存根
-		return super.canHarvestBlock(state, stack);
-	}
-
-	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-		// TODO 自动生成的方法存根
-		return super.getDestroySpeed(stack, state);
 	}
 
 	@Override
@@ -103,18 +85,6 @@ public class ToolBase extends Item implements IHasModel {
 	@Override
 	public int getItemBurnTime(ItemStack itemStack) {
 		return this.burnTime;
-	}
-
-	@Override
-	public boolean isDamageable() {
-		// TODO 自动生成的方法存根
-		return super.isDamageable();
-	}
-
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		// TODO 自动生成的方法存根
-		return super.isEnchantable(stack);
 	}
 
 	@Override
