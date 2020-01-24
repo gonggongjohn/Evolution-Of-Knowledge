@@ -7,6 +7,12 @@ import com.gonggongjohn.eok.utils.Colors;
 
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * 这是MetaGUIScreen的示例
+ * 在游戏内输入命令/eoktestscreen可打开该界面
+ * 
+ * @see MetaGUIScreen
+ */
 public class GUIScreenTest extends MetaGUIScreen {
 
 	public GUIScreenTest() {
