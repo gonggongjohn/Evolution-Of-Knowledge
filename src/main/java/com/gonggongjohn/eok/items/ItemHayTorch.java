@@ -67,14 +67,19 @@ public class ItemHayTorch extends Item implements IHasModel {
 	        }
 
 	        //Unlock inspiration:Fire Preservation
-	        if(worldIn.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.log")){
-				if(playerIn.hasCapability(CapabilityHandler.capInspirations, null)){
+	        if(worldIn.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.log")) {
+	        	
+				if(playerIn.hasCapability(CapabilityHandler.capInspirations, null)) {
+					
 					IInspirations inspirations = playerIn.getCapability(CapabilityHandler.capInspirations, null);
 					Capability.IStorage<IInspirations> storage = CapabilityHandler.capInspirations.getStorage();
 					int[] insStatus = inspirations.getInspirationsStatus();
-					if(insStatus[1] == 0){
+					
+					if(insStatus[1] == 0) {
+						
 						double rand = Math.random();
-						if(rand > 0.5D){
+						if(rand > 0.5D) {
+							
 							insStatus[1] = 1;
 							inspirations.setInspirationsStatus(insStatus);
 							NBTBase nbt = storage.writeNBT(CapabilityHandler.capInspirations, inspirations, null);
@@ -84,13 +89,13 @@ public class ItemHayTorch extends Item implements IHasModel {
 							message.compound.setTag("inspirations", storage.writeNBT(CapabilityHandler.capInspirations, inspirations, null));
 							EOK.getNetwork().sendToServer(message);
 							String inspName = EOK.inspirationDict.inspirationNameDict.get(1);
+							
 							playerIn.sendStatusMessage(new TextComponentTranslation("inspiration.get.pre"), false);
 							playerIn.sendStatusMessage(new TextComponentTranslation("inspiration." + inspName + ".name"), false);
 						}
 					}
 				}
 			}
-
 
 	        if(itemStack.getItemDamage() == 4) {
 	        	
