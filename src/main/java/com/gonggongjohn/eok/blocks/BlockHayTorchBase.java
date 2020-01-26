@@ -38,6 +38,7 @@ public class BlockHayTorchBase extends BlockContainer implements IHasModel {
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
     }
+    
     @Override
     public boolean isOpaqueCube(IBlockState state) {
     	
@@ -55,11 +56,13 @@ public class BlockHayTorchBase extends BlockContainer implements IHasModel {
     	
         return HAY_TORCH_BASE_AABB;
     }
+    
     @Override
     public void registerModel() {
     	
         EOK.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
+    
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         
@@ -79,6 +82,7 @@ public class BlockHayTorchBase extends BlockContainer implements IHasModel {
     
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
+    	
         return EnumBlockRenderType.MODEL;
     }
 }
