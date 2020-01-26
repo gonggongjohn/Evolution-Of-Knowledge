@@ -1,18 +1,20 @@
 package com.gonggongjohn.eok.items;
 
 import java.util.ArrayList;
-//import java.util.Random;
+import java.util.Random;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -24,7 +26,7 @@ public class ItemFireStick extends Item implements IHasModel {
 	private int cpt = 0;
 	private boolean fire = false;
 	private int useTime = 0;
-	//private Random rand;
+	private Random rand = new Random();
 	
 	ArrayList<Long> timeList = new ArrayList<>();
 
@@ -68,31 +70,50 @@ public class ItemFireStick extends Item implements IHasModel {
 				
 				timeList.add(worldIn.getWorldTime());
 				
+				if(timeList.size() >= 2 && (timeList.get(timeList.size() - 1) - timeList.get(timeList.size() - 2)) > 10) {
+					
+					timeList.clear();
+					cpt = 0;
+				}
+				
 				if(cpt > 0) {
 					
 					//Smoke_normal
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+			        /*
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 1.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 1.0D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() - 0.0D, 0.0D, 0.0D, 0.0D);
+					*/
 				}
 
 				if(cpt > 10) {
 					
 					//Smoke_Large
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+					/*
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 1.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 1.0D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() - 0.0D, 0.0D, 0.0D, 0.0D);
+					*/
 				}
 				
 				if(cpt > 15) {
 					
 					//Flame
+					worldIn.playSound(getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+					worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + rand.nextDouble() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + rand.nextDouble() + 0.0D, 0.0D, 0.0D, 0.0D);
+			        /*
 					worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() - 0.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 1.0D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() + 1.0D, 0.0D, 0.0D, 0.0D);
 			        worldIn.spawnParticle(EnumParticleTypes.FLAME, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getX() + 0.5D, getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getY(), getFirePos(playerIn, worldIn, pos, handIn, playerIn.getHorizontalFacing()).getZ() - 0.0D, 0.0D, 0.0D, 0.0D);
+					*/
 				}
 			}
 			else {

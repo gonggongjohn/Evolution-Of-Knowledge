@@ -78,6 +78,7 @@ public class BlockHayTorchBaseLit extends BlockContainer implements IHasModel {
             int id = GUIHandler.GUIHayTorchBaseLit;
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
+        
         return true;
     }
     
