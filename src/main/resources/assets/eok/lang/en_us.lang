@@ -24,7 +24,8 @@ item.fire_stick.name=Fire Stick
 item.hay_torch.name=Hay Torch
 item.dead_hay_torch.name=Dead Hay Torch
 item.dried_hay.name=Dried Hay
-item.virus.name=virus
+item.virus.name=Virus
+item.machine_gun.name=Machine Gun
 
 item.machine_gun.description=Still Developing
 
