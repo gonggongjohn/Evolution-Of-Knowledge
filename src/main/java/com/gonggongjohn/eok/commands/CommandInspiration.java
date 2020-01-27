@@ -42,4 +42,9 @@ public class CommandInspiration extends CommandBase {
             }
         }
     }
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 2;
+    }
 }

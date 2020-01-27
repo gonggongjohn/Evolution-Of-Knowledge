@@ -162,4 +162,5 @@ public class ItemFireStick extends Item implements IHasModel {
 			return EnumActionResult.SUCCESS;
 		}
 	}
+
 }
