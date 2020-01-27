@@ -1,7 +1,10 @@
 package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.capabilities.IInspirations;
+import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
+import com.gonggongjohn.eok.network.PacketInverseInspirations;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,12 +13,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 
 public class ItemHayTorch extends Item implements IHasModel {
 	
@@ -59,7 +66,36 @@ public class ItemHayTorch extends Item implements IHasModel {
 	            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)playerIn, pos, itemStack);
 	        }
 
-	        if(worldIn.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.log")) ;  //TODO
+	        //Unlock inspiration:Fire Preservation
+	        if(worldIn.getBlockState(pos).getBlock().getUnlocalizedName().equals("tile.log")) {
+	        	
+				if(playerIn.hasCapability(CapabilityHandler.capInspirations, null)) {
+					
+					IInspirations inspirations = playerIn.getCapability(CapabilityHandler.capInspirations, null);
+					Capability.IStorage<IInspirations> storage = CapabilityHandler.capInspirations.getStorage();
+					int[] insStatus = inspirations.getInspirationsStatus();
+					
+					if(insStatus[1] == 0) {
+						
+						double rand = Math.random();
+						if(rand > 0.5D) {
+							
+							insStatus[1] = 1;
+							inspirations.setInspirationsStatus(insStatus);
+							NBTBase nbt = storage.writeNBT(CapabilityHandler.capInspirations, inspirations, null);
+							storage.readNBT(CapabilityHandler.capInspirations, playerIn.getCapability(CapabilityHandler.capInspirations, null), null, nbt);
+							PacketInverseInspirations message = new PacketInverseInspirations();
+							message.compound = new NBTTagCompound();
+							message.compound.setTag("inspirations", storage.writeNBT(CapabilityHandler.capInspirations, inspirations, null));
+							EOK.getNetwork().sendToServer(message);
+							String inspName = EOK.inspirationDict.inspirationNameDict.get(1);
+							
+							playerIn.sendStatusMessage(new TextComponentTranslation("inspiration.get.pre"), false);
+							playerIn.sendStatusMessage(new TextComponentTranslation("inspiration." + inspName + ".name"), false);
+						}
+					}
+				}
+			}
 
 	        if(itemStack.getItemDamage() == 4) {
 	        	

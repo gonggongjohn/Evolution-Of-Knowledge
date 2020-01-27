@@ -14,7 +14,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -235,8 +234,7 @@ public class AnotherEventHandler {
     {
         World world=event.getWorld();
         BlockPos pos=event.getPos();
-        System.out.println(1);
-        if(!event.getDrops().isEmpty()&&event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick)))
+        if(!event.getDrops().isEmpty()&&event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick)));
         {
             event.setDropChance(0.0F);
             world.spawnEntity(new EntityItem(world,pos.getX(),pos.getY(),pos.getZ(),new ItemStack(Items.STICK)));

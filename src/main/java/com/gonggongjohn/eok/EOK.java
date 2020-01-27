@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
+import com.gonggongjohn.eok.utils.InspirationDict;
 import com.gonggongjohn.eok.utils.MultiBlockDict;
 import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
@@ -44,7 +45,7 @@ public class EOK {
 	private SimpleNetworkWrapper network;
 
 	public static ResearchDict researchDict = new ResearchDict();
-
+	public static InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;
 
 	@EventHandler
@@ -59,6 +60,7 @@ public class EOK {
 		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
 		researchDict.initName();
 		researchDict.initRelation();
+		inspirationDict.initName();
 		CapabilityHandler.setupCapabilities();
 		TweakersMain.preInit();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
@@ -70,12 +72,13 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGUIScreen.Handler(), PacketTestGUIScreen.class, 7, Side.CLIENT);
-		network.registerMessage(new PacketSeconds.Handler(),PacketSeconds.class,999,Side.CLIENT);
-		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 8, Side.SERVER);
-		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 9, Side.CLIENT);
-		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.SERVER);
-		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 13, Side.CLIENT);
-		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 14, Side.CLIENT);
+		network.registerMessage(new PacketSeconds.Handler(),PacketSeconds.class,8,Side.CLIENT);
+		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 9, Side.SERVER);
+		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 10, Side.CLIENT);
+		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 11, Side.SERVER);
+		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.CLIENT);
+		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 13, Side.CLIENT);
+		network.registerMessage(new PacketInverseInspirations.Handler(), PacketInverseInspirations.class, 14, Side.SERVER);
 	}
 
 	@EventHandler
