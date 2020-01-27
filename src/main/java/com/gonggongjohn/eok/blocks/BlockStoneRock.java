@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockStoneRock extends Block implements IHasModel {
 	
     public final String name = "block_stone_rock";
-    public final static AxisAlignedBB Block_Stone_Rock_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 0.1875D, 0.625D);
+    public final static AxisAlignedBB Block_Stone_Rock_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D);
 
     public BlockStoneRock() {
     	
@@ -27,6 +27,7 @@ public class BlockStoneRock extends Block implements IHasModel {
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         this.setHardness(0.2F);
+        
         BlockHandler.blocks.add(this);
         ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
     }

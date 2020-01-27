@@ -44,6 +44,7 @@ tile.hay_torch_base.name=肝草火把底座
 tile.hay_torch_base_lit.name=亮的肝草火把底座
 tile.basket_ball.name=篮球——纪念科比
 tile.block_stone_rock.name=小石块
+tile.block_stick.name=小木棍
 
 itemGroup.eoktab=从无知到先知
 
