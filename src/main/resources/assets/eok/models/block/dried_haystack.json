@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "eok:blocks/dried_haystack_side",
+        "down": "eok:blocks/dried_haystack_up",
+        "up": "eok:blocks/dried_haystack_up",
+        "north": "eok:blocks/dried_haystack_side",
+        "south": "eok:blocks/dried_haystack_side",
+        "west": "eok:blocks/dried_haystack_side",
+        "east": "eok:blocks/dried_haystack_side"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "eok:blocks/decomposed_haystack_side",
+        "down": "eok:blocks/decomposed_haystack_up",
+        "up": "eok:blocks/decomposed_haystack_up",
+        "north": "eok:blocks/decomposed_haystack_side",
+        "south": "eok:blocks/decomposed_haystack_side",
+        "west": "eok:blocks/decomposed_haystack_side",
+        "east": "eok:blocks/decomposed_haystack_side"
+    }
+}
