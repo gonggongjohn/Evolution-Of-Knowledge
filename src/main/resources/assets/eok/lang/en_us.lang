@@ -26,6 +26,7 @@ item.dead_hay_torch.name=Dead Hay Torch
 item.dried_hay.name=Dried Hay
 item.virus.name=Virus
 item.machine_gun.name=Machine Gun
+item.eok_manual.name=EOK Manual
 
 item.machine_gun.description=Still Developing
 
