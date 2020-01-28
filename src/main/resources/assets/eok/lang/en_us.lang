@@ -24,7 +24,8 @@ item.fire_stick.name=Fire Stick
 item.hay_torch.name=Hay Torch
 item.dead_hay_torch.name=Dead Hay Torch
 item.dried_hay.name=Dried Hay
-item.virus.name=virus
+item.virus.name=Virus
+item.machine_gun.name=Machine Gun
 
 item.machine_gun.description=Still Developing
 
@@ -42,7 +43,9 @@ tile.dried_haystack.name=Dried Haystack
 tile.decomposed_haystack.name=Decomposed Haystack
 tile.hay_torch_base.name=Hay Torch Base
 tile.hay_torch_base_lit.name=Hay Torch Base Light
-tile.basket_ball.name=Basket Ball
+tile.basket_ball.name=Basketball
+tile.block_stone_rock.name=Stone Rock
+tile.block_stick.name=Stick
 
 itemGroup.eoktab=Evolution Of Knowledge
 

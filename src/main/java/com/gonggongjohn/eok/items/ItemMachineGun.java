@@ -5,7 +5,7 @@ import java.util.List;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.entity.EntityBullet;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-
+import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,29 +19,44 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMachineGun extends Item {
+public class ItemMachineGun extends Item implements IHasModel {
+	
+	private final String name = "machine_gun";
+	
 	public ItemMachineGun() {
-		this.setRegistryName("machine_gun");
-		this.setUnlocalizedName("machine_gun");
+		
+		this.setRegistryName(name);
+		this.setUnlocalizedName(name);
 		this.setCreativeTab(EOK.tabEOK);
+		
 		ItemHandler.items.add(this);
+	}
+	
+	@Override
+	public void registerModel() {
+		
+		EOK.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		
 		tooltip.add(I18n.format("item.machine_gun.description"));
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		
 		if (!world.isRemote) {
+			
 			EntityBullet bullet = new EntityBullet(world, player);
 			// EntityTippedArrow bullet = new EntityTippedArrow(world, player);
 			Vec3d vec = player.getLookVec();
 			bullet.shoot(vec.x, vec.y, vec.z, 40, 0);
 			world.spawnEntity(bullet);
 		}
+		
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
 }
