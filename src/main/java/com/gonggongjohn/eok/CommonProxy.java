@@ -1,9 +1,6 @@
 package com.gonggongjohn.eok;
 
-import com.gonggongjohn.eok.handlers.ConfigHandler;
-import com.gonggongjohn.eok.handlers.EntityHandler;
-import com.gonggongjohn.eok.handlers.GUIHandler;
-import com.gonggongjohn.eok.handlers.TradeHandler;
+import com.gonggongjohn.eok.handlers.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,6 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
+		MetaItemsHandler.init();
 		new ConfigHandler(event);
 		EntityHandler.register();
 	}
