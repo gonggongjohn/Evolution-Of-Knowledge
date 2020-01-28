@@ -20,12 +20,17 @@ public class WorldGenBlockStoneAndStick implements IWorldGenerator {
             BlockPos randomStickPos = new BlockPos(chunkX*16+8+random.nextInt(15),0,chunkZ*16+8+random.nextInt(15));
             randomStonePos=world.getTopSolidOrLiquidBlock(randomStonePos).down();
             randomStickPos=world.getTopSolidOrLiquidBlock(randomStickPos).down();
-            Block stoneDownBlock=world.getBlockState(randomStonePos).getBlock();
-            Block stickDownBlock=world.getBlockState(randomStickPos).getBlock();
-            if(world.isAirBlock(randomStonePos.up())&&(stoneDownBlock== Blocks.GRASS||stoneDownBlock==Blocks.STONE||stoneDownBlock==Blocks.SAND))
+            if(this.canSustainSt(world,randomStonePos))
                 world.setBlockState(randomStonePos.up(), BlockHandler.blockStoneRock.getDefaultState());
-            if(world.isAirBlock(randomStickPos.up())&&(stickDownBlock==Blocks.GRASS||stoneDownBlock==Blocks.STONE||stoneDownBlock==Blocks.SAND))
+            if(this.canSustainSt(world,randomStickPos))
                 world.setBlockState(randomStickPos.up(),BlockHandler.blockStick.getDefaultState());
         }
+    }
+    private boolean canSustainSt(World world,BlockPos pos)
+    {
+        boolean flag1=world.isAirBlock(pos.up())||world.getBlockState(pos).getBlock()==Blocks.SNOW_LAYER;
+        Block block=world.getBlockState(pos).getBlock();
+        boolean flag2=block==Blocks.GRASS||block==Blocks.STONE||block==Blocks.SAND;
+        return flag1&flag2;
     }
 }
