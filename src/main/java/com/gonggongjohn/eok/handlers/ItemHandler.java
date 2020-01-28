@@ -21,8 +21,8 @@ public class ItemHandler {
 	public static final Item hayTorch = new ItemHayTorch();
 	public static final Item Virus = new ItemVirus();
 	
-	public static final Item convexLens = new ItemMaterialBase("convex_lens");
-	public static final Item concaveLens = new ItemMaterialBase("concave_lens");
+	//public static final Item convexLens = new ItemMaterialBase("convex_lens");
+	//public static final Item concaveLens = new ItemMaterialBase("concave_lens");
 	public static final Item eokSymbol = new ItemMaterialBase("eok_symbol");
 	public static final Item plantFiber = new ItemMaterialBase("plant_fiber");
 	public static final Item shortStick = new ItemMaterialBase("short_stick");
