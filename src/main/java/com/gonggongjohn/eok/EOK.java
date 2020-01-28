@@ -4,6 +4,7 @@ import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
+import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
@@ -87,6 +88,7 @@ public class EOK {
 		multiBlockDict = new MultiBlockDict();
 		multiBlockDict.initStructure();
 		multiBlockDict.initDict();
+		new WorldGenHandler();
 		TweakersMain.init();
 		MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
 	}
