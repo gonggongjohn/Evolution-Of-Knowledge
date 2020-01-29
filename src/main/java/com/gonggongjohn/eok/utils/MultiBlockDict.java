@@ -4,16 +4,18 @@ import com.gonggongjohn.eok.handlers.BlockHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class MultiBlockDict {
-    public HashMap<String, String[]> structureDictLinear = new HashMap<String, String[]>();
-    public HashMap<String, String[][]> structureDict2D = new HashMap<String, String[][]>();
-    public HashMap<String, String[][][]> structureDict3D = new HashMap<String, String[][][]>();
+    public HashMap<String, ArrayList<ComponentRelation>> structureDictLinear = new HashMap<String, ArrayList<ComponentRelation>>();
+    public HashMap<String, ArrayList<ComponentRelation>> structureDict2D = new HashMap<String, ArrayList<ComponentRelation>>();
+    public HashMap<String, ArrayList<ComponentRelation>> structureDict3D = new HashMap<String, ArrayList<ComponentRelation>>();
 
-    public String[] STRElementaryResearchTable;
-    public String[][] STRTest2D;
-    public String[][][] STRTest3D;
+    public ArrayList<ComponentRelation> STRElementaryResearchTable;
+    public ArrayList<ComponentRelation> STRTest2D;
+    public ArrayList<ComponentRelation> STRTest3D;
 
     private Block stoneTable = BlockHandler.blockStoneTable;
 
@@ -22,21 +24,15 @@ public class MultiBlockDict {
     }
 
     public void initStructure(){
-        STRElementaryResearchTable = createStructureLinear(new Block[]{stoneTable, stoneTable});
-        STRTest2D = createStructure2D(new Block[][]{{stoneTable, stoneTable, stoneTable},
-                {stoneTable, BlockHandler.blockTest2DCore, stoneTable},
-                {stoneTable, stoneTable, stoneTable}});
-        STRTest3D = createStructure3D(new Block[][][]{
-                {{stoneTable, stoneTable, stoneTable},
-                        {stoneTable, stoneTable, stoneTable},
-                        {stoneTable, stoneTable, stoneTable}},
-                {{stoneTable, BlockHandler.blockTest3DCore, stoneTable},
-                        {stoneTable, Blocks.AIR, stoneTable},
-                        {stoneTable, stoneTable, stoneTable}},
-                {{stoneTable, stoneTable, stoneTable},
-                        {stoneTable, stoneTable, stoneTable},
-                        {stoneTable, stoneTable, stoneTable}}
-        });
+        STRElementaryResearchTable = createStructure(crwb(1, 0, 0, stoneTable));
+        STRTest2D = createStructure(crwb(1, 0, 0, stoneTable), crwb(-1, 0, 0, stoneTable),
+                crwb(0, 0, 1, stoneTable), crwb(0, 0, -1, stoneTable),
+                crwb(1, 0, 1, stoneTable), crwb(-1, 0, -1, stoneTable),
+                crwb(1, 0, -1, stoneTable), crwb(-1, 0, 1, stoneTable));
+        STRTest3D = createStructure(crwb(1, 0, 0, stoneTable), crwb(-1, 0, 0, stoneTable),
+                crwb(0, 0, 1, Blocks.AIR), crwb(1, 0, 1, stoneTable),
+                crwb(-1, 0, 1, stoneTable), crwb(0, 0, 2, stoneTable),
+                crwb(1, 0, 2, stoneTable), crwb(-1, 0, 2, stoneTable));
     }
 
 
@@ -46,15 +42,17 @@ public class MultiBlockDict {
         structureDict3D.put("structure_test_3d", STRTest3D);
     }
 
-    private String[] createStructureLinear(Block[] origin){
-        String[] temp = new String[origin.length];
-        for(int i = 0; i < origin.length; i++){
-            temp[i] = origin[i].getUnlocalizedName();
-        }
-        return temp;
+    private ArrayList<ComponentRelation> createStructure(ComponentRelation... relations){
+        ArrayList<ComponentRelation> list = new ArrayList<ComponentRelation>(Arrays.asList(relations));
+        return list;
     }
 
-    private String[][] createStructure2D(Block[][] origin){
+    private ComponentRelation crwb(int x, int y, int z, Block block){
+        return new ComponentRelation(x, y, z, block.getUnlocalizedName());
+    }
+
+
+    /*private String[][] createStructure2D(Block[][] origin){
         String[][] temp = new String[origin.length][origin[0].length];
         for(int i = 0; i < origin.length; i++){
             for(int j = 0; j < origin[0].length; j++){
@@ -75,5 +73,5 @@ public class MultiBlockDict {
             }
         }
         return temp;
-    }
+    }*/
 }

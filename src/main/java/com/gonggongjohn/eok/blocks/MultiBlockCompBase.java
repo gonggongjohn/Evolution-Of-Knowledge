@@ -29,7 +29,7 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
     }
 
     private int[] checkLinear(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        String[] structure = EOK.multiBlockDict.structureDictLinear.get(structureName);
+        /*String[] structure = EOK.multiBlockDict.structureDictLinear.get(structureName);
         if(structure == null) return new int[]{0, 0, 0, 0};
         int arrayCur, facingCur = 0;
         //1是数组头，2是数组尾
@@ -60,20 +60,20 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
                 else if (arrayCur == 2 && !(worldIn.getBlockState(new BlockPos(posTransX, posY, posTransZ)).getBlock().getUnlocalizedName() == structure[structure.length - 1 - i])) return new int[]{0, 0, 0, 0};
             }
             return new int[]{1, transformMatrix2D[facingCur][0], 0, transformMatrix2D[facingCur][1]};
-        }
+        }*/
         return new int[]{0, 0, 0, 0};
     }
 
     private int[] check2D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        String[][] structure = EOK.multiBlockDict.structureDict2D.get(structureName);
-        if(structure == null) return new int[]{0, 0, 0, 0};
+        /*String[][] structure = EOK.multiBlockDict.structureDict2D.get(structureName);
+        if(structure == null) return new int[]{0, 0, 0, 0};*/
         //TODO
         return new int[]{0, 0, 0, 0};
     }
 
     private int[] check3D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        String[][][] structure = EOK.multiBlockDict.structureDict3D.get(structureName);
-        if(structure == null) return new int[]{0, 0, 0, 0};
+        /*String[][][] structure = EOK.multiBlockDict.structureDict3D.get(structureName);
+        if(structure == null) return new int[]{0, 0, 0, 0};*/
         //TODO
         return new int[]{0, 0, 0, 0};
     }
