@@ -39,6 +39,7 @@ public class ItemEOKManual extends Item implements IHasModel {
         	
         	BlockPos pos = playerIn.getPosition();
             int id = GUIHandler.GUIEOKManual;
+
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         
