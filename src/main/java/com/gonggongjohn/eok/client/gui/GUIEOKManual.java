@@ -17,6 +17,7 @@ public class GUIEOKManual extends GuiScreen {
     //private FontRenderer font = mc.fontRenderer;
     
 	private int lastGuiScale;
+	private int page = 0;
 
 	private int windowWidth;
 	private int windowHeight;
@@ -38,26 +39,6 @@ public class GUIEOKManual extends GuiScreen {
    	
     	super();
     }
-    
-	public int getWindowWidth() {
-		
-		return windowWidth;
-	}
-
-	public int getWindowHeight() {
-		
-		return windowHeight;
-	}
-	
-	public int getOffsetX() {
-		
-		return offsetX;
-	}
-
-	public int getOffsetY() {
-		
-		return offsetY;
-	}
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -75,12 +56,21 @@ public class GUIEOKManual extends GuiScreen {
 	    mc.getTextureManager().bindTexture(textureBook);
 	    drawTexturedModalRect(offsetX, offsetY, 0, 0, 190, 190);
 	    
-	    mc.renderEngine.bindTexture(texture);
-	    drawTexturedModalRect(offsetX + 77, offsetY + 40, 0, 0, 32, 32);
+	    if(page == 0) {
+	    	
+		    mc.renderEngine.bindTexture(texture);
+		    drawTexturedModalRect(offsetX + 77, offsetY + 40, 0, 0, 32, 32);
+		    
+	    }
 	    
 	    super.drawScreen(mouseX, mouseY, partialTicks);
 	    
-	    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);
+	    if(page == 0) {
+	    	
+		    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);    
+	    }
+	    
+	    drawHoveringText("Page " + page, offsetX + 65, offsetY + 165);
 	    
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
@@ -89,13 +79,19 @@ public class GUIEOKManual extends GuiScreen {
     @Override
     public void initGui() {
     	
+    	buttonList.clear();
+    	
     	super.initGui();
     	
 	    offsetX = (this.width - 190) / 2;
 	    offsetY = (this.height - 200) / 2;
 
 	    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 16, 20, ">>")));
-	    //buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 44, offsetY + 145, 16, 20, "<<")));
+	    
+	    if(page > 0) {
+	    	
+		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 44, offsetY + 145, 16, 20, "<<")));
+	    }
     }
     
 	@Override
@@ -125,21 +121,46 @@ public class GUIEOKManual extends GuiScreen {
     	
 			case BUTTON_LEFT : {
 				
-				break;
-			}
-			case BUTTON_RIGHT : {
-				
+				if(page > 0) {
+					
+					page--;
+				}
+				this.initGui();
 				break;
 			}
 			
-			case BUTTON_MID : {
+			case BUTTON_RIGHT : {
 				
-				//Label Menu
+				if(page < 9) {
+					
+					page++;
+				}
+				this.initGui();
 				break;
 			}
     	}
     }
 
+	public int getWindowWidth() {
+		
+		return windowWidth;
+	}
+
+	public int getWindowHeight() {
+		
+		return windowHeight;
+	}
+	
+	public int getOffsetX() {
+		
+		return offsetX;
+	}
+
+	public int getOffsetY() {
+		
+		return offsetY;
+	}
+	
 	public int getTexWidth() {
 		
 		return texWidth;
