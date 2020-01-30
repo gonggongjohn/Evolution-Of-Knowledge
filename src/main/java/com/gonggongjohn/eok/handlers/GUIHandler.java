@@ -24,7 +24,7 @@ public class GUIHandler implements IGuiHandler {
         switch (ID) {
         
         	case GUIEOKManual:
-        		return new ContainerEOKManual(player);
+        		return new GUIEOKManual();
             case GUIRefractingTelescope:
                 return new ContainerRefractingTelescope(player);
             case GUIElementaryResearchTable:

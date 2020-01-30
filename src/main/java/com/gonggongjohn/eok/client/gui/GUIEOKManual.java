@@ -2,19 +2,16 @@ package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
 import net.minecraft.client.Minecraft;
-//import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 import java.io.IOException;
-
 import org.lwjgl.opengl.GL11;
 
 public class GUIEOKManual extends GuiScreen {
 	
 	private ResourceLocation texture = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/label.png");
     private ResourceLocation textureBook = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/eok_manual.png");
-    //private FontRenderer font = mc.fontRenderer;
     
 	private int lastGuiScale;
 	private int page = 0;
@@ -56,6 +53,8 @@ public class GUIEOKManual extends GuiScreen {
 	    mc.getTextureManager().bindTexture(textureBook);
 	    drawTexturedModalRect(offsetX, offsetY, 0, 0, 190, 190);
 	    
+	    //this.drawHoveringText("Hello World", offsetX, offsetY);
+	    
 	    if(page == 0) {
 	    	
 		    mc.renderEngine.bindTexture(texture);
@@ -70,7 +69,13 @@ public class GUIEOKManual extends GuiScreen {
 		    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);    
 	    }
 	    
-	    drawHoveringText("Page " + page, offsetX + 65, offsetY + 165);
+	    //fontRenderer.drawStringWithShadow("Test String", offsetX, offsetY, 0);
+	    
+	    if(page > 0) {
+	    	
+		    fontRenderer.drawString("Page" + page, offsetX + 80, offsetY + 152, 0, false);
+	    	//drawString(fontRenderer, "Page" + page, offsetX + 80, offsetY + 152, 0);
+	    }
 	    
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
@@ -86,7 +91,11 @@ public class GUIEOKManual extends GuiScreen {
 	    offsetX = (this.width - 190) / 2;
 	    offsetY = (this.height - 200) / 2;
 
-	    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 16, 20, ">>")));
+	    
+	    if(page < 9) {
+	    	
+		    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 16, 20, ">>")));
+	    }
 	    
 	    if(page > 0) {
 	    	

@@ -33,16 +33,13 @@ public class ItemEOKManual extends Item implements IHasModel {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     	
-        if(!worldIn.isRemote) {
-        	
-        	BlockPos pos = playerIn.getPosition();
-            int id = GUIHandler.GUIEOKManual;
+        BlockPos pos = playerIn.getPosition();
+        int id = GUIHandler.GUIEOKManual;
+            
+        playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
 
-            playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
-        
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 }
