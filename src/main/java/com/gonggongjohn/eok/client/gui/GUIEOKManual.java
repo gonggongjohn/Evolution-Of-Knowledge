@@ -53,11 +53,13 @@ public class GUIEOKManual extends GuiScreen {
 		offsetX = (this.width - 190) / 2;
 	    offsetY = (this.height - 200) / 2;
 		
+	    super.drawScreen(mouseX, mouseY, partialTicks);
+	    
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    
+		
 		drawDefaultBackground();
 
 	    mc.getTextureManager().bindTexture(textureBook);
@@ -92,7 +94,6 @@ public class GUIEOKManual extends GuiScreen {
 		    	
 	            if((changeSec / 60) % 10 == 5) {
 	                	
-	              	System.out.println("  " + changeSec);
 	              	changeSec = 0;
 	            }
 	            else {
@@ -111,7 +112,47 @@ public class GUIEOKManual extends GuiScreen {
 		    }
 	    }
 	    
-	    super.drawScreen(mouseX, mouseY, partialTicks);
+		if (mouseX >= offsetX + 40 && mouseY >=  offsetY + 150 && mouseX < offsetX + 58 && mouseY < offsetY + 163) {
+			
+			if(page != 0) {
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 40, offsetY + 149, 26, 1230, 18, 13);
+			}
+			
+			if(page != 9) {
+				
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 130, offsetY + 150, 3, 1216, 18, 13);
+			}
+		} 
+		else if (mouseX >= offsetX + 130 && mouseY >=  offsetY + 150 && mouseX < offsetX + 148 && mouseY < offsetY + 183) {
+			
+			if(page != 9) {
+				
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 130, offsetY + 149, 26, 1216, 18, 13);
+			}
+			
+			if(page != 0) {
+				
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 40, offsetY + 150, 3, 1230, 18, 13);
+			}
+		} 
+		else {
+			
+			if(page != 0) {
+				
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 40, offsetY + 150, 3, 1230, 18, 13);
+			}
+			
+			if(page != 9) {
+				
+				mc.renderEngine.bindTexture(textureBook);
+				drawTexturedModalRect(offsetX + 130, offsetY + 150, 3, 1216, 18, 13);
+			}
+		}
 	    
 	    if(page == 0) {
 	    	
@@ -121,6 +162,31 @@ public class GUIEOKManual extends GuiScreen {
 	    	
 		    fontRenderer.drawString("Page" + page, offsetX + 80, offsetY + 152, 0, false);
 	    	//drawString(fontRenderer, "Page" + page, offsetX + 80, offsetY + 152, 0);
+	    }
+    	
+	    if(page == 1) {
+	    	
+	    	fontRenderer.drawString("EOK手册", offsetX + 44, offsetY + 35, 0, false);
+	    	fontRenderer.drawString("折射式望远镜", offsetX + 44, offsetY + 57, 0, false);
+	    	fontRenderer.drawString("清醒度", offsetX + 44, offsetY + 79, 0, false);
+	    	fontRenderer.drawString("开发人员表", offsetX + 44, offsetY + 105, 0, false);
+	    	
+			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 35 && mouseX < offsetX + 104 && mouseY < offsetY + 43) {
+				
+				fontRenderer.drawString("EOK手册", offsetX + 44, offsetY + 35, 0, true);
+			}
+			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 57 && mouseX < offsetX + 104 && mouseY < offsetY + 65) {
+				
+				fontRenderer.drawString("折射式望远镜", offsetX + 44, offsetY + 57, 0, true);
+			}
+			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 79 && mouseX < offsetX + 104 && mouseY < offsetY + 87) {
+				
+				fontRenderer.drawString("清醒度", offsetX + 44, offsetY + 79, 0, true);
+			}
+			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 105 && mouseX < offsetX + 104 && mouseY < offsetY + 113) {
+				
+				fontRenderer.drawString("开发人员表", offsetX + 44, offsetY + 105, 0, true);
+			}
 	    }
 	    
 	    //fontRenderer.drawStringWithShadow("Test String", offsetX, offsetY, 0);
@@ -198,20 +264,20 @@ public class GUIEOKManual extends GuiScreen {
 	    
 	    if(page < 9) {
 	    	
-		    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 16, 20, ">>")));
+		    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 20, 20, "")));
 	    }
 	    
 	    if(page > 0) {
-	    	
-		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 44, offsetY + 145, 16, 20, "<<")));
+
+		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 40, offsetY + 149, 18, 13, "")));
 	    }
-	    
+
 	    if(page == 1) {
 	    	
-	    	buttonList.add(setBtnMenu2(new GuiButton(2, offsetX + 44, offsetY + 35, 60, 20, "EOK手册")));
-	    	buttonList.add(setBtnMenu3(new GuiButton(3, offsetX + 44, offsetY + 57, 60, 20, "折射式望远镜")));
-	    	buttonList.add(setBtnMenu4(new GuiButton(4, offsetX + 44, offsetY + 79, 60, 20, "清醒度")));
-	    	buttonList.add(setBtnMenu5(new GuiButton(5, offsetX + 44, offsetY + 105, 60, 20, "开发人员表")));
+	    	buttonList.add(setBtnMenu2(new GuiButton(2, offsetX + 44, offsetY + 35, 60, 8, "EOK手册")));
+	    	buttonList.add(setBtnMenu3(new GuiButton(3, offsetX + 44, offsetY + 57, 60, 8, "折射式望远镜")));
+	    	buttonList.add(setBtnMenu4(new GuiButton(4, offsetX + 44, offsetY + 79, 60, 8, "清醒度")));
+	    	buttonList.add(setBtnMenu5(new GuiButton(5, offsetX + 44, offsetY + 105, 60, 8, "开发人员表")));
 	    }
     }
     
