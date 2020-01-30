@@ -27,10 +27,17 @@ public class GUIEOKManual extends GuiScreen {
 	
 	private GuiButton btnNext;
 	private GuiButton btnPrevious;
+	private GuiButton btnMenu2;
+	private GuiButton btnMenu3;
+	private GuiButton btnMenu4;
+	private GuiButton btnMenu5;
 	
 	public static final int BUTTON_RIGHT = 0;
 	public static final int BUTTON_LEFT = 1;
-	public static final int BUTTON_MID = 2;
+	public static final int BUTTON_MENU2 = 2;
+	public static final int BUTTON_MENU3 = 3;
+	public static final int BUTTON_MENU4 = 4;
+	public static final int BUTTON_MENU5 = 5;
 
     public GUIEOKManual() {
    	
@@ -55,26 +62,111 @@ public class GUIEOKManual extends GuiScreen {
 	    
 	    //this.drawHoveringText("Hello World", offsetX, offsetY);
 	    
-	    if(page == 0) {
-	    	
-		    mc.renderEngine.bindTexture(texture);
-		    drawTexturedModalRect(offsetX + 77, offsetY + 40, 0, 0, 32, 32);
-		    
+	    switch(page) {
+	    
+		    case 0: {
+		    	
+			    mc.renderEngine.bindTexture(texture);
+			    drawTexturedModalRect(offsetX + 77, offsetY + 40, 0, 0, 32, 32);  
+			    
+		    	break;
+		    }
+		    case 2: {
+		    	
+			    mc.renderEngine.bindTexture(texture);
+			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 35, 2, 32, 28);
+			    
+			    break;
+		    }
+		    case 3: {
+		    	
+			    mc.renderEngine.bindTexture(texture);
+			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 67, 2, 32, 28);
+			    
+			    break;
+		    }
+		    case 4: {
+		    	
+			    mc.renderEngine.bindTexture(texture);
+			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 100, 2, 80, 28);
+			    
+			    break;
+		    }
+		    default: {
+		    	
+		    	break;
+		    }
 	    }
 	    
 	    super.drawScreen(mouseX, mouseY, partialTicks);
 	    
 	    if(page == 0) {
 	    	
-		    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);    
+		    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);
+	    }
+	    else {
+	    	
+		    fontRenderer.drawString("Page" + page, offsetX + 80, offsetY + 152, 0, false);
+	    	//drawString(fontRenderer, "Page" + page, offsetX + 80, offsetY + 152, 0);
 	    }
 	    
 	    //fontRenderer.drawStringWithShadow("Test String", offsetX, offsetY, 0);
 	    
-	    if(page > 0) {
-	    	
-		    fontRenderer.drawString("Page" + page, offsetX + 80, offsetY + 152, 0, false);
-	    	//drawString(fontRenderer, "Page" + page, offsetX + 80, offsetY + 152, 0);
+	    switch(page) {
+	    
+	    	case 0: {
+	    		
+	    		break;
+	    	}
+	    	case 1: {
+	    		
+	    		fontRenderer.drawString("Menu", offsetX + 80, offsetY + 20, 0, false);
+	    		
+	    		break;
+	    	}
+		    case 2: {
+		    	
+		    	fontRenderer.drawString("EOK手册", offsetX + 80, offsetY + 22, 0, false);
+		    	fontRenderer.drawString("    EOK手册将一直伴随您，", offsetX + 40, offsetY + 60, 0, false);
+		    	fontRenderer.drawString("引导，并协助你完成游戏。", offsetX + 40, offsetY + 70, 0, false);
+			    
+		    	break;
+		    }
+		    case 3: {
+		    	
+		    	fontRenderer.drawString("折射式望远镜", offsetX + 80, offsetY + 22, 0, false);
+		    	fontRenderer.drawString("    有了它，能帮祝你更好的", offsetX + 40, offsetY + 60, 0, false);
+		    	fontRenderer.drawString("观察这个世界。", offsetX + 40, offsetY + 70, 0, false);
+		    	fontRenderer.drawString("    先在右下角的槽中放入", offsetX + 40, offsetY + 80, 0, false);
+		    	fontRenderer.drawString("§f§n莎草纸§r", offsetX + 40, offsetY + 90, 0, true);
+		    	fontRenderer.drawString("再点左下角的按钮记", offsetX + 67, offsetY + 90, 0, false);  
+		    	fontRenderer.drawString("录下这个瞬间吧。", offsetX + 40, offsetY + 100, 0, false);  
+		    	
+		    	break;
+		    }
+		    case 4: {
+		    	
+		    	fontRenderer.drawString("清醒度", offsetX + 40, offsetY + 50, 0, false);
+		    	fontRenderer.drawString("描述：", offsetX + 40, offsetY + 70, 0, false);
+		    	fontRenderer.drawString("    在研究台伏案学习会降", offsetX + 40, offsetY + 80, 0, false);
+		    	fontRenderer.drawString("低你的清醒度，如果清醒度为", offsetX + 40, offsetY + 90, 0, false);
+		    	fontRenderer.drawString("零则无法继续点亮研究节点。", offsetX + 40, offsetY + 100, 0, false);
+		    	fontRenderer.drawString("    睡觉可以恢复清醒度。", offsetX + 40, offsetY + 110, 0, false);
+		    	
+		    	break;
+		    }
+		    case 5: {
+		    	
+		    	drawHoveringText("别看了，全是鸽子", offsetX + 50, offsetY + 90);
+		    	
+		    	break;
+		    }
+		    default: {
+		    	
+		    	fontRenderer.drawString("待开发", offsetX + 80, offsetY + 80, 0, false);
+		    	
+		    	break;
+		    }
 	    }
 	    
 		GL11.glDisable(GL11.GL_BLEND);
@@ -90,7 +182,6 @@ public class GUIEOKManual extends GuiScreen {
     	
 	    offsetX = (this.width - 190) / 2;
 	    offsetY = (this.height - 200) / 2;
-
 	    
 	    if(page < 9) {
 	    	
@@ -100,6 +191,14 @@ public class GUIEOKManual extends GuiScreen {
 	    if(page > 0) {
 	    	
 		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 44, offsetY + 145, 16, 20, "<<")));
+	    }
+	    
+	    if(page == 1) {
+	    	
+	    	buttonList.add(setBtnMenu2(new GuiButton(2, offsetX + 44, offsetY + 35, 60, 20, "EOK手册")));
+	    	buttonList.add(setBtnMenu3(new GuiButton(3, offsetX + 44, offsetY + 57, 60, 20, "折射式望远镜")));
+	    	buttonList.add(setBtnMenu4(new GuiButton(4, offsetX + 44, offsetY + 79, 60, 20, "清醒度")));
+	    	buttonList.add(setBtnMenu5(new GuiButton(5, offsetX + 44, offsetY + 105, 60, 20, "开发人员表")));
 	    }
     }
     
@@ -135,6 +234,7 @@ public class GUIEOKManual extends GuiScreen {
 					page--;
 				}
 				this.initGui();
+				
 				break;
 			}
 			
@@ -145,7 +245,16 @@ public class GUIEOKManual extends GuiScreen {
 					page++;
 				}
 				this.initGui();
+				
 				break;
+			}
+			
+			default: {
+				
+	    		page = button.id;
+	    		this.initGui();
+	    		
+	    		break;
 			}
     	}
     }
@@ -210,5 +319,41 @@ public class GUIEOKManual extends GuiScreen {
 		
 		this.btnPrevious = btnPrevious;
 		return btnPrevious;
+	}
+
+	public GuiButton getBtnMenu2() {
+		return btnMenu2;
+	}
+
+	public GuiButton setBtnMenu2(GuiButton btnMenu2) {
+		this.btnMenu2 = btnMenu2;
+		return btnMenu2;
+	}
+
+	public GuiButton getBtnMenu3() {
+		return btnMenu3;
+	}
+
+	public GuiButton setBtnMenu3(GuiButton btnMenu3) {
+		this.btnMenu3 = btnMenu3;
+		return btnMenu3;
+	}
+
+	public GuiButton getBtnMenu4() {
+		return btnMenu4;
+	}
+
+	public GuiButton setBtnMenu4(GuiButton btnMenu4) {
+		this.btnMenu4 = btnMenu4;
+		return btnMenu4;
+	}
+
+	public GuiButton getBtnMenu5() {
+		return btnMenu5;
+	}
+
+	public GuiButton setBtnMenu5(GuiButton btnMenu5) {
+		this.btnMenu5 = btnMenu5;
+		return btnMenu5;
 	}
 }
