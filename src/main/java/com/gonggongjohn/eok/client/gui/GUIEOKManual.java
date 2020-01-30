@@ -15,6 +15,9 @@ public class GUIEOKManual extends GuiScreen {
     
 	private int lastGuiScale;
 	private int page = 0;
+	
+	private int sec = 0;
+	private int changeSec = 0;
 
 	private int windowWidth;
 	private int windowHeight;
@@ -87,9 +90,19 @@ public class GUIEOKManual extends GuiScreen {
 		    }
 		    case 4: {
 		    	
-			    mc.renderEngine.bindTexture(texture);
-			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 100, 2, 80, 28);
-			    
+	            if((changeSec / 60) % 10 == 5) {
+	                	
+	              	System.out.println("  " + changeSec);
+	              	changeSec = 0;
+	            }
+	            else {
+	
+	            	changeSec++;
+	            	sec = changeSec / 60;
+				    mc.renderEngine.bindTexture(texture);
+				    drawTexturedModalRect(offsetX + 40, offsetY + 20, 100, 2, 16 * (1 + sec), 28);
+	            }
+
 			    break;
 		    }
 		    default: {
@@ -322,37 +335,45 @@ public class GUIEOKManual extends GuiScreen {
 	}
 
 	public GuiButton getBtnMenu2() {
+		
 		return btnMenu2;
 	}
 
 	public GuiButton setBtnMenu2(GuiButton btnMenu2) {
+		
 		this.btnMenu2 = btnMenu2;
 		return btnMenu2;
 	}
 
 	public GuiButton getBtnMenu3() {
+		
 		return btnMenu3;
 	}
 
 	public GuiButton setBtnMenu3(GuiButton btnMenu3) {
+		
 		this.btnMenu3 = btnMenu3;
 		return btnMenu3;
 	}
 
 	public GuiButton getBtnMenu4() {
+		
 		return btnMenu4;
 	}
 
 	public GuiButton setBtnMenu4(GuiButton btnMenu4) {
+		
 		this.btnMenu4 = btnMenu4;
 		return btnMenu4;
 	}
 
 	public GuiButton getBtnMenu5() {
+		
 		return btnMenu5;
 	}
 
 	public GuiButton setBtnMenu5(GuiButton btnMenu5) {
+		
 		this.btnMenu5 = btnMenu5;
 		return btnMenu5;
 	}
