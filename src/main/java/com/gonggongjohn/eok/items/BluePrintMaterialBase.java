@@ -4,24 +4,34 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 
-public class ModMetaItem extends MaterialMetaItem {
+import java.util.ArrayList;
 
-    public ModMetaItem() {
-        super(OrePrefix.plate, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null);
+
+public class BluePrintMaterialBase extends MaterialMetaItem implements IBluePrint{
+    public static ArrayList<MetaItem<?>.MetaValueItem> BLUE_PRINTS=new ArrayList<MetaItem<?>.MetaValueItem>();
+
+    public BluePrintMaterialBase() {
+        super();
+        this.setCreativeTab(EOK.tabEOK);
     }
 
     @Override
     public void registerSubItems() {
-        MetaItemsHandler.CONVEX_LENS = this.addItem(0, "convex.lens");
-        MetaItemsHandler.CONCAVE_LENS = this.addItem(1, "concave.lens");
+        MetaItemsHandler.WATER_WHEEL=addItem(300,"water_wheel");
+        MetaItemsHandler.WIND_MILL=addItem(301,"wind_mill");
+
+        BLUE_PRINTS.add(MetaItemsHandler.WATER_WHEEL);
+        BLUE_PRINTS.add(MetaItemsHandler.WIND_MILL);
+
+        for(MetaItem<?>.MetaValueItem metaValueItem:BLUE_PRINTS)
+        {
+            metaValueItem.setMaxStackSize(1);
+        }
     }
 
     @Override
@@ -35,10 +45,5 @@ public class ModMetaItem extends MaterialMetaItem {
             }
             metaItem.getSubItemHandler().getSubItems(metaItem.getStackForm(), tab, items);
         }
-    }
-
-    @Override
-    public ResourceLocation createItemModelPath(MetaItem<?>.MetaValueItem metaValueItem, String postfix) {
-        return new ResourceLocation(EOK.MODID, this.formatModelPath(metaValueItem) + postfix);
     }
 }
