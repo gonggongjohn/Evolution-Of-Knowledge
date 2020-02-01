@@ -12,4 +12,20 @@ public class ComponentRelation {
         this.z = z;
         this.blockUnlocalizedName = blockUnlocalizedName;
     }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public int getZ() {
+        return this.z;
+    }
+
+    public String getBlockUnlocalizedName() {
+        return this.blockUnlocalizedName;
+    }
 }
