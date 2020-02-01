@@ -4,6 +4,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
+import com.gonggongjohn.eok.utils.JudgeWithFacing;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -55,13 +56,13 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        int[] checkResult = checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table");
-        if(checkResult[0] == 1){
-            EnumFacing facing;
-            facing = checkResult[1] == 0 ? (checkResult[3] == 1 ? EnumFacing.NORTH : EnumFacing.SOUTH) : (checkResult[1] == 1 ? EnumFacing.WEST : EnumFacing.EAST);
-            BlockPos sideBlockPos = new BlockPos(pos.getX() + checkResult[1], pos.getY(), pos.getZ() + checkResult[3]);
+        JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table");
+        if(checkResult.isTrue() && checkResult.getFacing() != null){
+            EnumFacing facing = checkResult.getFacing();
+            //facing = checkResult[1] == 0 ? (checkResult[3] == 1 ? EnumFacing.NORTH : EnumFacing.SOUTH) : (checkResult[1] == 1 ? EnumFacing.WEST : EnumFacing.EAST);
+            BlockPos sideBlockPos = new BlockPos(pos.getX() + facing.getDirectionVec().getX(), pos.getY(), pos.getZ() + facing.getDirectionVec().getZ());
             worldIn.setBlockToAir(sideBlockPos);
-            worldIn.setBlockState(pos, BlockHandler.blockElementaryResearchTable.getDefaultState().withProperty(FACING, facing));
+            worldIn.setBlockState(pos, BlockHandler.blockElementaryResearchTable.getDefaultState().withProperty(FACING, facing.getOpposite()));
         }
     }
 }
