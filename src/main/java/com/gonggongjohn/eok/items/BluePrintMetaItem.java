@@ -5,17 +5,21 @@ import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 
 
-public class BluePrintMaterialBase extends MaterialMetaItem implements IBluePrint{
+public class BluePrintMetaItem extends MaterialMetaItem {
     public static ArrayList<MetaItem<?>.MetaValueItem> BLUE_PRINTS=new ArrayList<MetaItem<?>.MetaValueItem>();
 
-    public BluePrintMaterialBase() {
+    public BluePrintMetaItem() {
         super();
         this.setCreativeTab(EOK.tabEOK);
     }
@@ -45,5 +49,20 @@ public class BluePrintMaterialBase extends MaterialMetaItem implements IBluePrin
             }
             metaItem.getSubItemHandler().getSubItems(metaItem.getStackForm(), tab, items);
         }
+    }
+
+
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            Item item = player.getHeldItem(hand).getItem();
+            for (MetaItem<?>.MetaValueItem metaItem : BLUE_PRINTS) {
+                if (item.equals(metaItem.getMetaItem())){
+                    //todo
+                }
+                break;
+            }
+        }
+        return EnumActionResult.PASS;
     }
 }

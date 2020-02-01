@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.items.BluePrintMaterialBase;
+import com.gonggongjohn.eok.items.BluePrintMetaItem;
 import com.gonggongjohn.eok.items.ModMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 
@@ -13,7 +13,7 @@ public class MetaItemsHandler {
         ModMetaItem metaItem = new ModMetaItem();
         metaItem.setRegistryName(EOK.MODID, "meta_item");
 
-        BluePrintMaterialBase bpMetaItem=new BluePrintMaterialBase();
+        BluePrintMetaItem bpMetaItem=new BluePrintMetaItem();
         bpMetaItem.setRegistryName(EOK.MODID,"blue_print_meta_item");
     }
 
