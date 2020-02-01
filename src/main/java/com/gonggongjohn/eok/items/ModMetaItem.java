@@ -26,7 +26,6 @@ public class ModMetaItem extends MaterialMetaItem {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        super.getSubItems(tab, items);
         if(tab != EOK.tabEOK){
             return;
         }
