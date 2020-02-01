@@ -12,12 +12,18 @@ public class MultiBlockDict {
     public HashMap<String, ArrayList<ComponentRelation>> structureDictLinear = new HashMap<String, ArrayList<ComponentRelation>>();
     public HashMap<String, ArrayList<ComponentRelation>> structureDict2D = new HashMap<String, ArrayList<ComponentRelation>>();
     public HashMap<String, ArrayList<ComponentRelation>> structureDict3D = new HashMap<String, ArrayList<ComponentRelation>>();
+    public HashMap<String, String> structureNameDict = new HashMap<String, String>();
+    public HashMap<String, Integer> structureDimensionDict = new HashMap<String, Integer>();
 
     public ArrayList<ComponentRelation> STRElementaryResearchTable;
     public ArrayList<ComponentRelation> STRTest2D;
     public ArrayList<ComponentRelation> STRTest3D;
 
     private Block stoneTable = BlockHandler.blockStoneTable;
+
+    private String SNElementaryResearchTable = "structure_elementary_research_table";
+    private String SNTest2D = "structure_test_2d";
+    private String SNTest3D = "structure_test_3d";
 
     public MultiBlockDict(){
 
@@ -37,9 +43,17 @@ public class MultiBlockDict {
 
 
     public void initDict(){
-        structureDictLinear.put("structure_elementary_research_table", STRElementaryResearchTable);
-        structureDict2D.put("structure_test_2d", STRTest2D);
-        structureDict3D.put("structure_test_3d", STRTest3D);
+        structureNameDict.put(stoneTable.getUnlocalizedName(), SNElementaryResearchTable);
+        structureNameDict.put(BlockHandler.blockTest2DCore.getUnlocalizedName(), SNTest2D);
+        structureNameDict.put(BlockHandler.blockTest3DCore.getUnlocalizedName(), SNTest3D);
+
+        structureDimensionDict.put(SNElementaryResearchTable, 1);
+        structureDimensionDict.put(SNTest2D, 2);
+        structureDimensionDict.put(SNTest3D, 3);
+
+        structureDictLinear.put(SNElementaryResearchTable, STRElementaryResearchTable);
+        structureDict2D.put(SNTest2D, STRTest2D);
+        structureDict3D.put(SNTest3D, STRTest3D);
     }
 
     private ArrayList<ComponentRelation> createStructure(ComponentRelation... relations){
