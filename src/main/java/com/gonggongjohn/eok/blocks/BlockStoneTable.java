@@ -57,7 +57,7 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table");
-        if(checkResult.isTrue() && checkResult.getFacing() != null){
+        if(checkResult.isComplete() && checkResult.getFacing() != null){
             EnumFacing facing = checkResult.getFacing();
             //facing = checkResult[1] == 0 ? (checkResult[3] == 1 ? EnumFacing.NORTH : EnumFacing.SOUTH) : (checkResult[1] == 1 ? EnumFacing.WEST : EnumFacing.EAST);
             BlockPos sideBlockPos = new BlockPos(pos.getX() + facing.getDirectionVec().getX(), pos.getY(), pos.getZ() + facing.getDirectionVec().getZ());

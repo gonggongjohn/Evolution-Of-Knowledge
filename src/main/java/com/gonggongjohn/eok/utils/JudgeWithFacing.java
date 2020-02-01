@@ -13,7 +13,7 @@ public class JudgeWithFacing {
         this.facing = facing;
     }
 
-    public boolean isTrue() {
+    public boolean isComplete() {
         return this.judge;
     }
 
