@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
     private final String name = "stone_table";
     public static final AxisAlignedBB STONE_TABLE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockStoneTable() {
         super(Material.ROCK);
@@ -56,13 +55,11 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, 1, "structure_elementary_research_table");
+        String structureName = EOK.multiBlockDict.structureNameDict.get(this.getUnlocalizedName());
+        int dimensionNum = EOK.multiBlockDict.structureDimensionDict.get(structureName);
+        JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, dimensionNum, structureName);
         if(checkResult.isComplete() && checkResult.getFacing() != null){
-            EnumFacing facing = checkResult.getFacing();
-            //facing = checkResult[1] == 0 ? (checkResult[3] == 1 ? EnumFacing.NORTH : EnumFacing.SOUTH) : (checkResult[1] == 1 ? EnumFacing.WEST : EnumFacing.EAST);
-            BlockPos sideBlockPos = new BlockPos(pos.getX() + facing.getDirectionVec().getX(), pos.getY(), pos.getZ() + facing.getDirectionVec().getZ());
-            worldIn.setBlockToAir(sideBlockPos);
-            worldIn.setBlockState(pos, BlockHandler.blockElementaryResearchTable.getDefaultState().withProperty(FACING, facing.getOpposite()));
+            createMultiBlock(worldIn, pos, structureName, checkResult.getFacing());
         }
     }
 }

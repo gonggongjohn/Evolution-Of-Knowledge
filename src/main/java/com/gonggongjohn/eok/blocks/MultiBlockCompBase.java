@@ -1,11 +1,13 @@
 package com.gonggongjohn.eok.blocks;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.utils.ComponentRelation;
 import com.gonggongjohn.eok.utils.IMultiBlock;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +17,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class MultiBlockCompBase extends Block implements IMultiBlock {
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public MultiBlockCompBase(Material materialIn) {
         super(materialIn);
@@ -28,8 +31,18 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
         return new JudgeWithFacing(false, null);
     }
 
-    public void createMultiBlock(){
-        EOK.getLogger().info("structure complete");
+    public void createMultiBlock(World worldIn, BlockPos pos, String structureName, EnumFacing facing){
+        Block replaceBlock = EOK.multiBlockDict.structureReplaceDict.get(structureName);
+        if(replaceBlock != null) {
+            ArrayList<ComponentRelation> relations = EOK.multiBlockDict.structureDictLinear.get(structureName);
+            for(int i = 0; i < relations.size(); i++) {
+                Vec3i transRela = EOK.mathUtils.coordRotation(relations.get(i).getX(), relations.get(i).getY(), relations.get(i).getZ(), facing);
+                BlockPos transPos2 = new BlockPos(pos.getX() + transRela.getX(), pos.getY() + transRela.getY(), pos.getZ() + transRela.getZ());
+                worldIn.setBlockToAir(transPos2);
+            }
+            worldIn.setBlockState(pos, replaceBlock.getDefaultState().withProperty(FACING, facing.getOpposite()));
+            EOK.getLogger().info("structure complete");
+        }
     }
 
     private JudgeWithFacing checkLinear(World worldIn, BlockPos pos, IBlockState state, String structureName){

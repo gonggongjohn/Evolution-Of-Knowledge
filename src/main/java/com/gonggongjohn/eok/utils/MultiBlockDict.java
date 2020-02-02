@@ -2,6 +2,7 @@ package com.gonggongjohn.eok.utils;
 
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.init.Blocks;
 
 import java.util.ArrayList;
@@ -12,14 +13,19 @@ public class MultiBlockDict {
     public HashMap<String, ArrayList<ComponentRelation>> structureDictLinear = new HashMap<String, ArrayList<ComponentRelation>>();
     public HashMap<String, ArrayList<ComponentRelation>> structureDict2D = new HashMap<String, ArrayList<ComponentRelation>>();
     public HashMap<String, ArrayList<ComponentRelation>> structureDict3D = new HashMap<String, ArrayList<ComponentRelation>>();
+    /** Block's Unlocalized Name -> Structure Name */
     public HashMap<String, String> structureNameDict = new HashMap<String, String>();
+    /** Structure Name -> Dimension Number */
     public HashMap<String, Integer> structureDimensionDict = new HashMap<String, Integer>();
+    /** Structure Name -> Replacement Block Instance */
+    public HashMap<String, Block> structureReplaceDict = new HashMap<String, Block>();
 
     public ArrayList<ComponentRelation> STRElementaryResearchTable;
     public ArrayList<ComponentRelation> STRTest2D;
     public ArrayList<ComponentRelation> STRTest3D;
 
     private Block stoneTable = BlockHandler.blockStoneTable;
+    private Block stone = Blocks.STONE;
 
     private String SNElementaryResearchTable = "structure_elementary_research_table";
     private String SNTest2D = "structure_test_2d";
@@ -31,14 +37,14 @@ public class MultiBlockDict {
 
     public void initStructure(){
         STRElementaryResearchTable = createStructure(crwb(1, 0, 0, stoneTable));
-        STRTest2D = createStructure(crwb(1, 0, 0, stoneTable), crwb(-1, 0, 0, stoneTable),
-                crwb(0, 0, 1, stoneTable), crwb(0, 0, -1, stoneTable),
-                crwb(1, 0, 1, stoneTable), crwb(-1, 0, -1, stoneTable),
-                crwb(1, 0, -1, stoneTable), crwb(-1, 0, 1, stoneTable));
-        STRTest3D = createStructure(crwb(1, 0, 0, stoneTable), crwb(-1, 0, 0, stoneTable),
-                crwb(0, 0, 1, Blocks.AIR), crwb(1, 0, 1, stoneTable),
-                crwb(-1, 0, 1, stoneTable), crwb(0, 0, 2, stoneTable),
-                crwb(1, 0, 2, stoneTable), crwb(-1, 0, 2, stoneTable));
+        STRTest2D = createStructure(crwb(1, 0, 0, stone), crwb(-1, 0, 0, stone),
+                crwb(0, 0, 1, stone), crwb(0, 0, -1, stone),
+                crwb(1, 0, 1, stone), crwb(-1, 0, -1, stone),
+                crwb(1, 0, -1, stone), crwb(-1, 0, 1, stone));
+        STRTest3D = createStructure(crwb(1, 0, 0, stone), crwb(-1, 0, 0, stone),
+                crwb(0, 0, 1, Blocks.AIR), crwb(1, 0, 1, stone),
+                crwb(-1, 0, 1, stone), crwb(0, 0, 2, stone),
+                crwb(1, 0, 2, stone), crwb(-1, 0, 2, stone));
     }
 
 
@@ -54,6 +60,8 @@ public class MultiBlockDict {
         structureDictLinear.put(SNElementaryResearchTable, STRElementaryResearchTable);
         structureDict2D.put(SNTest2D, STRTest2D);
         structureDict3D.put(SNTest3D, STRTest3D);
+
+        structureReplaceDict.put(SNElementaryResearchTable, BlockHandler.blockElementaryResearchTable);
     }
 
     private ArrayList<ComponentRelation> createStructure(ComponentRelation... relations){
