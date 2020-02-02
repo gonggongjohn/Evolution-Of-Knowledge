@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 public class GUIEOKManual extends GuiScreen {
 
 	private ResourceLocation texture = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/label.png");
-    private ResourceLocation textureBook = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/eok_manual.png");
+    private ResourceLocation textureBook = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/book.png");
     private ResourceLocation mdLocation = new ResourceLocation(EOK.MODID + ":" + "manual/eok_manual_info.md");
 	
     private ArrayList<String> mdList = new ArrayList<>();
@@ -45,11 +45,8 @@ public class GUIEOKManual extends GuiScreen {
             mdList.clear();
             mdListType.clear();
 
-            //import java.io.FileInputStream;
-            //path = "xxx";
-            //FileInputStream fileInputStream = new FileInputStream(path);
-            InputStreamReader inputStreamResder = new InputStreamReader(mc.getResourceManager().getResource(mdLocation).getInputStream(), "UTF-8");
-            BufferedReader mdFile = new BufferedReader(inputStreamResder);
+            InputStreamReader inputStreamReader = new InputStreamReader(mc.getResourceManager().getResource(mdLocation).getInputStream(), "UTF-8");
+            BufferedReader mdFile = new BufferedReader(inputStreamReader);
 
             String mdLine;
             mdList.add(" ");
@@ -93,8 +90,8 @@ public class GUIEOKManual extends GuiScreen {
 	    
     	readMarkdownFile(mdLocation);
 		
-		offsetX = (this.width - 190) / 2;
-	    offsetY = (this.height - 200) / 2;
+		offsetX = (this.width - 249) / 2;
+	    offsetY = (this.height - 175) / 2;
 		
 	    super.drawScreen(mouseX, mouseY, partialTicks);
 	    
@@ -106,28 +103,27 @@ public class GUIEOKManual extends GuiScreen {
 		drawDefaultBackground();
 
 	    mc.getTextureManager().bindTexture(textureBook);
-	    drawTexturedModalRect(offsetX, offsetY, 0, 0, 190, 190);
-	    
+	    drawTexturedModalRect(offsetX, offsetY, 0, 0, 249, 175);
 	    switch(page) {
 	    
 		    case 0: {
 		    	
 			    mc.renderEngine.bindTexture(texture);
-			    drawTexturedModalRect(offsetX + 77, offsetY + 40, 0, 0, 32, 32);  
+			    drawTexturedModalRect(offsetX + 50, offsetY + 20, 0, 0, 32, 32);  
 			    
 		    	break;
 		    }
 		    case 2: {
 		    	
 			    mc.renderEngine.bindTexture(texture);
-			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 35, 2, 32, 28);
+			    drawTexturedModalRect(offsetX + 20, offsetY + 20, 35, 2, 32, 28);
 			    
 			    break;
 		    }
 		    case 3: {
 		    	
 			    mc.renderEngine.bindTexture(texture);
-			    drawTexturedModalRect(offsetX + 40, offsetY + 20, 67, 2, 32, 28);
+			    drawTexturedModalRect(offsetX + 20, offsetY + 20, 67, 2, 32, 28);
 			    
 			    break;
 		    }
@@ -142,7 +138,7 @@ public class GUIEOKManual extends GuiScreen {
 	            	changeSec++;
 	            	sec = changeSec / 60;
 				    mc.renderEngine.bindTexture(texture);
-				    drawTexturedModalRect(offsetX + 40, offsetY + 20, 100, 2, 16 * (1 + sec), 28);
+				    drawTexturedModalRect(offsetX + 20, offsetY + 20, 100, 2, 16 * (1 + sec), 28);
 	            }
 
 			    break;
@@ -153,32 +149,32 @@ public class GUIEOKManual extends GuiScreen {
 		    }
 	    }
 	    
-		if (mouseX >= offsetX + 40 && mouseY >=  offsetY + 150 && mouseX < offsetX + 58 && mouseY < offsetY + 163) {
+		if (mouseX >= offsetX + 7 && mouseY >=  offsetY + 147 && mouseX < offsetX + 40 && mouseY < offsetY + 169) {
 			
 			if(page != 0) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 40, offsetY + 149, 26, 1230, 18, 13);
+				drawTexturedModalRect(offsetX + 7, offsetY + 147, 53, 473, 33, 22);
 			}
 			
 			if(page != 9) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 130, offsetY + 150, 3, 1216, 18, 13);
+				drawTexturedModalRect(offsetX + 207, offsetY + 147, 9, 441, 33, 22);
 			}
 		} 
-		else if (mouseX >= offsetX + 130 && mouseY >=  offsetY + 150 && mouseX < offsetX + 148 && mouseY < offsetY + 183) {
+		else if (mouseX >= offsetX + 207 && mouseY >=  offsetY + 147 && mouseX < offsetX + 240 && mouseY < offsetY + 169) {
 			
 			if(page != 9) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 130, offsetY + 149, 26, 1216, 18, 13);
+				drawTexturedModalRect(offsetX + 207, offsetY + 147, 53, 441, 33, 22);
 			}
 			
 			if(page != 0) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 40, offsetY + 150, 3, 1230, 18, 13);
+				drawTexturedModalRect(offsetX + 7, offsetY + 147, 9, 473, 33, 22);
 			}
 		} 
 		else {
@@ -186,54 +182,59 @@ public class GUIEOKManual extends GuiScreen {
 			if(page != 0) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 40, offsetY + 150, 3, 1230, 18, 13);
+				drawTexturedModalRect(offsetX + 7, offsetY + 147, 9, 473, 33, 22);
 			}
 			
 			if(page != 9) {
 				
 				mc.renderEngine.bindTexture(textureBook);
-				drawTexturedModalRect(offsetX + 130, offsetY + 150, 3, 1216, 18, 13);
+				drawTexturedModalRect(offsetX + 207, offsetY + 147, 9, 441, 33, 22);
 			}
 		}
 	    
 	    if(page == 0) {
 	    	
-		    drawHoveringText("EOK Manual", offsetX + 55, offsetY + 90);
+	    	if(mouseX >= offsetX + 50  && mouseY >=  offsetY + 20 && mouseX < offsetX + 82 && mouseY < offsetY + 52) {
+	    		
+			    drawHoveringText("EOK Symbol", mouseX, mouseY);
+	    	}
+	    	fontRenderer.drawString("try mouse on the EOK Symbol", offsetX + 50, offsetY + 60, 0, false);
 	    }
 	    else {
 	    	
-		    fontRenderer.drawString(mdList.get(10 * page + 1), offsetX + 78, offsetY + 152, 0, false);
+		    fontRenderer.drawString(mdList.get(10 * page + 1), offsetX + 40, offsetY + 156, 0, false);
 	    }
     	
 	    if(page == 1) {
 	    	
 	    	for(int i = 0; i < 4; i++) {
 		    	
-	    		fontRenderer.drawString(mdList.get((10 * page) + i * 2 + 2), offsetX + 44, offsetY + 35 + (22 * i), 0, false);
+	    		fontRenderer.drawString(mdList.get((10 * page) + i * 2 + 2), offsetX + 11, offsetY + 35 + (22 * i), 0, false);
 	    	}
 	    	
-			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 35 && mouseX < offsetX + 104 && mouseY < offsetY + 43) {
+			if (mouseX >= offsetX + 11 && mouseY >=  offsetY + 35 && mouseX < offsetX + 71 && mouseY < offsetY + 43) {
 				
-				fontRenderer.drawString(mdList.get((10 * page) + 3), offsetX + 44, offsetY + 35, 0, false);
+				fontRenderer.drawString(mdList.get((10 * page) + 3), offsetX + 11, offsetY + 35, 0, false);
 			}
-			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 57 && mouseX < offsetX + 104 && mouseY < offsetY + 65) {
+			if (mouseX >= offsetX + 11 && mouseY >=  offsetY + 57 && mouseX < offsetX + 71 && mouseY < offsetY + 65) {
 				
-				fontRenderer.drawString(mdList.get((10 * page) + 5), offsetX + 44, offsetY + 57, 0, false);
+				fontRenderer.drawString(mdList.get((10 * page) + 5), offsetX + 11, offsetY + 57, 0, false);
 			}
-			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 79 && mouseX < offsetX + 104 && mouseY < offsetY + 87) {
+			if (mouseX >= offsetX + 11 && mouseY >=  offsetY + 79 && mouseX < offsetX + 71 && mouseY < offsetY + 87) {
 				
-				fontRenderer.drawString(mdList.get((10 * page) + 7), offsetX + 44, offsetY + 79, 0, false);
+				fontRenderer.drawString(mdList.get((10 * page) + 7), offsetX + 11, offsetY + 79, 0, false);
 			}
-			if (mouseX >= offsetX + 44 && mouseY >=  offsetY + 101 && mouseX < offsetX + 104 && mouseY < offsetY + 113) {
+			if (mouseX >= offsetX + 11 && mouseY >=  offsetY + 101 && mouseX < offsetX + 71 && mouseY < offsetY + 113) {
 				
-				fontRenderer.drawString(mdList.get((10 * page) + 9), offsetX + 44, offsetY + 101, 0, false);
+				fontRenderer.drawString(mdList.get((10 * page) + 9), offsetX + 11, offsetY + 101, 0, false);
 			}
 	    }
 	    else {
 
-		    fontRenderer.drawString(mdList.get((10 * page) + 2), offsetX + 80, offsetY + 22, 0, false);
+		    fontRenderer.drawString(mdList.get((10 * page) + 2), offsetX + 60, offsetY + 22, 0, false);
 	    	for(int i = 0; i < 8; i++) {
-	    		fontRenderer.drawString(mdList.get((10 * page) + i + 3), offsetX + 40, offsetY + 60 + (10 * i), 0, false);
+	    		
+	    		fontRenderer.drawString(mdList.get((10 * page) + i + 3), offsetX + 11, offsetY + 60 + (10 * i), 0, false);
 	    	}
 	    }
 	    
@@ -253,20 +254,20 @@ public class GUIEOKManual extends GuiScreen {
 	    
 	    if(page < 9) {
 	    	
-		    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 128, offsetY + 145, 20, 20, "")));
+		    buttonList.add(setBtnNext(new GuiButton(0, offsetX + 177, offsetY + 159, 35, 23, "")));
 	    }
 	    
 	    if(page > 0) {
 
-		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX + 40, offsetY + 149, 18, 13, "")));
+		    buttonList.add(setBtnPrevious(new GuiButton(1, offsetX - 22, offsetY + 159, 33, 23, "")));
 	    }
 
 	    if(page == 1) {
 
-	    	buttonList.add(setBtnMenu2(new GuiButton(2, offsetX + 44, offsetY + 35, 60, 8, "")));
-	    	buttonList.add(setBtnMenu3(new GuiButton(3, offsetX + 44, offsetY + 57, 60, 8, "")));
-	    	buttonList.add(setBtnMenu4(new GuiButton(4, offsetX + 44, offsetY + 79, 60, 8, "")));
-	    	buttonList.add(setBtnMenu5(new GuiButton(5, offsetX + 44, offsetY + 105, 60, 8, "")));
+	    	buttonList.add(setBtnMenu2(new GuiButton(2, offsetX - 18, offsetY + 46, 60, 9, "")));
+	    	buttonList.add(setBtnMenu3(new GuiButton(3, offsetX - 18, offsetY + 68, 60, 9, "")));
+	    	buttonList.add(setBtnMenu4(new GuiButton(4, offsetX - 18, offsetY + 90, 60, 9, "")));
+	    	buttonList.add(setBtnMenu5(new GuiButton(5, offsetX - 18, offsetY + 113, 60, 9, "")));
 	    }
     }
 
