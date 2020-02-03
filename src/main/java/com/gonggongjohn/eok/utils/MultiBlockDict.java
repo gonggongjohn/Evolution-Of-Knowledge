@@ -36,7 +36,7 @@ public class MultiBlockDict {
     }
 
     public void initStructure(){
-        STRElementaryResearchTable = createStructure(crwb(1, 0, 0, stoneTable));
+        STRElementaryResearchTable = createStructure(crwb(0, 0, 1, stoneTable));
         STRTest2D = createStructure(crwb(1, 0, 0, stone), crwb(-1, 0, 0, stone),
                 crwb(0, 0, 1, stone), crwb(0, 0, -1, stone),
                 crwb(1, 0, 1, stone), crwb(-1, 0, -1, stone),
@@ -44,7 +44,16 @@ public class MultiBlockDict {
         STRTest3D = createStructure(crwb(1, 0, 0, stone), crwb(-1, 0, 0, stone),
                 crwb(0, 0, 1, Blocks.AIR), crwb(1, 0, 1, stone),
                 crwb(-1, 0, 1, stone), crwb(0, 0, 2, stone),
-                crwb(1, 0, 2, stone), crwb(-1, 0, 2, stone));
+                crwb(1, 0, 2, stone), crwb(-1, 0, 2, stone),
+                crwb(1, -1, 0, stone), crwb(-1, -1, 0, stone),
+                crwb(0, -1, 1, stone), crwb(1, -1, 1, stone),
+                crwb(-1, -1, 1, stone), crwb(0, -1, 2, stone),
+                crwb(1, -1, 2, stone), crwb(-1, -1, 2, stone),
+                crwb(0, -1, 0, stone), crwb(0, 1, 0, stone),
+                crwb(1, 1, 0, stone), crwb(-1, 1, 0, stone),
+                crwb(0, 1, 1, stone), crwb(1, 1, 1, stone),
+                crwb(-1, 1, 1, stone), crwb(0, 1, 2, stone),
+                crwb(1, 1, 2, stone), crwb(-1, 1, 2, stone));
     }
 
 

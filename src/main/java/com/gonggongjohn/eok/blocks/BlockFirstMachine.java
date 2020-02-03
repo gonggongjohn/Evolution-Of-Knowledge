@@ -57,7 +57,7 @@ public class BlockFirstMachine extends BlockContainer implements IHasModel {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        //判断所在游戏端是否为服务端，world.isRemote=true为客户端，false为服务端
+        //Judge the side is client or server, world.isRemote=true represents client side, false represents server side
         if(!worldIn.isRemote) {
             int id= GUIHandler.GUIFirstMachine;
             playerIn.openGui(EOK.instance,id,worldIn,pos.getX(),pos.getY(),pos.getZ());

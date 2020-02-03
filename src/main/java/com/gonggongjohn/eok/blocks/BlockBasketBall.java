@@ -21,7 +21,7 @@ public class BlockBasketBall extends Block implements IHasModel {
 
     public BlockBasketBall() {
     	
-    	//纪念我们尊敬的科比-布莱恩特，2020年，1月27日
+    	//In memory of our great Kobe Bryant, 2020/1/27
     	
         super(Material.WOOD);
         

@@ -8,6 +8,7 @@ import com.gonggongjohn.eok.utils.JudgeWithFacing;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -69,17 +70,56 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
     }
 
     private JudgeWithFacing check2D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        /*String[][] structure = EOK.multiBlockDict.structureDict2D.get(structureName);
-        if(structure == null) return new int[]{0, 0, 0, 0};*/
-        //TODO
+        ArrayList<ComponentRelation> relations = EOK.multiBlockDict.structureDict2D.get(structureName);
+        if(relations != null){
+            EnumFacing facing = state.getValue(FACING).getOpposite();
+            if(!facing.equals(EnumFacing.DOWN) && !facing.equals(EnumFacing.UP)){
+                boolean checkFlag = true;
+                for(int i = 0; i < relations.size(); i++){
+                    Vec3i transRela = EOK.mathUtils.coordRotation(relations.get(i).getX(), relations.get(i).getY(), relations.get(i).getZ(), facing);
+                    BlockPos transPos = new BlockPos(pos.getX() + transRela.getX(), pos.getY() + transRela.getY(), pos.getZ() + transRela.getZ());
+                    if(!worldIn.getBlockState(transPos).getBlock().getUnlocalizedName().equals(relations.get(i).getBlockUnlocalizedName()))
+                        checkFlag =false;
+                }
+                if(checkFlag) return new JudgeWithFacing(true, facing);
+            }
+        }
         return new JudgeWithFacing(false, null);
     }
 
     private JudgeWithFacing check3D(World worldIn, BlockPos pos, IBlockState state, String structureName){
-        /*String[][][] structure = EOK.multiBlockDict.structureDict3D.get(structureName);
-        if(structure == null) return new int[]{0, 0, 0, 0};*/
-        //TODO
+        ArrayList<ComponentRelation> relations = EOK.multiBlockDict.structureDict3D.get(structureName);
+        if(relations != null){
+            EnumFacing facing = state.getValue(FACING).getOpposite();
+            if(!facing.equals(EnumFacing.DOWN) && !facing.equals(EnumFacing.UP)){
+                boolean checkFlag = true;
+                for(int i = 0; i < relations.size(); i++){
+                    Vec3i transRela = EOK.mathUtils.coordRotation(relations.get(i).getX(), relations.get(i).getY(), relations.get(i).getZ(), facing);
+                    BlockPos transPos = new BlockPos(pos.getX() + transRela.getX(), pos.getY() + transRela.getY(), pos.getZ() + transRela.getZ());
+                    if(!worldIn.getBlockState(transPos).getBlock().getUnlocalizedName().equals(relations.get(i).getBlockUnlocalizedName()))
+                        checkFlag =false;
+                }
+                if(checkFlag) return new JudgeWithFacing(true, facing);
+            }
+        }
         return new JudgeWithFacing(false, null);
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing facing = EnumFacing.getHorizontal(meta & 3);
+        return this.getDefaultState().withProperty(FACING, facing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int facing = state.getValue(FACING).getHorizontalIndex();
+        return facing;
     }
 
 }

@@ -6,9 +6,9 @@ import net.minecraft.util.math.Vec3i;
 import javax.vecmath.Matrix3d;
 
 public class MathUtils {
-    private Matrix3d transNorth = new Matrix3d(0, 0, -1, 0, 1, 0, 1, 0, 0);
-    private Matrix3d transWest = new Matrix3d(-1, 0, 0, 0, 1, 0, 0, 0, -1);
-    private Matrix3d transSouth = new Matrix3d(0, 0, 1, 0, 1, 0, -1, 0, 0);
+    private Matrix3d transEast = new Matrix3d(0, 0, -1, 0, 1, 0, 1, 0, 0);
+    private Matrix3d transNorth = new Matrix3d(-1, 0, 0, 0, 1, 0, 0, 0, -1);
+    private Matrix3d transWest = new Matrix3d(0, 0, 1, 0, 1, 0, -1, 0, 0);
 
     public MathUtils() {
     }
@@ -17,9 +17,9 @@ public class MathUtils {
         Matrix3d matOrigin = new Matrix3d(x, y, z, 0, 0, 0, 0, 0, 0);
         Matrix3d matResult = new Matrix3d();
         switch (facing){
-            case EAST: matResult = matOrigin; break;
+            case SOUTH: matResult = matOrigin; break;
             case NORTH: matResult.mul(matOrigin, transNorth);break;
-            case SOUTH: matResult.mul(matOrigin, transSouth);break;
+            case EAST: matResult.mul(matOrigin, transEast);break;
             case WEST: matResult.mul(matOrigin, transWest);break;
             default: return new Vec3i(0, 0, 0);
         }

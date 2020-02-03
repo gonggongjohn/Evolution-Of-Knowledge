@@ -96,7 +96,7 @@ public class BlockHayTorchBaseLit extends BlockContainer implements IHasModel {
             worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
         }
 
-        //四个面同时冒火 位置靠上 靠中间（以后火把细）
+        //flaming out on four sides, the position is at up middle. (Can be specify with torch later)
         worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, dx - 0.02D, dy, dz + dRand, 0.0D, 0.0D, 0.0D);
         worldIn.spawnParticle(EnumParticleTypes.FLAME, dx - 0.02D, dy, dz + dRand, 0.0D, 0.0D, 0.0D);
 
