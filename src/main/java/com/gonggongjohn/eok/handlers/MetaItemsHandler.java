@@ -18,8 +18,8 @@ public class MetaItemsHandler {
     }
 
     //edited by molybdenum
-    public static MetaItem<?>.MetaValueItem WATER_WHEEL;//水车
-    public static MetaItem<?>.MetaValueItem WIND_MILL;//风车
-    public static MetaItem<?>.MetaValueItem TEST_2D_CORE;
-    public static MetaItem<?>.MetaValueItem ELEMENTARY_RESEARCH_TABLE;
+    public static MetaItem<?>.MetaValueItem BLUE_PRINT_WATER_WHEEL;//水车
+    public static MetaItem<?>.MetaValueItem BLUE_PRINT_WIND_MILL;//风车
+    public static MetaItem<?>.MetaValueItem BLUE_PRINT_TEST_2D_CORE;
+    public static MetaItem<?>.MetaValueItem BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE;
 }

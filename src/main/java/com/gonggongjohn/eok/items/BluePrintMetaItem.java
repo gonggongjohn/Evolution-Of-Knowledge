@@ -1,9 +1,10 @@
 package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.blocks.MultiBlockCompBase;
 import com.gonggongjohn.eok.handlers.BlockHandler;
+import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
-import com.gonggongjohn.eok.utils.IMultiBlock;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
@@ -38,16 +39,16 @@ public class BluePrintMetaItem extends MaterialMetaItem {
 
     @Override
     public void registerSubItems() {
-        MetaItemsHandler.WATER_WHEEL=addItem(300,"water_wheel");
-        MetaItemsHandler.WIND_MILL=addItem(301,"wind_mill");
-        MetaItemsHandler.TEST_2D_CORE=addItem(302,"test_2d_core");
-        MetaItemsHandler.ELEMENTARY_RESEARCH_TABLE=addItem(303,"elementary_research_table");
-        //记得这两个要改！（暂无对应方块）
-        initBluePrint(MetaItemsHandler.WATER_WHEEL, Blocks.DIRT);
-        initBluePrint(MetaItemsHandler.WIND_MILL,Blocks.STONE);
+        MetaItemsHandler.BLUE_PRINT_WATER_WHEEL =addItem(300,"water_wheel");
+        MetaItemsHandler.BLUE_PRINT_WIND_MILL =addItem(301,"wind_mill");
+        MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"test_2d_core");
+        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(303,"elementary_research_table");
+        //记得这两个要改！（暂无对应方块且暂不可用）
+        initBluePrint(MetaItemsHandler.BLUE_PRINT_WATER_WHEEL, Blocks.DIRT);
+        initBluePrint(MetaItemsHandler.BLUE_PRINT_WIND_MILL,Blocks.STONE);
 
-        initBluePrint(MetaItemsHandler.TEST_2D_CORE, BlockHandler.blockTest2DCore);
-        initBluePrint(MetaItemsHandler.ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);
+        initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE, BlockHandler.blockTest2DCore);
+        initBluePrint(MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);
 
         for(MetaItem<?>.MetaValueItem metaValueItem:BLUE_PRINTS)
         {
@@ -72,23 +73,34 @@ public class BluePrintMetaItem extends MaterialMetaItem {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
+            System.out.println(2);
             Item item = player.getHeldItem(hand).getItem();
             for (MetaItem<?>.MetaValueItem metaItem : BLUE_PRINTS) {
-                if (item.equals(metaItem.getMetaItem())){
-                    boolean openGuiFlag=true;
-                    Block clickingBlock=worldIn.getBlockState(pos).getBlock();
-                    if(storage.get(metaItem).equals(clickingBlock)&&clickingBlock instanceof IMultiBlock)
-                    {
-                        //JudgeWithFacing result=((IMultiBlock)clickingBlock).checkStructure(worldIn,pos,worldIn.getBlockState(pos),);
+                if (item==metaItem.getMetaItem()) {
+                    Block clickingBlock = worldIn.getBlockState(pos).getBlock();
+                    if (storage.get(metaItem) == clickingBlock && clickingBlock instanceof MultiBlockCompBase) {
+                        MultiBlockCompBase multiBlock = (MultiBlockCompBase) clickingBlock;
+                        String name = EOK.multiBlockDict.structureNameDict.get(clickingBlock.getUnlocalizedName());
+                        int dimension = EOK.multiBlockDict.structureDimensionDict.get(name);
+                        JudgeWithFacing result = multiBlock.checkStructure(worldIn, pos, worldIn.getBlockState(pos), dimension, name);
+                        if (result.isComplete()) {
+                            ((MultiBlockCompBase) clickingBlock).createMultiBlock(worldIn, pos, name, result.getFacing());
+                        } else System.out.println("structure is not completed!");
                     }
-                    if(openGuiFlag)
-                    {
-                        System.out.println("open Gui of the blueprint");
-                    }
+                    else continue;
+                    return EnumActionResult.SUCCESS;
                 }
-                break;
             }
         }
         return EnumActionResult.PASS;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        System.out.println(1);
+            BlockPos pos = playerIn.getPosition();
+            int id= GUIHandler.GUIBluePrint;
+            Item item=playerIn.getHeldItem(handIn).getItem();
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }
