@@ -48,7 +48,7 @@ public class MultiBlockCompBase extends Block implements IMultiBlock {
     private JudgeWithFacing checkLinear(World worldIn, BlockPos pos, IBlockState state, String structureName){
         ArrayList<ComponentRelation> relations = EOK.multiBlockDict.structureDictLinear.get(structureName);
         if(relations != null){
-            for(EnumFacing facing : EnumFacing.values()){
+            for(EnumFacing facing : new EnumFacing[]{EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH}){
                 int tempX = pos.getX() + facing.getDirectionVec().getX();
                 int tempY = pos.getY() + facing.getDirectionVec().getY();
                 int tempZ = pos.getZ() + facing.getDirectionVec().getZ();

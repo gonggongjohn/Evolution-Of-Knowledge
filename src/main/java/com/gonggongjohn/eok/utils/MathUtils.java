@@ -6,9 +6,9 @@ import net.minecraft.util.math.Vec3i;
 import javax.vecmath.Matrix3d;
 
 public class MathUtils {
-    private Matrix3d transSouth = new Matrix3d(0, 0, -1, 0, 1, 0, 1, 0, 0);
+    private Matrix3d transNorth = new Matrix3d(0, 0, -1, 0, 1, 0, 1, 0, 0);
     private Matrix3d transWest = new Matrix3d(-1, 0, 0, 0, 1, 0, 0, 0, -1);
-    private Matrix3d transNorth = new Matrix3d(0, 0, 1, 0, 1, 0, -1, 0, 0);
+    private Matrix3d transSouth = new Matrix3d(0, 0, 1, 0, 1, 0, -1, 0, 0);
 
     public MathUtils() {
     }
