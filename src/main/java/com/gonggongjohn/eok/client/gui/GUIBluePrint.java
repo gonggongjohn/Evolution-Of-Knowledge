@@ -17,7 +17,7 @@ public class GUIBluePrint extends GuiScreen {
     private GuiButton next;
     private static final int NEXT_BUTTON_ID=1;
     private static final int PREVIOUS_BUTTON_ID=0;
-    private ResourceLocation backgroundLocation=new ResourceLocation(EOK.MODID+":" + "textures/gui/container/blueprint/blueprint_default_background.png");
+    private ResourceLocation backgroundLocation=new ResourceLocation(EOK.MODID+":" + "textures/gui/screen/blueprint/blueprint_default_background.png");
 
     public static MetaItem<?>.MetaValueItem blueprintHolding;
     private int page;
@@ -59,7 +59,7 @@ public class GUIBluePrint extends GuiScreen {
         }
         //draw the pictures on the left
         String[] texturepack=EOK.bluePrintDict.textureMap.get(blueprintHolding);
-        ResourceLocation location=new ResourceLocation(EOK.MODID+":"+"textures/gui/container/blueprint/"+blueprintHolding.unlocalizedName+"/"+texturepack[page]);
+        ResourceLocation location=new ResourceLocation(EOK.MODID+":"+"textures/gui/screen/blueprint/"+blueprintHolding.unlocalizedName+"/"+texturepack[page]);
         mc.renderEngine.bindTexture(location);
         drawTexturedModalRect(offsetX,offsetY,0,0,128,200);
         GL11.glPopMatrix();
