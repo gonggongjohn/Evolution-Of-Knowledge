@@ -58,7 +58,7 @@ public class GUIControl {
 	public static class GUIScrollBar extends GUIControl {
 
 		/**
-		 * @param type 滚动条方向，0为横向，1为纵向。
+		 * @param type the orientation of the scrollbar, 0 is horizontal, 1 is vertical
 		 */
 		public GUIScrollBar(int type) {
 			if (type == 0) {

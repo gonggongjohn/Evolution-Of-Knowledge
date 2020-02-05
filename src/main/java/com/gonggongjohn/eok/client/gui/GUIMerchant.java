@@ -25,10 +25,10 @@ public class GUIMerchant extends GuiContainer {
 
 	public final ResourceLocation TEXTURE = new ResourceLocation(EOK.MODID + ":textures/gui/container/merchant.png");
 
-	public static final int BUTTON_LEFT = 0; // 左翻页
-	public static final int BUTTON_RIGHT = 1; // 右翻页
-	public static final int BUTTON_BUY = 2; // 购买按钮
-	public static final int DEAL_ITEM_1 = 3; // 交易项选择（1-5）
+	public static final int BUTTON_LEFT = 0; // paging left
+	public static final int BUTTON_RIGHT = 1; // paging right
+	public static final int BUTTON_BUY = 2; // purchase button
+	public static final int DEAL_ITEM_1 = 3; // deal option (1 - 5)
 	public static final int DEAL_ITEM_2 = 4;
 	public static final int DEAL_ITEM_3 = 5;
 	public static final int DEAL_ITEM_4 = 6;
@@ -61,7 +61,7 @@ public class GUIMerchant extends GuiContainer {
 		int offsetY = (this.height - this.xSize) / 2;
 		this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
 
-		// 将选中的交易加上高亮边框
+		// highlight the frame of the chosen deal
 		switch (this.container.currentDeal) {
 		case 1:
 			this.drawTexturedModalRect(offsetX + 12, offsetY + 24, 102, 227, 106, 24);
@@ -90,8 +90,8 @@ public class GUIMerchant extends GuiContainer {
 		int offsetX = (this.width - this.xSize) / 2;
 		int offsetY = (this.height - this.xSize) / 2;
 
-		// 这是一个完整的按钮
-		// 我们抛弃它的原因是我们有了更好的解决方案：ButtonBuilder
+		// This is a complete button.
+		// We discard it because we have a better solution : ButtonBuilder
 		/*
 		 * this.buttonList.add(new GuiButton(BUTTON_LEFT, offsetX + 126, offsetY + 116,
 		 * 22, 20, "<") {
@@ -110,11 +110,11 @@ public class GUIMerchant extends GuiContainer {
 		 * });
 		 */
 
-		// --------按钮--------
+		// --------Button--------
 
 		ButtonData bd = new ButtonData();
 
-		// 左翻页按钮
+		// Paging left button
 		bd.setPosX(offsetX + 126);
 		bd.setPosY(offsetY + 116);
 		bd.setWidth(11);
@@ -127,7 +127,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText("<");
 		this.buttonList.add(ButtonBuilder.CommonButton(BUTTON_LEFT, bd));
 
-		// 右翻页按钮
+		// Paging right button
 		bd.setPosX(offsetX + 140);
 		bd.setPosY(offsetY + 116);
 		bd.setWidth(11);
@@ -140,7 +140,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText(">");
 		this.buttonList.add(ButtonBuilder.CommonButton(BUTTON_RIGHT, bd));
 
-		// 购买按钮
+		// Purchase button
 		bd.setPosX(offsetX + 158);
 		bd.setPosY(offsetY + 116);
 		bd.setWidth(22);
@@ -153,7 +153,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText(I18n.format("gui.merchant.button.buy"));
 		this.buttonList.add(ButtonBuilder.CommonButton(BUTTON_BUY, bd));
 
-		// 交易项目1
+		// Deal item 1
 		bd.setPosX(offsetX + 14);
 		bd.setPosY(offsetY + 26);
 		bd.setWidth(102);
@@ -166,7 +166,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText("");
 		this.buttonList.add(ButtonBuilder.CommonButton(DEAL_ITEM_1, bd));
 
-		// 交易项目2
+		// Deal item 2
 		bd.setPosX(offsetX + 14);
 		bd.setPosY(offsetY + 48);
 		bd.setWidth(102);
@@ -179,7 +179,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText("");
 		this.buttonList.add(ButtonBuilder.CommonButton(DEAL_ITEM_2, bd));
 
-		// 交易项目3
+		// Deal item 3
 		bd.setPosX(offsetX + 14);
 		bd.setPosY(offsetY + 70);
 		bd.setWidth(102);
@@ -192,7 +192,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText("");
 		this.buttonList.add(ButtonBuilder.CommonButton(DEAL_ITEM_3, bd));
 
-		// 交易项目4
+		// Deal item 4
 		bd.setPosX(offsetX + 14);
 		bd.setPosY(offsetY + 92);
 		bd.setWidth(102);
@@ -205,7 +205,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setText("");
 		this.buttonList.add(ButtonBuilder.CommonButton(DEAL_ITEM_4, bd));
 
-		// 交易项目5
+		// Deal item 5
 		bd.setPosX(offsetX + 14);
 		bd.setPosY(offsetY + 114);
 		bd.setWidth(102);
@@ -320,9 +320,9 @@ public class GUIMerchant extends GuiContainer {
 	}
 
 	/**
-	 * 选择交易项目，被选中的项目会高亮
+	 * choose deal item. the chosen item will be highlighted.
 	 * 
-	 * @param id 选中的交易在GUI交易栏里的位置（1-5）
+	 * @param id The position of the chosen deal in the trade column GUI (1 - 5)
 	 */
 	public void selectDeal(int deal) {
 		container.currentDeal = deal;
