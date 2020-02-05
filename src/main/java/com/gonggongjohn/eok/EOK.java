@@ -5,13 +5,10 @@ import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
-import com.gonggongjohn.eok.utils.MathUtils;
+import com.gonggongjohn.eok.utils.*;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 
-import com.gonggongjohn.eok.utils.InspirationDict;
-import com.gonggongjohn.eok.utils.MultiBlockDict;
-import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
@@ -50,6 +47,7 @@ public class EOK {
 	public static ResearchDict researchDict = new ResearchDict();
 	public static InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;
+	public static BluePrintDict bluePrintDict;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -90,6 +88,8 @@ public class EOK {
 		multiBlockDict = new MultiBlockDict();
 		multiBlockDict.initStructure();
 		multiBlockDict.initDict();
+		bluePrintDict = new BluePrintDict();
+		bluePrintDict.init();
 		new WorldGenHandler();
 		TweakersMain.init();
 		MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
