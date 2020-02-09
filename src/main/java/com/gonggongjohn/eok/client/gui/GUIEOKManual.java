@@ -21,11 +21,11 @@ public class GUIEOKManual extends GuiScreen {
 	/**
 	 * la source des labels du manuel
 	 */
-	private ResourceLocation texture = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/label.png");
+	private ResourceLocation texture = new ResourceLocation(EOK.MODID + ":" + "textures/gui/manual/label.png");
 	/**
 	 * la source de l'image du manuel
 	 */
-	private ResourceLocation textureBook = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/book.png");
+	private ResourceLocation textureBook = new ResourceLocation(EOK.MODID + ":" + "textures/gui/manual/book.png");
 	/**
 	 * la source des texts du manuel
 	 */
