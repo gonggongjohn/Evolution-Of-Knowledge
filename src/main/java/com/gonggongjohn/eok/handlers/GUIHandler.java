@@ -18,12 +18,12 @@ public class GUIHandler implements IGuiHandler {
     public static final int GUIHayTorchBase = 6;
     public static final int GUIHayTorchBaseLit = 7;
     public static final int GUIBluePrint = 8;
+    public static final int GUITest2D = 9;
 
     @Override
     public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
     	
         switch (ID) {
-        
         	case GUIEOKManual:
         		return new GUIEOKManual();
             case GUIRefractingTelescope:
@@ -40,6 +40,8 @@ public class GUIHandler implements IGuiHandler {
                 return new ContainerHayTorchBaseLit(player, world.getTileEntity(new BlockPos(x, y, z)));
             case GUIBluePrint:
                 return new GUIBluePrint();
+            case GUITest2D:
+                return new GUITest2D();
             default:
 				return null;
 		}
@@ -66,6 +68,8 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIHayTorchBaseLit(new ContainerHayTorchBaseLit(player, world.getTileEntity(new BlockPos(x, y, z))));
             case GUIBluePrint:
                 return new GUIBluePrint();
+            case GUITest2D:
+                return new GUITest2D();
             default:
                 return null;
         }

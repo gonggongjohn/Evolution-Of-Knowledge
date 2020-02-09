@@ -44,6 +44,7 @@ public class EOK {
 	private SimpleNetworkWrapper network;
 
 	public static MathUtils mathUtils = new MathUtils();
+	public static DocumentUtils documentUtils = new DocumentUtils();
 	public static ResearchDict researchDict = new ResearchDict();
 	public static InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;
