@@ -28,7 +28,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
         if (this.visible) {
             GL11.glPushMatrix();
             GL11.glEnable(GL11.GL_BLEND);
-            OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+            OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             mc.getTextureManager().bindTexture(TEXTURECOMP);
@@ -39,6 +39,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
                 String name = I18n.format("research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(researchId) + ".name");
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
             }
+            GL11.glDisable(GL11.GL_BLEND);
             GL11.glPopMatrix();
         }
     }

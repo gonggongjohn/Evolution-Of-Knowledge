@@ -50,7 +50,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) { GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TEXTUREBACK);
@@ -70,6 +70,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
             }
         }
         lastFinList = finList;
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
     }
 
@@ -87,7 +88,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
                 if(this.visible){
                     GL11.glPushMatrix();
                     GL11.glEnable(GL11.GL_BLEND);
-                    OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+                    OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                     mc.getTextureManager().bindTexture(TEXTURECOMP);
@@ -96,6 +97,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
                         this.drawTexturedModalRect(this.x, this.y, 44, 0, this.width, this.height);
                     else
                         this.drawTexturedModalRect(this.x, this.y, 0, 0, this.width, this.height);
+                    GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                 }
             }
