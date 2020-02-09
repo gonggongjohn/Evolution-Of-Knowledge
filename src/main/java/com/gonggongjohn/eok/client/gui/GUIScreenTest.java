@@ -8,8 +8,8 @@ import com.gonggongjohn.eok.utils.Colors;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * 这是MetaGUIScreen的示例
- * 在游戏内输入命令/eoktestscreen可打开该界面
+ * This is an example of MetaGUIScreen
+ * Send /eoktestscreen command in the game to open this interface
  * 
  * @see MetaGUIScreen
  */

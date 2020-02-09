@@ -2,6 +2,7 @@ package com.gonggongjohn.eok.blocks;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
+import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
 import net.minecraft.block.material.Material;
@@ -40,6 +41,8 @@ public class BlockTest2DCore extends MultiBlockCompBase {
         int dimensionNum = EOK.multiBlockDict.structureDimensionDict.get(structureName);
         JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, dimensionNum, structureName);
         if(checkResult.isComplete() && checkResult.getFacing() != null){
+            int id = GUIHandler.GUITest2D;
+            playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
             EOK.getLogger().info("Structure Complete!");
         }
         return true;

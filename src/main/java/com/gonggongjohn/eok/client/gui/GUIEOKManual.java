@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 /*
  * La classse représantant l'interface graphique de manuel d'EOK
- * @author EOK - 不咕鸟 咕咕鸡
+ * @author EOK - Cuckoo
  * @version 1.2
  */
 public class GUIEOKManual extends GuiScreen {
@@ -495,8 +495,7 @@ public class GUIEOKManual extends GuiScreen {
 
 	/**
 	 * getter de l'attribut btnMenu4
-	 * 
-	 * @param btnMenu4
+	 *
 	 * @return l'attribut btnMenu4
 	 */
 	public GuiButton getBtnMenu4() {

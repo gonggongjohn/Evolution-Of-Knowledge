@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockStick extends Block implements IHasModel {
 	
-    //咕咕咕
+    //development process suspended (temporarily)
     public final String name = "block_stick";
     public final static AxisAlignedBB Block_Stick_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 0.125D);
     

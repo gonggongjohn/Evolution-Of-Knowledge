@@ -2,6 +2,7 @@ package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.blocks.MultiBlockCompBase;
+import com.gonggongjohn.eok.client.gui.GUIBluePrint;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
@@ -39,15 +40,11 @@ public class BluePrintMetaItem extends MaterialMetaItem {
 
     @Override
     public void registerSubItems() {
-        MetaItemsHandler.BLUE_PRINT_WATER_WHEEL =addItem(300,"water_wheel");
-        MetaItemsHandler.BLUE_PRINT_WIND_MILL =addItem(301,"wind_mill");
         MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"test_2d_core");
-        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(303,"elementary_research_table");
-        //记得这两个要改！（暂无对应方块且暂不可用）
-        initBluePrint(MetaItemsHandler.BLUE_PRINT_WATER_WHEEL, Blocks.DIRT);
-        initBluePrint(MetaItemsHandler.BLUE_PRINT_WIND_MILL,Blocks.STONE);
-
+        MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE=addItem(303,"test_3d_core");
+        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(304,"elementary_research_table");
         initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE, BlockHandler.blockTest2DCore);
+        initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,BlockHandler.blockTest3DCore);
         initBluePrint(MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);
 
         for(MetaItem<?>.MetaValueItem metaValueItem:BLUE_PRINTS)
@@ -73,10 +70,9 @@ public class BluePrintMetaItem extends MaterialMetaItem {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            System.out.println(2);
-            Item item = player.getHeldItem(hand).getItem();
+            int damage=player.getHeldItem(hand).getItemDamage();
             for (MetaItem<?>.MetaValueItem metaItem : BLUE_PRINTS) {
-                if (item==metaItem.getMetaItem()) {
+                if (damage==metaItem.getMetaValue()&&player.getHeldItem(hand).getItem() instanceof MetaItem) {
                     Block clickingBlock = worldIn.getBlockState(pos).getBlock();
                     if (storage.get(metaItem) == clickingBlock && clickingBlock instanceof MultiBlockCompBase) {
                         MultiBlockCompBase multiBlock = (MultiBlockCompBase) clickingBlock;
@@ -97,10 +93,18 @@ public class BluePrintMetaItem extends MaterialMetaItem {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        System.out.println(1);
             BlockPos pos = playerIn.getPosition();
             int id= GUIHandler.GUIBluePrint;
-            Item item=playerIn.getHeldItem(handIn).getItem();
+            ItemStack itemstack=playerIn.getHeldItem(handIn);
+            for(MetaItem<?>.MetaValueItem metaValueItem:BLUE_PRINTS)
+            {
+                if(itemstack.getItemDamage()==metaValueItem.getMetaValue()&&itemstack.getItem() instanceof MetaItem<?>)
+                {
+                    GUIBluePrint.blueprintHolding=metaValueItem;
+                    playerIn.openGui(EOK.instance,id,worldIn,pos.getX(),pos.getY(),pos.getZ());
+                    break;
+                }
+            }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

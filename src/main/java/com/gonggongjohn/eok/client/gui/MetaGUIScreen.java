@@ -15,22 +15,22 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * GUIScreen基类
+ * GUIScreen Base Class
  * 
  * @see GUIScreenTest
  */
 public abstract class MetaGUIScreen extends GuiScreen {
 	/**
-	 * 这个Map用于存储所有GUI控件。 键为控件id，值为控件对象。
+	 * This map is used to store all GUI controls. The key is the control ID and the value is the control object.
 	 */
 	private Map<Integer, GUIControl> controls = new HashMap<Integer, GUIControl>();
 	private ResourceLocation TEXTURE = new ResourceLocation("");
 	/**
-	 * 这里的windowWidth不是游戏窗口的宽，是GUI界面的宽
+	 * The window width here is not the width of the game window, but the width of the GUI interface
 	 */
 	private int windowWidth;
 	/**
-	 * 这里的windowHeight不是游戏窗口的高，是GUI界面的高
+	 * The window height here is not the height of the game window, but the height of the GUI interface
 	 */
 	private int windowHeight;
 	private int texWidth;
@@ -38,32 +38,32 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	private int offsetX;
 	private int offsetY;
 	/**
-	 * 它用来决定在打开GUI时是否强制更改界面缩放倍数
+	 * It is used to decide whether or not to force the interface zoom factor to be changed when the GUI is opened
 	 */
 	private boolean forceChangeGuiScale;
 	/**
-	 * 它用来决定这个GUI是否有自定义的背景
-	 * 如果它为true，将不会执行drawDefaultBackground()方法
+	 * It is used to determine whether the GUI has a custom background
+	 * If it is true, the drawDefaultBackground() method will not be executed
 	 */
 	private boolean hasCustomBackground = false;
 	/**
-	 * 存储玩家打开GUI之前的界面缩放设置，以便在玩家关闭GUI时恢复原来的界面大小
+	 * Store the interface zoom settings before the player opens the GUI, so as to restore the original interface size when the player closes the GUI
 	 */
 	private int lastGuiScale;
 	/**
-	 * GUI左上角顶点的横坐标与屏幕宽度的比值
+	 * Ratio of abscissa of top left corner vertex of GUI to screen width
 	 */
 	private float guiPosX;
 	/**
-	 * GUI左上角顶点的纵坐标与屏幕高度的比值
+	 * The ratio of the vertical coordinate of the top left corner of GUI to the screen height
 	 */
 	private float guiPosY;
 	private String title = "";
 	
 	/**
-	 * 构造一个新的MetaGUIScreen实例
+	 * Construct a new instance of MetaGUIScreen
 	 * 
-	 * @param forceChangeGuiScale 玩家打开GUI时是否强制更改界面缩放倍数
+	 * @param forceChangeGuiScale Whether to force the user to change the interface zoom ratio when opening the GUI
 	 */
 	public MetaGUIScreen(boolean forceChangeGuiScale) {
 		super();
@@ -137,7 +137,7 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	}
 
 	/**
-	 * 获取这个GUI的所有控件及其所对应的ID
+	 * Get all the controls of this GUI and their corresponding IDs
 	 */
 	public Map<Integer, GUIControl> getControls() {
 		return this.controls;
@@ -173,14 +173,14 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	}
 	
 	/**
-	 * 获取GUI左上角顶点的横坐标
+	 * Get the abscissa of the top left corner of GUI
 	 */
 	public int getOffsetX() {
 		return offsetX;
 	}
 	
 	/**
-	 * 获取GUI左上角顶点的纵坐标
+	 * Get the vertical coordinate of the top left corner of GUI
 	 */
 	public int getOffsetY() {
 		return offsetY;
@@ -209,8 +209,8 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	}
 	
 	/**
-	 * 设置界面标题，标题默认显示在界面上部中间
-	 * @param title 标题，不支持多行
+	 * Set the title of the interface, which is displayed in the middle of the upper part of the interface by default
+	 * @param title Title, doesn't support multi line yet
 	 */
 	public void setTitle(String title) {
 		if(title == null)
@@ -219,30 +219,30 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	}
 	
 	/**
-	 * 获取该GUI在打开时是否会强制修改界面缩放设置
+	 * Gets whether the GUI will force the interface scaling settings to be modified when it is opened
 	 */
 	public boolean whetherToChangeGuiScaleWhenOpening() {
 		return forceChangeGuiScale;
 	}
 	
 	/*
-	 * 获取游戏屏幕的宽
+	 * Get the width of the game screen
 	 */
 	public int getScreenWidth() {
 		return width;
 	}
 	
 	/**
-	 * 获取游戏屏幕的高
+	 * Get the height of the game screen
 	 */
 	public int getScreenHeight() {
 		return height;
 	}
 	
 	/**
-	 * 设置GUI左上角顶点的横/纵坐标与屏幕宽/高的比值
-	 * @param x GUI左上角顶点与屏幕宽的比值
-	 * @param y GUI左上角顶点与屏幕高的比值
+	 * Set the ratio of the horizontal / vertical coordinates of the top left corner of the GUI to the screen width / height
+	 * @param x Ratio of top left corner vertex of GUI to screen width
+	 * @param y Ratio of top left corner vertex of GUI to screen height
 	 */
 	public void setStartPos(float x, float y) {
 		if(x < 0 || y < 0)
@@ -260,8 +260,8 @@ public abstract class MetaGUIScreen extends GuiScreen {
 	}
 	
 	/**
-	 * 设置这个GUI是否有自定义背景
-	 * 如果它为true，将不会执行drawDefaultBackground()方法
+	 * Set whether this GUI has a custom background
+	 * If it is true, the drawDefaultBackground() method will not be executed
 	 */
 	public void setHasCustomBackground(boolean b) {
 		this.hasCustomBackground = b;
