@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.utils;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.client.gui.GUIBluePrint;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import com.gonggongjohn.eok.items.BluePrintMetaItem;
 import gregtech.api.items.metaitem.MetaItem;

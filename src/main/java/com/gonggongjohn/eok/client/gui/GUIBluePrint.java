@@ -1,9 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.handlers.MetaItemsHandler;
-import com.gonggongjohn.eok.items.BluePrintMetaItem;
-import com.gonggongjohn.eok.utils.BluePrintDict;
 import gregtech.api.items.metaitem.MetaItem;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

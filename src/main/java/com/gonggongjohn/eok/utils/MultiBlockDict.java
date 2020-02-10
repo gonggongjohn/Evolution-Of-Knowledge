@@ -2,7 +2,6 @@ package com.gonggongjohn.eok.utils;
 
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.init.Blocks;
 
 import java.util.ArrayList;
