@@ -24,7 +24,7 @@ public class PacketTestGuiScreen implements IMessage {
 		@Override
 		public IMessage onMessage(PacketTestGuiScreen message, MessageContext ctx) {
 			if(ctx.side == Side.CLIENT) {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiScreenTest());
+				Minecraft.getMinecraft().addScheduledTask(() -> Minecraft.getMinecraft().displayGuiScreen(new GuiScreenTest()));
 			}
 			return null;
 		}

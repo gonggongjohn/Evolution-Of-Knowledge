@@ -84,11 +84,11 @@ public abstract class MetaGuiScreen extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		offsetX = (this.width - this.windowWidth) / 2;
-		offsetY = (this.height - this.windowHeight) / 2;
 		if (!this.hasCustomBackground) {
 			this.drawDefaultBackground();
 		}
+		offsetX = (this.width - this.windowWidth) / 2;
+		offsetY = (this.height - this.windowHeight) / 2;
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -98,6 +98,7 @@ public abstract class MetaGuiScreen extends GuiScreen {
 		this.fontRenderer.drawString(title, offsetX + windowWidth / 2 - this.fontRenderer.getStringWidth(title) / 2, offsetY + 10, Colors.DEFAULT_BLACK, false);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
+		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
 	@Override
@@ -113,8 +114,10 @@ public abstract class MetaGuiScreen extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		for(Map.Entry<Integer, GuiControl> entry : controls.entrySet()) {
-			if(entry.getValue().getType() == GuiControl.EnumControlType.BUTTON) {
-				((GuiControl.GuiButton)entry.getValue()).func.accept(this);
+			if(entry.getValue() instanceof GuiControl.GuiButton) {
+				if(button.id == entry.getValue().getId()) {
+					((GuiControl.GuiButton)entry.getValue()).func.accept(this);
+				}
 			}
 		}
 		super.actionPerformed(button);
@@ -147,7 +150,7 @@ public abstract class MetaGuiScreen extends GuiScreen {
 
 	@Override
 	public boolean doesGuiPauseGame() {
-		return super.doesGuiPauseGame();
+		return false;
 	}
 
 	/**
@@ -274,6 +277,14 @@ public abstract class MetaGuiScreen extends GuiScreen {
 	
 	public void removeControl(GuiControl control) {
 		this.controls.remove(control.getId());
+	}
+	
+	public int getTextureWidth() {
+		return this.texWidth;
+	}
+	
+	public int getTextureHeight() {
+		return this.texHeight;
 	}
 
 }

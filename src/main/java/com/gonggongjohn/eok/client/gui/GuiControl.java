@@ -1,9 +1,14 @@
 package com.gonggongjohn.eok.client.gui;
 
 import java.util.function.Consumer;
+
+import org.lwjgl.opengl.GL11;
+
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.ButtonBuilder;
-import com.gonggongjohn.eok.utils.ButtonData;
+import com.gonggongjohn.eok.utils.Colors;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 
 public class GuiControl {
 
@@ -49,17 +54,18 @@ public class GuiControl {
 		protected String text = "";
 		protected int color = 0;
 		
-		public GuiButton(int x, int y, int width, int height, int u, int v, int u2, int v2, MetaGuiScreen gui, Consumer<MetaGuiScreen> onClick) {
+		public GuiButton(int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick) {
 			super(gui);
 			this.setType(EnumControlType.BUTTON);
-			this.x = x;
-			this.y = y;
+			this.x = x + gui.getOffsetX();
+			this.y = y + gui.getOffsetY();
 			this.width = width;
 			this.height = height;
 			this.u = u;
 			this.v = v;
 			this.u2 = u2;
 			this.v2 = v2;
+			this.func = onClick;
 		}
 		
 		//public static GuiButton create(int x, int y, int width, int height, int u, int v, int u2, int v2, MetaGuiScreen gui, Consumer<MetaGuiScreen> onClick) {
@@ -68,7 +74,7 @@ public class GuiControl {
 
 		@Override
 		public void init(int id) {
-			super.init(id);
+			super.init(id);/*
 			ButtonData bd = new ButtonData();
 			bd.setPosX(this.x);
 			bd.setPosY(this.y);
@@ -81,8 +87,47 @@ public class GuiControl {
 			bd.setTextureY2(v2);
 			bd.setCustomTxtColor(true);
 			bd.setTxtcolor(color);
-			bd.setText(text);
-			gui.getButtonList().add(ButtonBuilder.CommonButton(id, bd));
+			bd.setText(text);*/
+			//gui.getButtonList().add(ButtonBuilder.CommonButton(id, bd));
+			net.minecraft.client.gui.GuiButton button = new net.minecraft.client.gui.GuiButton(id, x, y, width, height, text) {
+
+				@Override
+				public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+					if (this.visible) {
+
+						GL11.glPushMatrix();
+						GL11.glEnable(GL11.GL_BLEND);
+						GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+						mc.getTextureManager().bindTexture(gui.getTexture());
+
+						if (mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height) {
+							Gui.drawModalRectWithCustomSizedTexture(x, y, u2, v2, width, height, gui.getTextureWidth(), gui.getTextureHeight());
+						} else {
+							Gui.drawModalRectWithCustomSizedTexture(x, y, u, v, width, height, gui.getTextureWidth(), gui.getTextureHeight());
+						}
+
+						if (!text.equals("")) {
+
+								if (mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
+										&& mouseY < this.y + this.height) {
+									this.drawCenteredString(mc.fontRenderer, text, this.x + this.width / 2,
+											this.y + (this.height - 8) / 2, Colors.MOUSEON_TEXT);
+								} else {
+									this.drawCenteredString(mc.fontRenderer, text, this.x + this.width / 2,
+											this.y + (this.height - 8) / 2, color);
+								}
+						}
+
+						GL11.glDisable(GL11.GL_BLEND);
+						GL11.glPopMatrix();
+
+					}
+				}
+
+			};
+			
+			gui.getButtonList().add(button);
 		}
 		
 		@Override

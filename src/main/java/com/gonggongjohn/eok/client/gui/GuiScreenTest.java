@@ -3,8 +3,6 @@ package com.gonggongjohn.eok.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.Colors;
-
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -22,7 +20,7 @@ public class GuiScreenTest extends MetaGuiScreen {
 		super(true);
 		this.setTexture(new ResourceLocation(EOK.MODID + ":textures/gui/screen/test_screen.png"));
 		this.setTextureSize(422, 800);
-		this.setWindowSize(400, 280);
+		this.setWindowSize(401, 281);
 		this.setTitle("");
 	}
 
@@ -36,16 +34,13 @@ public class GuiScreenTest extends MetaGuiScreen {
 		this.mc.getTextureManager().bindTexture(this.getTexture());
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
-		buttonList.isEmpty();
 	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
-		pageUp = builder.new GuiButton(this.getOffsetX() + 12, this.getOffsetY() + 240, 54, 36, 0, 450, 0, 281, this, this::pageUp);
-		pageDown = builder.new GuiButton(this.getOffsetX() + 120, this.getOffsetY() + 20, 54, 36, 0, 450, 0, 333, this, this::pageDown);
-		pageUp.setText("114514", Colors.DEFAULT_BLACK);
-		pageDown.setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq", 0xFFFFFFFF);
+		pageUp = builder.new GuiButton(12, 235, 54, 36, 0, 450, 0, 318, this::pageUp);
+		pageDown = builder.new GuiButton(331, 234, 54, 36, 0, 450, 0, 282, this::pageDown);
 		this.addControl(pageUp);
 		this.addControl(pageDown);
 	}
@@ -55,7 +50,7 @@ public class GuiScreenTest extends MetaGuiScreen {
 	}
 	
 	private void pageDown(MetaGuiScreen gui) {
-		
+		EOK.getLogger().info("2");
 	}
 	
 }
