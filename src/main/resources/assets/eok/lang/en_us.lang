@@ -28,6 +28,11 @@ item.virus.name=Virus
 item.machine_gun.name=Machine Gun
 item.eok_manual.name=EOK Manual
 
+item.pickaxe.name=Pickaxe
+item.axe.name=Axe
+item.shovel.name=Shovel
+item.sword.name=Sword
+
 metaitem.elementary_research_table.name=BluePrint of Elementary Research Table
 metaitem.test_2d_core.name=BluePrint of Test 2D Core (for debug)
 metaitem.test_3d_core.name=BluePrint of Test 3D core (for debug)

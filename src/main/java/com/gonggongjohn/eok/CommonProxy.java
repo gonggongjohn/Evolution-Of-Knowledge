@@ -31,6 +31,10 @@ public class CommonProxy {
 
 	}
 
+	public void registerItemRenderer(Item item, int meta, String pathName, String id){
+
+	}
+
 	public IThreadListener getThreadListener(MessageContext context) {
 		if (context.side.isServer()) {
 			return context.getServerHandler().player.mcServer;
