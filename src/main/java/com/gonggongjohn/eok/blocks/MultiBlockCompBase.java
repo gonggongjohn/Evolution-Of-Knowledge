@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.blocks;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.utils.ComponentRelation;
 import com.gonggongjohn.eok.utils.IMultiBlock;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;

@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.network;
 
-import com.gonggongjohn.eok.client.gui.GUIScreenTest;
+import com.gonggongjohn.eok.client.gui.GuiScreenTest;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketTestGUIScreen implements IMessage {
+public class PacketTestGuiScreen implements IMessage {
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
@@ -19,12 +19,12 @@ public class PacketTestGUIScreen implements IMessage {
 	public void toBytes(ByteBuf buf) {
 	}
 
-	public static class Handler implements IMessageHandler<PacketTestGUIScreen, IMessage> {
+	public static class Handler implements IMessageHandler<PacketTestGuiScreen, IMessage> {
 
 		@Override
-		public IMessage onMessage(PacketTestGUIScreen message, MessageContext ctx) {
+		public IMessage onMessage(PacketTestGuiScreen message, MessageContext ctx) {
 			if(ctx.side == Side.CLIENT) {
-				Minecraft.getMinecraft().displayGuiScreen(new GUIScreenTest());
+				Minecraft.getMinecraft().addScheduledTask(() -> Minecraft.getMinecraft().displayGuiScreen(new GuiScreenTest()));
 			}
 			return null;
 		}

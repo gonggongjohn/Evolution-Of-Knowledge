@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.commands;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.network.PacketTestGUIScreen;
+import com.gonggongjohn.eok.network.PacketTestGuiScreen;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -24,7 +24,7 @@ public class CommandTestGuiScreen extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		EntityPlayerMP player = CommandBase.getCommandSenderAsPlayer(sender);
-		EOK.getNetwork().sendTo(new PacketTestGUIScreen(), player);
+		EOK.getNetwork().sendTo(new PacketTestGuiScreen(), player);
 	}
 
 	@Override
