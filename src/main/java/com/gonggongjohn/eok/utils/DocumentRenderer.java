@@ -186,6 +186,8 @@ public class DocumentRenderer {
 			return false;
 		}
 
+		pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
+		elements.clear();
 		document = new Document(pageList, this);
 		
 		return true;
