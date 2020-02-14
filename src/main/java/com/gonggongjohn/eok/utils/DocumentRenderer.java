@@ -108,12 +108,13 @@ public class DocumentRenderer {
 					if(chars.get(readerIndex + 1) == '!') {
 						readerIndex += 2;
 						String m = "";
-						for(int i=0; i<3; i++) {
+						while(chars.get(readerIndex) != ' ') {
 							m += (char)chars.get(readerIndex).intValue();
 							readerIndex++;
 						}
-						if(m.equals("img")) {
-							readerIndex++;
+						readerIndex++;
+						if(m.equalsIgnoreCase("image")) {
+							//readerIndex++;
 							String img = "";
 							String _widths = "";
 							String _heights = "";
@@ -134,6 +135,10 @@ public class DocumentRenderer {
 							readerIndex++;
 							ResourceLocation location = new ResourceLocation(EOK.MODID + ":" + img);
 							if(currentY + Integer.parseInt(_heights) + 10 > this.height) {
+								if(Integer.parseInt(_heights) + 10 > this.height) {
+									EOK.getLogger().error("Image {} is too large.", location.toString());
+									continue;
+								}
 								pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
 								elements.clear();
 								currentY = 0;
@@ -141,18 +146,107 @@ public class DocumentRenderer {
 							elements.add(new Document.Page.Element.Image(location, Integer.parseInt(_widths), Integer.parseInt(_heights)));
 							currentY += Integer.parseInt(_heights);
 							
-						} else if(m.equals("eop")) {
+						} else if(m.equalsIgnoreCase("end_of_page")) {
 							pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
 							elements.clear();
 							currentY = 0;
-							readerIndex += 1;
+							//readerIndex += 1;
+						} else if(m.equalsIgnoreCase("centered_text")) {
+							String s = "";
+							while(chars.get(readerIndex) != '`') {
+								s += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							if(currentY + 20 >= this.height) {
+								pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
+								elements.clear();
+								if(!currentLine.isEmpty()) {
+									elements.add(new Document.Page.Element.TextLine(new String(currentLine)));
+									currentLine = "";
+									currentY += 10;
+								}
+							}
+							elements.add(new Document.Page.Element.CenteredText(s));
+							currentY += 10;
+						} else if(m.equalsIgnoreCase("line")) {
+							String x1s = "";
+							String y1s = "";
+							String x2s = "";
+							String y2s = "";
+							String widths = "";
+							String hex = "";
+							while(chars.get(readerIndex) != ',') {
+								x1s += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							while(chars.get(readerIndex) != ',') {
+								x2s += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							while(chars.get(readerIndex) != ',') {
+								y1s += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							while(chars.get(readerIndex) != ',') {
+								y2s += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							while(chars.get(readerIndex) != ',') {
+								widths += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							while(chars.get(readerIndex) != '`') {
+								hex += (char)chars.get(readerIndex).intValue();
+								readerIndex++;
+							}
+							readerIndex++;
+							int x1, y1, x2, y2, lwidth;
+							int color = 0;
+							x1 = Integer.parseInt(x1s);
+							y1 = Integer.parseInt(y1s);
+							x2 = Integer.parseInt(x2s);
+							y2 = Integer.parseInt(y2s);
+							lwidth = Integer.parseInt(widths);
+							hex = hex.toUpperCase();
+							for(char c : hex.toCharArray()) {
+								switch(c) {
+								case '#': continue;
+								case '0': color = color << 4 | 0x00000000; break;
+								case '1': color = color << 4 | 0x00000001; break;
+								case '2': color = color << 4 | 0x00000002; break;
+								case '3': color = color << 4 | 0x00000003; break;
+								case '4': color = color << 4 | 0x00000004; break;
+								case '5': color = color << 4 | 0x00000005; break;
+								case '6': color = color << 4 | 0x00000006; break;
+								case '7': color = color << 4 | 0x00000007; break;
+								case '8': color = color << 4 | 0x00000008; break;
+								case '9': color = color << 4 | 0x00000009; break;
+								case 'A': color = color << 4 | 0x0000000A; break;
+								case 'B': color = color << 4 | 0x0000000B; break;
+								case 'C': color = color << 4 | 0x0000000C; break;
+								case 'D': color = color << 4 | 0x0000000D; break;
+								case 'E': color = color << 4 | 0x0000000E; break;
+								case 'F': color = color << 4 | 0x0000000F; break;
+								default: break;
+								}
+							}
+							int r, g, b;
+							r = (color & 0xFF0000) >> 16;
+							g = (color & 0x00FF00) >> 8;
+							b = (color & 0x0000FF);
+							elements.add(new Document.Page.Element.Line(x1, y1, x2, y2, lwidth, r, g, b));
 						}
 					} else {
 						readerIndex++;
 						continue;
 					}
 				} else if(chars.get(readerIndex) == '\r') {
-					readerIndex ++;
+					readerIndex++;
 				} else if(chars.get(readerIndex) == '\n') {
 				
 					if(currentY + 20 > this.height) {
@@ -186,8 +280,21 @@ public class DocumentRenderer {
 			return false;
 		}
 
-		pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
-		elements.clear();
+		if(!currentLine.isEmpty()) {
+			if(currentY + 20 >= this.height) {
+				pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
+				elements.clear();
+			}
+			elements.add(new Document.Page.Element.TextLine(new String(currentLine)));
+			currentLine = "";
+			currentY += 10;
+		}
+		
+		if(!elements.isEmpty()) {
+			pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
+			elements.clear();
+		}
+		
 		document = new Document(pageList, this);
 		
 		return true;
@@ -227,13 +334,24 @@ public class DocumentRenderer {
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glLineWidth(2f);
 				bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-				bufferbuilder.color(0, 0, 0, 0);
-				bufferbuilder.pos(renderer.offsetX + origin1.getX() + 20, renderer.offsetY + origin1.getY() + height - 9, 0).endVertex();
-				bufferbuilder.pos(renderer.offsetX + origin1.getX() + width - 20, renderer.offsetY + origin1.getY() + height - 9, 0).endVertex();
+				bufferbuilder.pos(renderer.offsetX + origin1.getX() + 20, renderer.offsetY + origin1.getY() + height - 9, 0).color(0, 0, 0, 255).endVertex();
+				bufferbuilder.pos(renderer.offsetX + origin1.getX() + width - 20, renderer.offsetY + origin1.getY() + height - 9, 0).color(0, 0, 0, 255).endVertex();
 				tessellator.draw();
+				/*
+				 * Directly use OpenGL to draw lines
+				 * 
+				GL11.glColor3f(0f, 0f, 0f);
+				GL11.glBegin(GL11.GL_LINES);
+				GL11.glVertex2i(renderer.offsetX + origin1.getX() + 20, renderer.offsetY + origin1.getY() + height - 9);
+				GL11.glVertex2i(renderer.offsetX + origin1.getX() + width - 20, renderer.offsetY + origin1.getY() + height - 9);
+				GL11.glEnd();
+				GL11.glFlush();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glPopMatrix();
 				GL11.glColor4f(1f, 1f, 1f, 1f);
+				*/
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				GL11.glPopMatrix();
 				fontRenderer.drawString(String.valueOf(index + 1), renderer.offsetX + origin1.getX() + width / 2 - fontRenderer.getStringWidth(String.valueOf(index + 1)) / 2, renderer.offsetY + origin1.getY() + height - 8, Colors.DEFAULT_BLACK);
 				origin = origin1;
 				GL11.glDisable(GL11.GL_BLEND);
@@ -243,19 +361,18 @@ public class DocumentRenderer {
 				GL11.glPushMatrix();
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glPushMatrix();
 				GL11.glColor4f(1f, 1f, 1f, 1f);
+				GL11.glPushMatrix();
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glLineWidth(2f);
 				bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-				bufferbuilder.color(0, 0, 0, 0);
-				bufferbuilder.pos(renderer.offsetX + origin2.getX() + 20, renderer.offsetY + origin2.getY() + height - 9, 0).endVertex();
-				bufferbuilder.pos(renderer.offsetX + origin2.getX() + width - 20, renderer.offsetY + origin2.getY() + height - 9, 0).endVertex();
+				bufferbuilder.pos(renderer.offsetX + origin2.getX() + 20, renderer.offsetY + origin2.getY() + height - 9, 0).color(0, 0, 0, 255).endVertex();
+				bufferbuilder.pos(renderer.offsetX + origin2.getX() + width - 20, renderer.offsetY + origin2.getY() + height - 9, 0).color(0, 0, 0, 255).endVertex();
 				tessellator.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glPopMatrix();
 				GL11.glColor4f(1f, 1f, 1f, 1f);
-				fontRenderer.drawString(String.valueOf(index + 2), renderer.offsetX + origin2.getX() + width / 2 - fontRenderer.getStringWidth(String.valueOf(index + 2)) / 2, renderer.offsetY + origin2.getY() + height - 8, Colors.DEFAULT_BLACK);
+				fontRenderer.drawString(String.valueOf(index + 1), renderer.offsetX + origin2.getX() + width / 2 - fontRenderer.getStringWidth(String.valueOf(index + 1)) / 2, renderer.offsetY + origin2.getY() + height - 8, Colors.DEFAULT_BLACK);
 				origin = origin2;
 				GL11.glDisable(GL11.GL_BLEND);
 				GL11.glPopMatrix();
@@ -280,7 +397,7 @@ public class DocumentRenderer {
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(1f, 1f, 1f, 1f);
 					Minecraft.getMinecraft().getTextureManager().bindTexture(((Page.Element.Image)element).image);
-					Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, w, h, w, h);
+					Gui.drawModalRectWithCustomSizedTexture((x + w) / 2, y, 0, 0, w, h, w, h);
 					y += h;
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glPopMatrix();
@@ -292,6 +409,50 @@ public class DocumentRenderer {
 					GL11.glColor4f(1f, 1f, 1f, 1f);
 					fontRenderer.drawString(((Page.Element.TextLine)element).text, x, y, Colors.DEFAULT_BLACK);
 					y += 10;
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+					break;
+				case CENTERED_TEXT:
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1f, 1f, 1f, 1f);
+					Page.Element.CenteredText t = (Page.Element.CenteredText)element;
+					String s = t.text;
+					fontRenderer.drawString(s, x + renderer.width / 2 - fontRenderer.getStringWidth(s) / 2, y, Colors.DEFAULT_BLACK);
+					y += 10;
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+					break;
+				case LINE:
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1f, 1f, 1f, 1f);
+					Page.Element.Line line = (Page.Element.Line)element;
+					GL11.glLineWidth(line.width);
+					bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+					bufferbuilder.pos(line.v0.getX(), line.v0.getY(), 0f).color(line.r, line.g, line.b, 1f).endVertex();
+					bufferbuilder.pos(line.v1.getX(), line.v1.getY(), 0f).color(line.r, line.g, line.b, 1f).endVertex();
+					tessellator.draw();
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+					break;
+				case ITEM:
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1f, 1f, 1f, 1f);
+					// TODO
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+					break;
+				case CRAFTING:
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1f, 1f, 1f, 1f);
+					// TODO
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glPopMatrix();
 					break;
@@ -313,7 +474,11 @@ public class DocumentRenderer {
 				
 				public enum Type {
 					IMAGE,
-					TEXTLINE
+					TEXTLINE,
+					CENTERED_TEXT,
+					LINE,
+					ITEM,
+					CRAFTING
 				}
 				
 				public Type getType() {
@@ -342,6 +507,34 @@ public class DocumentRenderer {
 						this.type = Type.TEXTLINE;
 					}
 
+				}
+				
+				private static class CenteredText extends Element {
+					private String text;
+					
+					public CenteredText(String text) {
+						this.text = text;
+						this.type = Type.CENTERED_TEXT;
+					}
+				}
+				
+				private static class Line extends Element {
+					private int r;
+					private int g;
+					private int b;
+					private int width;
+					private Point v0;
+					private Point v1;
+					
+					public Line(int v0x, int v0y, int v1x, int v1y, int width, int r, int g, int b) {
+						this.r = r;
+						this.g = g;
+						this.b = b;
+						this.width = width;
+						this.v0 = new Point(v0x, v0y);
+						this.v1 = new Point(v1x, v1y);
+						this.type = Type.LINE;
+					}
 				}
 			}
 		}

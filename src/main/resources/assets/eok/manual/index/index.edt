@@ -1,12 +1,13 @@
-§9§l测试页面
+`!centered_text §9§l测试页面`
 
-`!img manual/index/image1.png,200,122`
+`!image manual/index/image1.png,144,89`
 §0ohhhhhhhhhhhhhhhhhhh
-`!eop`
+`!end_of_page`
 
 
 §0鸽露咕咕咕
 §9§l别看了，一群鸽子
+`line 15,15,60,70,
 §nMinecraft Formatting
 
 §r§00 §11 §22 §33
@@ -20,3 +21,11 @@
 §rn §nMinecraft
 §ro §oMinecraft
 §rr §rMinecraft
+
+§9§lsky&Smalldew语录
+
+`!image manual/index/image2.png,186,118`
+
+`!image manual/index/image3.png,299,79`
+
+结束啦

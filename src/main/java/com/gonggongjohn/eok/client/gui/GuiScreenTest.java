@@ -64,7 +64,7 @@ public class GuiScreenTest extends MetaGuiScreen {
 	}
 	
 	private void pageDown(MetaGuiScreen gui) {
-		if(this.pageIndex + 1 >= this.pages) {
+		if(this.pageIndex + 2 >= this.pages) {
 			return;
 		}
 		this.pageIndex += 2;
