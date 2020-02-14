@@ -2,12 +2,14 @@
 
 `!image manual/index/image1.png,144,89`
 §0ohhhhhhhhhhhhhhhhhhh
+§d66CCFF66CCFF66CCFF66CCFF66CCFF66CCFF
+`!line 15,15,140,220,15,#66CCFF`
 `!end_of_page`
 
 
 §0鸽露咕咕咕
 §9§l别看了，一群鸽子
-`line 15,15,60,70,
+
 §nMinecraft Formatting
 
 §r§00 §11 §22 §33

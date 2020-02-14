@@ -108,7 +108,7 @@ public class DocumentRenderer {
 					if(chars.get(readerIndex + 1) == '!') {
 						readerIndex += 2;
 						String m = "";
-						while(chars.get(readerIndex) != ' ') {
+						while(chars.get(readerIndex) != ' ' && chars.get(readerIndex) != '`') {
 							m += (char)chars.get(readerIndex).intValue();
 							readerIndex++;
 						}
@@ -181,12 +181,12 @@ public class DocumentRenderer {
 							}
 							readerIndex++;
 							while(chars.get(readerIndex) != ',') {
-								x2s += (char)chars.get(readerIndex).intValue();
+								y1s += (char)chars.get(readerIndex).intValue();
 								readerIndex++;
 							}
 							readerIndex++;
 							while(chars.get(readerIndex) != ',') {
-								y1s += (char)chars.get(readerIndex).intValue();
+								x2s += (char)chars.get(readerIndex).intValue();
 								readerIndex++;
 							}
 							readerIndex++;
@@ -427,14 +427,16 @@ public class DocumentRenderer {
 				case LINE:
 					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(1f, 1f, 1f, 1f);
 					Page.Element.Line line = (Page.Element.Line)element;
 					GL11.glLineWidth(line.width);
 					bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-					bufferbuilder.pos(line.v0.getX(), line.v0.getY(), 0f).color(line.r, line.g, line.b, 1f).endVertex();
-					bufferbuilder.pos(line.v1.getX(), line.v1.getY(), 0f).color(line.r, line.g, line.b, 1f).endVertex();
+					bufferbuilder.pos(line.v0.getX() + renderer.offsetX, line.v0.getY() + renderer.offsetY, 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
+					bufferbuilder.pos(line.v1.getX() + renderer.offsetX, line.v1.getY() + renderer.offsetY, 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
 					tessellator.draw();
+					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glPopMatrix();
 					break;
