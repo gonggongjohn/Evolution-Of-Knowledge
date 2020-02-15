@@ -1,8 +1,12 @@
+`!comment 这是一条注释。`
+`!comment 这是另一条注释`
 `!centered_text §9§l测试页面`
-
 `!image manual/index/image1.png,144,89`
 §0ohhhhhhhhhhhhhhhhhhh
+`!comment 这个颜色不是#66CCFF，因为文字仅支持16种颜色`
 §d66CCFF66CCFF66CCFF66CCFF66CCFF66CCFF
+`!comment 画一条线`
+`!comment 注意:线是独立于其他元素绘制的`
 `!line 15,15,140,220,15,#66CCFF`
 `!end_of_page`
 

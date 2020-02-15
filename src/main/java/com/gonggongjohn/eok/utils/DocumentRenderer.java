@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
@@ -100,6 +101,7 @@ public class DocumentRenderer {
 		
 		int readerIndex = 0;
 		int currentY = 0;
+		int lines = 1; // WARNING: This is the current line in the document FILE, isn't that displays on the SCREEN.
 		String currentLine = "";
 		
 		try {
@@ -114,7 +116,6 @@ public class DocumentRenderer {
 						}
 						readerIndex++;
 						if(m.equalsIgnoreCase("image")) {
-							//readerIndex++;
 							String img = "";
 							String _widths = "";
 							String _heights = "";
@@ -150,7 +151,6 @@ public class DocumentRenderer {
 							pageList.add(new Document.Page(new ArrayList<Document.Page.Element>(elements)));
 							elements.clear();
 							currentY = 0;
-							//readerIndex += 1;
 						} else if(m.equalsIgnoreCase("centered_text")) {
 							String s = "";
 							while(chars.get(readerIndex) != '`') {
@@ -240,11 +240,22 @@ public class DocumentRenderer {
 							g = (color & 0x00FF00) >> 8;
 							b = (color & 0x0000FF);
 							elements.add(new Document.Page.Element.Line(x1, y1, x2, y2, lwidth, r, g, b));
+						} else if(m.equalsIgnoreCase("comment")) {
+							while(chars.get(readerIndex) != '`') {
+								readerIndex++;
+							}
+							readerIndex++;
+						} else {
+							EOK.getLogger().error("Illegal token {} at line {}.", m, lines);
 						}
+						readerIndex ++;
 					} else {
+						EOK.getLogger().error("Illegal symbol \"`\" at line {}, delete it.", lines);
 						readerIndex++;
 						continue;
 					}
+					readerIndex++;
+					lines++;
 				} else if(chars.get(readerIndex) == '\r') {
 					readerIndex++;
 				} else if(chars.get(readerIndex) == '\n') {
@@ -258,6 +269,7 @@ public class DocumentRenderer {
 					currentLine = "";
 					currentY += 10;
 					readerIndex ++;
+					lines++;
 				} else {
 					int strWidth = Minecraft.getMinecraft().fontRenderer.getStringWidth(currentLine);
 					if(strWidth >= this.width) {
@@ -275,6 +287,7 @@ public class DocumentRenderer {
 					}
 				}
 			}
+			lines--;
 		} catch(IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			return false;
@@ -311,6 +324,12 @@ public class DocumentRenderer {
 		}
 		
 		public boolean draw(int index, Side side) {
+			int r, g, b;
+			r = (Colors.DEFAULT_BLACK & 0xFF0000) >> 16;
+			g = (Colors.DEFAULT_BLACK & 0x00FF00) >> 8;
+			b = (Colors.DEFAULT_BLACK & 0x0000FF);
+			GL11.glColor4f(r, g, b, 1f);
+			GlStateManager.color(r, g, b, 1f);
 			if(index > pageList.size()) {
 				(new IndexOutOfBoundsException(String.format("Page index:%d, pages: %d", index, pageList.size())))
 				.printStackTrace();
@@ -352,10 +371,12 @@ public class DocumentRenderer {
 				*/
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glPopMatrix();
+				GlStateManager.color(r, g, b, 1f);
 				fontRenderer.drawString(String.valueOf(index + 1), renderer.offsetX + origin1.getX() + width / 2 - fontRenderer.getStringWidth(String.valueOf(index + 1)) / 2, renderer.offsetY + origin1.getY() + height - 8, Colors.DEFAULT_BLACK);
 				origin = origin1;
 				GL11.glDisable(GL11.GL_BLEND);
 				GL11.glPopMatrix();
+				GlStateManager.color(r, g, b, 1f);
 				break;
 			case RIGHT:
 				GL11.glPushMatrix();
@@ -371,11 +392,12 @@ public class DocumentRenderer {
 				tessellator.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glPopMatrix();
-				GL11.glColor4f(1f, 1f, 1f, 1f);
+				GlStateManager.color(r, g, b, 1f);
 				fontRenderer.drawString(String.valueOf(index + 1), renderer.offsetX + origin2.getX() + width / 2 - fontRenderer.getStringWidth(String.valueOf(index + 1)) / 2, renderer.offsetY + origin2.getY() + height - 8, Colors.DEFAULT_BLACK);
 				origin = origin2;
 				GL11.glDisable(GL11.GL_BLEND);
 				GL11.glPopMatrix();
+				GlStateManager.color(r, g, b, 1f);
 				break;
 			}
 			int x = origin.getX() + renderer.offsetX;
@@ -406,7 +428,7 @@ public class DocumentRenderer {
 					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glColor4f(1f, 1f, 1f, 1f);
+					GlStateManager.color(r, g, b, 1f);
 					fontRenderer.drawString(((Page.Element.TextLine)element).text, x, y, Colors.DEFAULT_BLACK);
 					y += 10;
 					GL11.glDisable(GL11.GL_BLEND);
@@ -416,9 +438,9 @@ public class DocumentRenderer {
 					GL11.glPushMatrix();
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glColor4f(1f, 1f, 1f, 1f);
 					Page.Element.CenteredText t = (Page.Element.CenteredText)element;
 					String s = t.text;
+					GlStateManager.color(r, g, b, 1f);
 					fontRenderer.drawString(s, x + renderer.width / 2 - fontRenderer.getStringWidth(s) / 2, y, Colors.DEFAULT_BLACK);
 					y += 10;
 					GL11.glDisable(GL11.GL_BLEND);
@@ -433,8 +455,8 @@ public class DocumentRenderer {
 					Page.Element.Line line = (Page.Element.Line)element;
 					GL11.glLineWidth(line.width);
 					bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-					bufferbuilder.pos(line.v0.getX() + renderer.offsetX, line.v0.getY() + renderer.offsetY, 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
-					bufferbuilder.pos(line.v1.getX() + renderer.offsetX, line.v1.getY() + renderer.offsetY, 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
+					bufferbuilder.pos(line.v0.getX() + renderer.offsetX + origin.getX(), line.v0.getY() + renderer.offsetY + origin.getY(), 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
+					bufferbuilder.pos(line.v1.getX() + renderer.offsetX + origin.getX(), line.v1.getY() + renderer.offsetY + origin.getY(), 0f).color(line.r / 255F, line.g / 255F, line.b / 255F, 1f).endVertex();
 					tessellator.draw();
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					GL11.glDisable(GL11.GL_BLEND);
@@ -459,6 +481,8 @@ public class DocumentRenderer {
 					GL11.glPopMatrix();
 					break;
 				}
+				GL11.glColor4f(r, g, b, 1f);
+				GlStateManager.color(r, g, b, 1f);
 			}
 			return true;
 		}
