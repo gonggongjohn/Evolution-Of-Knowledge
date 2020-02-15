@@ -397,7 +397,7 @@ public class DocumentRenderer {
 					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 					GL11.glColor4f(1f, 1f, 1f, 1f);
 					Minecraft.getMinecraft().getTextureManager().bindTexture(((Page.Element.Image)element).image);
-					Gui.drawModalRectWithCustomSizedTexture((x + w) / 2, y, 0, 0, w, h, w, h);
+					Gui.drawModalRectWithCustomSizedTexture(x + (renderer.width - w) / 2, y, 0, 0, w, h, w, h);
 					y += h;
 					GL11.glDisable(GL11.GL_BLEND);
 					GL11.glPopMatrix();
