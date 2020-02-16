@@ -2,7 +2,6 @@ package com.gonggongjohn.eok;
 
 import org.apache.logging.log4j.Logger;
 
-import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
@@ -10,7 +9,6 @@ import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.network.PacketAnotherSeconds;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.network.PacketGuiButton;
-import com.gonggongjohn.eok.network.PacketHayTorchBase;
 import com.gonggongjohn.eok.network.PacketInspirations;
 import com.gonggongjohn.eok.network.PacketInverseInspirations;
 import com.gonggongjohn.eok.network.PacketInverseReseachData;
@@ -89,8 +87,6 @@ public class EOK {
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
 		network.registerMessage(new PacketSeconds.Handler(), PacketSeconds.class, 8, Side.CLIENT);
-		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 9, Side.SERVER);
-		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 10, Side.CLIENT);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 11, Side.SERVER);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.CLIENT);
 		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 13, Side.CLIENT);

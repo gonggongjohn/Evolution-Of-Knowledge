@@ -1,11 +1,11 @@
 package com.gonggongjohn.eok.entity;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityBullet extends EntityTippedArrow {
+public class EntityBullet extends EntityArrow {
 	public EntityBullet(World world) {
 		super(world);
 	}
@@ -21,22 +21,6 @@ public class EntityBullet extends EntityTippedArrow {
 			this.setDead();
 		}
 	}
-
-	// @Override
-	// protected void onImpact(RayTraceResult result) {
-	// if (this.world.isRemote) {
-	// return;
-	// }
-	// if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
-	// System.out.println(result.entityHit.getEntityId());
-	// if (result.entityHit instanceof EntityLiving) {
-	// EntityLiving living = (EntityLiving) result.entityHit;
-	// living.attackEntityFrom(DamageSource.causeThrownDamage(this, this.thrower),
-	// this.damage);
-	// }
-	// }
-	// this.setDead();
-	// }
 
 	@Override
 	protected ItemStack getArrowStack() {

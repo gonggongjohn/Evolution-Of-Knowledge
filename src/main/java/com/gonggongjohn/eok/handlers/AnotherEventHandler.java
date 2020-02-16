@@ -4,19 +4,16 @@ import java.util.ArrayList;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityAnotherSeconds;
-import com.gonggongjohn.eok.capabilities.CapabilityHayTorchBase;
 import com.gonggongjohn.eok.capabilities.CapabilityInspirations;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
 import com.gonggongjohn.eok.capabilities.CapabilitySeconds;
 import com.gonggongjohn.eok.capabilities.IAnotherSeconds;
-import com.gonggongjohn.eok.capabilities.IHayTorch;
 import com.gonggongjohn.eok.capabilities.IInspirations;
 import com.gonggongjohn.eok.capabilities.IPlayerState;
 import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.capabilities.ISeconds;
 import com.gonggongjohn.eok.network.PacketAnotherSeconds;
-import com.gonggongjohn.eok.network.PacketHayTorchBase;
 import com.gonggongjohn.eok.network.PacketInspirations;
 import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.network.PacketSeconds;
@@ -50,12 +47,10 @@ public class AnotherEventHandler {
 		if (e.getObject() instanceof EntityPlayer) {
 			ICapabilitySerializable<NBTTagCompound> providerResearchData = new CapabilityResearchData.ProvidePlayer();
 			ICapabilitySerializable<NBTTagCompound> providerSeconds = new CapabilitySeconds.ProvidePlayer();
-			ICapabilitySerializable<NBTTagCompound> providerHayTorchState = new CapabilityHayTorchBase.ProvidePlayer();
 			ICapabilitySerializable<NBTTagCompound> providerAnotherSeconds = new CapabilityAnotherSeconds.ProvidePlayer();
 			ICapabilitySerializable<NBTTagCompound> providerInspirations = new CapabilityInspirations.ProvidePlayer();
 			e.addCapability(new ResourceLocation(EOK.MODID + ":" + "researchData"), providerResearchData);
 			e.addCapability(new ResourceLocation(EOK.MODID + ":" + "seconds"), providerSeconds);
-			e.addCapability(new ResourceLocation(EOK.MODID + ":" + "hayTorchState"), providerHayTorchState);
 			e.addCapability(new ResourceLocation(EOK.MODID + ":" + "damage"), providerAnotherSeconds);
 			e.addCapability(new ResourceLocation(EOK.MODID + ":" + "inspirations"), providerInspirations);
 
@@ -71,8 +66,6 @@ public class AnotherEventHandler {
 		Capability.IStorage<IResearchData> storageResearchData = capabilityResearchData.getStorage();
 		Capability<ISeconds> capabilitySeconds = CapabilityHandler.capSeconds;
 		Capability.IStorage<ISeconds> storageSeconds = capabilitySeconds.getStorage();
-		Capability<IHayTorch> capabilityHayTorchState = CapabilityHandler.capHayTorchBase;
-		Capability.IStorage<IHayTorch> storageHayTorchState = capabilityHayTorchState.getStorage();
 		Capability<IAnotherSeconds> capabilityAnotherSeconds = CapabilityHandler.capAnotherSeconds;
 		Capability.IStorage<IAnotherSeconds> storageAnotherSeconds = capabilityAnotherSeconds.getStorage();
 		Capability<IInspirations> capabilityInspirations = CapabilityHandler.capInspirations;
@@ -91,13 +84,6 @@ public class AnotherEventHandler {
 					e.getOriginal().getCapability(capabilitySeconds, null), null);
 			storageSeconds.readNBT(capabilitySeconds, e.getEntityPlayer().getCapability(capabilitySeconds, null), null,
 					nbt);
-		}
-		if (e.getOriginal().hasCapability(capabilityHayTorchState, null)
-				&& e.getEntityPlayer().hasCapability(capabilityHayTorchState, null)) {
-			NBTBase nbt = storageHayTorchState.writeNBT(capabilityHayTorchState,
-					e.getOriginal().getCapability(capabilityHayTorchState, null), null);
-			storageHayTorchState.readNBT(capabilityHayTorchState,
-					e.getEntityPlayer().getCapability(capabilityHayTorchState, null), null, nbt);
 		}
 		if (e.getOriginal().hasCapability(capabilityAnotherSeconds, null)
 				&& e.getEntityPlayer().hasCapability(capabilityAnotherSeconds, null)) {
@@ -154,17 +140,6 @@ public class AnotherEventHandler {
 
 				message.compound = new NBTTagCompound();
 				message.compound.setTag("seconds", storage.writeNBT(CapabilityHandler.capSeconds, seconds, null));
-
-				EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
-			}
-			if (player.hasCapability(CapabilityHandler.capHayTorchBase, null)) {
-				PacketHayTorchBase message = new PacketHayTorchBase();
-				IHayTorch hayTorchState = player.getCapability(CapabilityHandler.capHayTorchBase, null);
-				Capability.IStorage<IHayTorch> storage = CapabilityHandler.capHayTorchBase.getStorage();
-
-				message.compound = new NBTTagCompound();
-				message.compound.setTag("hayTorchState",
-						storage.writeNBT(CapabilityHandler.capHayTorchBase, hayTorchState, null));
 
 				EOK.getNetwork().sendTo(message, (EntityPlayerMP) player);
 			}
@@ -249,9 +224,8 @@ public class AnotherEventHandler {
 	public void onDestroyedButNotDropItself(BlockEvent.HarvestDropsEvent event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
-		if (!event.getDrops().isEmpty() && event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick)))
-			;
-		{
+		if (!event.getDrops().isEmpty()
+				&& event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick))) {
 			event.setDropChance(0.0F);
 			world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK)));
 		}
