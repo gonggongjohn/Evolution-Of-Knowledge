@@ -1,13 +1,29 @@
 package com.gonggongjohn.eok;
 
+import org.apache.logging.log4j.Logger;
+
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
-import com.gonggongjohn.eok.utils.*;
-import com.gonggongjohn.eok.network.*;
+import com.gonggongjohn.eok.network.PacketAnotherSeconds;
+import com.gonggongjohn.eok.network.PacketGUIMerchant;
+import com.gonggongjohn.eok.network.PacketGuiButton;
+import com.gonggongjohn.eok.network.PacketHayTorchBase;
+import com.gonggongjohn.eok.network.PacketInspirations;
+import com.gonggongjohn.eok.network.PacketInverseInspirations;
+import com.gonggongjohn.eok.network.PacketInverseReseachData;
+import com.gonggongjohn.eok.network.PacketResearchData;
+import com.gonggongjohn.eok.network.PacketSeconds;
+import com.gonggongjohn.eok.network.PacketTestGuiScreen;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
+import com.gonggongjohn.eok.utils.BluePrintDict;
+import com.gonggongjohn.eok.utils.DocumentUtils;
+import com.gonggongjohn.eok.utils.InspirationDict;
+import com.gonggongjohn.eok.utils.MathUtils;
+import com.gonggongjohn.eok.utils.MultiBlockDict;
+import com.gonggongjohn.eok.utils.ResearchDict;
 
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
@@ -54,9 +70,9 @@ public class EOK {
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		if (Loader.isModLoaded("torcherino") || Loader.isModLoaded("projecte")) {
-			CrashReport cr = CrashReport.makeCrashReport(new IllegalAccessError(),
+			CrashReport report = CrashReport.makeCrashReport(new IllegalAccessError(),
 					String.format("You have ENRAGED the FOREST BAT because some mods are loaded"));
-			throw new ReportedException(cr);
+			throw new ReportedException(report);
 		}
 		proxy.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
@@ -67,20 +83,19 @@ public class EOK {
 		TweakersMain.preInit();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
-		network.registerMessage(new PacketConsciousness.Handler(), PacketConsciousness.class, 1, Side.CLIENT);
-		network.registerMessage(new PacketMindActivity.Handler(), PacketMindActivity.class, 2, Side.CLIENT);
 		network.registerMessage(new PacketResearchData.Handler(), PacketResearchData.class, 3, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
-		network.registerMessage(new PacketSeconds.Handler(),PacketSeconds.class,8,Side.CLIENT);
+		network.registerMessage(new PacketSeconds.Handler(), PacketSeconds.class, 8, Side.CLIENT);
 		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 9, Side.SERVER);
 		network.registerMessage(new PacketHayTorchBase.Handler(), PacketHayTorchBase.class, 10, Side.CLIENT);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 11, Side.SERVER);
 		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.CLIENT);
 		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 13, Side.CLIENT);
-		network.registerMessage(new PacketInverseInspirations.Handler(), PacketInverseInspirations.class, 14, Side.SERVER);
+		network.registerMessage(new PacketInverseInspirations.Handler(), PacketInverseInspirations.class, 14,
+				Side.SERVER);
 	}
 
 	@EventHandler
@@ -93,7 +108,6 @@ public class EOK {
 		bluePrintDict.init();
 		new WorldGenHandler();
 		TweakersMain.init();
-		MinecraftForge.EVENT_BUS.register(PlayerVitalSigns.getInstance());
 	}
 
 	@EventHandler
@@ -101,7 +115,7 @@ public class EOK {
 		proxy.postInit(event);
 		TweakersMain.postInit();
 	}
-	
+
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
 		CommandHandler.registerCommands(event);
@@ -115,7 +129,7 @@ public class EOK {
 		return instance.network;
 	}
 
-	public static org.apache.logging.log4j.Logger getLogger() {
+	public static Logger getLogger() {
 		return logger;
 	}
 }
