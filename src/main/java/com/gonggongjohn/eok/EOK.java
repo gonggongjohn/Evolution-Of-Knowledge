@@ -2,18 +2,13 @@ package com.gonggongjohn.eok;
 
 import org.apache.logging.log4j.Logger;
 
-import com.gonggongjohn.eok.handlers.AnotherEventHandler;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
-import com.gonggongjohn.eok.network.PacketAnotherSeconds;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.network.PacketGuiButton;
-import com.gonggongjohn.eok.network.PacketInspirations;
-import com.gonggongjohn.eok.network.PacketInverseInspirations;
 import com.gonggongjohn.eok.network.PacketInverseReseachData;
 import com.gonggongjohn.eok.network.PacketResearchData;
-import com.gonggongjohn.eok.network.PacketSeconds;
 import com.gonggongjohn.eok.network.PacketTestGuiScreen;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 import com.gonggongjohn.eok.utils.BluePrintDict;
@@ -26,7 +21,6 @@ import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -73,7 +67,6 @@ public class EOK {
 			throw new ReportedException(report);
 		}
 		proxy.preInit(event);
-		MinecraftForge.EVENT_BUS.register(new AnotherEventHandler());
 		researchDict.initName();
 		researchDict.initRelation();
 		inspirationDict.initName();
@@ -86,12 +79,6 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
-		network.registerMessage(new PacketSeconds.Handler(), PacketSeconds.class, 8, Side.CLIENT);
-		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 11, Side.SERVER);
-		network.registerMessage(new PacketAnotherSeconds.Handler(), PacketAnotherSeconds.class, 12, Side.CLIENT);
-		network.registerMessage(new PacketInspirations.Handler(), PacketInspirations.class, 13, Side.CLIENT);
-		network.registerMessage(new PacketInverseInspirations.Handler(), PacketInverseInspirations.class, 14,
-				Side.SERVER);
 	}
 
 	@EventHandler
