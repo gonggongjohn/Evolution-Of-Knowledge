@@ -8,8 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntityZijing extends EntityNPCBase{
-
+public class EntityZijing extends EntityNPCBase {
 	public EntityZijing(World worldIn) {
 		super(worldIn);
 	}
@@ -36,11 +35,9 @@ public class EntityZijing extends EntityNPCBase{
 	protected void initEntityAI() {
 		super.initEntityAI();
 	}
-	
+
 	@Override
 	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
 		return super.processInteract(player, hand);
 	}
-	
-
 }

@@ -53,7 +53,7 @@ public class EOK {
 	public static CommonProxy proxy;
 
 	public static final CreativeTabs tabEOK = new EOKTab();
-	private static org.apache.logging.log4j.Logger logger;
+	private static Logger logger;
 
 	private SimpleNetworkWrapper network;
 

@@ -8,8 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class EntitySmalldew extends EntityNPCBase{
-
+public class EntitySmalldew extends EntityNPCBase {
 	public EntitySmalldew(World worldIn) {
 		super(worldIn);
 	}
@@ -41,6 +40,4 @@ public class EntitySmalldew extends EntityNPCBase{
 	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
 		return super.processInteract(player, hand);
 	}
-	
-
 }
