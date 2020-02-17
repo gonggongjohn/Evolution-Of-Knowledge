@@ -1,12 +1,11 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.List;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
 import com.gonggongjohn.eok.capabilities.IPlayerState;
 import com.gonggongjohn.eok.capabilities.IResearchData;
+import com.gonggongjohn.eok.network.PacketPlayerState;
 import com.gonggongjohn.eok.network.PacketResearchData;
 
 import net.minecraft.block.state.IBlockState;
@@ -58,26 +57,20 @@ public class EventHandlerServer {
 	@SubscribeEvent
 	public static void onPlayerLoggedIn(PlayerLoggedInEvent e) {
 		if (!e.player.world.isRemote) {
-			EntityPlayer player = e.player;
+			EntityPlayerMP player = (EntityPlayerMP) e.player;
 			if (player.hasCapability(CapabilityHandler.capPlayerState, null)) {
-
+				IPlayerState state = player.getCapability(CapabilityHandler.capPlayerState, null);
+				IStorage storage = CapabilityHandler.capPlayerState.getStorage();
+				NBTTagCompound nbt = (NBTTagCompound) storage.writeNBT(CapabilityHandler.capPlayerState, state, null);
+				PacketPlayerState mesage = new PacketPlayerState(nbt);
+				EOK.getNetwork().sendTo(mesage, player);
 			}
 			if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
-				PacketResearchData mesage = new PacketResearchData();
-				IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
-				Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
-				List<Integer> finList = researchData.getFinishedResearch();
-				if (finList.size() == 0) {
-					finList.add(1);
-					researchData.setFinishedResearch(finList);
-					NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
-					storage.readNBT(CapabilityHandler.capResearchData,
-							player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
-				}
-				mesage.compound = new NBTTagCompound();
-				mesage.compound.setTag("finishedResearch",
-						storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
-				EOK.getNetwork().sendTo(mesage, (EntityPlayerMP) player);
+				IResearchData data = player.getCapability(CapabilityHandler.capResearchData, null);
+				IStorage storage = CapabilityHandler.capResearchData.getStorage();
+				NBTTagCompound nbt = (NBTTagCompound) storage.writeNBT(CapabilityHandler.capResearchData, data, null);
+				PacketResearchData mesage = new PacketResearchData(nbt);
+				EOK.getNetwork().sendTo(mesage, player);
 			}
 		}
 	}
