@@ -8,6 +8,7 @@ import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketInverseReseachData;
+import com.gonggongjohn.eok.network.PacketPlayerState;
 import com.gonggongjohn.eok.network.PacketResearchData;
 import com.gonggongjohn.eok.network.PacketTestGuiScreen;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
@@ -74,6 +75,7 @@ public class EOK {
 		TweakersMain.preInit();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		network.registerMessage(new PacketGuiButton.Handler(), PacketGuiButton.class, 0, Side.SERVER);
+		network.registerMessage(new PacketPlayerState.Handler(), PacketPlayerState.class, 1, Side.CLIENT);
 		network.registerMessage(new PacketResearchData.Handler(), PacketResearchData.class, 3, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 4, Side.CLIENT);
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);

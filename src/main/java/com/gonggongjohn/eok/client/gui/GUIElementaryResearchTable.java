@@ -21,10 +21,9 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
 
 public class GUIElementaryResearchTable extends GuiContainer {
 	private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/elementary_research_table.png";
@@ -153,19 +152,17 @@ public class GUIElementaryResearchTable extends GuiContainer {
 					// Add result to player's capability
 					EntityPlayer player = Minecraft.getMinecraft().player;
 					if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
-						PacketInverseReseachData message = new PacketInverseReseachData();
 						IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
-						Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
+						IStorage storage = CapabilityHandler.capResearchData.getStorage();
 						List<Integer> finListT = researchData.getFinishedResearch();
 						if (!finListT.contains(result)) {
 							finListT.add(result);
 							researchData.setFinishedResearch(finListT);
-							NBTBase nbt = storage.writeNBT(CapabilityHandler.capResearchData, researchData, null);
+							NBTTagCompound nbt = (NBTTagCompound) storage.writeNBT(CapabilityHandler.capResearchData,
+									researchData, null);
 							storage.readNBT(CapabilityHandler.capResearchData,
 									player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
-							message.compound = new NBTTagCompound();
-							message.compound.setTag("finishedResearch",
-									storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
+							PacketInverseReseachData message = new PacketInverseReseachData(nbt);
 							EOK.getNetwork().sendToServer(message);
 						}
 					}
