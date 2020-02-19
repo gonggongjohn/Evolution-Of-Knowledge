@@ -35,6 +35,8 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	private static final ResourceLocation TEXTUREPAPER = new ResourceLocation(TEXTURE_PAPER);
 	private List<Integer> lastFinList, finList = new ArrayList<Integer>();
 	private Slot invPaperSlot;
+	private int offsetX, offsetY;
+	private int btnPage = 0;
 
 	public GUIElementaryResearchTable(ContainerElementaryResearchTable inventorySlotsIn) {
 		super(inventorySlotsIn);
@@ -62,7 +64,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 
 		this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
 		this.mc.getTextureManager().bindTexture(TEXTURECOMP);
-		this.drawTexturedModalRect(offsetX + 166, offsetY + 146, 0, 33, 90, 16);
+		this.drawTexturedModalRect(offsetX + 159, offsetY + 145, 0, 22, 88, 8);
 		if (this.invPaperSlot != null
 				&& this.invPaperSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
 			this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
@@ -87,7 +89,8 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
+		offsetX = (this.width - this.xSize) / 2;
+		offsetY = (this.height - this.ySize) / 2;
 		this.buttonList.add(new GuiButton(0, offsetX + 225, offsetY + 114, 22, 22, "") {
 			@Override
 			public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
@@ -108,15 +111,56 @@ public class GUIElementaryResearchTable extends GuiContainer {
 				}
 			}
 		});
+		this.buttonList.add(new GuiButton(1, offsetX + 12, offsetY + 114, 18, 18, ""){
+			@Override
+			public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+				if (this.visible) {
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.getTextureManager().bindTexture(TEXTURECOMP);
+					int relx = mouseX - this.x, rely = mouseY - this.y;
+					if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
+						this.drawTexturedModalRect(this.x, this.y, 36, 30, this.width, this.height);
+					else
+						this.drawTexturedModalRect(this.x, this.y, 0, 30, this.width, this.height);
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+				}
+			}
+		});
+		this.buttonList.add(new GuiButton(2, offsetX + 34, offsetY + 114, 18, 18, ""){
+			@Override
+			public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+				if (this.visible) {
+					GL11.glPushMatrix();
+					GL11.glEnable(GL11.GL_BLEND);
+					OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					mc.getTextureManager().bindTexture(TEXTURECOMP);
+					int relx = mouseX - this.x, rely = mouseY - this.y;
+					if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
+						this.drawTexturedModalRect(this.x, this.y, 36, 48, this.width, this.height);
+					else
+						this.drawTexturedModalRect(this.x, this.y, 0, 48, this.width, this.height);
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glPopMatrix();
+				}
+			}
+		});
 
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
 			IResearchData researchData = player.getCapability(CapabilityHandler.capResearchData, null);
 			finList = researchData.getFinishedResearch();
 			if (finList.size() != 0) {
-				for (int i = 1; i <= finList.size(); i++) {
-					this.buttonList.add(new ButtonElementaryResearchTable(i, finList.get(i - 1),
+				for (int i = 1; i <= Math.min(finList.size(), 8); i++) {
+					this.buttonList.add(new ButtonElementaryResearchTable(2 + i, finList.get(i - 1),
 							offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 18, 18, offsetY));
+					btnPage = 1;
 				}
 			}
 
@@ -126,7 +170,25 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		super.actionPerformed(button);
-		if (button.id >= 1 && button.id <= finList.size()) {
+		if(button.id == 1){
+			if(btnPage <= 1) return;
+			buttonList.removeIf(index -> index.id >= 3 && index.id <= 10);
+			for (int i = 1; i <= 8; i++) {
+				this.buttonList.add(new ButtonElementaryResearchTable(2 + i, finList.get((btnPage - 2) * 8 + i - 1),
+						offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 18, 18, offsetY));
+			}
+			btnPage -= 1;
+		}
+		if(button.id == 2){
+			if(btnPage * 8 >= finList.size()) return;
+			buttonList.removeIf(index -> index.id >= 3 && index.id <= 10);
+			for (int i = 1; i <= Math.min(finList.size() - btnPage * 8, 8); i++) {
+				this.buttonList.add(new ButtonElementaryResearchTable(2 + i, finList.get(btnPage * 8 + i - 1),
+						offsetX + calcButtonLeftPos(i), offsetY + calcButtonTopPos(i), 18, 18, offsetY));
+			}
+			btnPage += 1;
+		}
+		if (button.id >= 3 && button.id <= Math.min(2 + finList.size(), 10)) {
 			int activeResearchID = ((ButtonElementaryResearchTable) button).getResearchId();
 			EOK.getNetwork().sendToServer(new PacketGuiButton(activeResearchID));
 		}

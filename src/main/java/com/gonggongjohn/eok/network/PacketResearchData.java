@@ -44,7 +44,7 @@ public class PacketResearchData implements IMessage {
 	public static class Handler implements IMessageHandler<PacketResearchData, IMessage> {
 		@Override
 		public IMessage onMessage(PacketResearchData message, MessageContext ctx) {
-			if (ctx.side == Side.SERVER) {
+			if (ctx.side == Side.CLIENT) {
 				Minecraft.getMinecraft().addScheduledTask(() -> {
 					EntityPlayer player = EOK.getProxy().getPlayer(ctx);
 					if (player.hasCapability(CapabilityHandler.capResearchData, null)) {

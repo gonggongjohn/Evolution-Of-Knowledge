@@ -30,6 +30,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid = EOK.MODID)
 public class EventHandlerServer {
 	@SubscribeEvent
@@ -68,7 +70,13 @@ public class EventHandlerServer {
 			if (player.hasCapability(CapabilityHandler.capResearchData, null)) {
 				IResearchData data = player.getCapability(CapabilityHandler.capResearchData, null);
 				IStorage storage = CapabilityHandler.capResearchData.getStorage();
+				List<Integer> finList = data.getFinishedResearch();
+				if(finList.isEmpty()) {
+					finList.add(1);
+					data.setFinishedResearch(finList);
+				}
 				NBTTagCompound nbt = (NBTTagCompound) storage.writeNBT(CapabilityHandler.capResearchData, data, null);
+				storage.readNBT(CapabilityHandler.capResearchData, player.getCapability(CapabilityHandler.capResearchData, null), null, nbt);
 				PacketResearchData mesage = new PacketResearchData(nbt);
 				EOK.getNetwork().sendTo(mesage, player);
 			}

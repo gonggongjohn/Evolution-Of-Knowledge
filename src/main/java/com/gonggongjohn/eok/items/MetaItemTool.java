@@ -30,8 +30,10 @@ public class MetaItemTool extends Item implements IHasModel {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for(EnumTool tool : EnumTool.values()){
-            items.add(new ItemStack(this, 1, tool.getMeta()));
+        if(tab == EOK.tabEOK) {
+            for (EnumTool tool : EnumTool.values()) {
+                items.add(new ItemStack(this, 1, tool.getMeta()));
+            }
         }
     }
 
