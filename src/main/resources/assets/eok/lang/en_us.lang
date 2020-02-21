@@ -1,3 +1,4 @@
+
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=Papyrus
@@ -8,9 +9,6 @@ item.polished_flint_fragment.name=Polished Flint Fragment
 item.rough_flint_spear.name=Rough Flint Spear
 item.rough_flint_axe.name=Rough Flint Axe
 
-item.convex_lens.name=Convex Lens
-item.concave_lens.name=Concave Lens
-item.eok_symbol.name=The EOK Symbol
 item.plant_fiber.name=Plant Fiber
 item.short_stick.name=Short Stick
 item.tube.name=Tube
@@ -36,6 +34,12 @@ item.sword.name=Sword
 metaitem.elementary_research_table.name=BluePrint of Elementary Research Table
 metaitem.test_2d_core.name=BluePrint of Test 2D Core (for debug)
 metaitem.test_3d_core.name=BluePrint of Test 3D core (for debug)
+
+metaitem.eok_symbol.name=The EOK Symbol
+metaitem.convex_lens.name=Convex Lens
+metaitem.concave_lens.name=Concave Lens
+metaitem.grinded_flint.name=Grinded Flint
+metaitem.chipped_flint.name=Chipped Flint
 
 item.machine_gun.description=Still Developing
 
