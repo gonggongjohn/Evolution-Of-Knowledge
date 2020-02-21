@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
@@ -38,6 +39,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	private Slot invPaperSlot;
 	private int offsetX, offsetY;
 	private int btnPage = 0;
+	private boolean onResearchProgress = false;
 
 	public GUIElementaryResearchTable(ContainerElementaryResearchTable inventorySlotsIn) {
 		super(inventorySlotsIn);
@@ -70,6 +72,13 @@ public class GUIElementaryResearchTable extends GuiContainer {
 				&& this.invPaperSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
 			this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
 			this.drawTexturedModalRect(offsetX + 67, offsetY + 10, 0, 0, 153, 126);
+			if(invPaperSlot.getStack().hasTagCompound() && invPaperSlot.getStack().getTagCompound().hasKey( "data.research")){
+				int[] content = invPaperSlot.getStack().getTagCompound().getIntArray("data.research");
+				for(int i = 0; i < content.length; i++){
+					String text = I18n.format("research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(content[i]) + ".name");
+					mc.fontRenderer.drawString(text, offsetX + 80, offsetY + 20 + i * 10, 0x00BFFF);
+				}
+			}
 		}
 		if (finList != null && !finList.isEmpty() && lastFinList != null && !lastFinList.isEmpty()) {
 			if (finList.size() > lastFinList.size()) {
@@ -78,7 +87,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 					this.buttonList.add(new ButtonElementaryResearchTable(2 + indexNew, finList.get(finList.size() - 1),
 							offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 18, 18, offsetY));
 				}
-				lastFinList = finList;
+				lastFinList = new ArrayList<Integer>(finList);
 			}
 		}
 		GL11.glDisable(GL11.GL_BLEND);
@@ -166,13 +175,14 @@ public class GUIElementaryResearchTable extends GuiContainer {
 					btnPage = 1;
 				}
 			}
-			lastFinList = finList;
+			lastFinList = new ArrayList<Integer>(finList);
 		}
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		super.actionPerformed(button);
+		//Previous Page Button
 		if(button.id == 1){
 			if(btnPage <= 1) return;
 			buttonList.removeIf(index -> index.id >= 3 && index.id <= 10);
@@ -182,6 +192,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 			}
 			btnPage -= 1;
 		}
+		//Next Page Button
 		if(button.id == 2){
 			if(btnPage * 8 >= finList.size()) return;
 			buttonList.removeIf(index -> index.id >= 3 && index.id <= 10);
@@ -191,10 +202,12 @@ public class GUIElementaryResearchTable extends GuiContainer {
 			}
 			btnPage += 1;
 		}
+		//Research Node Button
 		if (button.id >= 3 && button.id <= Math.min(2 + finList.size(), 10)) {
 			int activeResearchID = ((ButtonElementaryResearchTable) button).getResearchId();
 			EOK.getNetwork().sendToServer(new PacketGuiButton(activeResearchID));
 		}
+		//Activate Research Button
 		if (button.id == 0) {
 			ItemStack stack = this.invPaperSlot.getStack();
 			int[] temp;

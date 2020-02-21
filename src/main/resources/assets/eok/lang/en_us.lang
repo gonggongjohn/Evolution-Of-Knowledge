@@ -1,6 +1,8 @@
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=Papyrus
+item.papyrus_used.name=Used Papyrus
+item.papyrus_pile.name=Papyrus Pile
 item.refracting_telescope.name=Refracting Telescope
 item.flint_fragment.name=Flint Fragment
 item.chipped_flint_fragment.name=Chipped Flint Fragment

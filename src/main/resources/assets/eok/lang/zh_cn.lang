@@ -1,6 +1,8 @@
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=莎草纸
+item.papyrus_used.name=莎草纸（使用过的）
+item.papyrus_pile.name=莎草纸（一叠）
 item.refracting_telescope.name=折射望远镜
 item.flint_fragment.name=燧石碎片
 item.chipped_flint_fragment.name=打制过的燧石碎片
