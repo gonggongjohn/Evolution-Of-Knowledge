@@ -2,9 +2,11 @@ package com.gonggongjohn.eok.items;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;

@@ -1,7 +1,21 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.client.gui.*;
-import com.gonggongjohn.eok.inventory.*;
+import com.gonggongjohn.eok.client.gui.GUIBluePrint;
+import com.gonggongjohn.eok.client.gui.GUIEOKManual;
+import com.gonggongjohn.eok.client.gui.GUIElementaryResearchTable;
+import com.gonggongjohn.eok.client.gui.GUIFirstMachine;
+import com.gonggongjohn.eok.client.gui.GUIHayTorchBase;
+import com.gonggongjohn.eok.client.gui.GUIHayTorchBaseLit;
+import com.gonggongjohn.eok.client.gui.GUIMerchant;
+import com.gonggongjohn.eok.client.gui.GUIRefractingTelescope;
+import com.gonggongjohn.eok.client.gui.GUITest2D;
+import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
+import com.gonggongjohn.eok.inventory.ContainerFirstMachine;
+import com.gonggongjohn.eok.inventory.ContainerHayTorchBase;
+import com.gonggongjohn.eok.inventory.ContainerHayTorchBaseLit;
+import com.gonggongjohn.eok.inventory.ContainerMerchant;
+import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

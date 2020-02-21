@@ -1,5 +1,9 @@
 package com.gonggongjohn.eok.items;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.blocks.MultiBlockCompBase;
 import com.gonggongjohn.eok.client.gui.GUIBluePrint;
@@ -7,19 +11,20 @@ import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
+
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class BluePrintMetaItem extends MaterialMetaItem {

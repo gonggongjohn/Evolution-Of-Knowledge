@@ -1,88 +1,61 @@
 package com.gonggongjohn.eok.capabilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
-import net.minecraft.nbt.NBTBase;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
+public class CapabilityResearchData implements IResearchData, ICapabilitySerializable<NBTTagCompound> {
+	public static final ResourceLocation KEY = new ResourceLocation(EOK.MODID, "research_data");
 
-public class CapabilityResearchData {
-    public static class Storage implements Capability.IStorage<IResearchData>{
-        @Nullable
-        @Override
-        public NBTBase writeNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side){
-            NBTTagCompound compound = new NBTTagCompound();
-            ArrayList<Integer> finList = instance.getFinishedResearch();
-            for(int i = 0; i < finList.size(); i++) {
-                compound.setInteger("" + i, finList.get(i));
-            }
-            return compound;
-        }
+	private List<Integer> data = new ArrayList<>();
 
-        @Override
-        public void readNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side, NBTBase nbt){
-            NBTTagCompound compound = (NBTTagCompound) nbt;
-            ArrayList<Integer> finList = new ArrayList<Integer>();
-            if(compound != null && compound.getSize() != 0){
-                for(int i =0; i < compound.getSize(); i++){
-                    finList.add(compound.getInteger("" + i));
-                }
-            }
-            instance.setFinishedResearch(finList);
-        }
-    }
+	@Override
+	public List<Integer> getFinishedResearch() {
+		return this.data;
+	}
 
-    public static class Implementation implements IResearchData{
-        private ArrayList<Integer> finList = new ArrayList<>();
+	@Override
+	public void setFinishedResearch(List<Integer> list) {
+		this.data = list;
+	}
 
-        @Override
-        public ArrayList<Integer> getFinishedResearch(){
-            return this.finList;
-        }
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityHandler.capResearchData;
+	}
 
-        @Override
-        public void setFinishedResearch(ArrayList<Integer> finList) {
-            this.finList = finList;
-        }
-    }
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		return capability == CapabilityHandler.capResearchData ? (T) this : null;
+	}
 
-    public static class ProvidePlayer implements ICapabilitySerializable<NBTTagCompound>, ICapabilityProvider{
-        private IResearchData researchData = new Implementation();
-        private Capability.IStorage<IResearchData> storage = CapabilityHandler.capResearchData.getStorage();
+	@Override
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		List<Integer> data = this.getFinishedResearch();
+		int[] array = new int[data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			array[i] = data.get(i);
+		}
+		nbt.setIntArray("data", array);
+		return nbt;
+	}
 
-        @Override
-        public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-            return CapabilityHandler.capResearchData.equals(capability);
-        }
-
-        @Nullable
-        @Override
-        public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-            if(CapabilityHandler.capResearchData.equals(capability)){
-                @SuppressWarnings("unchecked")
-                T result = (T) researchData;
-                return result;
-            }
-            return null;
-        }
-
-        @Override
-        public NBTTagCompound serializeNBT() {
-            NBTTagCompound compound = new NBTTagCompound();
-            compound.setTag("finishedResearch", storage.writeNBT(CapabilityHandler.capResearchData, researchData, null));
-            return compound;
-        }
-
-        @Override
-        public void deserializeNBT(NBTTagCompound nbt) {
-            NBTTagCompound compound = nbt.getCompoundTag("finishedResearch");
-            storage.readNBT(CapabilityHandler.capResearchData, researchData, null, compound);
-        }
-    }
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
+		int[] array = nbt.getIntArray("data");
+		List<Integer> data = new ArrayList<Integer>();
+		for (int i = 0; i < array.length; i++) {
+			data.add(array[i]);
+		}
+		this.setFinishedResearch(data);
+	}
 }

@@ -1,13 +1,14 @@
 package com.gonggongjohn.eok.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import com.gonggongjohn.eok.items.BluePrintMetaItem;
+
 import gregtech.api.items.metaitem.MetaItem;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BluePrintDict {
     public Map<MetaItem<?>.MetaValueItem, String[]> textureMap=new HashMap<>();

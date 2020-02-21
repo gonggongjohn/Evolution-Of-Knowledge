@@ -1,10 +1,24 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.blocks.*;
-import net.minecraft.block.Block;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gonggongjohn.eok.blocks.BlockBasketBall;
+import com.gonggongjohn.eok.blocks.BlockDecomposedHaystack;
+import com.gonggongjohn.eok.blocks.BlockDriedHaystack;
+import com.gonggongjohn.eok.blocks.BlockElementaryResearchTable;
+import com.gonggongjohn.eok.blocks.BlockFirstMachine;
+import com.gonggongjohn.eok.blocks.BlockHayTorchBase;
+import com.gonggongjohn.eok.blocks.BlockHayTorchBaseLit;
+import com.gonggongjohn.eok.blocks.BlockHaystack;
+import com.gonggongjohn.eok.blocks.BlockStick;
+import com.gonggongjohn.eok.blocks.BlockStoneRock;
+import com.gonggongjohn.eok.blocks.BlockStoneTable;
+import com.gonggongjohn.eok.blocks.BlockTest2DCore;
+import com.gonggongjohn.eok.blocks.BlockTest3DCore;
+import com.gonggongjohn.eok.blocks.BlockTwoBarrelVacuumPump;
+
+import net.minecraft.block.Block;
 
 public class BlockHandler {
     public static final List<Block> blocks = new ArrayList<Block>();

@@ -6,6 +6,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.entity.EntityBullet;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,9 +1,9 @@
 package com.gonggongjohn.eok.utils;
 
+import javax.vecmath.Matrix3d;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3i;
-
-import javax.vecmath.Matrix3d;
 
 public class MathUtils {
     private Matrix3d transEast = new Matrix3d(0, 0, -1, 0, 1, 0, 1, 0, 0);

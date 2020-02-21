@@ -1,13 +1,15 @@
 package com.gonggongjohn.eok.client.gui;
 
+import java.io.IOException;
+
+import org.lwjgl.opengl.GL11;
+
 import com.gonggongjohn.eok.EOK;
+
 import gregtech.api.items.metaitem.MetaItem;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
 
 public class GUIBluePrint extends GuiScreen {
     private GuiButton previous;

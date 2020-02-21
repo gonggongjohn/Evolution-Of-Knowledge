@@ -1,6 +1,9 @@
+
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=Papyrus
+item.papyrus_used.name=Used Papyrus
+item.papyrus_pile.name=Papyrus Pile
 item.refracting_telescope.name=Refracting Telescope
 item.flint_fragment.name=Flint Fragment
 item.chipped_flint_fragment.name=Chipped Flint Fragment
@@ -8,9 +11,6 @@ item.polished_flint_fragment.name=Polished Flint Fragment
 item.rough_flint_spear.name=Rough Flint Spear
 item.rough_flint_axe.name=Rough Flint Axe
 
-item.convex_lens.name=Convex Lens
-item.concave_lens.name=Concave Lens
-item.eok_symbol.name=The EOK Symbol
 item.plant_fiber.name=Plant Fiber
 item.short_stick.name=Short Stick
 item.tube.name=Tube
@@ -36,6 +36,12 @@ item.sword.name=Sword
 metaitem.elementary_research_table.name=BluePrint of Elementary Research Table
 metaitem.test_2d_core.name=BluePrint of Test 2D Core (for debug)
 metaitem.test_3d_core.name=BluePrint of Test 3D core (for debug)
+
+metaitem.eok_symbol.name=The EOK Symbol
+metaitem.convex_lens.name=Convex Lens
+metaitem.concave_lens.name=Concave Lens
+metaitem.grinded_flint.name=Grinded Flint
+metaitem.chipped_flint.name=Chipped Flint
 
 item.machine_gun.description=Still Developing
 
@@ -73,6 +79,7 @@ materials.CHIPPED_FLINT.name=Chipped Flint
 messages.torcherino_crafted.msg=§4Do you really want to use it?
 messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
+message.documentrenderer.error=An error occurred when loading document.\nSee latest.log or debug.log for more information.
 
 research.gui.pre=Research Node:
 research.root.name=Root Research

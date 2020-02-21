@@ -3,7 +3,21 @@ package com.gonggongjohn.eok.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gonggongjohn.eok.items.*;
+import com.gonggongjohn.eok.items.ItemChippedFlintFragment;
+import com.gonggongjohn.eok.items.ItemEOKManual;
+import com.gonggongjohn.eok.items.ItemFireStick;
+import com.gonggongjohn.eok.items.ItemFlintFragment;
+import com.gonggongjohn.eok.items.ItemHayTorch;
+import com.gonggongjohn.eok.items.ItemMachineGun;
+import com.gonggongjohn.eok.items.ItemMaterialBase;
+import com.gonggongjohn.eok.items.ItemPapyrus;
+import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
+import com.gonggongjohn.eok.items.ItemRefractingTelescope;
+import com.gonggongjohn.eok.items.ItemRoughFlintSpear;
+import com.gonggongjohn.eok.items.ItemVirus;
+import com.gonggongjohn.eok.items.MetaItemTool;
+import com.gonggongjohn.eok.items.Torcherino;
+
 import net.minecraft.item.Item;
 
 public class ItemHandler {
@@ -23,8 +37,6 @@ public class ItemHandler {
 	public static final Item EOKManual = new ItemEOKManual();
 
 	public static final Item metaTool = new MetaItemTool();
-	//public static final Item convexLens = new ItemMaterialBase("convex_lens");
-	//public static final Item concaveLens = new ItemMaterialBase("concave_lens");
 	public static final Item eokSymbol = new ItemMaterialBase("eok_symbol");
 	public static final Item plantFiber = new ItemMaterialBase("plant_fiber");
 	public static final Item shortStick = new ItemMaterialBase("short_stick");

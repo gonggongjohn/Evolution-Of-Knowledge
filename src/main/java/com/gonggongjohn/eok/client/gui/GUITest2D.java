@@ -1,10 +1,11 @@
 package com.gonggongjohn.eok.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import com.gonggongjohn.eok.EOK;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.opengl.GL11;
 
 public class GUITest2D extends GuiScreen {
     private ResourceLocation background = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/book.png");

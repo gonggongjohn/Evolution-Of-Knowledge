@@ -1,6 +1,8 @@
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=Papier Papyus
+item.papyrus_used.name=Used Papyrus
+item.papyrus_pile.name=Papyrus Pile
 item.refracting_telescope.name=Lunette astronomique
 item.flint_fragment.name=pièce du silex
 item.chipped_flint_fragment.name=Galet Taillé
@@ -73,6 +75,7 @@ materials.CHIPPED_FLINT.name=Silex Taillé
 messages.torcherino_crafted.msg=§4你真的要使用它吗？
 messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
+message.documentrenderer.error=加载文档时发生错误。\n查看latest.log或debug.log获取详细信息。
 
 research.gui.pre=Noeud de Recherche：
 research.root.name=Base de Recherche

@@ -4,6 +4,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.EnumTool;
 import com.gonggongjohn.eok.utils.IHasModel;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,8 +31,10 @@ public class MetaItemTool extends Item implements IHasModel {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        for(EnumTool tool : EnumTool.values()){
-            items.add(new ItemStack(this, 1, tool.getMeta()));
+        if(tab == EOK.tabEOK) {
+            for (EnumTool tool : EnumTool.values()) {
+                items.add(new ItemStack(this, 1, tool.getMeta()));
+            }
         }
     }
 
