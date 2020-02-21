@@ -27,7 +27,7 @@ public class GuiScreenTest extends MetaGuiScreen {
 		this.setTextureSize(422, 800);
 		this.setWindowSize(401, 281);
 		this.setTitle("");
-		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, new ResourceLocation(EOK.MODID + ":manual/index/index.edt"));
+		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, EOK.MODID + ":manual/index/index.edt");
 		pages = renderer.getPages();
 	}
 
