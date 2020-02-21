@@ -33,7 +33,8 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
 	private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
 	private static final ResourceLocation TEXTUREPAPER = new ResourceLocation(TEXTURE_PAPER);
-	private List<Integer> lastFinList, finList = new ArrayList<Integer>();
+	private List<Integer> lastFinList = new ArrayList<Integer>();
+	private List<Integer> finList = new ArrayList<Integer>();
 	private Slot invPaperSlot;
 	private int offsetX, offsetY;
 	private int btnPage = 0;
@@ -71,13 +72,15 @@ public class GUIElementaryResearchTable extends GuiContainer {
 			this.drawTexturedModalRect(offsetX + 67, offsetY + 10, 0, 0, 153, 126);
 		}
 		if (finList != null && !finList.isEmpty() && lastFinList != null && !lastFinList.isEmpty()) {
-			if (finList.size() > lastFinList.size() || this.buttonList.size() < (finList.size() + 1)) {
-				int indexNew = finList.size();
-				this.buttonList.add(new ButtonElementaryResearchTable(indexNew, finList.get(indexNew - 1),
-						offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 18, 18, offsetY));
+			if (finList.size() > lastFinList.size()) {
+				if(finList.size() <= btnPage * 8) {
+					int indexNew = finList.size() - (btnPage - 1) * 8;
+					this.buttonList.add(new ButtonElementaryResearchTable(2 + indexNew, finList.get(finList.size() - 1),
+							offsetX + calcButtonLeftPos(indexNew), offsetY + calcButtonTopPos(indexNew), 18, 18, offsetY));
+				}
+				lastFinList = finList;
 			}
 		}
-		lastFinList = finList;
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
@@ -163,7 +166,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 					btnPage = 1;
 				}
 			}
-
+			lastFinList = finList;
 		}
 	}
 
