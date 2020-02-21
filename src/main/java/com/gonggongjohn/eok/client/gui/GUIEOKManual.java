@@ -1,15 +1,18 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.gonggongjohn.eok.EOK;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import org.lwjgl.opengl.GL11;
+
+import com.gonggongjohn.eok.EOK;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
 
 /*
  * La classse représantant l'interface graphique de manuel d'EOK

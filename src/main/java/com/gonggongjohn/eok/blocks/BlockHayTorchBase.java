@@ -6,6 +6,7 @@ import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.tile.TEHayTorchBase;
 import com.gonggongjohn.eok.utils.IHasModel;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

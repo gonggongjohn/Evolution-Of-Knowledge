@@ -1,6 +1,7 @@
 package com.gonggongjohn.eok.inventory;
 
 import com.gonggongjohn.eok.handlers.ItemHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;

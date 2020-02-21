@@ -1,12 +1,13 @@
 package com.gonggongjohn.eok.utils;
 
-import com.gonggongjohn.eok.handlers.BlockHandler;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import com.gonggongjohn.eok.handlers.BlockHandler;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 public class MultiBlockDict {
     public HashMap<String, ArrayList<ComponentRelation>> structureDictLinear = new HashMap<String, ArrayList<ComponentRelation>>();

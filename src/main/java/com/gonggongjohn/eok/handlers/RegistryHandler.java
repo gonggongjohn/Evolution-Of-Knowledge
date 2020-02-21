@@ -7,6 +7,7 @@ import com.gonggongjohn.eok.tile.TEHayTorchBase;
 import com.gonggongjohn.eok.tile.TEHayTorchBaseLit;
 import com.gonggongjohn.eok.tile.TEHaystack;
 import com.gonggongjohn.eok.utils.IHasModel;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;

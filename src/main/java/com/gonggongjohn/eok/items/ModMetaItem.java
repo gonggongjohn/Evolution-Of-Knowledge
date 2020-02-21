@@ -2,13 +2,12 @@ package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
-import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 
 public class ModMetaItem extends MaterialMetaItem {
 	public ModMetaItem() {

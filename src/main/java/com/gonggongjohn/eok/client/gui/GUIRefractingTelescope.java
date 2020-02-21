@@ -1,17 +1,19 @@
 package com.gonggongjohn.eok.client.gui;
 
+import java.io.IOException;
+
+import org.lwjgl.opengl.GL11;
+
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import com.gonggongjohn.eok.network.PacketGuiButton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
 
 public class GUIRefractingTelescope extends GuiContainer {
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";

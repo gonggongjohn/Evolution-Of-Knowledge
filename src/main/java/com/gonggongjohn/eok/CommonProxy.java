@@ -1,6 +1,10 @@
 package com.gonggongjohn.eok;
 
-import com.gonggongjohn.eok.handlers.*;
+import com.gonggongjohn.eok.handlers.ConfigHandler;
+import com.gonggongjohn.eok.handlers.EntityHandler;
+import com.gonggongjohn.eok.handlers.GUIHandler;
+import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+import com.gonggongjohn.eok.handlers.TradeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

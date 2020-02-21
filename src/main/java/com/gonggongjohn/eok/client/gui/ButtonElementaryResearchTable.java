@@ -1,12 +1,14 @@
 package com.gonggongjohn.eok.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import com.gonggongjohn.eok.EOK;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class ButtonElementaryResearchTable extends GuiButton {
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/elementary_research_table_components.png";
