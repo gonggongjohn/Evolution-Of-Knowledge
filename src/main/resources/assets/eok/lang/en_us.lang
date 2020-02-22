@@ -79,6 +79,7 @@ materials.CHIPPED_FLINT.name=Chipped Flint
 messages.torcherino_crafted.msg=§4Do you really want to use it?
 messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
+message.documentrenderer.error=An error occurred when loading document.\nSee latest.log or debug.log for more information.
 
 research.gui.pre=Research Node:
 research.root.name=Root Research
