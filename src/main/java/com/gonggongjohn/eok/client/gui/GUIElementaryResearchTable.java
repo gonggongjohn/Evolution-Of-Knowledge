@@ -36,7 +36,7 @@ public class GUIElementaryResearchTable extends GuiContainer {
 	private static final ResourceLocation TEXTUREPAPER = new ResourceLocation(TEXTURE_PAPER);
 	private List<Integer> lastFinList = new ArrayList<Integer>();
 	private List<Integer> finList = new ArrayList<Integer>();
-	private Slot invPaperSlot;
+	private Slot invPaperInputSlot, invPaperOutputSlot;
 	private int offsetX, offsetY;
 	private int btnPage = 0;
 	private boolean onResearchProgress = false;
@@ -45,7 +45,8 @@ public class GUIElementaryResearchTable extends GuiContainer {
 		super(inventorySlotsIn);
 		this.xSize = 256;
 		this.ySize = 166;
-		this.invPaperSlot = inventorySlotsIn.getPaperSlot();
+		this.invPaperInputSlot = inventorySlotsIn.getPaperInputSlot();
+		this.invPaperOutputSlot = inventorySlotsIn.getPaperOutputSlot();
 	}
 
 	@Override
@@ -68,12 +69,12 @@ public class GUIElementaryResearchTable extends GuiContainer {
 		this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
 		this.mc.getTextureManager().bindTexture(TEXTURECOMP);
 		this.drawTexturedModalRect(offsetX + 159, offsetY + 145, 0, 22, 88, 8);
-		if (this.invPaperSlot != null
-				&& this.invPaperSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
+		if (this.invPaperInputSlot != null
+				&& this.invPaperInputSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
 			this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
 			this.drawTexturedModalRect(offsetX + 67, offsetY + 10, 0, 0, 153, 126);
-			if(invPaperSlot.getStack().hasTagCompound() && invPaperSlot.getStack().getTagCompound().hasKey( "data.research")){
-				int[] content = invPaperSlot.getStack().getTagCompound().getIntArray("data.research");
+			if(invPaperInputSlot.getStack().hasTagCompound() && invPaperInputSlot.getStack().getTagCompound().hasKey( "data.research")){
+				int[] content = invPaperInputSlot.getStack().getTagCompound().getIntArray("data.research");
 				for(int i = 0; i < content.length; i++){
 					String text = I18n.format("research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(content[i]) + ".name");
 					mc.fontRenderer.drawString(text, offsetX + 80, offsetY + 20 + i * 10, 0x00BFFF);
@@ -209,19 +210,18 @@ public class GUIElementaryResearchTable extends GuiContainer {
 		}
 		//Activate Research Button
 		if (button.id == 0) {
-			ItemStack stack = this.invPaperSlot.getStack();
+			ItemStack stack = this.invPaperOutputSlot.getStack();
 			int[] temp;
 			if (stack == null || stack.isEmpty())
 				return;
 			NBTTagCompound compound = stack.getTagCompound();
-			if (compound == null)
-				return;
+			if (compound == null) return;
 			else {
 				temp = compound.getIntArray("data.research");
 				HashSet<Integer> relation = new HashSet<Integer>();
 				int result;
-				for (int i = 0; i < temp.length; i++) {
-					relation.add(temp[i]);
+				for (int value : temp) {
+					relation.add(value);
 				}
 				if (EOK.researchDict.researchRelationDict.containsKey(relation)) {
 					result = EOK.researchDict.researchRelationDict.get(relation);
