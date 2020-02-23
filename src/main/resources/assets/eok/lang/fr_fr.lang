@@ -1,3 +1,4 @@
+
 commands.eoktestscreen.usage=eoktestscreen
 
 item.papyrus.name=Papier Papyus
@@ -10,9 +11,6 @@ item.polished_flint_fragment.name=Galet Aigu
 item.rough_flint_spear.name=Lance avec tête en silex
 item.rough_flint_axe.name=Hache avec tête en silex
 
-item.convex_lens.name=lentille convexe
-item.concave_lens.name=lentille concave
-item.eok_symbol.name=Symbole d'EOK
 item.plant_fiber.name=Fibre Végétale
 item.short_stick.name=Bâton Courts
 item.tube.name=Tube à Essai
@@ -38,6 +36,12 @@ item.sword.name=剑
 metaitem.elementary_research_table.name=研究台蓝图
 metaitem.test_2d_core.name=二维多方块结构蓝图（测试用）
 metaitem.test_3d_core.name=三维多方块结构蓝图（测试用）
+
+metaitem.eok_symbol.name=Symbole d'EOK
+metaitem.convex_lens.name=lentille convexe
+metaitem.concave_lens.name=lentille concave
+metaitem.grinded_flint.name=磨制燧石
+metaitem.chipped_flint.name=打制燧石
 
 item.machine_gun.description=en construction ...
 
@@ -95,4 +99,3 @@ entity.entity_zijing.name=zijing_233
 
 gui.merchant.title=Marchand
 gui.merchant.button.buy=Acheter
-
