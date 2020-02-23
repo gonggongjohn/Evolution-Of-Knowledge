@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import com.gonggongjohn.eok.network.PacketSlotChange;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
@@ -69,6 +70,10 @@ public class GUIElementaryResearchTable extends GuiContainer {
 		this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
 		this.mc.getTextureManager().bindTexture(TEXTURECOMP);
 		this.drawTexturedModalRect(offsetX + 159, offsetY + 145, 0, 22, 88, 8);
+		if(this.invPaperInputSlot.getStack().getItemDamage() != 0){
+			int slotID = invPaperInputSlot.slotNumber;
+			EOK.getNetwork().sendToServer(new PacketSlotChange(slotID));
+		}
 		if (this.invPaperInputSlot != null
 				&& this.invPaperInputSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
 			this.mc.getTextureManager().bindTexture(TEXTUREPAPER);

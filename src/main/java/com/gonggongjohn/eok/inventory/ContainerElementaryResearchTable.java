@@ -17,7 +17,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerElementaryResearchTable extends Container implements IButtonHandler {
+public class ContainerElementaryResearchTable extends Container implements IButtonHandler, ISlotHandler{
     protected Slot paperInputSlot;
     protected Slot penSlot;
     protected Slot inkSlot;
@@ -58,73 +58,78 @@ public class ContainerElementaryResearchTable extends Container implements IButt
         }
     }
 
-
     @Override
-    public void putStackInSlot(int slotID, ItemStack stack) {
+    public void onSlotChange(int slotID) {
         if (slotID == this.paperInputSlot.slotNumber) {
+            ItemStack stackInput = this.paperInputSlot.getStack();
             ItemStack stackOutput = this.paperOutputSlot.getStack();
             //Proceed inputSlot
-            if (stack.getItemDamage() == 0) super.putStackInSlot(slotID, stack);
-                //Dump procedure when used paper is in inputSlot
-            else if (stack.getItemDamage() == 1) {
+            //Dump procedure when used paper is in inputSlot
+            if (stackInput.getItemDamage() == 1) {
                 NBTTagCompound tempCompound = new NBTTagCompound();
                 if (stackOutput.isEmpty()) {
                     ItemStack tempStack = new ItemStack(ItemHandler.papyrus, 1, 2);
                     tempCompound.setInteger("pageNum", 1);
-                    if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("data.research")) {
-                        int[] tempResearches = stack.getTagCompound().getIntArray("data.research");
+                    if (stackInput.getTagCompound() != null && stackInput.getTagCompound().hasKey("data.research")) {
+                        int[] tempResearches = stackInput.getTagCompound().getIntArray("data.research");
                         tempCompound.setIntArray("data.research", tempResearches);
                     }
                     tempStack.setTagCompound(tempCompound);
                     stackOutput = tempStack;
+                    this.paperOutputSlot.putStack(stackOutput);
                 } else {
                     if (stackOutput.getTagCompound() != null) {
                         int tempPageNum = stackOutput.getTagCompound().getInteger("pageNum");
                         int[] tempResearchesOutput = stackOutput.getTagCompound().getIntArray("data.research");
                         tempCompound.setInteger("pageNum", tempPageNum + 1);
-                        if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("data.research")) {
-                            int[] tempResearchesInput = stack.getTagCompound().getIntArray("data.research");
+                        if (stackInput.getTagCompound() != null && stackInput.getTagCompound().hasKey("data.research")) {
+                            int[] tempResearchesInput = stackInput.getTagCompound().getIntArray("data.research");
                             int[] tempResult = new int[tempResearchesInput.length + tempResearchesOutput.length];
                             System.arraycopy(tempResearchesOutput, 0, tempResult, 0, tempResearchesInput.length);
                             System.arraycopy(tempResearchesInput, 0, tempResult, tempResearchesOutput.length, tempResearchesInput.length);
                             tempCompound.setIntArray("data.research", tempResult);
                         }
                         stackOutput.setTagCompound(tempCompound);
+                        this.paperOutputSlot.putStack(stackOutput);
                     }
                 }
+                this.paperInputSlot.putStack(new ItemStack(Items.AIR));
             }
             //Dump procedure when used paper pile is in inputSlot
-            else if (stack.getItemDamage() == 2) {
+            else if (stackInput.getItemDamage() == 2) {
                 NBTTagCompound tempCompound = new NBTTagCompound();
                 if (stackOutput.isEmpty()) {
                     ItemStack tempStack = new ItemStack(ItemHandler.papyrus, 1, 2);
-                    if (stack.getTagCompound() != null) {
-                        tempCompound.setInteger("pageNum", stack.getTagCompound().getInteger("pageNum"));
-                        if (stack.getTagCompound().hasKey("data.research")) {
-                            int[] tempResearches = stack.getTagCompound().getIntArray("data.research");
+                    if (stackInput.getTagCompound() != null) {
+                        tempCompound.setInteger("pageNum", stackInput.getTagCompound().getInteger("pageNum"));
+                        if (stackInput.getTagCompound().hasKey("data.research")) {
+                            int[] tempResearches = stackInput.getTagCompound().getIntArray("data.research");
                             tempCompound.setIntArray("data.research", tempResearches);
                         }
                         tempStack.setTagCompound(tempCompound);
                         stackOutput = tempStack;
+                        this.paperOutputSlot.putStack(stackOutput);
                     }
                 } else {
-                    if (stackOutput.getTagCompound() != null && stack.getTagCompound() != null) {
-                        int tempPageNumInput = stack.getTagCompound().getInteger("pageNum");
+                    if (stackOutput.getTagCompound() != null && stackInput.getTagCompound() != null) {
+                        int tempPageNumInput = stackInput.getTagCompound().getInteger("pageNum");
                         int tempPageNumOutput = stackOutput.getTagCompound().getInteger("pageNum");
                         int[] tempResearchesOutput = stackOutput.getTagCompound().getIntArray("data.research");
                         tempCompound.setInteger("pageNum", tempPageNumInput + tempPageNumOutput);
-                        if (stack.getTagCompound().hasKey("data.research")) {
-                            int[] tempResearchesInput = stack.getTagCompound().getIntArray("data.research");
+                        if (stackInput.getTagCompound().hasKey("data.research")) {
+                            int[] tempResearchesInput = stackInput.getTagCompound().getIntArray("data.research");
                             int[] tempResult = new int[tempResearchesInput.length + tempResearchesOutput.length];
                             System.arraycopy(tempResearchesOutput, 0, tempResult, 0, tempResearchesInput.length);
                             System.arraycopy(tempResearchesInput, 0, tempResult, tempResearchesOutput.length, tempResearchesInput.length);
                             tempCompound.setIntArray("data.research", tempResult);
                         }
                         stackOutput.setTagCompound(tempCompound);
+                        this.paperOutputSlot.putStack(stackOutput);
                     }
                 }
+                this.paperInputSlot.putStack(new ItemStack(Items.AIR));
             }
-        } else super.putStackInSlot(slotID, stack);
+        }
     }
 
     @Override
@@ -195,4 +200,5 @@ public class ContainerElementaryResearchTable extends Container implements IButt
     private boolean questInputSlot(ItemStack inputStack) {
         return !inputStack.isEmpty() && inputStack.getItemDamage() == 0;
     }
+
 }
