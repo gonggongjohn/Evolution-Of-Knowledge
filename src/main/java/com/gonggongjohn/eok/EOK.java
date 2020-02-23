@@ -1,16 +1,11 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.network.*;
 import org.apache.logging.log4j.Logger;
 
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
-import com.gonggongjohn.eok.network.PacketGUIMerchant;
-import com.gonggongjohn.eok.network.PacketGuiButton;
-import com.gonggongjohn.eok.network.PacketInverseReseachData;
-import com.gonggongjohn.eok.network.PacketPlayerState;
-import com.gonggongjohn.eok.network.PacketResearchData;
-import com.gonggongjohn.eok.network.PacketTestGuiScreen;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 import com.gonggongjohn.eok.utils.BluePrintDict;
 import com.gonggongjohn.eok.utils.DocumentUtils;
@@ -81,6 +76,7 @@ public class EOK {
 		network.registerMessage(new PacketGUIMerchant.Handler(), PacketGUIMerchant.class, 5, Side.SERVER);
 		network.registerMessage(new PacketInverseReseachData.Handler(), PacketInverseReseachData.class, 6, Side.SERVER);
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
+		network.registerMessage(new PacketSlotChange.Handler(), PacketSlotChange.class, 8, Side.SERVER);
 	}
 
 	@EventHandler
