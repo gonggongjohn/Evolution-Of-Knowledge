@@ -81,6 +81,8 @@ messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
 message.documentrenderer.error=An error occurred when loading document.\nSee latest.log or debug.log for more information.
 
+manual.error=Error loading document.
+
 research.gui.pre=Research Node:
 research.root.name=Root Research
 research.elementary_arithmetic.name=Math:Elementary Arithmetic

@@ -81,6 +81,8 @@ messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
 message.documentrenderer.error=加载文档时发生错误。\n查看latest.log或debug.log获取详细信息。
 
+manual.error=加载文档时发生错误。
+
 research.gui.pre=Noeud de Recherche：
 research.root.name=Base de Recherche
 research.elementary_arithmetic.name=Mathématiques：Calcul arithmétique

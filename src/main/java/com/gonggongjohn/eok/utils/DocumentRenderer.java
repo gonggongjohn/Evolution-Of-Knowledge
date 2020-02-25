@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 
 public class DocumentRenderer {
 	private final int org1X;
@@ -56,12 +57,15 @@ public class DocumentRenderer {
 		this.resourceManager = Minecraft.getMinecraft().getResourceManager();
 		this.documentLocation = new ResourceLocation(documentPath);
 		if(!(available = read())) {
-			Minecraft.getMinecraft().player.sendChatMessage(I18n.format("message.documentrenderer.error"));
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
 		}
 	}
 	
 	private void init() {
 		tokenMap.put("center", this::addCenteredText);
+		tokenMap.put("comment", (s) -> true);
+		tokenMap.put("image", this::addImage);
+		tokenMap.put("drawline", this::addLine);
 	}
 	
 	public static enum Side {
@@ -101,7 +105,8 @@ public class DocumentRenderer {
 			}
 			lineNumber++;
 		}
-		if(!processPages()) return false;
+		logger.debug("Processing pages");
+		if(!buildDocument()) return false;
 		logger.debug("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
 		return true;
 	}
@@ -122,11 +127,6 @@ public class DocumentRenderer {
 		if(!line.isEmpty()) {
 			elements.add(new Element.TextLine(line));
 		}
-	}
-	
-	private boolean addCenteredText(String[] args) {
-		// TODO
-		return true;
 	}
 	
 	private boolean processLine(String line) {
@@ -171,35 +171,113 @@ public class DocumentRenderer {
 		return true;
 	}
 	
-	private boolean processPages() {
-		//TODO
+	private boolean buildDocument() {
+		int currentY = 0;
+		List<Element> currentElements = new ArrayList<Element>();
+		for(Element element : elements) {
+			if(element.getHeight() > this.height) {
+				logger.error("This element's size exceeds the limit({}*{})", this.width, this.height);
+				return false;
+			}
+			if(currentY + element.getHeight() >= this.height) {
+				pages.add(new Page(new ArrayList<Element>(currentElements)));
+				currentElements.clear();
+				currentElements.add(element);
+			} else {
+				currentElements.add(element);
+			}
+		}
+		if(!currentElements.isEmpty()) {
+			pages.add(new Page(new ArrayList<Element>(currentElements)));
+			currentElements.clear();
+		}
+		documentIn = new Document(pages);
+		return true;
+	}
+	
+	private boolean addCenteredText(String[] args) {
+		if(args.length != 1) {
+			logger.warn("Illegal Arguments: Line {}: There must be only one argument.");
+			return false;
+		}
+		elements.add(new Element.CenteredText(args[0]));
+		return true;
+	}
+	
+	/* {path, width, height} */
+	private boolean addImage(String[] args) {
+		if(args.length != 3) {
+			logger.warn("Illegal Arguments: Line {}: There must be only 3 argument.");
+			return false;
+		}
+		try {
+			elements.add(new Element.Image(new ResourceLocation(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2])));
+		} catch(Exception e) {
+			logger.warn("Syntax error at line {}.", lineNumber);
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean addLine(String[] args) {
+		// TODO
 		return true;
 	}
 
 	public int getPages() {
-		// TODO 自动生成的方法存根
-		return 0;
+		return pages.size();
 	}
 
-	public void draw(int pageIndex, Side left, int offsetX, int offsetY) {
+	public void draw(int pageIndex, Side side, int offsetX, int offsetY) {
+		if(!available) {
+			if(side == Side.LEFT) {
+				fontRenderer.drawString(I18n.format("manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
+			}
+			return;
+		}
 		// TODO 自动生成的方法存根
+		int originX;
+		int originY;
+		switch(side) {
+		case LEFT:
+			originX = offsetX + org1X;
+			originY = offsetY + org1Y;
+			break;
+		case RIGHT:
+			originX = offsetX + org2X;
+			originY = offsetY + org2Y;
+			break;
+		}
 	}
 	
 	private static final class Document {
 		
+		private final List<Page> pages;
+
+		public Document(List<Page> pages) {
+			this.pages = pages;
+		}
 	}
 	
 	private static final class Page {
 		
+		private final List<Element> elements;
+
+		public Page(List<Element> elements) {
+			this.elements = elements;
+		}
 	}
 	
-	private static class Element {
-		
-		protected Type type = Type.NONE;
+	private static abstract class Element {
 		
 		private static enum Type {
 			NONE, TEXTLINE, CENTERED_TEXT, IMAGE, LINE, ITEM, CRAFTING
 		}
+		
+		protected abstract Type getType();
+		
+		protected abstract int getHeight();
 		
 		private static class TextLine extends Element {
 			
@@ -207,7 +285,16 @@ public class DocumentRenderer {
 			
 			private TextLine(String str) {
 				this.str = str;
-				this.type = Type.TEXTLINE;
+			}
+
+			@Override
+			protected Type getType() {
+				return Type.TEXTLINE;
+			}
+
+			@Override
+			protected int getHeight() {
+				return 10;
 			}
 		}
 		
@@ -217,7 +304,16 @@ public class DocumentRenderer {
 			
 			private CenteredText(String str) {
 				this.str = str;
-				this.type = Type.CENTERED_TEXT;
+			}
+
+			@Override
+			protected Type getType() {
+				return Type.CENTERED_TEXT;
+			}
+
+			@Override
+			protected int getHeight() {
+				return 10;
 			}
 		}
 		
@@ -231,7 +327,16 @@ public class DocumentRenderer {
 				this.location = location;
 				this.width = width;
 				this.height = height;
-				this.type = Type.IMAGE;
+			}
+
+			@Override
+			protected Type getType() {
+				return Type.IMAGE;
+			}
+
+			@Override
+			protected int getHeight() {
+				return height;
 			}
 		}
 		
@@ -251,15 +356,48 @@ public class DocumentRenderer {
 				this.y2 = y2;
 				this.width = width;
 				this.color = color;
-				this.type = type.LINE;
+			}
+
+			@Override
+			protected Type getType() {
+				return Type.LINE;
+			}
+
+			@Override
+			protected int getHeight() {
+				return 0;
 			}
 		}
 		
 		private static class Item extends Element {
+
+			@Override
+			protected Type getType() {
+				// TODO 自动生成的方法存根
+				return null;
+			}
+
+			@Override
+			protected int getHeight() {
+				// TODO 自动生成的方法存根
+				return 0;
+			}
 			// TODO
 		}
 		
 		private static class Crafting extends Element {
+
+			@Override
+			protected Type getType() {
+				// TODO 自动生成的方法存根
+				return null;
+			}
+
+			@Override
+			protected int getHeight() {
+				// TODO 自动生成的方法存根
+				return 0;
+			}
 			// TODO
 		}
 		
