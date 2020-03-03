@@ -1,6 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import java.util.List;
+import java.util.Random;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
@@ -10,18 +11,21 @@ import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.network.PacketPlayerState;
 import com.gonggongjohn.eok.network.PacketResearchData;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -32,13 +36,54 @@ import net.minecraftforge.event.entity.player.PlayerEvent.Clone;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-@Mod.EventBusSubscriber(modid = EOK.MODID)
+@EventBusSubscriber(modid = EOK.MODID)
 public class EventHandlerServer {
+	@SubscribeEvent
+	public static void onStoneHarvestBlock(HarvestDropsEvent e) {
+		if (e.getHarvester() != null) {
+			EntityPlayer player = e.getHarvester();
+			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+			if (MetaItemsHandler.GRINDED_FLINT.isItemEqual(stack)) {
+				Block block = e.getState().getBlock();
+				Random rand = new Random(System.currentTimeMillis());
+				if (block == Blocks.LEAVES || block == Blocks.LEAVES2) {
+					if (rand.nextFloat() < 0.3) {
+						e.getDrops().add(new ItemStack(Items.STICK));
+					}
+				}
+				NBTTagCompound nbtStack = null;
+				NBTTagCompound nbt = null;
+				if (!stack.hasTagCompound()) {
+					nbtStack = new NBTTagCompound();
+					stack.setTagCompound(nbtStack);
+				} else {
+					nbtStack = stack.getTagCompound();
+				}
+				if (!nbtStack.hasKey("eok.stone")) {
+					nbt = new NBTTagCompound();
+					nbtStack.setTag("eok.stone", nbt);
+				} else {
+					nbt = nbtStack.getCompoundTag("eok.stone");
+				}
+				if (!nbt.hasKey("damage")) {
+					nbt.setInteger("damage", 0);
+				}
+				int damage = nbt.getInteger("damage");
+				if (damage >= 79900) {
+					player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+				} else {
+					nbt.setInteger("damage", damage + 100);
+				}
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onStoneWork(RightClickBlock e) {
 		if (e.getWorld().isRemote) {

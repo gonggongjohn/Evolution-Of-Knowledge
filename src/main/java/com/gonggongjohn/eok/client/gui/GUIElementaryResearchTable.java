@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import com.gonggongjohn.eok.network.PacketSlotChange;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
@@ -14,6 +13,7 @@ import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
 import com.gonggongjohn.eok.network.PacketGuiButton;
 import com.gonggongjohn.eok.network.PacketInverseReseachData;
+import com.gonggongjohn.eok.network.PacketSlotChange;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

@@ -1,15 +1,16 @@
 package com.gonggongjohn.eok.network;
 
+import javax.annotation.Nullable;
+
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ISlotHandler;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import javax.annotation.Nullable;
 
 public class PacketSlotChange implements IMessage {
     private int slotID;

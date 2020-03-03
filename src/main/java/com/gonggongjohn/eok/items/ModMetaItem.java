@@ -21,7 +21,7 @@ public class ModMetaItem extends MaterialMetaItem {
 		MetaItemsHandler.CONVEX_LENS = this.addItem(1, "convex_lens");
 		MetaItemsHandler.CONCAVE_LENS = this.addItem(2, "concave_lens");
 		MetaItemsHandler.CHIPPED_FLINT = this.addItem(3, "chipped_flint");
-		MetaItemsHandler.GRINDED_FLINT = this.addItem(4, "grinded_flint");
+		MetaItemsHandler.GRINDED_FLINT = this.addItem(4, "grinded_flint").addComponents(new DurabilityStone());
 	}
 
 	@Override

@@ -34,10 +34,10 @@ public class LeavesTweaker {
 
 		Random rand = new Random();
 		// 50%几率掉落
-		if (rand.nextInt(100) < 50) {
-			event.getWorld().spawnEntity(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(),
-					event.getPos().getZ(), new ItemStack(Items.STICK, 1)));
-		}
+//		if (rand.nextInt(100) < 50) {
+//			event.getWorld().spawnEntity(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(),
+//					event.getPos().getZ(), new ItemStack(Items.STICK, 1)));
+//		}
 	}
 
 	public LeavesTweaker() {
