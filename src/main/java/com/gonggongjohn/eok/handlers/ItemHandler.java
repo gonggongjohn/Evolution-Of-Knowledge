@@ -19,9 +19,13 @@ import com.gonggongjohn.eok.items.MetaItemTool;
 import com.gonggongjohn.eok.items.Torcherino;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@EventBusSubscriber
 public class ItemHandler {
-	public static final List<Item> items = new ArrayList<Item>();
+	public static final List<Item> ITEM_REGISTRY = new ArrayList<Item>();
 
 	public static final Item papyrus = new ItemPapyrus();
 	public static final Item refractingTelescope = new ItemRefractingTelescope();
@@ -46,4 +50,13 @@ public class ItemHandler {
 	public static final Item strong_hemp_rope = new ItemMaterialBase("strong_hemp_rope");
 	public static final Item driedHay = new ItemMaterialBase("dried_hay");
 	public static final Item deadHayTorch = new ItemMaterialBase("dead_hay_torch");
+
+	public static void registerItem(Item item) {
+		ITEM_REGISTRY.add(item);
+	}
+
+	@SubscribeEvent
+	public static void onBlockRegister(Register<Item> e) {
+		e.getRegistry().registerAll(ITEM_REGISTRY.toArray(new Item[0]));
+	}
 }

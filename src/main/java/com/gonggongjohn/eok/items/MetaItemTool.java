@@ -19,7 +19,7 @@ public class MetaItemTool extends Item implements IHasModel {
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setCreativeTab(EOK.tabEOK);
-        ItemHandler.items.add(this);
+        ItemHandler.ITEM_REGISTRY.add(this);
     }
 
     @Override

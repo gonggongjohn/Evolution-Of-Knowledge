@@ -24,8 +24,8 @@ public class BlockDecomposedHaystack extends Block implements IHasModel {
         this.setCreativeTab(EOK.tabEOK);
         this.setSoundType(SoundType.PLANT);
         
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
-        BlockHandler.blocks.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
     }
     
 	@Override

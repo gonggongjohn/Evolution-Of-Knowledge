@@ -4,6 +4,7 @@ import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+import com.gonggongjohn.eok.handlers.TileEntityHandler;
 import com.gonggongjohn.eok.handlers.TradeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		MetaItemsHandler.init();
+		TileEntityHandler.register();
 		new ConfigHandler(event);
 		EntityHandler.register();
 	}
@@ -35,7 +37,7 @@ public class CommonProxy {
 
 	}
 
-	public void registerItemRenderer(Item item, int meta, String pathName, String id){
+	public void registerItemRenderer(Item item, int meta, String pathName, String id) {
 
 	}
 

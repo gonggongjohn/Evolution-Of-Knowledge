@@ -27,8 +27,8 @@ public class BlockTest2DCore extends MultiBlockCompBase {
         this.setCreativeTab(EOK.tabEOK);
         this.setHardness(5.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
-        BlockHandler.blocks.add(this);
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
     }
 
     @Override

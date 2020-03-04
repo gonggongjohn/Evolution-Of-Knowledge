@@ -31,8 +31,8 @@ public class BlockHaystack extends BlockContainer implements IHasModel {
         this.setHardness(0.5F);
         this.setSoundType(SoundType.PLANT);
         
-        BlockHandler.blocks.add(this);
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
     }
     
     @Override

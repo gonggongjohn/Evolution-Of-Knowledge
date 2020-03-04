@@ -27,8 +27,8 @@ public class BlockTwoBarrelVacuumPump extends Block implements IHasModel {
         this.setRegistryName(name);
         this.setHardness(5.0F);
         this.setCreativeTab(EOK.tabEOK);
-        BlockHandler.blocks.add(this);
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
     }
 
     @Override

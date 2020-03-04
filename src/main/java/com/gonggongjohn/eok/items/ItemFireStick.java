@@ -40,7 +40,7 @@ public class ItemFireStick extends Item implements IHasModel {
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		
-		ItemHandler.items.add(this);
+		ItemHandler.ITEM_REGISTRY.add(this);
 	}
 	
 	@Override

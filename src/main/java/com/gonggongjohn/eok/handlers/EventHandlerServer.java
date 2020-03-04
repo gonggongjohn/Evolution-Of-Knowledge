@@ -205,30 +205,30 @@ public class EventHandlerServer {
 	/** 描述方块下方方块被破坏时上方方块自然掉落的事件 */
 	@SubscribeEvent
 	public static void onDownBlockDestroyed(BlockEvent.BreakEvent event) {
-		if (!event.getWorld().isRemote) {
-			BlockPos pos = event.getPos();
-			IBlockState state = event.getWorld().getBlockState(pos.up());
-			if (state.equals(BlockHandler.blockStoneRock.getDefaultState())) {
-				event.getWorld().setBlockToAir(pos.up());
-				event.getWorld().spawnEntity(new EntityItem(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(),
-						new ItemStack(BlockHandler.blockStoneRock)));
-			} else if (state.equals(BlockHandler.blockStick.getDefaultState())) {
-				event.getWorld().setBlockToAir(pos.up());
-				event.getWorld().spawnEntity(new EntityItem(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(),
-						new ItemStack(Items.STICK)));
-			}
-		}
+//		if (!event.getWorld().isRemote) {
+//			BlockPos pos = event.getPos();
+//			IBlockState state = event.getWorld().getBlockState(pos.up());
+//			if (state.equals(BlockHandler.blockStoneRock.getDefaultState())) {
+//				event.getWorld().setBlockToAir(pos.up());
+//				event.getWorld().spawnEntity(new EntityItem(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(),
+//						new ItemStack(BlockHandler.blockStoneRock)));
+//			} else if (state.equals(BlockHandler.blockStick.getDefaultState())) {
+//				event.getWorld().setBlockToAir(pos.up());
+//				event.getWorld().spawnEntity(new EntityItem(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(),
+//						new ItemStack(Items.STICK)));
+//			}
+//		}
 	}
 
 	/** 描述玩家破坏方块时方块不掉落本身的事件 */
 	@SubscribeEvent
 	public static void onDestroyedButNotDropItself(BlockEvent.HarvestDropsEvent event) {
-		World world = event.getWorld();
-		BlockPos pos = event.getPos();
-		if (!event.getDrops().isEmpty()
-				&& event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick))) {
-			event.setDropChance(0.0F);
-			world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK)));
-		}
+//		World world = event.getWorld();
+//		BlockPos pos = event.getPos();
+//		if (!event.getDrops().isEmpty()
+//				&& event.getDrops().get(0).isItemEqual(new ItemStack(BlockHandler.blockStick))) {
+//			event.setDropChance(0.0F);
+//			world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK)));
+//		}
 	}
 }

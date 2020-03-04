@@ -24,7 +24,7 @@ public class ItemEOKManual extends Item implements IHasModel {
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
-        ItemHandler.items.add(this);
+        ItemHandler.ITEM_REGISTRY.add(this);
     }
 
     @Override

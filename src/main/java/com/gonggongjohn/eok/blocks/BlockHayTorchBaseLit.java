@@ -44,8 +44,8 @@ public class BlockHayTorchBaseLit extends BlockContainer implements IHasModel {
         this.setHardness(7.0F);
         this.setLightLevel(1);
         
-        BlockHandler.blocks.add(this);
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
     }
     
     @Override

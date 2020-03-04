@@ -27,7 +27,7 @@ public class ItemMachineGun extends Item implements IHasModel {
 		this.setRegistryName(name);
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(EOK.tabEOK);
-		ItemHandler.items.add(this);
+		ItemHandler.ITEM_REGISTRY.add(this);
 	}
 
 	@Override

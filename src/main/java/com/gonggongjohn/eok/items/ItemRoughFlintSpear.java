@@ -36,7 +36,7 @@ public class ItemRoughFlintSpear extends Item implements IHasModel {
 		this.setCreativeTab(EOK.tabEOK);
 		this.maxStackSize = 1;
 		this.setMaxDamage(47);
-		ItemHandler.items.add(this);
+		ItemHandler.ITEM_REGISTRY.add(this);
 	}
 
 	public float getAttackDamage() {

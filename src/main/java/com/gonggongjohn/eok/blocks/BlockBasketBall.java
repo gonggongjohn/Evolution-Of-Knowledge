@@ -31,8 +31,8 @@ public class BlockBasketBall extends Block implements IHasModel {
         this.setCreativeTab(EOK.tabEOK);
         this.setHardness(7.0F);
         
-        BlockHandler.blocks.add(this);
-        ItemHandler.items.add(new ItemBlock(this).setRegistryName(name));
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
     }
     
     @Override
