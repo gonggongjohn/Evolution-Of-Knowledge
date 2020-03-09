@@ -79,9 +79,11 @@ materials.CHIPPED_FLINT.name=打制的燧石
 messages.torcherino_crafted.msg=§4你真的要使用它吗?
 messages.torcherino_use.msg=§4你激怒了森林蝙蝠!!!
 messages.torcherino_use.msg2=§4你将得到你应有的惩罚
-message.documentrenderer.error=加载文档时发生错误。\n查看latest.log或debug.log获取详细信息。
+message.documentrenderer.error=加载文档时发生致命错误。\n查看latest.log或debug.log获取详细信息。
 
-manual.error=加载文档时发生错误。
+manual.error=警告：加载文档时发生错误。
+manual.error1=查看日志文件获取更多信息。
+manual.error2=第%d行存在非法的"%s"
 
 research.gui.pre=研究节点：
 research.root.name=根研究

@@ -42,6 +42,7 @@ public class DocumentRenderer {
 	private List<Page> pages = new ArrayList<Page>();
 	private List<Element> elements = new ArrayList<Element>();
 	public final boolean available;
+	private List<String> errorMessage = new ArrayList<String>();
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
 		init();
@@ -58,6 +59,7 @@ public class DocumentRenderer {
 		this.documentLocation = new ResourceLocation(documentPath);
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+			this.errorMessage.add(I18n.format("manual.error"));
 		}
 	}
 	
@@ -195,6 +197,7 @@ public class DocumentRenderer {
 		return true;
 	}
 	
+	/* {text:string} */
 	private boolean addCenteredText(String[] args) {
 		if(args.length != 1) {
 			logger.warn("Illegal Arguments: Line {}: There must be only one argument.");
@@ -204,10 +207,10 @@ public class DocumentRenderer {
 		return true;
 	}
 	
-	/* {path, width, height} */
+	/* {path:string, width:int, height:int} */
 	private boolean addImage(String[] args) {
 		if(args.length != 3) {
-			logger.warn("Illegal Arguments: Line {}: There must be only 3 argument.");
+			logger.warn("Illegal Arguments: Line {}: There must be only 3 arguments.");
 			return false;
 		}
 		try {
@@ -220,8 +223,48 @@ public class DocumentRenderer {
 		return true;
 	}
 	
+	/* {x1:int, y1:int, x2:int, y2:int, width:int, color:string[#XXXXXX]} */
 	private boolean addLine(String[] args) {
-		// TODO
+		if(args.length != 6) {
+			logger.warn("Illegal Arguments: Line {}: There must be only 6 arguments.");
+			return false;
+		}
+		try {
+			String hex = args[5];
+			hex = hex.toUpperCase();
+			int color = 0;
+			for(char c : hex.toCharArray()) {
+				switch(c) {
+				case '#': continue;
+				case '0': color = color << 4 | 0x00000000; break;
+				case '1': color = color << 4 | 0x00000001; break;
+				case '2': color = color << 4 | 0x00000002; break;
+				case '3': color = color << 4 | 0x00000003; break;
+				case '4': color = color << 4 | 0x00000004; break;
+				case '5': color = color << 4 | 0x00000005; break;
+				case '6': color = color << 4 | 0x00000006; break;
+				case '7': color = color << 4 | 0x00000007; break;
+				case '8': color = color << 4 | 0x00000008; break;
+				case '9': color = color << 4 | 0x00000009; break;
+				case 'A': color = color << 4 | 0x0000000A; break;
+				case 'B': color = color << 4 | 0x0000000B; break;
+				case 'C': color = color << 4 | 0x0000000C; break;
+				case 'D': color = color << 4 | 0x0000000D; break;
+				case 'E': color = color << 4 | 0x0000000E; break;
+				case 'F': color = color << 4 | 0x0000000F; break;
+				default: break;
+				}
+			}
+			int r, g, b;
+			r = (color & 0xFF0000) >> 16;
+			g = (color & 0x00FF00) >> 8;
+			b = (color & 0x0000FF);
+			elements.add(new Element.Line(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), r, g, b));
+		} catch(Exception e) {
+			logger.warn("Syntax error at line {}.", lineNumber);
+			e.printStackTrace();
+			return false;
+		}
 		return true;
 	}
 
@@ -347,15 +390,19 @@ public class DocumentRenderer {
 			private int x2;
 			private int y2;
 			private int width;
-			private int color;
+			private int r;
+			private int g;
+			private int b;
 			
-			private Line(int x1, int y1, int x2, int y2, int width, int color) {
+			private Line(int x1, int y1, int x2, int y2, int width, int r, int g, int b) {
 				this.x1 = x1;
 				this.y1 = y1;
 				this.x2 = x2;
 				this.y2 = y2;
 				this.width = width;
-				this.color = color;
+				this.r = r;
+				this.g = g;
+				this.b = b;
 			}
 
 			@Override
