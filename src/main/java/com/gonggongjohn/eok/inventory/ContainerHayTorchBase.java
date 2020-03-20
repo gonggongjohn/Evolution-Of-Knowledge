@@ -51,7 +51,7 @@ public class ContainerHayTorchBase extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        return null;
+        return ItemStack.EMPTY;
     }
     
     @Override

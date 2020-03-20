@@ -1,13 +1,13 @@
 `!comment 这是一条注释。`
 `!comment 这是另一条注释`
-`!centered_text §9§l测试页面`
-`!image manual/index/image1.png,144,89`
+`!center §9§l测试页面`
+`!image eok:manual/index/image1.png 144 89`
 §0ohhhhhhhhhhhhhhhhhhh
 `!comment 这个颜色不是#66CCFF，因为文字仅支持16种颜色`
 §d66CCFF66CCFF66CCFF66CCFF66CCFF66CCFF
 `!comment 画一条线`
 `!comment 注意:线是独立于其他元素绘制的`
-`!line 15,15,140,220,15,#66CCFF`
+`!line 15 15 140 220 15 #66CCFF`
 `!end_of_page`
 
 
@@ -30,8 +30,24 @@
 
 §9§lsky&Smalldew语录
 
-`!image manual/index/image2.png,186,118`
+`!image eok:manual/index/image2.png 186 118`
 
-`!image manual/index/image3.png,299,79`
+`!image eok:manual/index/image3.png 299 79`
+`!end_of_page`
+
+高  清  重  置
+
+`!image eok:manual/index/fhdtest.png 1920 1080`
+
+111111
+123123123123123
+
+咕咕咕咕咕咕咕咕咕咕咕咕咕咕咕
+
+咕咕咕咕咕咕咕咕咕咕
+
+钴
+
+
 
 结束啦

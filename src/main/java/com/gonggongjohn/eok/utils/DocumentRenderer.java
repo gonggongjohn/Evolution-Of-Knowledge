@@ -11,15 +11,17 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.utils.GLUtils.ColorRGB;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 
@@ -31,21 +33,18 @@ public class DocumentRenderer {
 	private final int width;
 	private final int height;
 	private final Logger logger;
-	private final FontRenderer fontRenderer;
 	private final BufferBuilder bufferBuilder;
-	private final IResourceManager resourceManager;
 	private int lineNumber;
 	private ResourceLocation documentLocation;
 	private String[] orgLines;
-	private static Map<String, Predicate<String[]>> tokenMap = new HashMap<String, Predicate<String[]>>();
+	private Map<String, Predicate<String[]>> tokenMap;
 	private Document documentIn;
 	private List<Page> pages = new ArrayList<Page>();
 	private List<Element> elements = new ArrayList<Element>();
-	public final boolean available;
-	private List<String> errorMessage = new ArrayList<String>();
+	private boolean available;
+	private boolean err;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
-		init();
 		this.org1X = org1X;
 		this.org1Y = org1Y;
 		this.org2X = org2X;
@@ -53,18 +52,24 @@ public class DocumentRenderer {
 		this.width = width;
 		this.height = height;
 		logger = EOK.getLogger();
-		this.fontRenderer = Minecraft.getMinecraft().fontRenderer;
 		this.bufferBuilder = Tessellator.getInstance().getBuffer();
-		this.resourceManager = Minecraft.getMinecraft().getResourceManager();
 		this.documentLocation = new ResourceLocation(documentPath);
+		this.tokenMap = new HashMap<String, Predicate<String[]>>();
+		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
-			this.errorMessage.add(I18n.format("manual.error"));
+		} else if(err){
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.ducumentrenderer.syntaxerror")), false);
 		}
+	}
+	
+	public boolean isAvailable() {
+		return available;
 	}
 	
 	private void init() {
 		tokenMap.put("center", this::addCenteredText);
+		tokenMap.put("end_of_page", this::addEndOfPageMark);
 		tokenMap.put("comment", (s) -> true);
 		tokenMap.put("image", this::addImage);
 		tokenMap.put("drawline", this::addLine);
@@ -75,16 +80,20 @@ public class DocumentRenderer {
 	}
 	
 	public BufferedReader getResource(ResourceLocation location) throws UnsupportedEncodingException, IOException {
-		return new BufferedReader(new InputStreamReader(resourceManager.getResource(location).getInputStream(), "UTF-8"));
+		return new BufferedReader(new InputStreamReader(DataUtils.getResource(location), "UTF-8"));
 	}
 	
 	public boolean read() {
+		err = false;
+		pages.clear();
+		elements.clear();
+		available = true;
 		long startTime = System.currentTimeMillis();
 		if(this.width < 20 || this.height < 20) {
 			logger.error("Text area is too small! It must be larger than 20*20 pixels.");
 			return false;
 		}
-		logger.debug("Loading document {}:{}", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+		logger.info("Loading document {}:{}", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
 		lineNumber = 1;
 		BufferedReader reader;
 		List<String> lineList = new ArrayList<String>();
@@ -93,32 +102,37 @@ public class DocumentRenderer {
 			String line;
 			while((line = reader.readLine()) != null) {
 				lineList.add(line);
-				break;
 			}
-			orgLines = (String[])lineList.toArray();
+			orgLines = new String[lineList.size()];
+			lineList.toArray(orgLines);
 		} catch(Exception e) {
 			logger.error("Can't read document file \"{}:{}\"", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+			e.printStackTrace();
 			return false;
 		}
-		logger.debug("Processing tokens");
+		logger.info("Parsing document structure");
 		for(String line : orgLines) {
 			if(!processLine(line)) {
 				return false;
 			}
 			lineNumber++;
 		}
-		logger.debug("Processing pages");
+		logger.info("Building pages");
 		if(!buildDocument()) return false;
-		logger.debug("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
+		logger.info("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
 		return true;
 	}
 	
+	private void appendErrText(String str) {
+		appendText("§c§lERROR:" + str);
+		err = true;
+	}
+	
 	private void appendText(String str) {
-		str = "§c§lERROR:" + str;
 		String line = "";
 		char[] chars = str.toCharArray();
 		for(char c : chars) {
-			if(fontRenderer.getStringWidth(line) >= this.width) {
+			if(GLUtils.getStringWidth(line) >= this.width) {
 				elements.add(new Element.TextLine(new String(line)));
 				line = "";
 				line += c;
@@ -126,19 +140,17 @@ public class DocumentRenderer {
 				line += c;
 			}
 		}
-		if(!line.isEmpty()) {
-			elements.add(new Element.TextLine(line));
-		}
+		elements.add(new Element.TextLine(line));
 	}
 	
 	private boolean processLine(String line) {
 		try {
-			if(line.startsWith("`! ") && line.endsWith("`")) {
-				String statement = line.substring(3, line.length() - 1);
+			if(line.startsWith("`!") && line.endsWith("`")) {
+				String statement = line.substring(2, line.length() - 1);	// 索引从0开始，并且要去掉最后一个字符，所以还要减1
 				if(statement.indexOf(' ') == -1) {	// statement with no arguments
 					if(tokenMap.containsKey(statement)) {
 						if(!tokenMap.get(statement).test(new String[0])) {
-							appendText(line);
+							appendErrText(line);
 						}
 					} else {
 						logger.warn("Invalid token {} at line {}.", statement, lineNumber);
@@ -149,12 +161,12 @@ public class DocumentRenderer {
 					if(tokenMap.containsKey(token)) {
 						if(args.indexOf(' ') == -1) {	// statement with only one argument
 							if(!tokenMap.get(token).test(new String[] {args})) {
-								appendText(line);
+								appendErrText(line);
 							}
 						} else {	// statement with multiple arguments
 							String[] argArray = args.split(" ");
 							if(!tokenMap.get(token).test(argArray)) {
-								appendText(line);
+								appendErrText(line);
 							}
 						}
 					} else {
@@ -178,22 +190,32 @@ public class DocumentRenderer {
 		List<Element> currentElements = new ArrayList<Element>();
 		for(Element element : elements) {
 			if(element.getHeight() > this.height) {
-				logger.error("This element's size exceeds the limit({}*{})", this.width, this.height);
+				logger.error("This element's size exceeds the limit({}*{})! Loading won't continue.", this.width, this.height);
 				return false;
+			}
+			if(element instanceof Element.EndOfPage) {
+				pages.add(new Page(new ArrayList<Element>(currentElements)));
+				currentElements.clear();
+				currentY = 0;
+				continue;
 			}
 			if(currentY + element.getHeight() >= this.height) {
 				pages.add(new Page(new ArrayList<Element>(currentElements)));
 				currentElements.clear();
+				currentY = 0;
 				currentElements.add(element);
+				currentY += element.getHeight();
 			} else {
 				currentElements.add(element);
+				currentY += element.getHeight();
 			}
 		}
 		if(!currentElements.isEmpty()) {
 			pages.add(new Page(new ArrayList<Element>(currentElements)));
 			currentElements.clear();
 		}
-		documentIn = new Document(pages);
+		documentIn = new Document(new ArrayList<Page>(pages));
+		pages = null;
 		return true;
 	}
 	
@@ -207,6 +229,11 @@ public class DocumentRenderer {
 		return true;
 	}
 	
+	private boolean addEndOfPageMark(String[] args) {
+		elements.add(new Element.EndOfPage());
+		return true;
+	}
+	
 	/* {path:string, width:int, height:int} */
 	private boolean addImage(String[] args) {
 		if(args.length != 3) {
@@ -214,7 +241,24 @@ public class DocumentRenderer {
 			return false;
 		}
 		try {
-			elements.add(new Element.Image(new ResourceLocation(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2])));
+			float width = Integer.parseInt(args[1]);
+			float height = Integer.parseInt(args[2]);
+			float realWidth = width;
+			float realHeight = height;
+			if(width > this.width || height > this.height) {
+					float a = this.width / width;
+					float b = this.height / height;
+					float w, h;
+					w = width * a;
+					h = height * a;
+					if(w > this.width || h > this.height) {
+						w = width * b;
+						h = height * b;
+					}
+					realWidth = (int) w;
+					realHeight = (int) h;
+			}
+			elements.add(new Element.Image(new ResourceLocation(args[0]), (int)width, (int)height, (int)realWidth, (int)realHeight));
 		} catch(Exception e) {
 			logger.warn("Syntax error at line {}.", lineNumber);
 			e.printStackTrace();
@@ -231,37 +275,19 @@ public class DocumentRenderer {
 		}
 		try {
 			String hex = args[5];
-			hex = hex.toUpperCase();
-			int color = 0;
-			for(char c : hex.toCharArray()) {
-				switch(c) {
-				case '#': continue;
-				case '0': color = color << 4 | 0x00000000; break;
-				case '1': color = color << 4 | 0x00000001; break;
-				case '2': color = color << 4 | 0x00000002; break;
-				case '3': color = color << 4 | 0x00000003; break;
-				case '4': color = color << 4 | 0x00000004; break;
-				case '5': color = color << 4 | 0x00000005; break;
-				case '6': color = color << 4 | 0x00000006; break;
-				case '7': color = color << 4 | 0x00000007; break;
-				case '8': color = color << 4 | 0x00000008; break;
-				case '9': color = color << 4 | 0x00000009; break;
-				case 'A': color = color << 4 | 0x0000000A; break;
-				case 'B': color = color << 4 | 0x0000000B; break;
-				case 'C': color = color << 4 | 0x0000000C; break;
-				case 'D': color = color << 4 | 0x0000000D; break;
-				case 'E': color = color << 4 | 0x0000000E; break;
-				case 'F': color = color << 4 | 0x0000000F; break;
-				default: break;
-				}
-			}
-			int r, g, b;
-			r = (color & 0xFF0000) >> 16;
-			g = (color & 0x00FF00) >> 8;
-			b = (color & 0x0000FF);
-			elements.add(new Element.Line(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), r, g, b));
-		} catch(Exception e) {
-			logger.warn("Syntax error at line {}.", lineNumber);
+			ColorRGB rgb = GLUtils.hexStringToRGB(hex);
+			int x1 = Integer.parseInt(args[0]);
+			int y1 = Integer.parseInt(args[1]);
+			int x2 = Integer.parseInt(args[2]);
+			int y2 = Integer.parseInt(args[3]);
+			int width = Integer.parseInt(args[4]);
+			int r = rgb.getR();
+			int g = rgb.getG();
+			int b = rgb.getB();
+			elements.add(new Element.Line(x1, y1, x2, y2, width, r, g, b));
+		} catch(NumberFormatException e) {
+			logger.warn("Syntax error at line {}: The input is not a number!", lineNumber);
+			logger.warn("\t{}", (e.getMessage() != null) ? e.getMessage() : "");
 			e.printStackTrace();
 			return false;
 		}
@@ -269,17 +295,16 @@ public class DocumentRenderer {
 	}
 
 	public int getPages() {
-		return pages.size();
+		return documentIn.pages.size();
 	}
 
 	public void draw(int pageIndex, Side side, int offsetX, int offsetY) {
 		if(!available) {
 			if(side == Side.LEFT) {
-				fontRenderer.drawString(I18n.format("manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
+				GLUtils.drawString(I18n.format("manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
 			}
 			return;
 		}
-		// TODO 自动生成的方法存根
 		int originX;
 		int originY;
 		switch(side) {
@@ -291,7 +316,13 @@ public class DocumentRenderer {
 			originX = offsetX + org2X;
 			originY = offsetY + org2Y;
 			break;
+		default:	// never reaches, but it is necessary
+			originX = 0;
+			originY = 0;
+			break;
 		}
+		this.documentIn.pages.get(pageIndex).draw(originX, originY, this);
+		GLUtils.drawCenteredString(String.valueOf(pageIndex + 1), originX + width / 2, originY + height + 5, Colors.DEFAULT_BLACK);
 	}
 	
 	private static final class Document {
@@ -310,17 +341,47 @@ public class DocumentRenderer {
 		public Page(List<Element> elements) {
 			this.elements = elements;
 		}
+		
+		public void draw(int orgX, int orgY, DocumentRenderer renderer) {
+			int currentX = orgX;
+			int currentY = orgY;
+			for(Element element : elements) {
+				GLUtils.resetState();
+				element.draw(currentX, currentY, renderer);
+				currentY += element.getHeight();
+			}
+		}
 	}
 	
 	private static abstract class Element {
 		
 		private static enum Type {
-			NONE, TEXTLINE, CENTERED_TEXT, IMAGE, LINE, ITEM, CRAFTING
+			END_OF_PAGE, TEXTLINE, CENTERED_TEXT, IMAGE, LINE, ITEM, CRAFTING
 		}
 		
 		protected abstract Type getType();
 		
 		protected abstract int getHeight();
+		
+		protected abstract void draw(int x, int y, DocumentRenderer renderer);
+		
+		private static class EndOfPage extends Element {
+
+			@Override
+			protected Type getType() {
+				return Type.END_OF_PAGE;
+			}
+
+			@Override
+			protected int getHeight() {
+				return 0;
+			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				
+			}
+		}
 		
 		private static class TextLine extends Element {
 			
@@ -338,6 +399,11 @@ public class DocumentRenderer {
 			@Override
 			protected int getHeight() {
 				return 10;
+			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				GLUtils.drawString(str, x, y, Colors.DEFAULT_BLACK);
 			}
 		}
 		
@@ -358,6 +424,11 @@ public class DocumentRenderer {
 			protected int getHeight() {
 				return 10;
 			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				GLUtils.drawCenteredString(str, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
+			}
 		}
 		
 		private static class Image extends Element {
@@ -365,11 +436,15 @@ public class DocumentRenderer {
 			private ResourceLocation location;
 			private int width;
 			private int height;
+			private int realWidth;
+			private int realHeight;
 			
-			private Image(ResourceLocation location, int width, int height) {
+			private Image(ResourceLocation location, int width, int height, int realWidth, int realHeight) {
 				this.location = location;
 				this.width = width;
 				this.height = height;
+				this.realWidth = realWidth;
+				this.realHeight = realHeight;
 			}
 
 			@Override
@@ -379,7 +454,17 @@ public class DocumentRenderer {
 
 			@Override
 			protected int getHeight() {
-				return height;
+				return realHeight;
+			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				Minecraft.getMinecraft().renderEngine.bindTexture(location);
+				if(width == realWidth && height == realHeight) {
+					Gui.drawModalRectWithCustomSizedTexture(x + renderer.width / 2 - width / 2, y, 0, 0, width, height, width, height);
+				} else {
+					Gui.drawScaledCustomSizeModalRect(x + renderer.width / 2 - realWidth / 2, y, 0, 0, width, height, realWidth, realHeight, width, height);
+				}
 			}
 		}
 		
@@ -414,38 +499,60 @@ public class DocumentRenderer {
 			protected int getHeight() {
 				return 0;
 			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				BufferBuilder bb = renderer.bufferBuilder;
+				GLUtils.glLineWidth(width);
+				bb.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+				bb.pos(x1, y1, 0).color(r, g, b, 255);
+				bb.pos(x2, y2, 0).color(r, g, b, 255);
+				bb.finishDrawing();
+			}
 		}
 		
 		private static class Item extends Element {
 
 			@Override
 			protected Type getType() {
-				// TODO 自动生成的方法存根
+				// TODO Item
 				return null;
 			}
 
 			@Override
 			protected int getHeight() {
-				// TODO 自动生成的方法存根
+				// TODO Item
 				return 0;
 			}
 			// TODO
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				// TODO 自动生成的方法存根
+				
+			}
 		}
 		
 		private static class Crafting extends Element {
 
 			@Override
 			protected Type getType() {
-				// TODO 自动生成的方法存根
+				// TODO Crafting
 				return null;
 			}
 
 			@Override
 			protected int getHeight() {
-				// TODO 自动生成的方法存根
+				// TODO Crafting
 				return 0;
 			}
 			// TODO
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				// TODO 自动生成的方法存根
+				
+			}
 		}
 		
 	}

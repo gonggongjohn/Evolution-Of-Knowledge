@@ -79,7 +79,8 @@ materials.CHIPPED_FLINT.name=Chipped Flint
 messages.torcherino_crafted.msg=§4Do you really want to use it?
 messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
-message.documentrenderer.error=A fatal error occurred when loading document.\nSee latest.log or debug.log for more information.
+message.documentrenderer.error=A fatal error occurred when loading document. See latest.log or debug.log for more information.
+message.ducumentrenderer.syntaxerror=Warning: Some syntax error were found in the document. Check the log file for more information.
 
 manual.error=Warning:Error loading document.
 manual.error1=See the log file for more information.
