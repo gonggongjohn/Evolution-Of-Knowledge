@@ -1,6 +1,10 @@
 package com.gonggongjohn.eok.utils;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -15,16 +19,21 @@ import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.utils.GLUtils.ColorRGB;
+import com.gonggongjohn.eok.utils.datatypes.Size2i;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class DocumentRenderer {
 	private final int org1X;
 	private final int org1Y;
@@ -36,6 +45,7 @@ public class DocumentRenderer {
 	private final BufferBuilder bufferBuilder;
 	private int lineNumber;
 	private ResourceLocation documentLocation;
+	private File documentFile;
 	private String[] orgLines;
 	private Map<String, Predicate<String[]>> tokenMap;
 	private Document documentIn;
@@ -43,8 +53,10 @@ public class DocumentRenderer {
 	private List<Element> elements = new ArrayList<Element>();
 	private boolean available;
 	private boolean err;
+	public final boolean isDocumentExternal;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
+		isDocumentExternal = false;
 		this.org1X = org1X;
 		this.org1Y = org1Y;
 		this.org2X = org2X;
@@ -54,6 +66,26 @@ public class DocumentRenderer {
 		logger = EOK.getLogger();
 		this.bufferBuilder = Tessellator.getInstance().getBuffer();
 		this.documentLocation = new ResourceLocation(documentPath);
+		this.tokenMap = new HashMap<String, Predicate<String[]>>();
+		init();
+		if(!(available = read())) {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+		} else if(err){
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.ducumentrenderer.syntaxerror")), false);
+		}
+	}
+	
+	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, File documentFile) {
+		isDocumentExternal = true;
+		this.org1X = org1X;
+		this.org1Y = org1Y;
+		this.org2X = org2X;
+		this.org2Y = org2Y;
+		this.width = width;
+		this.height = height;
+		logger = EOK.getLogger();
+		this.bufferBuilder = Tessellator.getInstance().getBuffer();
+		this.documentFile = documentFile;
 		this.tokenMap = new HashMap<String, Predicate<String[]>>();
 		init();
 		if(!(available = read())) {
@@ -93,20 +125,36 @@ public class DocumentRenderer {
 			logger.error("Text area is too small! It must be larger than 20*20 pixels.");
 			return false;
 		}
-		logger.info("Loading document {}:{}", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+		if(!isDocumentExternal) {
+			logger.info("Loading document {}:{}", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+		} else {
+			logger.info("Loading document {}", documentFile.getAbsolutePath());
+		}
 		lineNumber = 1;
 		BufferedReader reader;
 		List<String> lineList = new ArrayList<String>();
 		try {
-			reader = getResource(documentLocation);
-			String line;
-			while((line = reader.readLine()) != null) {
-				lineList.add(line);
+			if(!isDocumentExternal) {
+				reader = getResource(documentLocation);
+				String line;
+				while((line = reader.readLine()) != null) {
+					lineList.add(line);
+				}
+				orgLines = lineList.toArray(new String[0]);
+			} else {
+				reader = new BufferedReader(new InputStreamReader(new FileInputStream(documentFile), "UTF-8"));
+				String line;
+				while((line = reader.readLine()) != null) {
+					lineList.add(line);
+				}
+				orgLines = lineList.toArray(new String[0]);
 			}
-			orgLines = new String[lineList.size()];
-			lineList.toArray(orgLines);
 		} catch(Exception e) {
-			logger.error("Can't read document file \"{}:{}\"", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+			if(!isDocumentExternal) {
+				logger.error("Can't read document file \"{}:{}\"", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+			} else {
+				logger.error("Can't read document file \"{}\"", documentFile.getAbsolutePath());
+			}
 			e.printStackTrace();
 			return false;
 		}
@@ -120,6 +168,10 @@ public class DocumentRenderer {
 		logger.info("Building pages");
 		if(!buildDocument()) return false;
 		logger.info("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
+		if(documentIn.pages.size() == 0) {
+			logger.warn("Wait...WTF? 0 pages?? What's wrong???");
+			return false;
+		}
 		return true;
 	}
 	
@@ -186,6 +238,7 @@ public class DocumentRenderer {
 	}
 	
 	private boolean buildDocument() {
+		logger.info("buildDocument: Loaded {} elements.", elements.size());
 		int currentY = 0;
 		List<Element> currentElements = new ArrayList<Element>();
 		for(Element element : elements) {
@@ -215,7 +268,7 @@ public class DocumentRenderer {
 			currentElements.clear();
 		}
 		documentIn = new Document(new ArrayList<Page>(pages));
-		pages = null;
+		logger.info("buildDocument: Built {} pages.", pages.size());
 		return true;
 	}
 	
@@ -234,31 +287,23 @@ public class DocumentRenderer {
 		return true;
 	}
 	
-	/* {path:string, width:int, height:int} */
+	/* {path:string} */
 	private boolean addImage(String[] args) {
-		if(args.length != 3) {
-			logger.warn("Illegal Arguments: Line {}: There must be only 3 arguments.");
+		if(args.length != 1) {
+			logger.warn("Illegal Arguments: Line {}: There must be only 1 arguments.");
 			return false;
 		}
 		try {
-			float width = Integer.parseInt(args[1]);
-			float height = Integer.parseInt(args[2]);
-			float realWidth = width;
-			float realHeight = height;
-			if(width > this.width || height > this.height) {
-					float a = this.width / width;
-					float b = this.height / height;
-					float w, h;
-					w = width * a;
-					h = height * a;
-					if(w > this.width || h > this.height) {
-						w = width * b;
-						h = height * b;
-					}
-					realWidth = (int) w;
-					realHeight = (int) h;
+			if(!isDocumentExternal) {
+				elements.add(new Element.Image(new ResourceLocation(args[0]), this.width, this.height));
+			} else {
+				if(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]).exists()) {
+					elements.add(new Element.Image(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]), this.width, this.height));
+				} else {
+					logger.error("File not found: {}", Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]);
+					throw new FileNotFoundException(String.format("File not found: %s", Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]));
+				}
 			}
-			elements.add(new Element.Image(new ResourceLocation(args[0]), (int)width, (int)height, (int)realWidth, (int)realHeight));
 		} catch(Exception e) {
 			logger.warn("Syntax error at line {}.", lineNumber);
 			e.printStackTrace();
@@ -433,18 +478,30 @@ public class DocumentRenderer {
 		
 		private static class Image extends Element {
 			
-			private ResourceLocation location;
+			private BufferedImage image;
 			private int width;
 			private int height;
 			private int realWidth;
 			private int realHeight;
 			
-			private Image(ResourceLocation location, int width, int height, int realWidth, int realHeight) {
-				this.location = location;
-				this.width = width;
-				this.height = height;
-				this.realWidth = realWidth;
-				this.realHeight = realHeight;
+			private Image(ResourceLocation location, int windowWidth, int windowHeight) throws IOException {
+				this.image = TextureUtil.readBufferedImage(Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream());
+				this.width = this.image.getWidth();
+				this.height = this.image.getHeight();
+				Size2i size = new Size2i(this.width, this.height);
+				size.scaleToSize(windowWidth, windowHeight);
+				this.realWidth = size.getWidth();
+				this.realHeight = size.getHeight();
+			}
+			
+			private Image(File image, int windowWidth, int windowHeight) throws FileNotFoundException, IOException {
+				this.image = TextureUtil.readBufferedImage(new FileInputStream(image));
+				this.width = this.image.getWidth();
+				this.height = this.image.getHeight();
+				Size2i size = new Size2i(this.width, this.height);
+				size.scaleToSize(windowWidth, windowHeight);
+				this.realWidth = size.getWidth();
+				this.realHeight = size.getHeight();
 			}
 
 			@Override
@@ -459,12 +516,19 @@ public class DocumentRenderer {
 
 			@Override
 			protected void draw(int x, int y, DocumentRenderer renderer) {
-				Minecraft.getMinecraft().renderEngine.bindTexture(location);
+				int textureId;
+				try {
+					textureId = GLUtils.bindTexture(image);
+				} catch(Exception e) {
+					e.printStackTrace();
+					return;
+				}
 				if(width == realWidth && height == realHeight) {
 					Gui.drawModalRectWithCustomSizedTexture(x + renderer.width / 2 - width / 2, y, 0, 0, width, height, width, height);
 				} else {
 					Gui.drawScaledCustomSizeModalRect(x + renderer.width / 2 - realWidth / 2, y, 0, 0, width, height, realWidth, realHeight, width, height);
 				}
+				//GLUtils.deleteTexture(textureId);
 			}
 		}
 		
@@ -505,8 +569,8 @@ public class DocumentRenderer {
 				BufferBuilder bb = renderer.bufferBuilder;
 				GLUtils.glLineWidth(width);
 				bb.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-				bb.pos(x1, y1, 0).color(r, g, b, 255);
-				bb.pos(x2, y2, 0).color(r, g, b, 255);
+				bb.pos(x1, y1, 0).color(r, g, b, 255).endVertex();
+				bb.pos(x2, y2, 0).color(r, g, b, 255).endVertex();
 				bb.finishDrawing();
 			}
 		}

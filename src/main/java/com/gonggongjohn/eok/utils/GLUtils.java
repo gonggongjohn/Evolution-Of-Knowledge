@@ -1,7 +1,18 @@
 package com.gonggongjohn.eok.utils;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.client.renderer.texture.ITextureObject;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.util.ResourceLocation;
 
 public class GLUtils {
 	
@@ -26,6 +37,26 @@ public class GLUtils {
 
 		public int getB() {
 			return b;
+		}
+		
+	}
+	
+	private static final class ExternalImageTexture extends AbstractTexture {
+
+		private BufferedImage image;
+		
+		public ExternalImageTexture(File file) throws FileNotFoundException, IOException {
+			this.image = TextureUtil.readBufferedImage(new FileInputStream(file));
+		}
+		
+		public ExternalImageTexture(BufferedImage image) {
+			this.image = image;
+		}
+		
+		@Override
+		public void loadTexture(IResourceManager resourceManager) throws IOException {
+			this.deleteGlTexture();
+			TextureUtil.uploadTextureImageAllocate(this.getGlTextureId(), image, false, false);
 		}
 		
 	}
@@ -124,5 +155,42 @@ public class GLUtils {
 	
 	public static void color4f(float r, float g, float b, float a) {
 		GlStateManager.color(r, g, b, a);
+	}
+	
+	public static void bindTexture(ResourceLocation location) {
+		Minecraft.getMinecraft().getTextureManager().bindTexture(location);
+	}
+	
+	/**
+	 * @param textureId GLTextureId
+	 */
+	public static void bindTexture(int textureId) {
+		GlStateManager.bindTexture(textureId);
+	}
+	
+	/**
+	 * Similar to {@link TextureManager#bindTexture}<br>
+	 * But this method can bind an existing PNG file to the TextureManager.
+	 * 
+	 * @param file
+	 * @return GLTextureID
+	 * @throws IOException
+	 */
+	public static int bindTexture(File file) throws IOException {
+		ITextureObject texture = new ExternalImageTexture(file);
+		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
+		bindTexture(texture.getGlTextureId());
+		return texture.getGlTextureId();
+	}
+	
+	public static int bindTexture(BufferedImage image) throws IOException {
+		ITextureObject texture = new ExternalImageTexture(image);
+		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
+		bindTexture(texture.getGlTextureId());
+		return texture.getGlTextureId();
+	}
+	
+	public static void deleteTexture(int textureId) {
+		TextureUtil.deleteTexture(textureId);
 	}
 }
