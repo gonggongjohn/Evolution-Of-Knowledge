@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
@@ -7,9 +8,11 @@ import com.gonggongjohn.eok.handlers.MetaItemsHandler;
 import com.gonggongjohn.eok.handlers.TileEntityHandler;
 import com.gonggongjohn.eok.handlers.TradeHandler;
 
+import com.gonggongjohn.eok.render.StructureHighlightRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -25,6 +28,8 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new PlayerVitalSigns());
+		MinecraftForge.EVENT_BUS.register(new StructureHighlightRenderer());
 		NetworkRegistry.INSTANCE.registerGuiHandler(EOK.instance, new GUIHandler());
 		TradeHandler.setup();
 	}

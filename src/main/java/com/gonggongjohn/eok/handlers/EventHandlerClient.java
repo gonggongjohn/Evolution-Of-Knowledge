@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(modid = EOK.MODID, value = Side.CLIENT)
 public class EventHandlerClient {
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onTooltip(ItemTooltipEvent event) {
 		ItemStack stack = event.getItemStack();
@@ -48,7 +47,6 @@ public class EventHandlerClient {
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void tweakGamma(GuiOpenEvent event) {
 		BrightnessTweaker.tweak();
