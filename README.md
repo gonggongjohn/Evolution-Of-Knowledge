@@ -19,8 +19,8 @@ suggestions on the mod, you can directly contact the dev team.
 * Manor Life [Github Repo](https://github.com/gonggongjohn/Manor-Life-1.12)
 
 # Features
-* Minecraft Version:1.12.2
+* Minecraft Version: 1.12.2
 
-* Forge Version:14.23.5.2847
+* Forge Version: 14.23.5.2847
 
-* Current Mod Version:0.0.1
+* Current Mod Version: alpha-0.0.2-b200403a
