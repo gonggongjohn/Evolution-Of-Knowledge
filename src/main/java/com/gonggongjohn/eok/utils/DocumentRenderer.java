@@ -54,6 +54,7 @@ public class DocumentRenderer {
 	private boolean available;
 	private boolean err;
 	public final boolean isDocumentExternal;
+	private final List<Integer> textureList;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
 		isDocumentExternal = false;
@@ -67,6 +68,7 @@ public class DocumentRenderer {
 		this.bufferBuilder = Tessellator.getInstance().getBuffer();
 		this.documentLocation = new ResourceLocation(documentPath);
 		this.tokenMap = new HashMap<String, Predicate<String[]>>();
+		textureList = new ArrayList<Integer>();
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
@@ -87,6 +89,7 @@ public class DocumentRenderer {
 		this.bufferBuilder = Tessellator.getInstance().getBuffer();
 		this.documentFile = documentFile;
 		this.tokenMap = new HashMap<String, Predicate<String[]>>();
+		textureList = new ArrayList<Integer>();
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
@@ -97,6 +100,13 @@ public class DocumentRenderer {
 	
 	public boolean isAvailable() {
 		return available;
+	}
+	
+	public void remove() {
+		for(int id : this.textureList) {
+			GLUtils.deleteTexture(id);
+		}
+		documentIn.remove();
 	}
 	
 	private void init() {
@@ -377,6 +387,12 @@ public class DocumentRenderer {
 		public Document(List<Page> pages) {
 			this.pages = pages;
 		}
+		
+		public void remove() {
+			for(Page p : pages) {
+				p.remove();
+			}
+		}
 	}
 	
 	private static final class Page {
@@ -396,6 +412,12 @@ public class DocumentRenderer {
 				currentY += element.getHeight();
 			}
 		}
+		
+		public void remove() {
+			for(Element e : elements) {
+				e.remove();
+			}
+		}
 	}
 	
 	private static abstract class Element {
@@ -409,6 +431,10 @@ public class DocumentRenderer {
 		protected abstract int getHeight();
 		
 		protected abstract void draw(int x, int y, DocumentRenderer renderer);
+		
+		protected void remove() {
+			
+		}
 		
 		private static class EndOfPage extends Element {
 
@@ -478,11 +504,12 @@ public class DocumentRenderer {
 		
 		private static class Image extends Element {
 			
-			private BufferedImage image;
-			private int width;
-			private int height;
-			private int realWidth;
-			private int realHeight;
+			private final BufferedImage image;
+			private final int width;
+			private final int height;
+			private final int realWidth;
+			private final int realHeight;
+			private final int glTextureId;
 			
 			private Image(ResourceLocation location, int windowWidth, int windowHeight) throws IOException {
 				this.image = TextureUtil.readBufferedImage(Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream());
@@ -492,6 +519,8 @@ public class DocumentRenderer {
 				size.scaleToSize(windowWidth, windowHeight);
 				this.realWidth = size.getWidth();
 				this.realHeight = size.getHeight();
+				this.glTextureId = GLUtils.loadTexture(this.image);
+				
 			}
 			
 			private Image(File image, int windowWidth, int windowHeight) throws FileNotFoundException, IOException {
@@ -502,6 +531,7 @@ public class DocumentRenderer {
 				size.scaleToSize(windowWidth, windowHeight);
 				this.realWidth = size.getWidth();
 				this.realHeight = size.getHeight();
+				this.glTextureId = GLUtils.loadTexture(this.image);
 			}
 
 			@Override
@@ -516,19 +546,18 @@ public class DocumentRenderer {
 
 			@Override
 			protected void draw(int x, int y, DocumentRenderer renderer) {
-				int textureId;
-				try {
-					textureId = GLUtils.bindTexture(image);
-				} catch(Exception e) {
-					e.printStackTrace();
-					return;
-				}
+				GLUtils.bindTexture(this.glTextureId);
 				if(width == realWidth && height == realHeight) {
 					Gui.drawModalRectWithCustomSizedTexture(x + renderer.width / 2 - width / 2, y, 0, 0, width, height, width, height);
 				} else {
 					Gui.drawScaledCustomSizeModalRect(x + renderer.width / 2 - realWidth / 2, y, 0, 0, width, height, realWidth, realHeight, width, height);
 				}
 				//GLUtils.deleteTexture(textureId);
+			}
+			
+			@Override
+			protected void remove() {
+				GLUtils.deleteTexture(glTextureId);
 			}
 		}
 		

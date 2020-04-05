@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 
 public class BrightnessTweaker {
 	
-	public static final float GAMMA = -0.30F; 
+	public static final float GAMMA = -0.10F; 
 	
 	public static void tweak() {
 		if(!ConfigHandler.reduceBrightness)

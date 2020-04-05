@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.AbstractTexture;
@@ -168,25 +170,15 @@ public class GLUtils {
 		GlStateManager.bindTexture(textureId);
 	}
 	
-	/**
-	 * Similar to {@link TextureManager#bindTexture}<br>
-	 * But this method can bind an existing PNG file to the TextureManager.
-	 * 
-	 * @param file
-	 * @return GLTextureID
-	 * @throws IOException
-	 */
-	public static int bindTexture(File file) throws IOException {
+	public static int loadTexture(File file) throws IOException {
 		ITextureObject texture = new ExternalImageTexture(file);
 		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
-		bindTexture(texture.getGlTextureId());
 		return texture.getGlTextureId();
 	}
 	
-	public static int bindTexture(BufferedImage image) throws IOException {
+	public static int loadTexture(BufferedImage image) throws IOException {
 		ITextureObject texture = new ExternalImageTexture(image);
 		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
-		bindTexture(texture.getGlTextureId());
 		return texture.getGlTextureId();
 	}
 	

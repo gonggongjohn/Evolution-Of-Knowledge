@@ -18,8 +18,8 @@ public class GuiScreenTest extends MetaGuiScreen {
 
 	private GuiControl.GuiButton pageUp;
 	private GuiControl.GuiButton pageDown;
-	private DocumentRenderer renderer;
-	private int pages;
+	protected DocumentRenderer renderer;
+	protected int pages;
 	private int pageIndex;
 	
 	public GuiScreenTest() {
@@ -66,5 +66,11 @@ public class GuiScreenTest extends MetaGuiScreen {
 	private void pageDown(MetaGuiScreen gui) {
 		if(this.pageIndex + 2 >= this.pages) return;
 		this.pageIndex += 2;
+	}
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		renderer.remove();
 	}
 }
