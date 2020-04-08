@@ -82,9 +82,20 @@ messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
 message.documentrenderer.error=A fatal error occurred when loading document. See latest.log or debug.log for more information.
 message.ducumentrenderer.syntaxerror=Warning: Some syntax error were found in the document. Check the log file for more information.
 
+manual.msg.error=§cError in %s at line %d: %s
+manual.msg.warning=§eWarning in %s at line %d: %s
+manual.msg.document_empty=Wait...WTF? 0 pages?? What's wrong???
 manual.error=Warning:Error loading document.
 manual.error1=See the log file for more information.
 manual.error2=Invalid "%s" at line %d
+manual.text.error=Error
+manual.error.text_area_too_small=Text area is too small! It must be larger than 20*20 pixels.
+manual.error.cant_read_document_file=Can't read document file "%s".
+manual.error.invalid_token=Invalid token "%s".
+manual.error.error_processing_statement=Can't parse the statement.
+manual.error.element_too_large=This element's size exceeds the limit(%d*%d)! Loading won't continue.
+manual.error.illegal_arguments=There must be only %d argument(s).
+manual.error.syntax_error=Syntax error.
 
 research.gui.pre=Research Node:
 research.root.name=Root Research

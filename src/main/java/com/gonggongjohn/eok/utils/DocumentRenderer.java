@@ -132,7 +132,7 @@ public class DocumentRenderer {
 		available = true;
 		long startTime = System.currentTimeMillis();
 		if(this.width < 20 || this.height < 20) {
-			logger.error("Text area is too small! It must be larger than 20*20 pixels.");
+			this.error(I18n.format("manual.error.text_area_too_small"));
 			return false;
 		}
 		if(!isDocumentExternal) {
@@ -161,10 +161,11 @@ public class DocumentRenderer {
 			}
 		} catch(Exception e) {
 			if(!isDocumentExternal) {
-				logger.error("Can't read document file \"{}:{}\"", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+				this.error(I18n.format("manual.error.cant_read_document_file", this.documentLocation.toString()));
 			} else {
-				logger.error("Can't read document file \"{}\"", documentFile.getAbsolutePath());
+				this.error(I18n.format("manual.error.cant_read_document_file", this.documentFile.getPath()));
 			}
+			this.error(e.toString());
 			e.printStackTrace();
 			return false;
 		}
@@ -179,14 +180,14 @@ public class DocumentRenderer {
 		if(!buildDocument()) return false;
 		logger.info("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
 		if(documentIn.pages.size() == 0) {
-			logger.warn("Wait...WTF? 0 pages?? What's wrong???");
+			this.warning(I18n.format("manual.msg.document_empty"));
 			return false;
 		}
 		return true;
 	}
 	
 	private void appendErrText(String str) {
-		appendText("§c§lERROR:" + str);
+		appendText("§c§l" + I18n.format("manual.text.error") + ":" + str);
 		err = true;
 	}
 	
@@ -215,7 +216,7 @@ public class DocumentRenderer {
 							appendErrText(line);
 						}
 					} else {
-						logger.warn("Invalid token {} at line {}.", statement, lineNumber);
+						this.warning(I18n.format("manual.error.invalid_token", statement));
 					}
 				} else {
 					String token = statement.substring(0, statement.indexOf(' '));
@@ -232,7 +233,7 @@ public class DocumentRenderer {
 							}
 						}
 					} else {
-						logger.warn("Invalid token {} at line {}.", token, lineNumber);
+						this.warning(I18n.format("manual.error.invalid_token", statement));
 					}
 					
 				}
@@ -241,6 +242,8 @@ public class DocumentRenderer {
 			}
 		} catch(Exception e) {
 			logger.error("An error occurred while processing line \"{}\" (Line {})", line, lineNumber);
+			this.error(I18n.format("manual.error.error_processing_statement"));
+			this.error(e.toString());
 			e.printStackTrace();
 			return false;
 		}
@@ -253,7 +256,7 @@ public class DocumentRenderer {
 		List<Element> currentElements = new ArrayList<Element>();
 		for(Element element : elements) {
 			if(element.getHeight() > this.height) {
-				logger.error("This element's size exceeds the limit({}*{})! Loading won't continue.", this.width, this.height);
+				this.error(I18n.format("manual.error.element_too_large", this.width, this.height));
 				return false;
 			}
 			if(element instanceof Element.EndOfPage) {
@@ -285,7 +288,7 @@ public class DocumentRenderer {
 	/* {text:string} */
 	private boolean addCenteredText(String[] args) {
 		if(args.length != 1) {
-			logger.warn("Illegal Arguments: Line {}: There must be only one argument.");
+			this.warning(I18n.format("manual.error.illegal_arguments", 1));
 			return false;
 		}
 		elements.add(new Element.CenteredText(args[0]));
@@ -300,7 +303,7 @@ public class DocumentRenderer {
 	/* {path:string} */
 	private boolean addImage(String[] args) {
 		if(args.length != 1) {
-			logger.warn("Illegal Arguments: Line {}: There must be only 1 arguments.");
+			this.warning(I18n.format("manual.error.illegal_arguments", 1));
 			return false;
 		}
 		try {
@@ -315,7 +318,8 @@ public class DocumentRenderer {
 				}
 			}
 		} catch(Exception e) {
-			logger.warn("Syntax error at line {}.", lineNumber);
+			this.warning(I18n.format("manual.error.syntax_error"));
+			this.warning(e.toString());
 			e.printStackTrace();
 			return false;
 		}
@@ -325,7 +329,7 @@ public class DocumentRenderer {
 	/* {x1:int, y1:int, x2:int, y2:int, width:int, color:string[#XXXXXX]} */
 	private boolean addLine(String[] args) {
 		if(args.length != 6) {
-			logger.warn("Illegal Arguments: Line {}: There must be only 6 arguments.");
+			this.warning(I18n.format("manual.error.illegal_arguments", 6));
 			return false;
 		}
 		try {
@@ -341,8 +345,8 @@ public class DocumentRenderer {
 			int b = rgb.getB();
 			elements.add(new Element.Line(x1, y1, x2, y2, width, r, g, b));
 		} catch(NumberFormatException e) {
-			logger.warn("Syntax error at line {}: The input is not a number!", lineNumber);
-			logger.warn("\t{}", (e.getMessage() != null) ? e.getMessage() : "");
+			this.warning(I18n.format("manual.error.syntax_error"));
+			this.warning(e.toString());
 			e.printStackTrace();
 			return false;
 		}
@@ -378,6 +382,26 @@ public class DocumentRenderer {
 		}
 		this.documentIn.pages.get(pageIndex).draw(originX, originY, this);
 		GLUtils.drawCenteredString(String.valueOf(pageIndex + 1), originX + width / 2, originY + height + 5, Colors.DEFAULT_BLACK);
+	}
+	
+	private void error(String msg) {
+		if(!this.isDocumentExternal) {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg));
+		} else {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg));
+		}
+	}
+	
+	private void warning(String msg) {
+		if(!this.isDocumentExternal) {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg));
+		} else {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg));
+		}
 	}
 	
 	private static final class Document {

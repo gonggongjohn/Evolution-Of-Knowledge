@@ -82,9 +82,20 @@ messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
 message.documentrenderer.error=加载文档时发生致命错误。查看latest.log或debug.log获取详细信息。
 message.ducumentrenderer.syntaxerror=警告：文档中存在语法错误。请查看日志文件获取详细信息。
 
+manual.msg.error=§c错误: 在文件 %s 第 %d 行: %s
+manual.msg.warning=§e警告: 在文件 %s 第 %d 行: %s
+manual.msg.document_empty=慢着...0页？？什么鬼东西？？？
 manual.error=警告：加载文档时发生错误。
 manual.error1=查看日志文件获取更多信息。
 manual.error2=第%d行存在非法的"%s"
+manual.text.error=错误
+manual.error.text_area_too_small=文本区域太小！它必须大于20*20像素。
+manual.error.cant_read_document_file=无法读取文档 “%s”。
+manual.error.invalid_token=无效的标记 "%s"。
+manual.error.error_processing_statement=无法解析语句。
+manual.error.element_too_large=元素的大小超过了限制(%d*%d)! 加载将不会继续进行。
+manual.error.illegal_arguments=只能有%d个参数。
+manual.error.syntax_error=语法错误。
 
 research.gui.pre=Noeud de Recherche：
 research.root.name=Base de Recherche
