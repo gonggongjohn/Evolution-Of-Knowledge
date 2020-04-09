@@ -21,7 +21,7 @@ public class GuiDocumentPreview extends GuiScreenTest {
 		this.setTextureSize(422, 800);
 		this.setWindowSize(401, 281);
 		this.setTitle("");
-		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + path));
+		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + path));
 		pages = renderer.getPages();
 	}
 }

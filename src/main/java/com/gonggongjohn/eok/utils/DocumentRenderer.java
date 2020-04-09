@@ -55,6 +55,7 @@ public class DocumentRenderer {
 	private boolean err;
 	public final boolean isDocumentExternal;
 	private final List<Integer> textureList;
+	public static final String localManualPath = "local_manual" + File.separator;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
 		isDocumentExternal = false;
@@ -78,7 +79,7 @@ public class DocumentRenderer {
 	}
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, File documentFile) {
-		isDocumentExternal = true;
+		this.isDocumentExternal = true;
 		this.org1X = org1X;
 		this.org1Y = org1Y;
 		this.org2X = org2X;
@@ -310,11 +311,13 @@ public class DocumentRenderer {
 			if(!isDocumentExternal) {
 				elements.add(new Element.Image(new ResourceLocation(args[0]), this.width, this.height));
 			} else {
-				if(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]).exists()) {
-					elements.add(new Element.Image(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]), this.width, this.height));
+				ResourceLocation location = new ResourceLocation(args[0]);
+				File file = new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + location.getResourceDomain() + File.separator + location.getResourcePath());
+				if(file.exists()) {
+					elements.add(new Element.Image(file, this.width, this.height));
 				} else {
-					logger.error("File not found: {}", Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]);
-					throw new FileNotFoundException(String.format("File not found: %s", Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + args[0]));
+					logger.error("File not found: {}", file.getAbsolutePath());
+					throw new FileNotFoundException(String.format("File not found: %s", file.getAbsolutePath()));
 				}
 			}
 		} catch(Exception e) {
@@ -576,7 +579,6 @@ public class DocumentRenderer {
 				} else {
 					Gui.drawScaledCustomSizeModalRect(x + renderer.width / 2 - realWidth / 2, y, 0, 0, width, height, realWidth, realHeight, width, height);
 				}
-				//GLUtils.deleteTexture(textureId);
 			}
 			
 			@Override
