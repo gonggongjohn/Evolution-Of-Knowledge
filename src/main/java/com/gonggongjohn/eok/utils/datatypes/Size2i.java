@@ -22,8 +22,8 @@ public class Size2i {
 	 * 利用图形相似原理，在不改变纵横比的前提下把它缩放到给定的最大尺寸，并返回它本身。
 	 */
 	public Size2i scaleToSize(int width, int height) {
-		float a = width / this.width;
-		float b = height / this.height;
+		float a = (float)width / (float)this.width;
+		float b = (float)height / (float)this.height;
 		float w, h;
 		w = this.width * a;
 		h = this.height * a;
