@@ -193,18 +193,146 @@ public class DocumentRenderer {
 	}
 	
 	private void appendText(String str) {
-		String line = "";
-		char[] chars = str.toCharArray();
-		for(char c : chars) {
-			if(GLUtils.getStringWidth(line) >= this.width) {
-				elements.add(new Element.TextLine(new String(line)));
-				line = "";
-				line += c;
-			} else {
-				line += c;
+		char styleMark = '§';
+		int index = 0;
+		boolean colored = false;
+		char currentColor = 'f';
+		boolean random = false;			// k
+		boolean bold = false;			// l
+		boolean strikethrough = false;	// m
+		boolean underlined = false;		// n
+		boolean italic = false;			// o
+		String allStyles = "0123456789abcdefklmnor";
+		String colors = "0123456789abcdef";
+		String tmp = new String(str);
+		String output = "";
+		for(int i = 0; i < str.length(); i++) {
+			index = tmp.indexOf(styleMark);
+			if(index == -1) {	// 没有任何样式代码
+				if(tmp.isEmpty()) {	// 所有字符都处理完毕了，直接结束
+					break;
+				} else {
+					for(char c : tmp.toCharArray()) {	// 给剩余字符附上样式并结束
+						if(colored) {
+							output += styleMark;
+							output += currentColor;
+						}
+						if(random) {
+							output += styleMark;
+							output += 'k';
+						}
+						if(bold) {
+							output += styleMark;
+							output += 'l';
+						}
+						if(strikethrough) {
+							output += styleMark;
+							output += 'm';
+						}
+						if(underlined) {
+							output += styleMark;
+							output += 'n';
+						}
+						if(italic) {
+							output += styleMark;
+							output += 'o';
+						}
+						output += c;
+					}
+					break;
+				}
 			}
+			if(index != 0) {	// 有样式代码但是不在开头，要先把前面的字符附上已有的样式
+				for(char c : tmp.toCharArray()) {
+					if(c == styleMark) break;
+					if(colored) {
+						output += styleMark;
+						output += currentColor;
+					}
+					if(random) {
+						output += styleMark;
+						output += 'k';
+					}
+					if(bold) {
+						output += styleMark;
+						output += 'l';
+					}
+					if(strikethrough) {
+						output += styleMark;
+						output += 'm';
+					}
+					if(underlined) {
+						output += styleMark;
+						output += 'n';
+					}
+					if(italic) {
+						output += styleMark;
+						output += 'o';
+					}
+					output += c;
+					tmp = tmp.substring(1);
+				}
+				continue;
+			}
+			if(index == tmp.length()) break;
+			index++;
+			if(allStyles.indexOf(tmp.charAt(index)) == -1) {	// 样式代码无效，保持原样
+				output += tmp.substring(0, 2);
+				tmp = tmp.substring(2);
+				continue;
+			}
+			// 正式开始处理样式
+			// 字符的转移放到最后
+			if(colors.indexOf(tmp.charAt(index)) != -1) {	// 颜色代码
+				colored = true;
+				currentColor = tmp.charAt(index);
+			} else if(tmp.charAt(index) == 'r'){	// §r
+				colored = false;
+				currentColor = 'f';
+				random = false;
+				bold = false;
+				strikethrough = false;
+				underlined = false;
+				italic = false;
+			} else {	// 其他样式代码
+				switch(tmp.charAt(index)) {
+					case 'k': random = true; break;
+					case 'l': bold = true; break;
+					case 'm': strikethrough = true; break;
+					case 'n': underlined = true; break;
+					case 'o': italic = true; break;
+					default: break;	// 不可能执行
+				}
+			}
+			// 转移字符
+			tmp = tmp.substring(2);
 		}
-		elements.add(new Element.TextLine(line));
+
+		List<String> lines = trimStringToWidthWithoutStyleMarks(output, this.width);
+		for(String line : lines) {
+			elements.add(new Element.TextLine(line));
+		}
+	}
+	
+	/**
+	 * 将一个字符串按一定的宽度限制分成若干行(忽略样式标识)
+	 * @param 输入的字符串
+	 * @return 一个List，每行一个字符串
+	 */
+	private List<String> trimStringToWidthWithoutStyleMarks(String str, int limit) {
+		List<String> lines = new ArrayList<String>();
+		String line = "";
+		for(char c : str.toCharArray()) {
+			if(GLUtils.getStringWidth(line) >= limit) {
+				lines.add(new String(line));
+				line = "";
+			}
+			line += c;
+		}
+		if(!line.isEmpty()) {
+			lines.add(new String(line));
+		}
+		return lines;
 	}
 	
 	private boolean processLine(String line) {

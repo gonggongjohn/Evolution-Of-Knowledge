@@ -112,6 +112,14 @@ public class GLUtils {
 		return Minecraft.getMinecraft().fontRenderer.getStringWidth(str);
 	}
 	
+	public static int getCharWidth(char c) {
+		return Minecraft.getMinecraft().fontRenderer.getCharWidth(c);
+	}
+	
+	public static String trimStringToWidth(String str, int width) {
+		return Minecraft.getMinecraft().fontRenderer.trimStringToWidth(str, width);
+	}
+	
 	public static void drawString(String str, int x, int y, int color) {
 		ColorRGB rgb = hexToRGB(color);
 		color3i(rgb.r, rgb.g, rgb.b);
