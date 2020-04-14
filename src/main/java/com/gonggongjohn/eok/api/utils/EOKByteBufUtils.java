@@ -1,7 +1,9 @@
-package com.gonggongjohn.eok.utils;
+package com.gonggongjohn.eok.api.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.gonggongjohn.eok.utils.MerchantTradeData;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;

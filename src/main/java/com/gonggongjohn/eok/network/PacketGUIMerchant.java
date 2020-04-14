@@ -2,8 +2,8 @@ package com.gonggongjohn.eok.network;
 
 import java.util.ArrayList;
 
+import com.gonggongjohn.eok.api.utils.EOKByteBufUtils;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
-import com.gonggongjohn.eok.utils.EOKByteBufUtils;
 import com.gonggongjohn.eok.utils.MerchantTradeData;
 
 import io.netty.buffer.ByteBuf;

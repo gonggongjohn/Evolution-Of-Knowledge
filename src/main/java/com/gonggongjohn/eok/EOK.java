@@ -8,7 +8,6 @@ import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
 import com.gonggongjohn.eok.utils.BluePrintDict;
-import com.gonggongjohn.eok.utils.DocumentUtils;
 import com.gonggongjohn.eok.utils.InspirationDict;
 import com.gonggongjohn.eok.utils.MathUtils;
 import com.gonggongjohn.eok.utils.MultiBlockDict;
@@ -48,7 +47,6 @@ public class EOK {
 	private SimpleNetworkWrapper network;
 
 	public static MathUtils mathUtils = new MathUtils();
-	public static DocumentUtils documentUtils = new DocumentUtils();
 	public static ResearchDict researchDict = new ResearchDict();
 	public static InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;

@@ -3,6 +3,8 @@ package com.gonggongjohn.eok.client.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.gui.meta.GuiControl;
+import com.gonggongjohn.eok.api.gui.meta.MetaGuiScreen;
 import com.gonggongjohn.eok.utils.DocumentRenderer;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -25,11 +27,9 @@ public class GuiScreenTest extends MetaGuiScreen {
 	public GuiScreenTest() {
 		super(true);
 		this.setTexture(new ResourceLocation(EOK.MODID + ":textures/gui/screen/test_screen.png"));
-		this.setTextureSize(422, 800);
-		this.setWindowSize(401, 281);
+		this.setTextureSize(512, 512);
+		this.setWindowSize(279, 180);
 		this.setTitle("");
-		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, EOK.MODID + ":manual/index/index.edt");
-		pages = renderer.getPages();
 	}
 
 	@Override
@@ -52,8 +52,9 @@ public class GuiScreenTest extends MetaGuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		pageUp = builder.new GuiButton(12, 235, 54, 36, 0, 450, 0, 318, this::pageUp);
-		pageDown = builder.new GuiButton(331, 234, 54, 36, 0, 450, 0, 282, this::pageDown);
+		this.initDocument();
+		pageUp = builder.createButton(13, 151, 20, 20, 0, 181, 21, 181, this::pageUp);
+		pageDown = builder.createButton(248, 151, 20, 20, 0, 202, 21, 202, this::pageDown);
 		this.addControl(pageUp);
 		this.addControl(pageDown);
 	}
@@ -72,5 +73,10 @@ public class GuiScreenTest extends MetaGuiScreen {
 	public void onGuiClosed() {
 		super.onGuiClosed();
 		renderer.remove();
+	}
+	
+	protected void initDocument() {
+		renderer = new DocumentRenderer(17, 13, 149, 13, 115, 135, EOK.MODID + ":manual/index/index.edt");
+		pages = renderer.getPages();
 	}
 }

@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.utils;
+package com.gonggongjohn.eok.api.gui;
 
 public class Colors {
 	public static final int DEFAULT_TEXT = 0xE0E0E0;

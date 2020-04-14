@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.utils;
+package com.gonggongjohn.eok.api.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

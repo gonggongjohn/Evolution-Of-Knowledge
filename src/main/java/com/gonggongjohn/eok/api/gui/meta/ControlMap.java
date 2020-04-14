@@ -1,9 +1,6 @@
-package com.gonggongjohn.eok.utils;
+package com.gonggongjohn.eok.api.gui.meta;
 
 import java.util.HashMap;
-
-import com.gonggongjohn.eok.client.gui.GuiControl;
-import com.gonggongjohn.eok.client.gui.MetaGuiScreen;
 
 public class ControlMap extends HashMap<Integer, GuiControl> {
 
@@ -19,12 +16,16 @@ public class ControlMap extends HashMap<Integer, GuiControl> {
 	public GuiControl put(Integer key, GuiControl value) {
 		switch(value.getType()) {
 		case BUTTON:
-			((GuiControl.GuiButton)value).init(key);
+			((GuiControl.GuiButton)value).init();
 			break;
 		default:
 			break;
 		}
 		return super.put(key, value);
+	}
+	
+	public GuiControl put(GuiControl control) {
+		return super.put(control.id, control);
 	}
 
 	@Override

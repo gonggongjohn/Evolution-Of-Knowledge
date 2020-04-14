@@ -1,12 +1,10 @@
-package com.gonggongjohn.eok.utils;
+package com.gonggongjohn.eok.api.render;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -192,5 +190,21 @@ public class GLUtils {
 	
 	public static void deleteTexture(int textureId) {
 		TextureUtil.deleteTexture(textureId);
+	}
+	
+	public static void enableBlend() {
+		GlStateManager.enableBlend();
+	}
+	
+	public static void disableBlend() {
+		GlStateManager.disableBlend();
+	}
+	
+	public static void enableTexture2D() {
+		GlStateManager.enableTexture2D();
+	}
+	
+	public static void disableTexture2D() {
+		GlStateManager.disableTexture2D();
 	}
 }

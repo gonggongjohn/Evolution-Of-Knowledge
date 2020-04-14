@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.gui;
+package com.gonggongjohn.eok.api.gui.meta;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.Colors;
-import com.gonggongjohn.eok.utils.ControlMap;
+import com.gonggongjohn.eok.api.gui.Colors;
+import com.gonggongjohn.eok.client.gui.GuiScreenTest;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -21,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
  * 
  * @see GuiScreenTest
  */
-public abstract class MetaGuiScreen extends GuiScreen {
+public abstract class MetaGuiScreen  extends GuiScreen implements IMetaGui {
 	/**
 	 * This map is used to store all Gui controls. The key is the control ID and the
 	 * value is the control object.
@@ -34,7 +34,7 @@ public abstract class MetaGuiScreen extends GuiScreen {
 	 * 
 	 * @see GuiScreenTest
 	 */
-	public GuiControl builder = new GuiControl(this);
+	public GuiControl.ControlBuilder builder = new GuiControl.ControlBuilder(this);
 	private int nextId = 0;
 	/**
 	 * The window width here is not the width of the game window, but the width of
@@ -153,16 +153,26 @@ public abstract class MetaGuiScreen extends GuiScreen {
 		return false;
 	}
 
-	/**
-	 * Get all the controls of this Gui and their corresponding IDs
-	 */
-	public Map<Integer, GuiControl> getControls() {
+	@Override
+	public ControlMap getControls() {
 		return this.controls;
 	}
 
 	private static void throwArgumentException(String s) {
 		EOK.getLogger().error("An error occurred when rendering Gui, " + s + ".");
 		throw new IllegalArgumentException(s);
+	}
+	
+	public ResourceLocation getTexture() {
+		return TEXTURE;
+	}
+	
+	public int getTextureWidth() {
+		return this.texWidth;
+	}
+	
+	public int getTextureHeight() {
+		return this.texHeight;
 	}
 
 	public int getWindowWidth() {
@@ -179,14 +189,6 @@ public abstract class MetaGuiScreen extends GuiScreen {
 		}
 		this.windowWidth = width;
 		this.windowHeight = height;
-	}
-
-	public int getTexWidth() {
-		return texWidth;
-	}
-
-	public int getTexHeight() {
-		return texHeight;
 	}
 
 	/**
@@ -209,10 +211,6 @@ public abstract class MetaGuiScreen extends GuiScreen {
 		}
 		this.texWidth = width;
 		this.texHeight = height;
-	}
-
-	public ResourceLocation getTexture() {
-		return TEXTURE;
 	}
 
 	public void setTexture(ResourceLocation texture) {
@@ -277,14 +275,6 @@ public abstract class MetaGuiScreen extends GuiScreen {
 	
 	public void removeControl(GuiControl control) {
 		this.controls.remove(control.getId());
-	}
-	
-	public int getTextureWidth() {
-		return this.texWidth;
-	}
-	
-	public int getTextureHeight() {
-		return this.texHeight;
 	}
 
 }

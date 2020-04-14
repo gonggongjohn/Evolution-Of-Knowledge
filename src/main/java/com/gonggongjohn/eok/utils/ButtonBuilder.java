@@ -2,6 +2,8 @@ package com.gonggongjohn.eok.utils;
 
 import org.lwjgl.opengl.GL11;
 
+import com.gonggongjohn.eok.api.gui.Colors;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

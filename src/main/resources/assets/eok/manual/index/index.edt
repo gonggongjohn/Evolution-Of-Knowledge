@@ -7,7 +7,6 @@
 §d66CCFF66CCFF66CCFF66CCFF66CCFF66CCFF
 `!comment 画一条线`
 `!comment 注意:线是独立于其他元素绘制的`
-`!drawline 15 15 140 220 15 #66CCFF`
 `!end_of_page`
 
 

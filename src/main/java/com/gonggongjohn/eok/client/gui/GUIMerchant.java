@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.gui.Colors;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.utils.ButtonBuilder;
 import com.gonggongjohn.eok.utils.ButtonData;
-import com.gonggongjohn.eok.utils.Colors;
 import com.gonggongjohn.eok.utils.MerchantTradeData;
 
 import net.minecraft.client.gui.GuiButton;

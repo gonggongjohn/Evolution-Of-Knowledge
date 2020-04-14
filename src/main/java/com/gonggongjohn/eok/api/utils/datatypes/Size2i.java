@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.utils.datatypes;
+package com.gonggongjohn.eok.api.utils.datatypes;
 
 public class Size2i {
 	

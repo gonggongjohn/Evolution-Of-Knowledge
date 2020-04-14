@@ -2,11 +2,9 @@ package com.gonggongjohn.eok.client.gui;
 
 import java.io.File;
 
-import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.utils.DocumentRenderer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 
 /**
  * Want to load a document from your file system? Use this.
@@ -16,12 +14,15 @@ import net.minecraft.util.ResourceLocation;
  */
 public class GuiDocumentPreview extends GuiScreenTest {
 
+	private final String path = "";
+	
 	public GuiDocumentPreview(String path) {
-		this.setTexture(new ResourceLocation(EOK.MODID + ":textures/gui/screen/test_screen.png"));
-		this.setTextureSize(422, 800);
-		this.setWindowSize(401, 281);
-		this.setTitle("");
-		renderer = new DocumentRenderer(18, 18, 210, 18, 170, 230, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + path));
+		super();
+	}
+	
+	@Override
+	protected void initDocument() {
+		renderer = new DocumentRenderer(17, 13, 149, 13, 115, 135, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + path));
 		pages = renderer.getPages();
 	}
 }

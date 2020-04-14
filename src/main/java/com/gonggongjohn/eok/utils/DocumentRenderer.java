@@ -18,8 +18,11 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.GLUtils.ColorRGB;
-import com.gonggongjohn.eok.utils.datatypes.Size2i;
+import com.gonggongjohn.eok.api.gui.Colors;
+import com.gonggongjohn.eok.api.render.GLUtils;
+import com.gonggongjohn.eok.api.render.GLUtils.ColorRGB;
+import com.gonggongjohn.eok.api.utils.DataUtils;
+import com.gonggongjohn.eok.api.utils.datatypes.Size2i;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -42,6 +45,7 @@ public class DocumentRenderer {
 	private final int width;
 	private final int height;
 	private final Logger logger;
+	private final Tessellator tessellator;
 	private final BufferBuilder bufferBuilder;
 	private int lineNumber;
 	private ResourceLocation documentLocation;
@@ -66,7 +70,8 @@ public class DocumentRenderer {
 		this.width = width;
 		this.height = height;
 		logger = EOK.getLogger();
-		this.bufferBuilder = Tessellator.getInstance().getBuffer();
+		this.tessellator = Tessellator.getInstance();
+		this.bufferBuilder = tessellator.getBuffer();
 		this.documentLocation = new ResourceLocation(documentPath);
 		this.tokenMap = new HashMap<String, Predicate<String[]>>();
 		textureList = new ArrayList<Integer>();
@@ -87,6 +92,7 @@ public class DocumentRenderer {
 		this.width = width;
 		this.height = height;
 		logger = EOK.getLogger();
+		this.tessellator = Tessellator.getInstance();
 		this.bufferBuilder = Tessellator.getInstance().getBuffer();
 		this.documentFile = documentFile;
 		this.tokenMap = new HashMap<String, Predicate<String[]>>();
@@ -750,11 +756,16 @@ public class DocumentRenderer {
 			@Override
 			protected void draw(int x, int y, DocumentRenderer renderer) {
 				BufferBuilder bb = renderer.bufferBuilder;
+				Tessellator tesr = renderer.tessellator;
 				GLUtils.glLineWidth(width);
+				GLUtils.enableBlend();
+				GLUtils.disableTexture2D();
 				bb.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
-				bb.pos(x1, y1, 0).color(r, g, b, 255).endVertex();
-				bb.pos(x2, y2, 0).color(r, g, b, 255).endVertex();
-				bb.finishDrawing();
+				bb.pos(x + x1, y + y1, 0).color(r, g, b, 255).endVertex();
+				bb.pos(x + x2, y + y2, 0).color(r, g, b, 255).endVertex();
+				tesr.draw();
+				GLUtils.enableTexture2D();
+				GLUtils.disableBlend();
 			}
 		}
 		
