@@ -79,3 +79,10 @@ processResources {
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 }
+
+task apiJar(type: Jar) {
+    classifier = 'api'
+    from sourceSets.main.output
+    from sourceSets.main.allSource
+    include 'com/gonggongjohn/eok/api/**'
+}
