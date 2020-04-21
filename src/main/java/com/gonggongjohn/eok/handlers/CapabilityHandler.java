@@ -1,11 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
-import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
-import com.gonggongjohn.eok.capabilities.IPlayerState;
-import com.gonggongjohn.eok.capabilities.IResearchData;
-import com.gonggongjohn.eok.capabilities.StoragePlayerState;
-import com.gonggongjohn.eok.capabilities.StorageResearchData;
+import com.gonggongjohn.eok.capabilities.*;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;

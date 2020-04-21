@@ -1,13 +1,8 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.entity.EntityBullet;
-import com.gonggongjohn.eok.entity.EntityOsIr;
-import com.gonggongjohn.eok.entity.EntitySmalldew;
-import com.gonggongjohn.eok.entity.EntityZijing;
-import com.gonggongjohn.eok.entity.render.RenderOsIr;
-import com.gonggongjohn.eok.entity.render.RenderSmalldew;
-import com.gonggongjohn.eok.entity.render.RenderZijing;
+import com.gonggongjohn.eok.entity.*;
+import com.gonggongjohn.eok.entity.render.*;
 import com.gonggongjohn.eok.utils.EntityRenderFactory;
 
 import net.minecraft.client.renderer.entity.RenderLiving;

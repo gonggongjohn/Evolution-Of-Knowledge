@@ -1,20 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.client.gui.GUIBluePrint;
-import com.gonggongjohn.eok.client.gui.GUIEOKManualOld;
-import com.gonggongjohn.eok.client.gui.GUIElementaryResearchTable;
-import com.gonggongjohn.eok.client.gui.GUIFirstMachine;
-import com.gonggongjohn.eok.client.gui.GUIHayTorchBase;
-import com.gonggongjohn.eok.client.gui.GUIHayTorchBaseLit;
-import com.gonggongjohn.eok.client.gui.GUIMerchant;
-import com.gonggongjohn.eok.client.gui.GUIRefractingTelescope;
-import com.gonggongjohn.eok.client.gui.GUITest2D;
-import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
-import com.gonggongjohn.eok.inventory.ContainerFirstMachine;
-import com.gonggongjohn.eok.inventory.ContainerHayTorchBase;
-import com.gonggongjohn.eok.inventory.ContainerHayTorchBaseLit;
-import com.gonggongjohn.eok.inventory.ContainerMerchant;
-import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
+import com.gonggongjohn.eok.client.gui.*;
+import com.gonggongjohn.eok.inventory.*;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -39,7 +26,7 @@ public class GUIHandler implements IGuiHandler {
     	
         switch (ID) {
         	case GUIEOKManual:
-        		return new GUIEOKManualOld();
+        		return null;
             case GUIRefractingTelescope:
                 return new ContainerRefractingTelescope(player);
             case GUIElementaryResearchTable:
@@ -67,7 +54,7 @@ public class GUIHandler implements IGuiHandler {
         switch (ID){
         
         	case GUIEOKManual:
-        		return new GUIEOKManualOld();
+        		return null;
             case GUIRefractingTelescope:
                 return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));
             case GUIElementaryResearchTable:

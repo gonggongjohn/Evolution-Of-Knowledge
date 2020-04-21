@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.commands.CommandInspiration;
-import com.gonggongjohn.eok.commands.CommandTestGuiScreen;
+import com.gonggongjohn.eok.commands.*;
 
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 

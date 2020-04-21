@@ -1,11 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.tile.TEElementaryResearchTable;
-import com.gonggongjohn.eok.tile.TEFirstMachine;
-import com.gonggongjohn.eok.tile.TEHayTorchBase;
-import com.gonggongjohn.eok.tile.TEHayTorchBaseLit;
-import com.gonggongjohn.eok.tile.TEHaystack;
+import com.gonggongjohn.eok.tile.*;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
