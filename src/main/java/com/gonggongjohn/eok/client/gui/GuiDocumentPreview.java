@@ -9,10 +9,10 @@ import net.minecraft.client.Minecraft;
 /**
  * Want to load a document from your file system? Use this.
  * 
- * @see GuiScreenTest
+ * @see GuiEOKManual
  * @see DocumentRenderer
  */
-public class GuiDocumentPreview extends GuiScreenTest {
+public class GuiDocumentPreview extends GuiEOKManual {
 
 	private final String path = "";
 	
@@ -23,6 +23,5 @@ public class GuiDocumentPreview extends GuiScreenTest {
 	@Override
 	protected void initDocument() {
 		renderer = new DocumentRenderer(17, 13, 149, 13, 115, 135, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + path));
-		pages = renderer.getPages();
 	}
 }

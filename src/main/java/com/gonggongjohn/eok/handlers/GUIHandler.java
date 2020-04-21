@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.client.gui.GUIBluePrint;
-import com.gonggongjohn.eok.client.gui.GUIEOKManual;
+import com.gonggongjohn.eok.client.gui.GUIEOKManualOld;
 import com.gonggongjohn.eok.client.gui.GUIElementaryResearchTable;
 import com.gonggongjohn.eok.client.gui.GUIFirstMachine;
 import com.gonggongjohn.eok.client.gui.GUIHayTorchBase;
@@ -39,7 +39,7 @@ public class GUIHandler implements IGuiHandler {
     	
         switch (ID) {
         	case GUIEOKManual:
-        		return new GUIEOKManual();
+        		return new GUIEOKManualOld();
             case GUIRefractingTelescope:
                 return new ContainerRefractingTelescope(player);
             case GUIElementaryResearchTable:
@@ -67,7 +67,7 @@ public class GUIHandler implements IGuiHandler {
         switch (ID){
         
         	case GUIEOKManual:
-        		return new GUIEOKManual();
+        		return new GUIEOKManualOld();
             case GUIRefractingTelescope:
                 return new GUIRefractingTelescope(new ContainerRefractingTelescope(player));
             case GUIElementaryResearchTable:

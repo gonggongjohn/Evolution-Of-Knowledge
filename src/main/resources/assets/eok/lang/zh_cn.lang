@@ -8,7 +8,6 @@ item.refracting_telescope.name=折射望远镜
 item.flint_fragment.name=燧石碎片
 item.chipped_flint_fragment.name=打制过的燧石碎片
 item.polished_flint_fragment.name=磨制过的燧石碎片
-item.rough_flint_spear.name=粗制燧石矛
 item.rough_flint_axe.name=粗制燧石斧
 
 item.plant_fiber.name=植物纤维
@@ -96,6 +95,7 @@ manual.error.error_processing_statement=无法解析语句。
 manual.error.element_too_large=元素的大小超过了限制(%d*%d)! 加载将不会继续进行。
 manual.error.illegal_arguments=只能有%d个参数。
 manual.error.syntax_error=语法错误。
+manual.hyperlink.mouseon=点击跳转
 
 research.gui.pre=研究节点：
 research.root.name=根研究

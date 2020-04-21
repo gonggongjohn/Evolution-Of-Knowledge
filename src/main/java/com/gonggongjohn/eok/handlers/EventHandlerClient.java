@@ -1,14 +1,19 @@
 package com.gonggongjohn.eok.handlers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
+
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.render.GLUtils;
 import com.gonggongjohn.eok.tweakers.BrightnessTweaker;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -50,5 +55,13 @@ public class EventHandlerClient {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void tweakGamma(GuiOpenEvent event) {
 		BrightnessTweaker.tweak();
+	}
+	
+	/**
+	 * 仅用作调试，请勿更改
+	 */
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void renderTest(DrawScreenEvent event) {
+		
 	}
 }

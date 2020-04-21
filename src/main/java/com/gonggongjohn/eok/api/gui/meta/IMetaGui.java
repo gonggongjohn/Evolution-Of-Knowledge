@@ -24,7 +24,7 @@ public interface IMetaGui {
 	
 	/**
 	 * 获取游戏窗口的宽。<br><br>
-	 * Get the width of the game screen。
+	 * Gets the width of the game screen.
 	 */
 	default public int getScreenWidth() {
 		return Minecraft.getMinecraft().displayWidth;
@@ -32,7 +32,7 @@ public interface IMetaGui {
 
 	/**
 	 * 获取游戏窗口的高。<br><br>
-	 * Get the height of the game screen
+	 * Gets the height of the game screen.
 	 */
 	default public int getScreenHeight() {
 		return Minecraft.getMinecraft().displayHeight;

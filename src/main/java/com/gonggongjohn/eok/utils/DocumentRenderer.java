@@ -20,9 +20,11 @@ import org.lwjgl.opengl.GL11;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.gui.Colors;
 import com.gonggongjohn.eok.api.render.GLUtils;
-import com.gonggongjohn.eok.api.render.GLUtils.ColorRGB;
 import com.gonggongjohn.eok.api.utils.DataUtils;
+import com.gonggongjohn.eok.api.utils.Utils;
+import com.gonggongjohn.eok.api.utils.datatypes.ColorRGB;
 import com.gonggongjohn.eok.api.utils.datatypes.Size2i;
+import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -56,7 +58,7 @@ public class DocumentRenderer {
 	private List<Page> pages = new ArrayList<Page>();
 	private List<Element> elements = new ArrayList<Element>();
 	private boolean available;
-	private boolean err;
+	//private boolean err;
 	public final boolean isDocumentExternal;
 	private final List<Integer> textureList;
 	public static final String localManualPath = "local_manual" + File.separator;
@@ -78,8 +80,6 @@ public class DocumentRenderer {
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
-		} else if(err){
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.ducumentrenderer.syntaxerror")), false);
 		}
 	}
 	
@@ -100,8 +100,6 @@ public class DocumentRenderer {
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
-		} else if(err){
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.ducumentrenderer.syntaxerror")), false);
 		}
 	}
 	
@@ -113,7 +111,9 @@ public class DocumentRenderer {
 		for(int id : this.textureList) {
 			GLUtils.deleteTexture(id);
 		}
-		documentIn.remove();
+		if(documentIn != null) {
+			documentIn.remove();
+		}
 	}
 	
 	private void init() {
@@ -122,9 +122,10 @@ public class DocumentRenderer {
 		tokenMap.put("comment", (s) -> true);
 		tokenMap.put("image", this::addImage);
 		tokenMap.put("drawline", this::addLine);
+		tokenMap.put("hyperlink", this::addHyperLink);
 	}
 	
-	public static enum Side {
+	public static enum DocumentSide {
 		LEFT, RIGHT
 	}
 	
@@ -132,11 +133,26 @@ public class DocumentRenderer {
 		return new BufferedReader(new InputStreamReader(DataUtils.getResource(location), "UTF-8"));
 	}
 	
+	public boolean reload(boolean isExternal, String path) {
+		this.remove();
+		if(!isExternal) {
+			this.documentLocation = new ResourceLocation(path);
+		} else {
+			this.documentFile = new File(path);
+		}
+		if(!(available = read())) {
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+		}
+		return this.available;
+	}
+	
 	public boolean read() {
-		err = false;
 		pages.clear();
 		elements.clear();
 		available = true;
+		this.remove();
+		this.textureList.clear();
+		lineNumber = 0;
 		long startTime = System.currentTimeMillis();
 		if(this.width < 20 || this.height < 20) {
 			this.error(I18n.format("manual.error.text_area_too_small"));
@@ -195,7 +211,6 @@ public class DocumentRenderer {
 	
 	private void appendErrText(String str) {
 		appendText("§c§l" + I18n.format("manual.text.error") + ":" + str);
-		err = true;
 	}
 	
 	private void appendText(String str) {
@@ -489,14 +504,42 @@ public class DocumentRenderer {
 		}
 		return true;
 	}
+	
+	/* {text:string, link:string[domain:path]} */
+	private boolean addHyperLink(String[] args) {
+		if(args.length != 2) {
+			this.warning(I18n.format("manual.error.illegal_arguments", 2));
+			return false;
+		}
+		try {
+			if(!isDocumentExternal) {
+				Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(args[1]));	// 判断文档是否存在，不存在会抛出异常
+				elements.add(new Element.HyperLink(args[0], args[1], this.isDocumentExternal));
+			} else {
+				ResourceLocation location = new ResourceLocation(args[1]);
+				String link = Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + location.getResourceDomain() + File.separator + location.getResourcePath();
+				File document = new File(link);
+				if(!document.exists()) throw new FileNotFoundException("Can't find document file" + args[0]);
+				elements.add(new Element.HyperLink(args[0], link, this.isDocumentExternal));
+			}
+		} catch(Exception e) {
+			this.error(I18n.format("manual.error.cant_read_document_file", args[0]));
+			this.error(e.toString());
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	public int getPages() {
+		if(documentIn == null)
+			return 0;
 		return documentIn.pages.size();
 	}
 
-	public void draw(int pageIndex, Side side, int offsetX, int offsetY) {
+	public void draw(int pageIndex, DocumentSide side, int offsetX, int offsetY) {
 		if(!available) {
-			if(side == Side.LEFT) {
+			if(side == DocumentSide.LEFT) {
 				GLUtils.drawString(I18n.format("manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
 			}
 			return;
@@ -519,6 +562,16 @@ public class DocumentRenderer {
 		}
 		this.documentIn.pages.get(pageIndex).draw(originX, originY, this);
 		GLUtils.drawCenteredString(String.valueOf(pageIndex + 1), originX + width / 2, originY + height + 5, Colors.DEFAULT_BLACK);
+	}
+	
+	public void onMouseClick(int mouseX, int mouseY, int mouseButton, int pageIndex) {
+		if(this.pages == null)
+			return;
+		if(this.pages.size() == 0)
+			return;
+		for(Element e : this.pages.get(pageIndex).elements){
+			e.onClicked(this);
+		}
 	}
 	
 	private void error(String msg) {
@@ -581,14 +634,14 @@ public class DocumentRenderer {
 		}
 	}
 	
-	private static abstract class Element {
+	public static abstract class Element {
 		
-		private static enum Type {
-			END_OF_PAGE, TEXTLINE, CENTERED_TEXT, IMAGE, LINE, ITEM, CRAFTING
+		protected static enum Type {
+			END_OF_PAGE, TEXTLINE, CENTERED_TEXT, IMAGE, LINE, ITEM, CRAFTING, HYPERLINK
 		}
 		
 		protected abstract Type getType();
-		
+
 		protected abstract int getHeight();
 		
 		protected abstract void draw(int x, int y, DocumentRenderer renderer);
@@ -597,7 +650,11 @@ public class DocumentRenderer {
 			
 		}
 		
-		private static class EndOfPage extends Element {
+		protected void onClicked(DocumentRenderer renderer) {
+			
+		}
+		
+		protected static class EndOfPage extends Element {
 
 			@Override
 			protected Type getType() {
@@ -615,7 +672,7 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class TextLine extends Element {
+		protected static class TextLine extends Element {
 			
 			private String str;
 			
@@ -639,7 +696,7 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class CenteredText extends Element {
+		protected static class CenteredText extends Element {
 			
 			private String str;
 			
@@ -663,7 +720,7 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class Image extends Element {
+		protected static class Image extends Element {
 			
 			private final BufferedImage image;
 			private final int width;
@@ -681,7 +738,6 @@ public class DocumentRenderer {
 				this.realWidth = size.getWidth();
 				this.realHeight = size.getHeight();
 				this.glTextureId = GLUtils.loadTexture(this.image);
-				
 			}
 			
 			private Image(File image, int windowWidth, int windowHeight) throws FileNotFoundException, IOException {
@@ -721,7 +777,7 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class Line extends Element {
+		protected static class Line extends Element {
 			
 			private int x1;
 			private int y1;
@@ -750,7 +806,7 @@ public class DocumentRenderer {
 
 			@Override
 			protected int getHeight() {
-				return 0;
+				return 10;
 			}
 
 			@Override
@@ -769,7 +825,57 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class Item extends Element {
+		public static class HyperLink extends Element {
+
+			private final boolean isExternal;
+			private final String text;
+			private final String link;
+			private int x = 0;
+			private int y = 0;
+			
+			private HyperLink(String text, String link, boolean isExternal) {
+				this.isExternal = isExternal;
+				this.link = link;
+				this.text = text;
+			}
+			
+			@Override
+			protected Type getType() {
+				return Type.HYPERLINK;
+			}
+
+			@Override
+			protected int getHeight() {
+				return 10;
+			}
+
+			@Override
+			protected void draw(int x, int y, DocumentRenderer renderer) {
+				this.x = x;
+				this.y = y;
+				int mouseX = Utils.getMouseX();
+				int mouseY = Utils.getMouseY();
+				boolean mouseOn = mouseX >= x && mouseX <= x + renderer.width && mouseY >= y && mouseY <= y + 10;
+				if(!mouseOn) {
+					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
+				} else {
+					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, 0x00FF00);
+					GLUtils.drawSimpleToolTip(Lists.newArrayList(text, I18n.format("manual.hyperlink.mouseon")));
+				}
+			}
+
+			@Override
+			protected void onClicked(DocumentRenderer renderer) {
+				int mouseX = Utils.getMouseX();
+				int mouseY = Utils.getMouseY();
+				if(mouseX >= x && mouseX <= x + renderer.width && mouseY >= y && mouseY <= y + 10) {
+					renderer.reload(this.isExternal, this.link);
+				}
+			}
+			
+		}
+		
+		protected static class Item extends Element {
 
 			@Override
 			protected Type getType() {
@@ -791,7 +897,7 @@ public class DocumentRenderer {
 			}
 		}
 		
-		private static class Crafting extends Element {
+		protected static class Crafting extends Element {
 
 			@Override
 			protected Type getType() {

@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL11;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.gui.Colors;
-import com.gonggongjohn.eok.client.gui.GuiScreenTest;
+import com.gonggongjohn.eok.api.render.GLUtils;
+import com.gonggongjohn.eok.client.gui.GuiEOKManual;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -20,9 +19,9 @@ import net.minecraft.util.ResourceLocation;
  * GuiScreen基类<br><br>
  * GuiScreen Base Class
  * 
- * @see GuiScreenTest
+ * @see GuiEOKManual
  */
-public abstract class MetaGuiScreen extends GuiScreen implements IMetaGui {
+public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	/**
 	 * 这个Map用来存储所有的控件，键为控件ID，值为控件的实例。<br><br>
 	 * This map is used to store all Gui controls. The key is the control ID and the
@@ -101,15 +100,15 @@ public abstract class MetaGuiScreen extends GuiScreen implements IMetaGui {
 		}
 		offsetX = (this.width - this.windowWidth) / 2;
 		offsetY = (this.height - this.windowHeight) / 2;
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GLUtils.pushMatrix();
+		GLUtils.enableBlend();
+		GLUtils.normalBlend();
+		GLUtils.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(TEXTURE);
 		Gui.drawModalRectWithCustomSizedTexture(offsetX, offsetY, 0, 0, windowWidth, windowHeight, texWidth, texHeight);
 		this.fontRenderer.drawString(title, offsetX + windowWidth / 2 - this.fontRenderer.getStringWidth(title) / 2, offsetY + 10, Colors.DEFAULT_BLACK, false);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		GLUtils.disableBlend();
+		GLUtils.popMatrix();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 

@@ -2,10 +2,10 @@ package com.gonggongjohn.eok.api.gui.meta;
 
 import java.util.function.Consumer;
 
-import org.lwjgl.opengl.GL11;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.gui.Colors;
+import com.gonggongjohn.eok.api.render.GLUtils;
+import com.gonggongjohn.eok.api.utils.Utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -17,8 +17,8 @@ public class GuiControl {
 	public final int id;
 	protected int x;
 	protected int y;
-	protected int width;
-	protected int height;
+	protected int width = 0;
+	protected int height = 0;
 
 	private GuiControl(int id, MetaGuiScreen gui, EnumControlType type) {
 		this.id = id;
@@ -40,6 +40,13 @@ public class GuiControl {
 	
 	public void remove() {
 		
+	}
+	
+	public boolean isMouseOn() {
+		if(this.width == 0 || this.height == 0) return false;
+		int mouseX = Utils.getMouseX();
+		int mouseY = Utils.getMouseY();
+		return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
 	}
 	
 	public static class ControlBuilder {
@@ -82,6 +89,8 @@ public class GuiControl {
 
 		@Override
 		public void init() {
+			
+			boolean mouseOn = this.isMouseOn();
 
 			net.minecraft.client.gui.GuiButton button = new net.minecraft.client.gui.GuiButton(id, x, y, width, height, text) {
 
@@ -89,33 +98,26 @@ public class GuiControl {
 				public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 					if (this.visible) {
 
-						GL11.glPushMatrix();
-						GL11.glEnable(GL11.GL_BLEND);
-						GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-						mc.getTextureManager().bindTexture(gui.getTexture());
-
-						if (mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height) {
+						GLUtils.pushMatrix();
+						GLUtils.enableBlend();
+						GLUtils.normalBlend();
+						GLUtils.color4f(1f, 1f, 1f, 1f);						
+						GLUtils.bindTexture(gui.getTexture());
+						if (mouseOn) {
 							Gui.drawModalRectWithCustomSizedTexture(x, y, u2, v2, width, height, gui.getTextureWidth(), gui.getTextureHeight());
 						} else {
 							Gui.drawModalRectWithCustomSizedTexture(x, y, u, v, width, height, gui.getTextureWidth(), gui.getTextureHeight());
 						}
 
 						if (!text.equals("")) {
-
-								if (mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width
-										&& mouseY < this.y + this.height) {
-									this.drawCenteredString(mc.fontRenderer, text, this.x + this.width / 2,
-											this.y + (this.height - 8) / 2, Colors.MOUSEON_TEXT);
+								if (mouseOn) {
+									GLUtils.drawCenteredString(text, x + width / 2, y + (this.height - 8) / 2, Colors.MOUSEON_TEXT);
 								} else {
-									this.drawCenteredString(mc.fontRenderer, text, this.x + this.width / 2,
-											this.y + (this.height - 8) / 2, color);
+									GLUtils.drawCenteredString(text, x + width / 2, y + (this.height - 8) / 2, color);
 								}
 						}
-
-						GL11.glDisable(GL11.GL_BLEND);
-						GL11.glPopMatrix();
-
+						GLUtils.disableBlend();
+						GLUtils.popMatrix();
 					}
 				}
 

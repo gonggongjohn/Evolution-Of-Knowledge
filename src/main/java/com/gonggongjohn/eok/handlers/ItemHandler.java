@@ -13,7 +13,6 @@ import com.gonggongjohn.eok.items.ItemMaterialBase;
 import com.gonggongjohn.eok.items.ItemPapyrus;
 import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
 import com.gonggongjohn.eok.items.ItemRefractingTelescope;
-import com.gonggongjohn.eok.items.ItemRoughFlintSpear;
 import com.gonggongjohn.eok.items.ItemVirus;
 import com.gonggongjohn.eok.items.MetaItemTool;
 import com.gonggongjohn.eok.items.Torcherino;
@@ -32,7 +31,6 @@ public class ItemHandler {
 	public static final Item flintFragment = new ItemFlintFragment();
 	public static final Item chippedFlintFragment = new ItemChippedFlintFragment();
 	public static final Item polishedFlintFragment = new ItemPolishedFlintFragment();
-	public static final Item roughFlintSpear = new ItemRoughFlintSpear();
 	public static final Item Torcherino = new Torcherino();
 	public static final Item MACHINE_GUN = new ItemMachineGun();
 	public static final Item fireStick = new ItemFireStick();

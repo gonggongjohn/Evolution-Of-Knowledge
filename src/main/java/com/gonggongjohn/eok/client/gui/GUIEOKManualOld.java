@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
  * @author EOK - Cuckoo
  * @version 1.2
  */
-public class GUIEOKManual extends GuiScreen {
+public class GUIEOKManualOld extends GuiScreen {
 
 	/**
 	 * la source des labels du manuel
@@ -121,7 +121,7 @@ public class GUIEOKManual extends GuiScreen {
 	/**
 	 * Constructeur du Robot
 	 */
-    public GUIEOKManual() {
+    public GUIEOKManualOld() {
    	
     	super();
     }

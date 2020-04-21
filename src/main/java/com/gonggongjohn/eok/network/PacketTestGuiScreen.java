@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.network;
 
-import com.gonggongjohn.eok.client.gui.GuiScreenTest;
+import com.gonggongjohn.eok.client.gui.GuiEOKManual;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -24,7 +24,7 @@ public class PacketTestGuiScreen implements IMessage {
 		@Override
 		public IMessage onMessage(PacketTestGuiScreen message, MessageContext ctx) {
 			if(ctx.side == Side.CLIENT) {
-				Minecraft.getMinecraft().addScheduledTask(() -> Minecraft.getMinecraft().displayGuiScreen(new GuiScreenTest()));
+				Minecraft.getMinecraft().addScheduledTask(() -> Minecraft.getMinecraft().displayGuiScreen(new GuiEOKManual()));
 			}
 			return null;
 		}
