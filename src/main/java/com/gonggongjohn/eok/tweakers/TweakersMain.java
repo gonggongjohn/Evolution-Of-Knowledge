@@ -11,8 +11,6 @@ public class TweakersMain {
 	public static void init() {
 		ProgressBar progress = ProgressManager.push("Initializating tweakers", 0);
 		BlockHardness.setup();
-		new LeavesTweaker();
-		new GravelTweaker();
 		BrightnessTweaker.tweak();
 		ProgressManager.pop(progress);
 	}

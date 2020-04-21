@@ -1,6 +1,5 @@
 package com.gonggongjohn.eok.client.gui.overlay;
 
-import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;

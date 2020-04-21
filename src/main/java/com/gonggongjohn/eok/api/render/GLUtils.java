@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.api.gui.Colors;

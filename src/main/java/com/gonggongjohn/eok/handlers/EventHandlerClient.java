@@ -1,12 +1,8 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.input.Mouse;
-
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.render.GLUtils;
 import com.gonggongjohn.eok.tweakers.BrightnessTweaker;
 
 import net.minecraft.client.resources.I18n;

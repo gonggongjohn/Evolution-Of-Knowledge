@@ -2,18 +2,22 @@ package com.gonggongjohn.eok.tweakers;
 
 import java.util.Random;
 
+import com.gonggongjohn.eok.EOK;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@EventBusSubscriber(modid = EOK.MODID)
 public class LeavesTweaker {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void drop(HarvestDropsEvent event) {
+	public static void drop(HarvestDropsEvent event) {
 		if (event.getWorld().isRemote)
 			return;
 
@@ -34,13 +38,12 @@ public class LeavesTweaker {
 
 		Random rand = new Random();
 		// 50%几率掉落
-//		if (rand.nextInt(100) < 50) {
-//			event.getWorld().spawnEntity(new EntityItem(event.getWorld(), event.getPos().getX(), event.getPos().getY(),
-//					event.getPos().getZ(), new ItemStack(Items.STICK, 1)));
-//		}
-	}
-
-	public LeavesTweaker() {
-		MinecraftForge.EVENT_BUS.register(this);
+		if (rand.nextInt(100) < 50) {
+			BlockPos pos = event.getPos();
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			event.getWorld().spawnEntity(new EntityItem(event.getWorld(), x, y, z, new ItemStack(Items.STICK, 1)));
+		}
 	}
 }

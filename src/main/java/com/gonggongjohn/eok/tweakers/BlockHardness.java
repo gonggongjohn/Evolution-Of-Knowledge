@@ -4,18 +4,17 @@ import com.gonggongjohn.eok.handlers.ConfigHandler;
 
 import net.minecraft.init.Blocks;
 
-
-
 public class BlockHardness {
-	//硬度示例:
-	//=========================
-	//石头硬度：8
-	//圆石硬度：5
-	//原木硬度：6
-	//木板硬度：5
-	//草，作物硬度：0.5
-	//泥土硬度：5
-	//大多数机器硬度为5
+	
+	// 硬度示例:
+	// =========================
+	// 石头硬度：8
+	// 圆石硬度：5
+	// 原木硬度：6
+	// 木板硬度：5
+	// 草，作物硬度：0.5
+	// 泥土硬度：5
+	// 大多数机器硬度为5
 	
 	public static void setup() {
 		if(ConfigHandler.increaseBlockHardness == false)
@@ -24,12 +23,12 @@ public class BlockHardness {
 		tweakVanillaBlocks();
 	}
 	
-	//修改mod方块硬度
+	// 修改mod方块硬度
 	public static void tweakModBlocks() {
 		
 	}
 	
-	//修改原版方块硬度
+	// 修改原版方块硬度
 	public static void tweakVanillaBlocks() {
 		Blocks.STONE.setHardness(8.0F);
 		Blocks.GRASS.setHardness(5.2F);
@@ -52,10 +51,10 @@ public class BlockHardness {
 		Blocks.SANDSTONE.setHardness(5.0F);
 		Blocks.NOTEBLOCK.setHardness(5.0F);
 		Blocks.BED.setHardness(5.0F);
-		//Blocks.GOLDEN_RAIL 不变
-		//Blocks.DETECTOR_RAIL 不变
+		// Blocks.GOLDEN_RAIL 不变
+		// Blocks.DETECTOR_RAIL 不变
 		Blocks.STICKY_PISTON.setHardness(5.0F);
-		//Blocks.WEB 不变
+		// Blocks.WEB 不变
 		Blocks.TALLGRASS.setHardness(0.5F);
 		Blocks.DEADBUSH.setHardness(0.5F);
 		Blocks.PISTON.setHardness(5.0F);
@@ -74,9 +73,9 @@ public class BlockHardness {
 		Blocks.BOOKSHELF.setHardness(5.0F);
 		Blocks.MOSSY_COBBLESTONE.setHardness(5.0F);
 		Blocks.OBSIDIAN.setHardness(60.0F);
-		//Blocks.TORCH 不变
-		//Blocks.FIRE 不变
-		//Blocks.MOB_SPAWNER 不变
+		// Blocks.TORCH 不变
+		// Blocks.FIRE 不变
+		// Blocks.MOB_SPAWNER 不变
 		Blocks.OAK_STAIRS.setHardness(5.0F);
 		Blocks.CHEST.setHardness(5.0F);
 		Blocks.REDSTONE_WIRE.setHardness(0.5F);
@@ -87,12 +86,12 @@ public class BlockHardness {
 		Blocks.FARMLAND.setHardness(5.0F);
 		Blocks.FURNACE.setHardness(5.0F);
 		Blocks.LIT_FURNACE.setHardness(5.0F);
-		//Blocks.STANDING_SIGN 不变
+		// Blocks.STANDING_SIGN 不变
 		Blocks.OAK_DOOR.setHardness(5.0F);
-		//Blocks.LADDER 不变
-		//Blocks.RAIL 不变
+		// Blocks.LADDER 不变
+		// Blocks.RAIL 不变
 		Blocks.STONE_STAIRS.setHardness(5.0F);
-		//Blocks.WALL_SIGN 不变
+		// Blocks.WALL_SIGN 不变
 		Blocks.LEVER.setHardness(0.5F);
 		Blocks.STONE_PRESSURE_PLATE.setHardness(5.0F);
 		Blocks.IRON_DOOR.setHardness(5.0F);
@@ -102,7 +101,7 @@ public class BlockHardness {
 		Blocks.SNOW_LAYER.setHardness(4.0F);
 		Blocks.SNOW.setHardness(5.0F);
 		Blocks.ICE.setHardness(5.0F);
-		//Blocks.CACTUS 不变
+		// Blocks.CACTUS 不变
 		Blocks.CLAY.setHardness(5.0F);
 		Blocks.REEDS.setHardness(0.5F);
 		Blocks.JUKEBOX.setHardness(5.0F);
@@ -112,21 +111,21 @@ public class BlockHardness {
 		Blocks.SOUL_SAND.setHardness(5.0F);
 		Blocks.GLOWSTONE.setHardness(1.5F);
 		Blocks.LIT_PUMPKIN.setHardness(4.0F);
-		//Blocks.CAKE 不变
+		// Blocks.CAKE 不变
 		Blocks.UNPOWERED_REPEATER.setHardness(0.5F);
 		Blocks.POWERED_REPEATER.setHardness(0.5F);
 		Blocks.STAINED_GLASS.setHardness(1.5F);
 		Blocks.TRAPDOOR.setHardness(5.0F);
-		//Blocks.MONSTER_EGG 不变
+		// Blocks.MONSTER_EGG 不变
 		Blocks.STONEBRICK.setHardness(5.0F);
-		//Blocks.BROWN_MUSHROOM_BLOCK 不变
-		//Blocks.RED_MUSHROOM_BLOCK 不变
+		// Blocks.BROWN_MUSHROOM_BLOCK 不变
+		// Blocks.RED_MUSHROOM_BLOCK 不变
 		Blocks.IRON_BARS.setHardness(5.0F);
 		Blocks.GLASS_PANE.setHardness(1.5F);
 		Blocks.MELON_BLOCK.setHardness(4.0F);
 		Blocks.PUMPKIN_STEM.setHardness(0.5F);
 		Blocks.MELON_STEM.setHardness(0.5F);
-		//Blocks.VINE 不变
+		// Blocks.VINE 不变
 		Blocks.DARK_OAK_FENCE_GATE.setHardness(5.0F);
 		Blocks.BRICK_STAIRS.setHardness(5.0F);
 		Blocks.STONE_BRICK_STAIRS.setHardness(5.0F);
@@ -159,8 +158,8 @@ public class BlockHardness {
 		Blocks.FLOWER_POT.setHardness(0.5F);
 		Blocks.CARROTS.setHardness(0.5F);
 		Blocks.POTATOES.setHardness(0.5F);
-		//Blocks.WOODEN_BUTTON 不变
-		//Blocks.SKULL 不变
+		// Blocks.WOODEN_BUTTON 不变
+		// Blocks.SKULL 不变
 		Blocks.ANVIL.setHardness(5.0F);
 		Blocks.TRAPPED_CHEST.setHardness(5.0F);
 		Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE.setHardness(5.0F);
@@ -173,7 +172,7 @@ public class BlockHardness {
 		Blocks.HOPPER.setHardness(5.0F);
 		Blocks.QUARTZ_BLOCK.setHardness(5.0F);
 		Blocks.QUARTZ_STAIRS.setHardness(5.0F);
-		//Blocks.ACTIVATOR_RAIL 不变
+		// Blocks.ACTIVATOR_RAIL 不变
 		Blocks.DROPPER.setHardness(5.0F);
 		Blocks.STAINED_HARDENED_CLAY.setHardness(5.0F);
 		Blocks.STAINED_GLASS_PANE.setHardness(1.5F);
@@ -186,13 +185,13 @@ public class BlockHardness {
 		Blocks.PRISMARINE.setHardness(5.0F);
 		Blocks.SEA_LANTERN.setHardness(1.5F);
 		Blocks.HAY_BLOCK.setHardness(1.5F);
-		//Blocks.CARPET 不变
+		// Blocks.CARPET 不变
 		Blocks.HARDENED_CLAY.setHardness(5.0F);
 		Blocks.COAL_BLOCK.setHardness(5.0F);
 		Blocks.PACKED_ICE.setHardness(5.0F);
 		Blocks.DOUBLE_PLANT.setHardness(0.5F);
-		//Blocks.STANDING_BANNER 不变
-		//Blocks.WALL_BANNER 不变
+		// Blocks.STANDING_BANNER 不变
+		// Blocks.WALL_BANNER 不变
 		Blocks.DAYLIGHT_DETECTOR_INVERTED.setHardness(5.0F);
 		Blocks.RED_SANDSTONE.setHardness(5.0F);
 		Blocks.RED_SANDSTONE_STAIRS.setHardness(5.0F);
