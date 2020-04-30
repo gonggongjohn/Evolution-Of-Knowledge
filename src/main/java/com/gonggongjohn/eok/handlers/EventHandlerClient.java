@@ -47,11 +47,12 @@ public class EventHandlerClient {
 			}
 		}
 	}
-
+	/*
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void tweakGamma(GuiOpenEvent event) {
 		BrightnessTweaker.tweak();
 	}
+	*/// TODO 重写
 	
 	/**
 	 * 仅用作调试，请勿更改

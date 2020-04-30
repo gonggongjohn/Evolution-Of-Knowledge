@@ -33,6 +33,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
@@ -58,7 +59,6 @@ public class DocumentRenderer {
 	private List<Page> pages = new ArrayList<Page>();
 	private List<Element> elements = new ArrayList<Element>();
 	private boolean available;
-	//private boolean err;
 	public final boolean isDocumentExternal;
 	private final List<Integer> textureList;
 	public static final String localManualPath = "local_manual" + File.separator;
@@ -875,20 +875,23 @@ public class DocumentRenderer {
 			
 		}
 		
-		protected static class Item extends Element {
+		public static class Item extends Element {
 
+			private ItemStack stack;
+			
+			private Item(String data) {
+				// TODO Item
+			}
+			
 			@Override
 			protected Type getType() {
-				// TODO Item
-				return null;
+				return Type.ITEM;
 			}
 
 			@Override
 			protected int getHeight() {
-				// TODO Item
-				return 0;
+				return 20;
 			}
-			// TODO
 
 			@Override
 			protected void draw(int x, int y, DocumentRenderer renderer) {

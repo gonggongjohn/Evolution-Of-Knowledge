@@ -93,7 +93,7 @@ public class GUIMerchant extends GuiContainer {
 		// This is a complete button.
 		// We discard it because we have a better solution : ButtonBuilder
 		/*
-		 * this.buttonList.add(new GuiButton(BUTTON_LEFT, offsetX + 126, offsetY + 116,
+		 * this.buttonList.add(new Button(BUTTON_LEFT, offsetX + 126, offsetY + 116,
 		 * 22, 20, "<") {
 		 * 
 		 * @Override public void drawButton(Minecraft mc, int mouseX, int mouseY, float

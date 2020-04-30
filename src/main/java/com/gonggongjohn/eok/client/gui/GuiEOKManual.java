@@ -18,8 +18,8 @@ import net.minecraft.util.ResourceLocation;
  */
 public class GuiEOKManual extends MetaGuiScreen {
 
-	private GuiControl.GuiButton pageUp;
-	private GuiControl.GuiButton pageDown;
+	private GuiControl.Button pageUp;
+	private GuiControl.Button pageDown;
 	protected DocumentRenderer renderer;
 	private int pageIndex;
 	
@@ -56,8 +56,8 @@ public class GuiEOKManual extends MetaGuiScreen {
 	public void initGui() {
 		super.initGui();
 		this.initDocument();
-		pageUp = builder.createButton(13, 151, 20, 20, 0, 181, 21, 181, this::pageUp);
-		pageDown = builder.createButton(248, 151, 20, 20, 0, 202, 21, 202, this::pageDown);
+		pageUp = controlFactory.createButton(13, 151, 20, 20, 0, 181, 21, 181, this::pageUp);
+		pageDown = controlFactory.createButton(248, 151, 20, 20, 0, 202, 21, 202, this::pageDown);
 		this.addControl(pageUp);
 		this.addControl(pageDown);
 	}

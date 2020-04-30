@@ -26,7 +26,7 @@ public class GuiControl {
 		this.type = type;
 	}
 	
-	public EnumControlType getType() {
+	public final EnumControlType getType() {
 		return this.type;
 	}
 	
@@ -42,29 +42,33 @@ public class GuiControl {
 		
 	}
 	
-	public boolean isMouseOn() {
+	public final boolean isMouseOn() {
 		if(this.width == 0 || this.height == 0) return false;
 		int mouseX = Utils.getMouseX();
 		int mouseY = Utils.getMouseY();
 		return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
 	}
 	
-	public static class ControlBuilder {
+	protected final int getId() {
+		return id;
+	}
+	
+	public static class ControlFactory {
 		private final MetaGuiScreen gui;
 		private int nextId = 0;
 		
-		public ControlBuilder(MetaGuiScreen gui) {
+		public ControlFactory(MetaGuiScreen gui) {
 			this.gui = gui;
 		}
 		
-		public GuiButton createButton(int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick) {
-			return new GuiButton(nextId++, x, y, width, height, u, v, u2, v2, onClick, this.gui);
+		public Button createButton(int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick) {
+			return new Button(nextId++, x, y, width, height, u, v, u2, v2, onClick, this.gui);
 		}
 		
 		// TODO more controls
 	}
 
-	public static class GuiButton extends GuiControl {
+	public static class Button extends GuiControl {
 		
 		protected int u;
 		protected int v;
@@ -74,7 +78,7 @@ public class GuiControl {
 		protected String text = "";
 		protected int color = 0;
 		
-		protected GuiButton(int id, int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick, MetaGuiScreen gui) {
+		protected Button(int id, int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick, MetaGuiScreen gui) {
 			super(id, gui, EnumControlType.BUTTON);
 			this.x = x + gui.getOffsetX();
 			this.y = y + gui.getOffsetY();
@@ -138,22 +142,47 @@ public class GuiControl {
 		
 	}
 
-	// TODO GuiProgressBar
-	public static class GuiProgressBar extends GuiControl {
-		protected GuiProgressBar(int id, MetaGuiScreen gui) {
+	public static class ProgressBar extends GuiControl {
+		
+		/**
+		 * 范围/Range: [0,100]
+		 */
+		private int progress = 0;
+		
+		protected ProgressBar(int id, int x, int y, int width, int height, MetaGuiScreen gui) {
 			super(id, gui, EnumControlType.PROGRESSBAR);
+		}
+
+		public int getProgress() {
+			return progress;
+		}
+
+		/**
+		 * 设置进度，进度必须为0-100的整数。
+		 */
+		public void setProgress(int progress) {
+			if(progress < 0 || progress > 100)
+				throwArgumentException("progress must be in [0,100]");
+			this.progress = progress;
+		}
+
+		@Override
+		public void draw(int mouseX, int mouseY, float partialTicks, MetaGuiScreen gui) {
+			super.draw(mouseX, mouseY, partialTicks, gui);
+			GLUtils.drawRect(x, y, x + width, y + height, 0xFFFFFFFF);
+			GLUtils.drawRect(x + 1, y + 1, x + progress / 100 * (width - 1), y + height - 1, 0xFF00FF00);
 		}
 	}
 
-	// TODO  GuiScrollBar
-	public static class GuiScrollBar extends GuiControl {
+	// TODO  ScrollBar
+	public static class ScrollBar extends GuiControl {
 
 		public final int direction;
 		
 		/**
 		 * @param type the orientation of the scrollbar, 0 is horizontal, 1 is vertical
 		 */
-		protected GuiScrollBar(int id, int type, MetaGuiScreen gui) {
+		protected ScrollBar(int id, int type, MetaGuiScreen gui) {
 			super(id, gui, EnumControlType.SCROLLBAR);
 			if (type == 0 || type == 1) {
 				this.direction = type;
@@ -192,9 +221,5 @@ public class GuiControl {
 	private static void throwArgumentException(String s) {
 		EOK.getLogger().error("An error occurred when rendering Gui, " + s + ".");
 		throw new IllegalArgumentException(s);
-	}
-	
-	protected int getId() {
-		return id;
 	}
 }

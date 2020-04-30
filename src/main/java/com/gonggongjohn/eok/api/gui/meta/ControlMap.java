@@ -16,7 +16,7 @@ public class ControlMap extends HashMap<Integer, GuiControl> {
 	public GuiControl put(Integer key, GuiControl value) {
 		switch(value.getType()) {
 		case BUTTON:
-			((GuiControl.GuiButton)value).init();
+			((GuiControl.Button)value).init();
 			break;
 		default:
 			break;

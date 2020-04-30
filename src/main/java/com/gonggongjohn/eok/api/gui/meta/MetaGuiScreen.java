@@ -32,13 +32,13 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	/**
 	 * 这个实例用来创建控件。<br>
 	 * This object is used to create Controls.<br><br>
-	 * 例子/Example: <br><code>builder.createButton(...);</code><br><br>
+	 * 例子/Example: <br><code>controlFactory.createButton(...);</code><br><br>
 	 * <strong>注意/Warning: <br>要使控件被添加进Gui中，必须使用<code>this.addControl(...);
 	 * </code>来添加。</strong><br>
 	 * <br>If you want to add a control to this Gui, you must use 
 	 * <code>this.addControl(...);</code>.</strong>
 	 */
-	public GuiControl.ControlBuilder builder = new GuiControl.ControlBuilder(this);
+	public GuiControl.ControlFactory controlFactory = new GuiControl.ControlFactory(this);
 	private int nextId = 0;
 	/**
 	 * 这里的窗口宽度不是游戏窗口宽度，是Gui的宽度。<br><br>
@@ -125,9 +125,9 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		for(Map.Entry<Integer, GuiControl> entry : controls.entrySet()) {
-			if(entry.getValue() instanceof GuiControl.GuiButton) {
+			if(entry.getValue() instanceof GuiControl.Button) {
 				if(button.id == entry.getValue().getId()) {
-					((GuiControl.GuiButton)entry.getValue()).func.accept(this);
+					((GuiControl.Button)entry.getValue()).func.accept(this);
 				}
 			}
 		}
@@ -302,6 +302,10 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 		this.hasCustomBackground = b;
 	}
 	
+	/**
+	 * 仅供内部使用。<br><br>
+	 * Internal use only.
+	 */
 	protected List<GuiButton> getButtonList() {
 		return this.buttonList;
 	}

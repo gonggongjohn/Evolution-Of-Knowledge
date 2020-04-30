@@ -2,10 +2,19 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
+		maven { url = "https://zi-jing.github.io/cuckoo-maven/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
+}
+
+repositories {
+	// 为了避免某些"特性"只能这么写
+	jcenter()
+    maven { url = "https://files.minecraftforge.net/maven" }
+	maven { url = "https://zi-jing.github.io/cuckoo-maven/maven" }
+	maven { url = "https://zi-jing.github.io/cuckoo-maven/maven" }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -54,6 +63,8 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+	
+	compile 'com.osir.tmc:tmc-api:1.3.1.1'
 
 }
 
