@@ -37,7 +37,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
@@ -72,7 +71,6 @@ public class DocumentRenderer {
 	public static final String localManualPath = "local_manual" + File.separator;
 	private GuiScreen parentGui = null;
 	private GuiLoading loadingScreen = new GuiLoading();
-	private boolean isEnabled = false;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
 		isDocumentExternal = false;
@@ -970,7 +968,7 @@ public class DocumentRenderer {
 		
 		public static class Item extends Element {
 
-			private ItemStack stack;
+			// private ItemStack stack;
 			
 			private Item(String data) {
 				// TODO Item
