@@ -28,11 +28,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = EOK.MODID, name = EOK.NAME, version = EOK.VERSION, dependencies = EOK.DEPENDENCIES, useMetadata = true)
+@Mod(modid = EOK.MODID, name = EOK.NAME, dependencies = EOK.DEPENDENCIES, useMetadata = true)
 public class EOK {
 	public static final String MODID = "eok";
 	public static final String NAME = "Evolution Of Knowledge";
-	public static final String VERSION = "0.0.1";
 	public static final String DEPENDENCIES = "required-after:tmc@[1.3.1.1,);required-after:gregtech@[1.8.13.465,)";
 
 	@Mod.Instance
