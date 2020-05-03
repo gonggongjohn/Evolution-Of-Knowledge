@@ -75,13 +75,13 @@ public class GUIElementaryResearchTable extends GuiContainer {
 			EOK.getNetwork().sendToServer(new PacketSlotChange(slotID));
 		}
 		if (this.invPaperInputSlot != null
-				&& this.invPaperInputSlot.getStack().getItem().getUnlocalizedName().equals("item.papyrus")) {
+				&& this.invPaperInputSlot.getStack().getItem().getUnlocalizedName().equals("item.eok.papyrus")) {
 			this.mc.getTextureManager().bindTexture(TEXTUREPAPER);
 			this.drawTexturedModalRect(offsetX + 67, offsetY + 10, 0, 0, 153, 126);
 			if(invPaperInputSlot.getStack().hasTagCompound() && invPaperInputSlot.getStack().getTagCompound().hasKey( "data.research")){
 				int[] content = invPaperInputSlot.getStack().getTagCompound().getIntArray("data.research");
 				for(int i = 0; i < content.length; i++){
-					String text = I18n.format("research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(content[i]) + ".name");
+					String text = I18n.format("eok.research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(content[i]) + ".name");
 					mc.fontRenderer.drawString(text, offsetX + 80, offsetY + 20 + i * 10, 0x00BFFF);
 				}
 			}

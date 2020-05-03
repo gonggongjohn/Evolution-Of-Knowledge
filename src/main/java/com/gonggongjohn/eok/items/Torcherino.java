@@ -22,7 +22,7 @@ public class Torcherino extends Item implements IHasModel {
 	private final String name = "torcherino";
 
 	public Torcherino() {
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		ItemHandler.ITEM_REGISTRY.add(this);
@@ -36,7 +36,7 @@ public class Torcherino extends Item implements IHasModel {
 	@Override
 	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		if (!worldIn.isRemote) {
-			playerIn.sendMessage(new TextComponentString(I18n.format("messages.torcherino_crafted.msg")));
+			playerIn.sendMessage(new TextComponentString(I18n.format("eok.messages.torcherino_crafted.msg")));
 			super.onCreated(stack, worldIn, playerIn);
 		}
 	}
@@ -51,8 +51,8 @@ public class Torcherino extends Item implements IHasModel {
 		
 		int count = playerIn.getHeldItemMainhand().getCount();
 		playerIn.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-		playerIn.sendMessage(new TextComponentString(I18n.format("messages.torcherino_use.msg")));
-		playerIn.sendMessage(new TextComponentString(I18n.format("messages.torcherino_use.msg2")));
+		playerIn.sendMessage(new TextComponentString(I18n.format("eok.messages.torcherino_use.msg")));
+		playerIn.sendMessage(new TextComponentString(I18n.format("eok.messages.torcherino_use.msg2")));
 		
 		if (ConfigHandler.torcherinoExploding == false) {
 			playerIn.attackEntityFrom(DamageSource.GENERIC, 1000);
@@ -69,7 +69,7 @@ public class Torcherino extends Item implements IHasModel {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("tooltip.torcherino"));
+		tooltip.add(I18n.format("eok.tooltip.torcherino"));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	

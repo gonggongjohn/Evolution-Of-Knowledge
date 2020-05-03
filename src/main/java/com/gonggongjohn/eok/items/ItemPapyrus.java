@@ -12,7 +12,7 @@ import net.minecraft.util.NonNullList;
 public class ItemPapyrus extends Item implements IHasModel {
     private final String name = "papyrus";
     public ItemPapyrus(){
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
@@ -24,7 +24,7 @@ public class ItemPapyrus extends Item implements IHasModel {
     public String getUnlocalizedName(ItemStack stack) {
         int meta = stack.getItemDamage();
         EnumPapyrus papyrus = EnumPapyrus.values()[meta];
-        return "item." + papyrus.getName().toLowerCase();
+        return "item.eok." + papyrus.getName().toLowerCase();
     }
 
     @Override

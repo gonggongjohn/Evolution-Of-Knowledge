@@ -19,7 +19,7 @@ public class BlockDecomposedHaystack extends Block implements IHasModel {
     	
         super(Material.GRASS);
         this.setRegistryName(name);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setHardness(0.3F);
         this.setCreativeTab(EOK.tabEOK);
         this.setSoundType(SoundType.PLANT);

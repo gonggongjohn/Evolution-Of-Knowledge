@@ -26,7 +26,7 @@ public class MetaItemTool extends Item implements IHasModel {
     public String getUnlocalizedName(ItemStack stack) {
         int meta = stack.getItemDamage();
         EnumTool tool = EnumTool.values()[meta];
-        return "item." + tool.getName().toLowerCase();
+        return "item.eok." + tool.getName().toLowerCase();
     }
 
     @Override

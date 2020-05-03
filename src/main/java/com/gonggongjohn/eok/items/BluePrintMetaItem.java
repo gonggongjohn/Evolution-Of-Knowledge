@@ -43,9 +43,9 @@ public class BluePrintMetaItem extends MaterialMetaItem {
 
     @Override
     public void registerSubItems() {
-        MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"test_2d_core");
-        MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE=addItem(303,"test_3d_core");
-        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(304,"elementary_research_table");
+        MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"eok.test_2d_core");
+        MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE=addItem(303,"eok.test_3d_core");
+        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(304,"eok.elementary_research_table");
         initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE, BlockHandler.blockTest2DCore);
         initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,BlockHandler.blockTest3DCore);
         initBluePrint(MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);

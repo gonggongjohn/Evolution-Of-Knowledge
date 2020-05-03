@@ -36,7 +36,7 @@ public class ItemFireStick extends Item implements IHasModel {
 		
 		this.maxStackSize = 1;
 		
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		

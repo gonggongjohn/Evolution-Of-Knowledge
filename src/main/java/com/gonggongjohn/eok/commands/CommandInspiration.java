@@ -25,7 +25,7 @@ public class CommandInspiration extends CommandBase {
 			throw new WrongUsageException("commands.inspiration.usage");
 		} else if (args[0].equals("get")) {
 			EntityPlayerMP entityPlayerMP = CommandBase.getCommandSenderAsPlayer(sender);
-			sender.sendMessage(new TextComponentTranslation("inspiration.query.pre"));
+			sender.sendMessage(new TextComponentTranslation("eok.inspiration.query.pre"));
 //            if(entityPlayerMP.hasCapability(CapabilityHandler.capInspirations, null)) {
 //                IInspirations inspirations = entityPlayerMP.getCapability(CapabilityHandler.capInspirations, null);
 //                int[] insStatus = inspirations.getInspirationsStatus();

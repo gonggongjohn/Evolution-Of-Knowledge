@@ -23,7 +23,7 @@ public class BlockTwoBarrelVacuumPump extends Block implements IHasModel {
 
     public BlockTwoBarrelVacuumPump() {
         super(Material.IRON);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setHardness(5.0F);
         this.setCreativeTab(EOK.tabEOK);

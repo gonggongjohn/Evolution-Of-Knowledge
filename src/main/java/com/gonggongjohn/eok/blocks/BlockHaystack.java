@@ -25,7 +25,7 @@ public class BlockHaystack extends BlockContainer implements IHasModel {
     public BlockHaystack() {
     	
         super(Material.GRASS);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setCreativeTab(EOK.tabEOK);
         this.setRegistryName(name);
         this.setHardness(0.5F);

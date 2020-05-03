@@ -25,7 +25,7 @@ public class BlockStoneRock extends Block implements ICustomModel {
 
 	public BlockStoneRock() {
 		super(Material.ROCK);
-		this.setUnlocalizedName("block_stone_rock");
+		this.setUnlocalizedName("eok.block_stone_rock");
 		this.setRegistryName("block_stone_rock");
 		this.setHardness(0.2F);
 		BlockHandler.registerBlock(this, new ItemBlock(this).setRegistryName("block_stone_rock"));

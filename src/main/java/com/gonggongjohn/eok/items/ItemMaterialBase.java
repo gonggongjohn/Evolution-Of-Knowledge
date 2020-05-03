@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 
 public class ItemMaterialBase extends Item implements IHasModel {
     public ItemMaterialBase(String name){
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         ItemHandler.ITEM_REGISTRY.add(this);

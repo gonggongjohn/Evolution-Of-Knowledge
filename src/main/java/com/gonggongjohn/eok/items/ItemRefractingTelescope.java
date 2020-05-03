@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class ItemRefractingTelescope extends Item implements IHasModel {
     private final String name = "refracting_telescope";
     public ItemRefractingTelescope(){
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         ItemHandler.ITEM_REGISTRY.add(this);

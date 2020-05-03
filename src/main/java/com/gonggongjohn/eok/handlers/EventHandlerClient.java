@@ -29,14 +29,14 @@ public class EventHandlerClient {
 				int value = compound.getInteger("data.universe");
 				List<String> tooltip = event.getToolTip();
 				String str = "";
-				str += I18n.format("tooltip.data.universe", value);
+				str += I18n.format("eok.tooltip.data.universe", value);
 				tooltip.add(str);
 			}
 			if (compound != null && compound.hasKey("data.research")) {
 				int[] researchIDs = compound.getIntArray("data.research");
 				List<String> tooltip = event.getToolTip();
 				String str = "";
-				str += I18n.format("tooltip.data.research");
+				str += I18n.format("eok.tooltip.data.research");
 				tooltip.add(str);
 				for (int i = 0; i < researchIDs.length; i++) {
 					String strResearch = "";

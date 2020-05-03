@@ -37,7 +37,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
             this.drawTexturedModalRect(this.x, this.y, 66, 0, this.width, this.height);
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
-                String name = I18n.format("research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(researchId) + ".name");
+                String name = I18n.format("eok.research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(researchId) + ".name");
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
             }
             GL11.glDisable(GL11.GL_BLEND);

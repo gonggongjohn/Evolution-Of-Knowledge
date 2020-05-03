@@ -10,7 +10,7 @@ public class ItemChippedFlintFragment extends Item implements IHasModel {
 	private final String name = "chipped_flint_fragment";
 
 	public ItemChippedFlintFragment() {
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		ItemHandler.ITEM_REGISTRY.add(this);

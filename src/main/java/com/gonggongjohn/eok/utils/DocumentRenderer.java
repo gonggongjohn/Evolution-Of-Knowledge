@@ -88,7 +88,7 @@ public class DocumentRenderer {
 		textureList = new ArrayList<Integer>();
 		init();
 		if(!(available = read())) {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.message.documentrenderer.error")), false);
 		} else {
 			available = true;
 		}
@@ -111,7 +111,7 @@ public class DocumentRenderer {
 		textureList = new ArrayList<Integer>();
 		init();
 		if(!(available = read())) {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.message.documentrenderer.error")), false);
 		} else {
 			available = true;
 		}
@@ -165,7 +165,7 @@ public class DocumentRenderer {
 			this.documentFile = new File(path);
 		}
 		if(!(available = read())) {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.message.documentrenderer.error")), false);
 		}
 		this.closeLoadingGui();
 		return this.available;
@@ -173,7 +173,7 @@ public class DocumentRenderer {
 	
 	public boolean read() {
 		this.displayLoadingGui();
-		this.loadingScreen.setProgress(0, I18n.format("message.documentrenderer.loadingscreen.status0"));
+		this.loadingScreen.setProgress(0, I18n.format("eok.message.documentrenderer.loadingscreen.status0"));
 		pages.clear();
 		elements.clear();
 		available = false;
@@ -182,15 +182,15 @@ public class DocumentRenderer {
 		lineNumber = 0;
 		long startTime = System.currentTimeMillis();
 		if(this.width < 20 || this.height < 20) {
-			this.error(I18n.format("manual.error.text_area_too_small"));
+			this.error(I18n.format("eok.manual.error.text_area_too_small"));
 			return false;
 		}
 		if(!isDocumentExternal) {
 			logger.info("Loading document {}", documentLocation.toString());
-			this.loadingScreen.setProgress(5, I18n.format("message.documentrenderer.loadingscreen.status1", documentLocation.toString()));
+			this.loadingScreen.setProgress(5, I18n.format("eok.message.documentrenderer.loadingscreen.status1", documentLocation.toString()));
 		} else {
 			logger.info("Loading document {}", documentFile.getAbsolutePath());
-			this.loadingScreen.setProgress(5, I18n.format("message.documentrenderer.loadingscreen.status1", documentFile.getAbsolutePath()));
+			this.loadingScreen.setProgress(5, I18n.format("eok.message.documentrenderer.loadingscreen.status1", documentFile.getAbsolutePath()));
 		}
 		lineNumber = 1;
 		BufferedReader reader;
@@ -213,9 +213,9 @@ public class DocumentRenderer {
 			}
 		} catch(Exception e) {
 			if(!isDocumentExternal) {
-				this.error(I18n.format("manual.error.cant_read_document_file", this.documentLocation.toString()));
+				this.error(I18n.format("eok.manual.error.cant_read_document_file", this.documentLocation.toString()));
 			} else {
-				this.error(I18n.format("manual.error.cant_read_document_file", this.documentFile.getPath()));
+				this.error(I18n.format("eok.manual.error.cant_read_document_file", this.documentFile.getPath()));
 			}
 			this.error(e.toString());
 			e.printStackTrace();
@@ -232,14 +232,14 @@ public class DocumentRenderer {
 		if(!buildDocument()) return false;
 		logger.info("Loading completed in {}ms.", System.currentTimeMillis() - startTime);
 		if(documentIn.pages.size() == 0) {
-			this.warning(I18n.format("manual.msg.document_empty"));
+			this.warning(I18n.format("eok.manual.msg.document_empty"));
 			return false;
 		}
 		return true;
 	}
 	
 	private void appendErrText(String str) {
-		appendText("§c§l" + I18n.format("manual.text.error") + ":" + str);
+		appendText("§c§l" + I18n.format("eok.manual.text.error") + ":" + str);
 	}
 	
 	private void appendText(String str) {
@@ -390,18 +390,18 @@ public class DocumentRenderer {
 			if(line.startsWith("`!") && line.endsWith("`")) {
 				String statement = line.substring(2, line.length() - 1);	// 索引从0开始，并且要去掉最后一个字符，所以还要减1
 				if(statement.indexOf(' ') == -1) {	// statement with no arguments
-					this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, statement));
+					this.loadingScreen.setProgress(40, I18n.format("eok.message.documentrenderer.loadingscreen.status2", this.lineNumber, statement));
 					if(tokenMap.containsKey(statement)) {
 						if(!tokenMap.get(statement).test(new String[0])) {
 							appendErrText(line);
 						}
 					} else {
-						this.warning(I18n.format("manual.error.invalid_token", statement));
+						this.warning(I18n.format("eok.manual.error.invalid_token", statement));
 					}
 				} else {
 					String token = statement.substring(0, statement.indexOf(' '));
 					String args = statement.substring(statement.indexOf(' ') + 1);
-					this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, token));
+					this.loadingScreen.setProgress(40, I18n.format("eok.message.documentrenderer.loadingscreen.status2", this.lineNumber, token));
 					if(tokenMap.containsKey(token)) {
 						if(args.indexOf(' ') == -1) {	// statement with only one argument
 							if(!tokenMap.get(token).test(new String[] {args})) {
@@ -414,17 +414,17 @@ public class DocumentRenderer {
 							}
 						}
 					} else {
-						this.warning(I18n.format("manual.error.invalid_token", statement));
+						this.warning(I18n.format("eok.manual.error.invalid_token", statement));
 					}
 					
 				}
 			} else {
-				this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, ""));
+				this.loadingScreen.setProgress(40, I18n.format("eok.message.documentrenderer.loadingscreen.status2", this.lineNumber, ""));
 				appendText(line);
 			}
 		} catch(Exception e) {
 			logger.error("An error occurred while processing line \"{}\" (Line {})", line, lineNumber);
-			this.error(I18n.format("manual.error.error_processing_statement"));
+			this.error(I18n.format("eok.manual.error.error_processing_statement"));
 			this.error(e.toString());
 			e.printStackTrace();
 			return false;
@@ -440,9 +440,9 @@ public class DocumentRenderer {
 		int total = elements.size();
 		for(Element element : elements) {
 			idx++;
-			this.loadingScreen.setProgress(60 + (int)((float)idx / (float)total * 40F), I18n.format("message.documentrenderer.loadingscreen.status3", idx, total));
+			this.loadingScreen.setProgress(60 + (int)((float)idx / (float)total * 40F), I18n.format("eok.message.documentrenderer.loadingscreen.status3", idx, total));
 			if(element.getHeight() > this.height) {
-				this.error(I18n.format("manual.error.element_too_large", this.width, this.height));
+				this.error(I18n.format("eok.manual.error.element_too_large", this.width, this.height));
 				return false;
 			}
 			if(element instanceof Element.EndOfPage) {
@@ -474,7 +474,7 @@ public class DocumentRenderer {
 	/* {text:string} */
 	private boolean addCenteredText(String[] args) {
 		if(args.length != 1) {
-			this.warning(I18n.format("manual.error.illegal_arguments", 1));
+			this.warning(I18n.format("eok.manual.error.illegal_arguments", 1));
 			return false;
 		}
 		elements.add(new Element.CenteredText(args[0]));
@@ -489,11 +489,11 @@ public class DocumentRenderer {
 	/* {path:string} */
 	private boolean addImage(String[] args) {
 		if(args.length != 1) {
-			this.warning(I18n.format("manual.error.illegal_arguments", 1));
+			this.warning(I18n.format("eok.manual.error.illegal_arguments", 1));
 			return false;
 		}
 		try {
-			this.loadingScreen.setProgress(this.loadingScreen.getProgress(), I18n.format("message.documentrenderer.loadingscreen.status2.readfile", args[0]));
+			this.loadingScreen.setProgress(this.loadingScreen.getProgress(), I18n.format("eok.message.documentrenderer.loadingscreen.status2.readfile", args[0]));
 			if(!isDocumentExternal) {
 				elements.add(new Element.Image(new ResourceLocation(args[0]), this.width, this.height));
 			} else {
@@ -507,7 +507,7 @@ public class DocumentRenderer {
 				}
 			}
 		} catch(Exception e) {
-			this.warning(I18n.format("manual.error.syntax_error"));
+			this.warning(I18n.format("eok.manual.error.syntax_error"));
 			this.warning(e.toString());
 			e.printStackTrace();
 			return false;
@@ -518,7 +518,7 @@ public class DocumentRenderer {
 	/* {x1:int, y1:int, x2:int, y2:int, width:int, color:string[#XXXXXX]} */
 	private boolean addLine(String[] args) {
 		if(args.length != 6) {
-			this.warning(I18n.format("manual.error.illegal_arguments", 6));
+			this.warning(I18n.format("eok.manual.error.illegal_arguments", 6));
 			return false;
 		}
 		try {
@@ -534,7 +534,7 @@ public class DocumentRenderer {
 			int b = rgb.getB();
 			elements.add(new Element.Line(x1, y1, x2, y2, width, r, g, b));
 		} catch(NumberFormatException e) {
-			this.warning(I18n.format("manual.error.syntax_error"));
+			this.warning(I18n.format("eok.manual.error.syntax_error"));
 			this.warning(e.toString());
 			e.printStackTrace();
 			return false;
@@ -545,7 +545,7 @@ public class DocumentRenderer {
 	/* {text:string, link:string[domain:path]} */
 	private boolean addHyperLink(String[] args) {
 		if(args.length != 2) {
-			this.warning(I18n.format("manual.error.illegal_arguments", 2));
+			this.warning(I18n.format("eok.manual.error.illegal_arguments", 2));
 			return false;
 		}
 		try {
@@ -560,7 +560,7 @@ public class DocumentRenderer {
 				elements.add(new Element.HyperLink(args[0], link, this.isDocumentExternal));
 			}
 		} catch(Exception e) {
-			this.error(I18n.format("manual.error.cant_read_document_file", args[0]));
+			this.error(I18n.format("eok.manual.error.cant_read_document_file", args[0]));
 			this.error(e.toString());
 			e.printStackTrace();
 			return false;
@@ -577,7 +577,7 @@ public class DocumentRenderer {
 	public void draw(int pageIndex, DocumentSide side, int offsetX, int offsetY) {
 		if(!available) {
 			if(side == DocumentSide.LEFT) {
-				GLUtils.drawString(I18n.format("manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
+				GLUtils.drawString(I18n.format("eok.manual.error"), offsetX + org1X, offsetY + org1Y, Colors.DEFAULT_BLACK);
 			}
 			return;
 		}
@@ -613,21 +613,21 @@ public class DocumentRenderer {
 	
 	private void error(String msg) {
 		if(!this.isDocumentExternal) {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg)), false);
-			this.logger.error(I18n.format("manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg));
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("eok.manual.msg.error", this.documentLocation.toString(), this.lineNumber, msg));
 		} else {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg)), false);
-			this.logger.error(I18n.format("manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg));
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("eok.manual.msg.error", this.documentFile.getPath(), this.lineNumber, msg));
 		}
 	}
 	
 	private void warning(String msg) {
 		if(!this.isDocumentExternal) {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg)), false);
-			this.logger.error(I18n.format("manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg));
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("eok.manual.msg.warning", this.documentLocation.toString(), this.lineNumber, msg));
 		} else {
-			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg)), false);
-			this.logger.error(I18n.format("manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg));
+			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("eok.manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg)), false);
+			this.logger.error(I18n.format("eok.manual.msg.warning", this.documentFile.getPath(), this.lineNumber, msg));
 		}
 	}
 	
@@ -689,7 +689,7 @@ public class DocumentRenderer {
 		
 		public GuiLoading() {
 			super(MetaGuiConstants.GUI_NOT_PAUSE_GAME | MetaGuiConstants.GUI_HAS_CUSTOM_BACKGROUND);
-			this.setTitle(I18n.format("message.documentrenderer.loadingscreen.title"));
+			this.setTitle(I18n.format("eok.message.documentrenderer.loadingscreen.title"));
 			this.setWindowSize(250, 70);
 			this.setPreRenderFunction((gui) -> {
 				GLUtils.drawRect(gui.getOffsetX(), gui.getOffsetY(), gui.getOffsetX() + gui.getWindowWidth(), gui.getOffsetY() + gui.getWindowHeight(), 0x90E8ECEC);
@@ -951,7 +951,7 @@ public class DocumentRenderer {
 					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
 				} else {
 					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, 0x00FF00);
-					GLUtils.drawSimpleToolTip(Lists.newArrayList(text, I18n.format("manual.hyperlink.mouseon")));
+					GLUtils.drawSimpleToolTip(Lists.newArrayList(text, I18n.format("eok.manual.hyperlink.mouseon")));
 				}
 			}
 

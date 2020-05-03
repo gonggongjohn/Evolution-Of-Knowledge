@@ -24,7 +24,7 @@ public class ItemFlintFragment extends Item implements IHasModel {
 	private final String name = "flint_fragment";
 
 	public ItemFlintFragment() {
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		ItemHandler.ITEM_REGISTRY.add(this);

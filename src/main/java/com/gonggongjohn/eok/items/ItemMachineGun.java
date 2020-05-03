@@ -25,7 +25,7 @@ public class ItemMachineGun extends Item implements IHasModel {
 
 	public ItemMachineGun() {
 		this.setRegistryName(name);
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setCreativeTab(EOK.tabEOK);
 		ItemHandler.ITEM_REGISTRY.add(this);
 	}
@@ -38,7 +38,7 @@ public class ItemMachineGun extends Item implements IHasModel {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("item.machine_gun.description"));
+		tooltip.add(I18n.format("item.eok.machine_gun.description"));
 	}
 
 	@Override

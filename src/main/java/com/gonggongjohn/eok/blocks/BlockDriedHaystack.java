@@ -21,7 +21,7 @@ public class BlockDriedHaystack extends Block implements IHasModel {
 		this.setRegistryName(name);
 		this.setHardness(0.5F);
 		this.setCreativeTab(EOK.tabEOK);
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setSoundType(SoundType.PLANT);
 
 		BlockHandler.BLOCK_REGISTRY.add(this);

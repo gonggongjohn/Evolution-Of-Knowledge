@@ -21,7 +21,7 @@ public class ItemEOKManual extends Item implements IHasModel {
     public ItemEOKManual() {
     	
     	this.setMaxStackSize(1);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         ItemHandler.ITEM_REGISTRY.add(this);

@@ -18,12 +18,9 @@ public class BlockHandler {
 	public static final Block blockStoneTable = new BlockStoneTable();
 	public static final Block blockTwoBarrelVacuumPump = new BlockTwoBarrelVacuumPump();
 	public static final Block blockElementaryResearchTable = new BlockElementaryResearchTable();
-	public static final Block blockFirstMachine = new BlockFirstMachine();
 	public static final Block blockHaystack = new BlockHaystack();
 	public static final Block blockDriedHaystack = new BlockDriedHaystack();
 	public static final Block blockDecomposedHaystack = new BlockDecomposedHaystack();
-	public static final Block blockHayTorchBase = new BlockHayTorchBase();
-	public static final Block blockHayTorchBaseLit = new BlockHayTorchBaseLit();
 	public static final Block blockStoneRock = new BlockStoneRock();
 	public static final Block blockStick = new BlockStick();
 	public static final Block blockBasketBall = new BlockBasketBall();

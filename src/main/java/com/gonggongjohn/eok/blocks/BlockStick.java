@@ -25,7 +25,7 @@ public class BlockStick extends Block implements ICustomModel {
 
 	public BlockStick() {
 		super(Material.WOOD);
-		this.setUnlocalizedName("block_stick");
+		this.setUnlocalizedName("eok.block_stick");
 		this.setRegistryName("block_stick");
 		this.setHardness(0.2F);
 		BlockHandler.registerBlock(this, new ItemBlock(this).setRegistryName("block_stick"));

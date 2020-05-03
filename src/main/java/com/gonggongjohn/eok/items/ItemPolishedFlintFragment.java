@@ -10,7 +10,7 @@ public class ItemPolishedFlintFragment extends Item implements IHasModel {
 	
 	private final String name="polished_flint_fragment";
 	public ItemPolishedFlintFragment() {
-		this.setUnlocalizedName(name);
+		this.setUnlocalizedName("eok." + name);
 		this.setRegistryName(name);
 		this.setCreativeTab(EOK.tabEOK);
 		ItemHandler.ITEM_REGISTRY.add(this);

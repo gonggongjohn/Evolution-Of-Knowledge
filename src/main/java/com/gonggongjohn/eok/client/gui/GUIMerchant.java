@@ -150,7 +150,7 @@ public class GUIMerchant extends GuiContainer {
 		bd.setTextureY(75);
 		bd.setTextureX2(187);
 		bd.setTextureY2(86);
-		bd.setText(I18n.format("gui.merchant.button.buy"));
+		bd.setText(I18n.format("eok.gui.merchant.button.buy"));
 		this.buttonList.add(ButtonBuilder.CommonButton(BUTTON_BUY, bd));
 
 		// Deal item 1
@@ -234,7 +234,7 @@ public class GUIMerchant extends GuiContainer {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(TEXTURE);
-		String title = I18n.format("gui.merchant.title");
+		String title = I18n.format("eok.gui.merchant.title");
 		this.fontRenderer.drawString(title, 15, 30, Colors.DEFAULT_BLACK);
 		this.fontRenderer.drawString(String.valueOf(container.currentPage), 65, 154, Colors.DEFAULT_BLACK);
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);

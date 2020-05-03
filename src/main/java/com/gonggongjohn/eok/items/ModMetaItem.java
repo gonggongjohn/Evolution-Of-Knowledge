@@ -17,11 +17,11 @@ public class ModMetaItem extends MaterialMetaItem {
 
 	@Override
 	public void registerSubItems() {
-		MetaItemsHandler.CONVEX_LENS = this.addItem(0, "eok_symbol");
-		MetaItemsHandler.CONVEX_LENS = this.addItem(1, "convex_lens");
-		MetaItemsHandler.CONCAVE_LENS = this.addItem(2, "concave_lens");
-		MetaItemsHandler.CHIPPED_FLINT = this.addItem(3, "chipped_flint");
-		MetaItemsHandler.GRINDED_FLINT = this.addItem(4, "grinded_flint").addComponents(new DurabilityStone());
+		MetaItemsHandler.CONVEX_LENS = this.addItem(0, "eok.eok_symbol");
+		MetaItemsHandler.CONVEX_LENS = this.addItem(1, "eok.convex_lens");
+		MetaItemsHandler.CONCAVE_LENS = this.addItem(2, "eok.concave_lens");
+		MetaItemsHandler.CHIPPED_FLINT = this.addItem(3, "eok.chipped_flint");
+		MetaItemsHandler.GRINDED_FLINT = this.addItem(4, "eok.grinded_flint").addComponents(new DurabilityStone());
 	}
 
 	@Override

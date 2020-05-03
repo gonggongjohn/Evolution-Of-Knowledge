@@ -15,9 +15,9 @@ public class GUIHandler implements IGuiHandler {
     public static final int GUIElementaryResearchTable = 2;
 	public static final int GUIMerchant = 3;
 	public static final int GUIContainerTest = 4;
-    public static final int GUIFirstMachine = 5;
-    public static final int GUIHayTorchBase = 6;
-    public static final int GUIHayTorchBaseLit = 7;
+    // public static final int GUIFirstMachine = 5;
+    // public static final int GUIHayTorchBase = 6;
+    // public static final int GUIHayTorchBaseLit = 7;
     public static final int GUIBluePrint = 8;
     public static final int GUITest2D = 9;
 
@@ -33,12 +33,6 @@ public class GUIHandler implements IGuiHandler {
                 return new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z)));
             case GUIMerchant:
             	return new ContainerMerchant(player);
-            case GUIFirstMachine:
-                return new ContainerFirstMachine(player);
-            case GUIHayTorchBase:
-                return new ContainerHayTorchBase(player, world.getTileEntity(new BlockPos(x, y, z))); 
-            case GUIHayTorchBaseLit:
-                return new ContainerHayTorchBaseLit(player, world.getTileEntity(new BlockPos(x, y, z)));
             case GUIBluePrint:
                 return new GUIBluePrint();
             case GUITest2D:
@@ -61,12 +55,6 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIElementaryResearchTable(new ContainerElementaryResearchTable(player, world.getTileEntity(new BlockPos(x, y, z))));
             case GUIMerchant:
             	return new GUIMerchant(new ContainerMerchant(player));
-            case GUIFirstMachine:
-                return new GUIFirstMachine(new ContainerFirstMachine(player));
-            case GUIHayTorchBase:
-                return new GUIHayTorchBase(new ContainerHayTorchBase(player, world.getTileEntity(new BlockPos(x, y, z)))); 
-            case GUIHayTorchBaseLit:
-                return new GUIHayTorchBaseLit(new ContainerHayTorchBaseLit(player, world.getTileEntity(new BlockPos(x, y, z))));
             case GUIBluePrint:
                 return new GUIBluePrint();
             case GUITest2D:

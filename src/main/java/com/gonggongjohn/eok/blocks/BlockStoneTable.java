@@ -24,7 +24,7 @@ public class BlockStoneTable extends MultiBlockCompBase implements IHasModel {
 
     public BlockStoneTable() {
         super(Material.ROCK);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));

@@ -38,7 +38,7 @@ public class BlockElementaryResearchTable extends BlockContainer implements IHas
 
     public BlockElementaryResearchTable() {
         super(Material.ROCK);
-        this.setUnlocalizedName(name);
+        this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setHardness(5.0F);
         //this.setCreativeTab(EOK.tabEOK);
