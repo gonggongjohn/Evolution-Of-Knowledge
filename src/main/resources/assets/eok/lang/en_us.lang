@@ -80,6 +80,12 @@ messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
 messages.torcherino_use.msg2=§4You'll get the punishment you deserve.
 message.documentrenderer.error=A fatal error occurred when loading document. See latest.log or debug.log for more information.
 message.ducumentrenderer.syntaxerror=Warning: Some syntax error were found in the document. Check the log file for more information.
+message.documentrenderer.loadingscreen.title=Loading document
+message.documentrenderer.loadingscreen.status0=Initializating
+message.documentrenderer.loadingscreen.status1=1/3 - Reading file: %s
+message.documentrenderer.loadingscreen.status2=2/3 - Parsing document structure: Line %d: %s
+message.documentrenderer.loadingscreen.status2.readfile=2/3 - Reading file: %s 
+message.documentrenderer.loadingscreen.status3=3/3 - Building document: Processing page elements: %d/%d
 
 manual.msg.error=§cError in %s at line %d: %s
 manual.msg.warning=§eWarning in %s at line %d: %s

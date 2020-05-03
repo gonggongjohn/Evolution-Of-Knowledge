@@ -3,12 +3,12 @@ package com.gonggongjohn.eok.handlers;
 import java.util.List;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.tweakers.BrightnessTweaker;
+import com.gonggongjohn.eok.utils.DocumentRenderer.GuiLoading;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -53,12 +53,20 @@ public class EventHandlerClient {
 		BrightnessTweaker.tweak();
 	}
 	*/// TODO 重写
-	
+	static GuiLoading loading = new GuiLoading();
 	/**
 	 * 仅用作调试，请勿更改
+	 * 在这里添加断点和查看表达式来进行调试
 	 */
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void renderTest(DrawScreenEvent event) {
 		
+	}
+	
+	/**
+	 * 仅用作调试，请勿更改
+	 */
+	public static void debugMethod(int arg) {
+		Minecraft.getMinecraft().displayGuiScreen(loading);
 	}
 }

@@ -19,6 +19,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.gui.Colors;
+import com.gonggongjohn.eok.api.gui.meta.GuiControl;
+import com.gonggongjohn.eok.api.gui.meta.MetaGuiConstants;
+import com.gonggongjohn.eok.api.gui.meta.MetaGuiScreen;
 import com.gonggongjohn.eok.api.render.GLUtils;
 import com.gonggongjohn.eok.api.utils.DataUtils;
 import com.gonggongjohn.eok.api.utils.Utils;
@@ -28,6 +31,7 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -39,6 +43,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 用来读取并显示EOK文档。<br><br>
+ * It is used for reading and displaying EOK documents.<br><br>
+ */
 @SideOnly(Side.CLIENT)
 public class DocumentRenderer {
 	private final int org1X;
@@ -62,6 +70,9 @@ public class DocumentRenderer {
 	public final boolean isDocumentExternal;
 	private final List<Integer> textureList;
 	public static final String localManualPath = "local_manual" + File.separator;
+	private GuiScreen parentGui = null;
+	private GuiLoading loadingScreen = new GuiLoading();
+	private boolean isEnabled = false;
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, String documentPath) {
 		isDocumentExternal = false;
@@ -80,7 +91,10 @@ public class DocumentRenderer {
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+		} else {
+			available = true;
 		}
+		this.closeLoadingGui();
 	}
 	
 	public DocumentRenderer(int org1X, int org1Y, int org2X, int org2Y, int width, int height, File documentFile) {
@@ -100,13 +114,20 @@ public class DocumentRenderer {
 		init();
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
+		} else {
+			available = true;
 		}
+		this.closeLoadingGui();
 	}
 	
 	public boolean isAvailable() {
 		return available;
 	}
 	
+	/**
+	 * 回收它所占用的内存。<br><br>
+	 * Frees up memory it takes up.
+	 */
 	public void remove() {
 		for(int id : this.textureList) {
 			GLUtils.deleteTexture(id);
@@ -116,6 +137,11 @@ public class DocumentRenderer {
 		}
 	}
 	
+	@Override
+	protected void finalize() throws Throwable {
+		this.remove();
+	}
+
 	private void init() {
 		tokenMap.put("center", this::addCenteredText);
 		tokenMap.put("end_of_page", this::addEndOfPageMark);
@@ -143,13 +169,16 @@ public class DocumentRenderer {
 		if(!(available = read())) {
 			Minecraft.getMinecraft().player.sendStatusMessage(new TextComponentString(I18n.format("message.documentrenderer.error")), false);
 		}
+		this.closeLoadingGui();
 		return this.available;
 	}
 	
 	public boolean read() {
+		this.displayLoadingGui();
+		this.loadingScreen.setProgress(0, I18n.format("message.documentrenderer.loadingscreen.status0"));
 		pages.clear();
 		elements.clear();
-		available = true;
+		available = false;
 		this.remove();
 		this.textureList.clear();
 		lineNumber = 0;
@@ -159,9 +188,11 @@ public class DocumentRenderer {
 			return false;
 		}
 		if(!isDocumentExternal) {
-			logger.info("Loading document {}:{}", documentLocation.getResourceDomain(), documentLocation.getResourcePath());
+			logger.info("Loading document {}", documentLocation.toString());
+			this.loadingScreen.setProgress(5, I18n.format("message.documentrenderer.loadingscreen.status1", documentLocation.toString()));
 		} else {
 			logger.info("Loading document {}", documentFile.getAbsolutePath());
+			this.loadingScreen.setProgress(5, I18n.format("message.documentrenderer.loadingscreen.status1", documentFile.getAbsolutePath()));
 		}
 		lineNumber = 1;
 		BufferedReader reader;
@@ -361,6 +392,7 @@ public class DocumentRenderer {
 			if(line.startsWith("`!") && line.endsWith("`")) {
 				String statement = line.substring(2, line.length() - 1);	// 索引从0开始，并且要去掉最后一个字符，所以还要减1
 				if(statement.indexOf(' ') == -1) {	// statement with no arguments
+					this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, statement));
 					if(tokenMap.containsKey(statement)) {
 						if(!tokenMap.get(statement).test(new String[0])) {
 							appendErrText(line);
@@ -371,6 +403,7 @@ public class DocumentRenderer {
 				} else {
 					String token = statement.substring(0, statement.indexOf(' '));
 					String args = statement.substring(statement.indexOf(' ') + 1);
+					this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, token));
 					if(tokenMap.containsKey(token)) {
 						if(args.indexOf(' ') == -1) {	// statement with only one argument
 							if(!tokenMap.get(token).test(new String[] {args})) {
@@ -388,6 +421,7 @@ public class DocumentRenderer {
 					
 				}
 			} else {
+				this.loadingScreen.setProgress(40, I18n.format("message.documentrenderer.loadingscreen.status2", this.lineNumber, ""));
 				appendText(line);
 			}
 		} catch(Exception e) {
@@ -404,7 +438,11 @@ public class DocumentRenderer {
 		logger.info("buildDocument: Loaded {} elements.", elements.size());
 		int currentY = 0;
 		List<Element> currentElements = new ArrayList<Element>();
+		int idx = 0;
+		int total = elements.size();
 		for(Element element : elements) {
+			idx++;
+			this.loadingScreen.setProgress(60 + (int)((float)idx / (float)total * 40F), I18n.format("message.documentrenderer.loadingscreen.status3", idx, total));
 			if(element.getHeight() > this.height) {
 				this.error(I18n.format("manual.error.element_too_large", this.width, this.height));
 				return false;
@@ -457,6 +495,7 @@ public class DocumentRenderer {
 			return false;
 		}
 		try {
+			this.loadingScreen.setProgress(this.loadingScreen.getProgress(), I18n.format("message.documentrenderer.loadingscreen.status2.readfile", args[0]));
 			if(!isDocumentExternal) {
 				elements.add(new Element.Image(new ResourceLocation(args[0]), this.width, this.height));
 			} else {
@@ -632,6 +671,60 @@ public class DocumentRenderer {
 				e.remove();
 			}
 		}
+	}
+	
+	private void displayLoadingGui() {
+		this.loadingScreen.reset();
+		this.parentGui = Minecraft.getMinecraft().currentScreen;
+		this.loadingScreen.initGui();
+		Minecraft.getMinecraft().currentScreen = this.loadingScreen;
+	}
+	
+	private void closeLoadingGui() {
+		Minecraft.getMinecraft().currentScreen = this.parentGui;
+	}
+	
+	public static class GuiLoading extends MetaGuiScreen {
+
+		protected GuiControl.ProgressBar progress;
+		protected String status;
+		
+		public GuiLoading() {
+			super(MetaGuiConstants.GUI_NOT_PAUSE_GAME | MetaGuiConstants.GUI_HAS_CUSTOM_BACKGROUND);
+			this.setTitle(I18n.format("message.documentrenderer.loadingscreen.title"));
+			this.setWindowSize(250, 70);
+			this.setPreRenderFunction((gui) -> {
+				GLUtils.drawRect(gui.getOffsetX(), gui.getOffsetY(), gui.getOffsetX() + gui.getWindowWidth(), gui.getOffsetY() + gui.getWindowHeight(), 0x90E8ECEC);
+			});
+			this.progress = this.controlFactory.createProgressBar(220, 10);
+		}
+
+		@Override
+		public void initGui() {
+			super.initGui();
+			this.progress.setPos(15, 45);
+		}
+
+		@Override
+		public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+			super.drawScreen(mouseX, mouseY, partialTicks);
+			GLUtils.drawString(this.status, this.getOffsetX() + 17, this.getOffsetY() + 33, Colors.DEFAULT_BLACK);
+		}
+		
+		protected void setProgress(int progress, String status) {
+			this.progress.setProgress(progress);
+			this.status = status;
+		}
+		
+		protected int getProgress() {
+			return this.progress.getProgress();
+		}
+		
+		protected void reset() {
+			this.progress.setProgress(0);
+			this.status = "";
+		}
+		
 	}
 	
 	public static abstract class Element {
@@ -855,7 +948,7 @@ public class DocumentRenderer {
 				this.y = y;
 				int mouseX = Utils.getMouseX();
 				int mouseY = Utils.getMouseY();
-				boolean mouseOn = mouseX >= x && mouseX <= x + renderer.width && mouseY >= y && mouseY <= y + 10;
+				boolean mouseOn = mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10;
 				if(!mouseOn) {
 					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
 				} else {
@@ -868,7 +961,7 @@ public class DocumentRenderer {
 			protected void onClicked(DocumentRenderer renderer) {
 				int mouseX = Utils.getMouseX();
 				int mouseY = Utils.getMouseY();
-				if(mouseX >= x && mouseX <= x + renderer.width && mouseY >= y && mouseY <= y + 10) {
+				if(mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10) {
 					renderer.reload(this.isExternal, this.link);
 				}
 			}

@@ -14,10 +14,11 @@ import net.minecraft.client.Minecraft;
  */
 public class GuiDocumentPreview extends GuiEOKManual {
 
-	private final String path = "";
+	private final String path;
 	
 	public GuiDocumentPreview(String path) {
 		super();
+		this.path = path;
 	}
 	
 	@Override

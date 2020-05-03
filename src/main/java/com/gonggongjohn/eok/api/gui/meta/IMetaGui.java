@@ -11,10 +11,11 @@ public interface IMetaGui {
 	public ControlMap getControls();
 	
 	/**
-	 * 将一个控件添加至Gui中。<br><br>
-	 * Adds a control to this Gui.
+	 * 将一个控件添加至Gui中并返回它本身。<br><br>
+	 * Adds a control to this Gui and returns itself.
+	 * @return 
 	 */
-	public void addControl(GuiControl control);
+	public GuiControl addControl(GuiControl control);
 	
 	/**
 	 * 将一个控件从Gui中移除。<br><br>

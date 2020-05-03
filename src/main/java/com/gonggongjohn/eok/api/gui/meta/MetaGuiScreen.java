@@ -3,10 +3,12 @@ package com.gonggongjohn.eok.api.gui.meta;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.gui.Colors;
 import com.gonggongjohn.eok.api.render.GLUtils;
+import com.gonggongjohn.eok.api.utils.Utils;
 import com.gonggongjohn.eok.client.gui.GuiEOKManual;
 
 import net.minecraft.client.Minecraft;
@@ -60,8 +62,11 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	 * 它用来决定在Gui被打开是是否强制调小游戏界面缩放设置。<br><br>
 	 * It is used to decide whether or not to force the interface zoom factor to be
 	 * turned down when the Gui is opened.
+	 * 
+	 * @see MetaGuiScreen#MetaGuiScreen
+	 * @see MetaGuiScreen#onGuiClosed
 	 */
-	private boolean forceChangeGuiScale;
+	private final boolean forceChangeGuiScale;
 	/**
 	 * 它用来决定Gui是否有自定义背景，如果它为true, <code>drawDefaultBackground()</code>
 	 * 方法将不会被自动执行。<br><br>
@@ -69,46 +74,78 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	 * true, the <code>drawDefaultBackground()</code> method will not be executed 
 	 * automaticly.
 	 */
-	private boolean hasCustomBackground = false;
+	private final boolean hasCustomBackground;
+	private final boolean doesGuiPauseGame;
 	/**
 	 * 存储玩家打开Gui前的界面缩放设置，以便于在玩家关闭Gui时恢复到原来的设置。<br><br>
 	 * Store the interface zoom settings before the player opens the Gui, so as to
 	 * restore the original interface size when the player closes the Gui.
 	 */
 	private int lastGuiScale;
+	/**
+	 * 在<code>drawScreen()</code>中的代码被执行之前调用。<br><br>
+	 * Will be called before the code in <code>drawScreen()</code> is executed.
+	 * 
+	 * @see MetaGuiScreen#drawScreen
+	 * @see MetaGuiScreen#setPreRenderFunction
+	 */
+	private Consumer<MetaGuiScreen> preRenderFunction = (gui) -> {};
 
 	private String title = "";
 
 	/**
-	 * Construct a new instance of MetaGuiScreen
+	 * 构造一个MetaGuiScreen实例。<br><br>
+	 * Construct a new instance of MetaGuiScreen.
 	 * 
-	 * @param forceChangeGuiScale Whether to force the user to change the interface
-	 *                            zoom ratio when opening the Gui
+	 * @param type See {@link MetaGuiConstants}
+	 * 
 	 */
-	public MetaGuiScreen(boolean forceChangeGuiScale) {
+	public MetaGuiScreen(int type) {
 		super();
-		this.forceChangeGuiScale = forceChangeGuiScale;
+		this.checkWorldAndResolution();
+		this.forceChangeGuiScale = (type & MetaGuiConstants.GUI_FORCE_CHANGE_SCALE) == MetaGuiConstants.GUI_FORCE_CHANGE_SCALE;
+		this.hasCustomBackground = (type & MetaGuiConstants.GUI_HAS_CUSTOM_BACKGROUND) == MetaGuiConstants.GUI_HAS_CUSTOM_BACKGROUND;
+		this.doesGuiPauseGame = (type & MetaGuiConstants.GUI_NOT_PAUSE_GAME) != MetaGuiConstants.GUI_NOT_PAUSE_GAME;
 		lastGuiScale = Minecraft.getMinecraft().gameSettings.guiScale;
 		if (forceChangeGuiScale)
 			Minecraft.getMinecraft().gameSettings.guiScale = 3;
 	}
 
+	/**
+	 * 绘制整个Gui。<br><br>
+	 * Draws the whole Gui.
+	 */
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.checkWorldAndResolution();
+		GLUtils.pushMatrix();
+		GLUtils.enableBlend();
+		GLUtils.normalBlend();
+		offsetX = (this.width - this.windowWidth) / 2;
+		offsetY = (this.height - this.windowHeight) / 2;
+		this.preRenderFunction.accept(this);
+		GLUtils.disableBlend();
+		GLUtils.popMatrix();
+		
 		if (!this.hasCustomBackground) {
 			this.drawDefaultBackground();
 		}
-		offsetX = (this.width - this.windowWidth) / 2;
-		offsetY = (this.height - this.windowHeight) / 2;
+		
 		GLUtils.pushMatrix();
 		GLUtils.enableBlend();
 		GLUtils.normalBlend();
 		GLUtils.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(TEXTURE);
-		Gui.drawModalRectWithCustomSizedTexture(offsetX, offsetY, 0, 0, windowWidth, windowHeight, texWidth, texHeight);
-		this.fontRenderer.drawString(title, offsetX + windowWidth / 2 - this.fontRenderer.getStringWidth(title) / 2, offsetY + 10, Colors.DEFAULT_BLACK, false);
+		if(!TEXTURE.toString().equals("minecraft:")) {
+			this.mc.getTextureManager().bindTexture(TEXTURE);
+			Gui.drawModalRectWithCustomSizedTexture(offsetX, offsetY, 0, 0, windowWidth, windowHeight, texWidth, texHeight);
+		}
+		GLUtils.drawCenteredString(title, offsetX + windowWidth / 2, offsetY + 10, Colors.DEFAULT_BLACK);
+		//this.fontRenderer.drawString(title, offsetX + windowWidth / 2 - this.fontRenderer.getStringWidth(title) / 2, offsetY + 10, Colors.DEFAULT_BLACK, false);
 		GLUtils.disableBlend();
 		GLUtils.popMatrix();
+		for(int key : this.controls.keySet()) {
+			this.controls.get(key).draw(mouseX, mouseY, partialTicks, this);
+		}
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
@@ -126,7 +163,7 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	protected void actionPerformed(GuiButton button) throws IOException {
 		for(Map.Entry<Integer, GuiControl> entry : controls.entrySet()) {
 			if(entry.getValue() instanceof GuiControl.Button) {
-				if(button.id == entry.getValue().getId()) {
+				if(button == ((GuiControl.Button)entry.getValue()).buttonMc) {
 					((GuiControl.Button)entry.getValue()).func.accept(this);
 				}
 			}
@@ -134,15 +171,25 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 		super.actionPerformed(button);
 	}
 
+	/**
+	 * 在Gui被打开或游戏窗口大小改变时被调用。<br><br>
+	 * Called when this Gui is opened or the game window resized. 
+	 */
 	@Override
 	public void initGui() {
+		this.checkWorldAndResolution();
 		offsetX = (this.width - this.windowWidth) / 2;
 		offsetY = (this.height - this.windowHeight) / 2;
-		super.initGui();
+		for(Map.Entry<Integer, GuiControl> entry : controls.entrySet()) {	// 因为mc会在initGui()之前清空buttonList，所以重新加一遍
+			if(entry.getValue() instanceof GuiControl.Button) {
+				this.buttonList.add(((GuiControl.Button)entry.getValue()).buttonMc);
+			}
+		}
 	}
 
 	@Override
 	public void updateScreen() {
+		this.checkWorldAndResolution();
 		super.updateScreen();
 	}
 
@@ -161,7 +208,7 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 
 	@Override
 	public boolean doesGuiPauseGame() {
-		return false;
+		return this.doesGuiPauseGame;
 	}
 
 	@Override
@@ -179,8 +226,25 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	}
 	
 	/**
-	 * 获取这个Gui的贴图位置。<br><br>
-	 * Gets the texture location of this Gui.
+	 * 设置<code>drawScreen()</code>中的代码被执行前调用的函数，通常用于绘制自定义Gui。<br><br>
+	 * Sets the function that will be called before the code in <code>drawScreen()</code>
+	 * is executed, it is usually used to draw custom Gui.
+	 * 
+	 * @see MetaGuiScreen#preRenderFunction
+	 * @see MetaGuiScreen#drawScreen
+	 */
+	public void setPreRenderFunction(Consumer<MetaGuiScreen> func) {
+		this.preRenderFunction = func;
+	}
+	
+	/**
+	 * 获取这个Gui的贴图位置。如果没有设置贴图，将会返回一个空的ResourceLocation
+	 * (<code>new ResourceLocation("minecraft:")</code>)<br><br>
+	 * Gets the texture location of this Gui. If the texture isn't set, it will
+	 * return a empty ResourceLocation(<code>new ResourceLocation("minecraft:")</code>)
+	 * 
+	 * @see MetaGuiScreen#TEXTURE
+	 * @see MetaGuiScreen#setTexture
 	 */
 	public ResourceLocation getTexture() {
 		return TEXTURE;
@@ -238,6 +302,11 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	public int getOffsetY() {
 		return offsetY;
 	}
+	
+	public void setOffset(int x, int y) {
+		this.offsetX = x;
+		this.offsetY = y;
+	}
 
 	/**
 	 * 指定贴图大小，<strong>不建议在构造函数/initGui()之外使用。</strong><br><br>
@@ -253,8 +322,12 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	}
 
 	/**
-	 * 设置这个Gui的贴图位置。<br><br>
-	 * Sets the texture location of this Gui.
+	 * 设置这个Gui的贴图位置。如果不设置，贴图将不会被绘制。<br><br>
+	 * Sets the texture location of this Gui. If you don't set the texture, the texture won't
+	 * be drawn.
+	 * 
+	 * @see MetaGuiScreen#setPreRenderFunction
+	 * @see MetaGuiScreen#drawScreen
 	 */
 	public void setTexture(ResourceLocation texture) {
 		if (texture == null)
@@ -265,6 +338,8 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	/**
 	 * 获取这个Gui的标题。<br><br>
 	 * Gets the title of this Gui.
+	 * 
+	 * @see MetaGuiScreen#setTitle
 	 */
 	public String getTitle() {
 		return title;
@@ -275,6 +350,7 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	 * Set the title of the interface, which is displayed in the middle of the upper
 	 * part of the interface by default, <strong>doesn't support multi line yet</strong>.
 	 * 
+	 * @see MetaGuiScreen#drawScreen
 	 */
 	public void setTitle(String title) {
 		if (title == null)
@@ -285,21 +361,14 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	/**
 	 * 获取Gui在被打开时是否会强制修改MC界面缩放设置。<br><br>
 	 * Gets whether the Gui will force the interface scaling settings to be modified
-	 * when it is opened
+	 * when it is opened.
+	 * 
+	 * @see MetaGuiScreen#forceChangeGuiScale
+	 * @see MetaGuiScreen#MetaGuiScreen
+	 * @see MetaGuiScreen#onGuiClosed
 	 */
 	public boolean whetherToChangeGuiScaleWhenOpening() {
 		return forceChangeGuiScale;
-	}
-
-	/**
-	 * 指定Gui是否有自定义背景，如果它为true, <code>drawDefaultBackground()</code>
-	 * 方法将不会被自动执行。<br><br>
-	 * Appoints whether the Gui has a custom background If it is
-	 * true, the <code>drawDefaultBackground()</code> method will not be executed 
-	 * automaticly.
-	 */
-	public void setHasCustomBackground(boolean b) {
-		this.hasCustomBackground = b;
 	}
 	
 	/**
@@ -309,15 +378,27 @@ public class MetaGuiScreen extends GuiScreen implements IMetaGui {
 	protected List<GuiButton> getButtonList() {
 		return this.buttonList;
 	}
-	
+
 	@Override
-	public void addControl(GuiControl control) {
+	public GuiControl addControl(GuiControl control) {
 		this.controls.put(nextId++, control);
+		return control;
 	}
 	
 	@Override
 	public void removeControl(GuiControl control) {
 		this.controls.remove(control.getId());
+	}
+	
+	/**
+	 *
+	 */	// TODO
+	private void checkWorldAndResolution() {
+		if(this.mc == null) {
+			this.mc = Minecraft.getMinecraft();
+			this.width = Utils.getDisplayWidth();
+			this.height = Utils.getDisplayHeight();
+		}
 	}
 
 }

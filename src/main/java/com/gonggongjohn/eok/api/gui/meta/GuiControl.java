@@ -15,7 +15,19 @@ public class GuiControl {
 	protected final EnumControlType type;
 	protected final MetaGuiScreen gui;
 	public final int id;
+	/**
+	 * 控件的<strong>相对</strong>横坐标。<br><br>
+	 * This control's <strong>relative</strong> X coordinate.
+	 * 
+	 * @see GuiControl#getX
+	 */
 	protected int x;
+	/**
+	 * 控件的<strong>相对</strong>纵坐标。<br><br>
+	 * This control's <strong>relative</strong> Y coordinate.
+	 * 
+	 * @see GuiControl#getY
+	 */
 	protected int y;
 	protected int width = 0;
 	protected int height = 0;
@@ -53,6 +65,40 @@ public class GuiControl {
 		return id;
 	}
 	
+	/**
+	 * 设置控件的<strong>相对</strong>位置，必须在{@link MetaGuiScreen#initGui}中调用。<br><br>
+	 * Sets the control's <strong>relative</strong> position, it must be called in
+	 *  {@link MetaGuiScreen#initGui}.
+	 */
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * 获取控件的<strong>相对</strong>横坐标。<br><br>
+	 * Gets this control's <strong>relative</strong> X coordinate.
+	 * 
+	 * @see GuiControl#x
+	 */
+	public int getX() {
+		return this.x;
+	}
+	
+	/**
+	 * 获取控件的<strong>相对</strong>纵坐标。<br><br>
+	 * Gets this control's <strong>relative</strong> Y coordinate.
+	 * 
+	 * @see GuiControl#y
+	 */
+	public int getY() {
+		return this.y;
+	}
+	
+	/**
+	 * 它用来创建适用于一个Gui的控件。<br><br>
+	 * It is used to create controls for a Gui.
+	 */
 	public static class ControlFactory {
 		private final MetaGuiScreen gui;
 		private int nextId = 0;
@@ -61,8 +107,12 @@ public class GuiControl {
 			this.gui = gui;
 		}
 		
-		public Button createButton(int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick) {
-			return new Button(nextId++, x, y, width, height, u, v, u2, v2, onClick, this.gui);
+		public Button createButton(int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick) {
+			return (Button) gui.addControl(new Button(nextId++, width, height, u, v, u2, v2, onClick, this.gui));
+		}
+		
+		public ProgressBar createProgressBar(int width, int height) {
+			return (ProgressBar) gui.addControl(new ProgressBar(nextId++, width, height, this.gui));
 		}
 		
 		// TODO more controls
@@ -77,11 +127,12 @@ public class GuiControl {
 		protected Consumer<MetaGuiScreen> func;
 		protected String text = "";
 		protected int color = 0;
+		protected net.minecraft.client.gui.GuiButton buttonMc;
 		
-		protected Button(int id, int x, int y, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick, MetaGuiScreen gui) {
+		protected Button(int id, int width, int height, int u, int v, int u2, int v2, Consumer<MetaGuiScreen> onClick, MetaGuiScreen gui) {
 			super(id, gui, EnumControlType.BUTTON);
-			this.x = x + gui.getOffsetX();
-			this.y = y + gui.getOffsetY();
+			this.x = 0;
+			this.y = 0;
 			this.width = width;
 			this.height = height;
 			this.u = u;
@@ -96,12 +147,15 @@ public class GuiControl {
 			
 			boolean mouseOn = this.isMouseOn();
 
-			net.minecraft.client.gui.GuiButton button = new net.minecraft.client.gui.GuiButton(id, x, y, width, height, text) {
+			this.buttonMc = new net.minecraft.client.gui.GuiButton(id, x, y, width, height, text) {
 
 				@Override
 				public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 					if (this.visible) {
 
+						int x = gui.getOffsetX() + getX();
+						int y = gui.getOffsetY() + getY();
+						
 						GLUtils.pushMatrix();
 						GLUtils.enableBlend();
 						GLUtils.normalBlend();
@@ -127,7 +181,7 @@ public class GuiControl {
 
 			};
 			
-			gui.getButtonList().add(button);
+			gui.getButtonList().add(buttonMc);
 		}
 		
 		@Override
@@ -139,6 +193,13 @@ public class GuiControl {
 			this.text = text;
 			this.color = color;
 		}
+
+		@Override
+		public void setPos(int x, int y) {
+			super.setPos(x, y);
+			this.buttonMc.x = x + gui.getOffsetX();
+			this.buttonMc.y = y + gui.getOffsetY();
+		}
 		
 	}
 
@@ -149,8 +210,12 @@ public class GuiControl {
 		 */
 		private int progress = 0;
 		
-		protected ProgressBar(int id, int x, int y, int width, int height, MetaGuiScreen gui) {
+		protected ProgressBar(int id, int width, int height, MetaGuiScreen gui) {
 			super(id, gui, EnumControlType.PROGRESSBAR);
+			this.x = 0;
+			this.y = 0;
+			this.width = width;
+			this.height = height;
 		}
 
 		public int getProgress() {
@@ -169,8 +234,12 @@ public class GuiControl {
 		@Override
 		public void draw(int mouseX, int mouseY, float partialTicks, MetaGuiScreen gui) {
 			super.draw(mouseX, mouseY, partialTicks, gui);
+			int x = getX() + gui.getOffsetX();
+			int y = getY() + gui.getOffsetY();
 			GLUtils.drawRect(x, y, x + width, y + height, 0xFFFFFFFF);
-			GLUtils.drawRect(x + 1, y + 1, x + progress / 100 * (width - 1), y + height - 1, 0xFF00FF00);
+			if(progress > 0) {
+				GLUtils.drawRect(x + 1, y + 1, x + (int)((float)(progress) / 100F * (width - 1)), y + height - 1, 0xFF00FF00);
+			}
 		}
 	}
 
