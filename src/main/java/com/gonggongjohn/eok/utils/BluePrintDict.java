@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+import com.gonggongjohn.eok.handlers.GTMetaItemsHandler;
 import com.gonggongjohn.eok.items.BluePrintMetaItem;
 
 import gregtech.api.items.metaitem.MetaItem;
@@ -18,9 +18,9 @@ public class BluePrintDict {
     public final String[] textureElementaryResearchTable={"completedstructure.png"};
     public BluePrintDict()
     {
-        textureMap.put(MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE,textureTestCore2D);
-        textureMap.put(MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,textureElementaryResearchTable);
-        textureMap.put(MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,textureTestCore3D);
+        textureMap.put(GTMetaItemsHandler.BLUE_PRINT_TEST_2D_CORE,textureTestCore2D);
+        textureMap.put(GTMetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,textureElementaryResearchTable);
+        textureMap.put(GTMetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,textureTestCore3D);
     }
     public void init()
     {

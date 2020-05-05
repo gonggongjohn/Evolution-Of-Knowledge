@@ -4,7 +4,7 @@ import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
 import com.gonggongjohn.eok.handlers.ConfigHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
-import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+import com.gonggongjohn.eok.handlers.GTMetaItemsHandler;
 import com.gonggongjohn.eok.handlers.TileEntityHandler;
 import com.gonggongjohn.eok.handlers.TradeHandler;
 
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
-		MetaItemsHandler.init();
+		GTMetaItemsHandler.init();
 		TileEntityHandler.register();
 		new ConfigHandler(event);
 		EntityHandler.register();

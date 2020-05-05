@@ -9,7 +9,7 @@ import com.gonggongjohn.eok.blocks.MultiBlockCompBase;
 import com.gonggongjohn.eok.client.gui.GUIBluePrint;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
-import com.gonggongjohn.eok.handlers.MetaItemsHandler;
+import com.gonggongjohn.eok.handlers.GTMetaItemsHandler;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
 
 import gregtech.api.items.materialitem.MaterialMetaItem;
@@ -43,12 +43,12 @@ public class BluePrintMetaItem extends MaterialMetaItem {
 
     @Override
     public void registerSubItems() {
-        MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"eok.test_2d_core");
-        MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE=addItem(303,"eok.test_3d_core");
-        MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(304,"eok.elementary_research_table");
-        initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_2D_CORE, BlockHandler.blockTest2DCore);
-        initBluePrint(MetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,BlockHandler.blockTest3DCore);
-        initBluePrint(MetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);
+        GTMetaItemsHandler.BLUE_PRINT_TEST_2D_CORE =addItem(302,"eok.test_2d_core");
+        GTMetaItemsHandler.BLUE_PRINT_TEST_3D_CORE=addItem(303,"eok.test_3d_core");
+        GTMetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE =addItem(304,"eok.elementary_research_table");
+        initBluePrint(GTMetaItemsHandler.BLUE_PRINT_TEST_2D_CORE, BlockHandler.blockTest2DCore);
+        initBluePrint(GTMetaItemsHandler.BLUE_PRINT_TEST_3D_CORE,BlockHandler.blockTest3DCore);
+        initBluePrint(GTMetaItemsHandler.BLUE_PRINT_ELEMENTARY_RESEARCH_TABLE,BlockHandler.blockStoneTable);
 
         for(MetaItem<?>.MetaValueItem metaValueItem:BLUE_PRINTS)
         {

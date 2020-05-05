@@ -35,6 +35,8 @@ metaitem.eok.concave_lens.name=lentille concave
 metaitem.eok.grinded_flint.name=磨制燧石
 metaitem.eok.chipped_flint.name=打制燧石
 
+metaitem.eok.meta_item0.eok_symbol.name=EOK的标志
+
 item.eok.machine_gun.description=en construction ...
 
 tile.eok.stone_table.name=Table en Pierre
@@ -61,6 +63,7 @@ eok.tooltip.data.research=包含的研究：
 eok.messages.torcherino_crafted.msg=§4你真的要使用它吗？
 eok.messages.torcherino_use.msg=§4你激怒了森林蝙蝠！！！
 eok.messages.torcherino_use.msg2=§4你将得到你应有的惩罚。
+eok.messages.welcome_to_eok=§e欢迎来到EOK
 eok.message.documentrenderer.error=加载文档时发生致命错误。查看latest.log或debug.log获取详细信息。
 eok.message.ducumentrenderer.syntaxerror=警告：文档中存在语法错误。请查看日志文件获取详细信息。
 eok.message.documentrenderer.loadingscreen.title=正在加载文档

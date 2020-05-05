@@ -2,18 +2,18 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.items.BluePrintMetaItem;
-import com.gonggongjohn.eok.items.ModMetaItem;
+import com.gonggongjohn.eok.items.GTModMetaItem;
 
 import gregtech.api.items.metaitem.MetaItem;
 
-public class MetaItemsHandler {
+public class GTMetaItemsHandler {
 	public static MetaItem<?>.MetaValueItem CONVEX_LENS;
 	public static MetaItem<?>.MetaValueItem CONCAVE_LENS;
 	public static MetaItem<?>.MetaValueItem CHIPPED_FLINT;
 	public static MetaItem<?>.MetaValueItem GRINDED_FLINT;
 
 	public static void init() {
-		ModMetaItem metaItem = new ModMetaItem();
+		GTModMetaItem metaItem = new GTModMetaItem();
 		metaItem.setRegistryName(EOK.MODID, "meta_item");
 
 		BluePrintMetaItem bpMetaItem = new BluePrintMetaItem();

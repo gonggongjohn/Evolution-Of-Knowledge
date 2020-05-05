@@ -49,7 +49,7 @@ public class EventHandlerServer {
 		if (e.getHarvester() != null) {
 			EntityPlayer player = e.getHarvester();
 			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (MetaItemsHandler.GRINDED_FLINT.isItemEqual(stack)) {
+			if (GTMetaItemsHandler.GRINDED_FLINT.isItemEqual(stack)) {
 				Block block = e.getState().getBlock();
 				Random rand = new Random(System.currentTimeMillis());
 				if (block == Blocks.LEAVES || block == Blocks.LEAVES2) {
@@ -108,9 +108,9 @@ public class EventHandlerServer {
 		stack.shrink(1);
 		ItemStack result;
 		if (vec.x >= 0.25 && vec.x <= 0.75 && vec.z >= 0.25 && vec.z <= 0.75) {
-			result = MetaItemsHandler.GRINDED_FLINT.getStackForm();
+			result = GTMetaItemsHandler.GRINDED_FLINT.getStackForm();
 		} else {
-			result = MetaItemsHandler.CHIPPED_FLINT.getStackForm();
+			result = GTMetaItemsHandler.CHIPPED_FLINT.getStackForm();
 		}
 		player.inventory.addItemStackToInventory(result);
 		if (!result.isEmpty()) {
