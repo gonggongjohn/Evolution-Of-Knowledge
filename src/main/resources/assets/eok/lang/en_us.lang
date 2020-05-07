@@ -29,13 +29,13 @@ metaitem.eok.elementary_research_table.name=BluePrint of Elementary Research Tab
 metaitem.eok.test_2d_core.name=BluePrint of Test 2D Core (for debug)
 metaitem.eok.test_3d_core.name=BluePrint of Test 3D core (for debug)
 
-metaitem.eok.eok_symbol.name=The EOK Symbol
+metaitem.eok.others.eok_symbol.name=The EOK Symbol
 metaitem.eok.convex_lens.name=Convex Lens
 metaitem.eok.concave_lens.name=Concave Lens
 metaitem.eok.grinded_flint.name=Grinded Flint
 metaitem.eok.chipped_flint.name=Chipped Flint
 
-metaitem.eok.meta_item0.eok_symbol.name=The EOK Symbol
+metaitem.eok.meta_item0.others.eok_symbol.name=The EOK Symbol
 
 item.eok.machine_gun.description=Still Developing
 

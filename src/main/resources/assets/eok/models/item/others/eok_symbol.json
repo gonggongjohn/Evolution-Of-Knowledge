@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "eok:items/eok_symbol"
+        "layer0": "eok:items/others/eok_symbol"
     }
 }
