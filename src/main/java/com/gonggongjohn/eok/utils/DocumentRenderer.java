@@ -127,17 +127,9 @@ public class DocumentRenderer {
 	 * Frees up memory it takes up.
 	 */
 	public void remove() {
-		for(int id : this.textureList) {
-			GLUtils.deleteTexture(id);
-		}
 		if(documentIn != null) {
 			documentIn.remove();
 		}
-	}
-	
-	@Override
-	protected void finalize() throws Throwable {
-		this.remove();
 	}
 
 	private void init() {
@@ -818,7 +810,7 @@ public class DocumentRenderer {
 			private final int height;
 			private final int realWidth;
 			private final int realHeight;
-			private final int glTextureId;
+			// private final int glTextureId;
 			
 			private Image(ResourceLocation location, int windowWidth, int windowHeight) throws IOException {
 				this.image = TextureUtil.readBufferedImage(Minecraft.getMinecraft().getResourceManager().getResource(location).getInputStream());
@@ -828,7 +820,7 @@ public class DocumentRenderer {
 				size.scaleToSize(windowWidth, windowHeight);
 				this.realWidth = size.getWidth();
 				this.realHeight = size.getHeight();
-				this.glTextureId = GLUtils.loadTexture(this.image);
+				// this.glTextureId = GLUtils.loadTexture(this.image);
 			}
 			
 			private Image(File image, int windowWidth, int windowHeight) throws FileNotFoundException, IOException {
@@ -839,7 +831,7 @@ public class DocumentRenderer {
 				size.scaleToSize(windowWidth, windowHeight);
 				this.realWidth = size.getWidth();
 				this.realHeight = size.getHeight();
-				this.glTextureId = GLUtils.loadTexture(this.image);
+				// this.glTextureId = GLUtils.loadTexture(this.image);
 			}
 
 			@Override
@@ -854,7 +846,12 @@ public class DocumentRenderer {
 
 			@Override
 			protected void draw(int x, int y, DocumentRenderer renderer) {
-				GLUtils.bindTexture(this.glTextureId);
+				try {
+					GLUtils.loadTexture(image);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				if(width == realWidth && height == realHeight) {
 					Gui.drawModalRectWithCustomSizedTexture(x + renderer.width / 2 - width / 2, y, 0, 0, width, height, width, height);
 				} else {
@@ -864,7 +861,7 @@ public class DocumentRenderer {
 			
 			@Override
 			protected void remove() {
-				GLUtils.deleteTexture(glTextureId);
+				
 			}
 		}
 		

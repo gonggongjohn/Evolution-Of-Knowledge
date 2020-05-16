@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.gonggongjohn.eok.api.render.GLUtils;
+
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
@@ -24,8 +26,8 @@ public class ExternalImageTexture extends AbstractTexture {
 	
 	@Override
 	public void loadTexture(IResourceManager resourceManager) throws IOException {
-		this.deleteGlTexture();
-		TextureUtil.uploadTextureImageAllocate(this.getGlTextureId(), image, false, false);
+		GLUtils.deleteTempTexture();
+		TextureUtil.uploadTextureImageAllocate(GLUtils.tmpGlTextureId, image, false, false);
 	}
 	
 }

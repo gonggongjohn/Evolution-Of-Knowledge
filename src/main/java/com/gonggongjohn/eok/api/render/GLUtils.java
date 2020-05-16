@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.api.render;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -23,6 +24,8 @@ import net.minecraft.util.ResourceLocation;
 public class GLUtils {
 	
 	private static final Gui GUI = new Gui();
+	
+	public static final int tmpGlTextureId = GlStateManager.generateTexture();;
 	
 	public static int rgbToHex(int r, int g, int b) {
 		r <<= 16;
@@ -141,20 +144,22 @@ public class GLUtils {
 		GlStateManager.bindTexture(textureId);
 	}
 	
-	public static int loadTexture(File file) throws IOException {
+	public static void loadTexture(File file) throws IOException {
 		ITextureObject texture = new ExternalImageTexture(file);
 		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
-		return texture.getGlTextureId();
 	}
 	
-	public static int loadTexture(BufferedImage image) throws IOException {
+	public static void loadTexture(BufferedImage image) throws IOException {
 		ITextureObject texture = new ExternalImageTexture(image);
 		texture.loadTexture(Minecraft.getMinecraft().getResourceManager());
-		return texture.getGlTextureId();
 	}
 	
 	public static void deleteTexture(int textureId) {
 		TextureUtil.deleteTexture(textureId);
+	}
+	
+	public static void deleteTempTexture() {
+		deleteTexture(tmpGlTextureId);
 	}
 	
 	public static void enableBlend() {
@@ -183,6 +188,10 @@ public class GLUtils {
 	
 	public static void popMatrix() {
 		GlStateManager.popMatrix();
+	}
+	
+	public static void texImage2D(int target, int level, int internalFormat, int width, int height, int border, int format, int type, ByteBuffer pixels) {
+		GL11.glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels);
 	}
 	
 	/**

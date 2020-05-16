@@ -45,8 +45,6 @@ public class GuiEOKManual extends MetaGuiScreen {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		if(renderer == null)
 			return;
-		//if(!renderer.isAvailable())
-		//	return;
 		GLUtils.pushMatrix();
 		GLUtils.enableBlend();
 		GLUtils.normalBlend();
@@ -64,7 +62,6 @@ public class GuiEOKManual extends MetaGuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		//this.initDocument();
 		pageUp.setPos(13, 151);
 		pageDown.setPos(248, 151);
 	}
@@ -84,6 +81,7 @@ public class GuiEOKManual extends MetaGuiScreen {
 		super.onGuiClosed();
 		if(renderer != null)
 			renderer.remove();
+		GLUtils.deleteTempTexture();
 	}
 	
 	@Override
