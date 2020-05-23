@@ -23,4 +23,4 @@ suggestions on the mod, you can directly contact the dev team.
 
 * Forge Version: 14.23.5.2847
 
-* Current Mod Version: alpha-0.0.2-b200403a
+* Current Mod Version: alpha-1.0.1.6
