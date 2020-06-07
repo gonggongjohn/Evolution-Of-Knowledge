@@ -23,6 +23,7 @@ public class ItemHandler {
 	public static final Item MACHINE_GUN = new ItemMachineGun();
 	public static final Item fireStick = new ItemFireStick();
 	public static final Item EOKManual = new ItemEOKManual();
+	public static final Item Golden_Egg = new ItemGoldenEgg();
 
 	public static final Item metaTool = new MetaItemTool();
 	public static final Item eokSymbol = new ItemMaterialBase("eok_symbol");
