@@ -37,12 +37,6 @@ public class EntityHandler {
 
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.goldenegg"), EntityGoldenEgg.class,
                 "eok.entity_goldenegg", 7, EOK.instance, 64, 1, true);
-
-        EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.zijing"), EntityZijing.class,
-                "eok.entity_zijing", 4, EOK.instance, 64, 1, true, 0xB3FFFF, 0x4D94FF);
-
-        EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.moink"), EntityMoInk.class,
-                "eok.entity_moink", 5, EOK.instance, 64, 1, true, 0xffffb3, 0x66b2ff);
     }
 
     @SuppressWarnings("unchecked")
