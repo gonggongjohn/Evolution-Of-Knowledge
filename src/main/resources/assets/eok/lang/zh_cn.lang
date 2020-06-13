@@ -106,6 +106,8 @@ entity.eok.entity_chenwe_i_lin.name=Chenwe_i_lin
 entity.eok.entity_osir.name=Os_Ir
 entity.eok.entity_zijing.name=zijing_233
 entity.eok.entity_moink.name=Mo_Ink
+entity.eok.entity_goldenegg.name=Golden Egg
+entity.eok.entity_goldenchicken.name=金鸡
 
 eok.gui.merchant.title=商人
 eok.gui.merchant.button.buy=购买

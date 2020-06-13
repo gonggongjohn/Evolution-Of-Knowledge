@@ -2,10 +2,10 @@ package com.gonggongjohn.eok.utils;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntityRenderFactory<E extends EntityLiving> implements IRenderFactory<E> {
+public class EntityRenderFactory<E extends Entity> implements IRenderFactory<E> {
 	private final Class<? extends Render<E>> renderClass;
 
 	public EntityRenderFactory(Class<? extends Render<E>> renderClass) {
