@@ -1,6 +1,8 @@
 package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.entity.EntityGoldenChicken;
+import com.gonggongjohn.eok.entity.EntityGoldenEgg;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 
@@ -20,7 +22,7 @@ public class ItemGoldenEgg extends Item implements IHasModel {
 
     private final String name = "golden_egg";
 
-    public ItemGoldenEgg(){
+    public ItemGoldenEgg() {
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -33,7 +35,7 @@ public class ItemGoldenEgg extends Item implements IHasModel {
         ItemStack item = player.getHeldItem(hand);
         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         if (!world.isRemote) {
-            EntityEgg egg = new EntityEgg(world, player);
+            EntityGoldenEgg egg = new EntityGoldenEgg(world, player);
             egg.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
             world.spawnEntity(egg);
         }
@@ -42,7 +44,7 @@ public class ItemGoldenEgg extends Item implements IHasModel {
     }
 
     @Override
-    public void registerModel(){
+    public void registerModel() {
         EOK.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }
