@@ -9,30 +9,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityGoldenEgg extends EntityThrowable
-{
-    public EntityGoldenEgg(World worldIn)
-    {
+public class EntityGoldenEgg extends EntityThrowable {
+    public EntityGoldenEgg(World worldIn) {
         super(worldIn);
     }
 
-    public EntityGoldenEgg(World worldIn, EntityLivingBase throwerIn)
-    {
+    public EntityGoldenEgg(World worldIn, EntityLivingBase throwerIn) {
         super(worldIn, throwerIn);
     }
 
-    public EntityGoldenEgg(World worldIn, double x, double y, double z)
-    {
+    public EntityGoldenEgg(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
     }
 
     @Override
-    protected void onImpact(RayTraceResult movingObjectPosition)
-    {
-        if (!this.world.isRemote)
-        {
-            if ((movingObjectPosition.entityHit instanceof EntityChicken)&&!(movingObjectPosition.entityHit instanceof EntityGoldenChicken))
-            {
+    protected void onImpact(RayTraceResult movingObjectPosition) {
+        if (!this.world.isRemote) {
+            if ((movingObjectPosition.entityHit instanceof EntityChicken) && !(movingObjectPosition.entityHit instanceof EntityGoldenChicken)) {
                 EntityChicken originalChicken = (EntityChicken) movingObjectPosition.entityHit;
                 EntityGoldenChicken goldenChicken = new EntityGoldenChicken(this.world);
                 goldenChicken.setGrowingAge(originalChicken.getGrowingAge());
@@ -40,9 +33,7 @@ public class EntityGoldenEgg extends EntityThrowable
                         originalChicken.rotationYaw, originalChicken.rotationPitch);
                 originalChicken.setDead();
                 this.world.spawnEntity(goldenChicken);
-            }
-            else
-            {
+            } else {
                 this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ,
                         new ItemStack(ItemHandler.Golden_Egg)));
             }

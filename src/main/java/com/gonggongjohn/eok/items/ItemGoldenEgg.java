@@ -22,7 +22,7 @@ public class ItemGoldenEgg extends Item implements IHasModel {
 
     private final String name = "golden_egg";
 
-    public ItemGoldenEgg(){
+    public ItemGoldenEgg() {
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -44,7 +44,7 @@ public class ItemGoldenEgg extends Item implements IHasModel {
     }
 
     @Override
-    public void registerModel(){
+    public void registerModel() {
         EOK.proxy.registerItemRenderer(this, 0, "inventory");
     }
 }

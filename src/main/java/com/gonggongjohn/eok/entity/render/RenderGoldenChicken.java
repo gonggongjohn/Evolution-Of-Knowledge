@@ -11,31 +11,26 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderGoldenChicken extends RenderLiving<EntityGoldenChicken>
-{
+public class RenderGoldenChicken extends RenderLiving<EntityGoldenChicken> {
     private static final ResourceLocation GOLDEN_CHICKEN_TEXTURE = new ResourceLocation(
             EOK.MODID + ":" + "textures/entity/golden_chicken.png");
 
-    public RenderGoldenChicken(RenderManager renderManager)
-    {
+    public RenderGoldenChicken(RenderManager renderManager) {
         super(renderManager, new ModelChicken(), 0.5F);
     }
 
     @Override
-    protected void preRenderCallback(EntityGoldenChicken entity, float partialTickTime)
-    {
+    protected void preRenderCallback(EntityGoldenChicken entity, float partialTickTime) {
         GlStateManager.scale(2.5F, 2.5F, 2.5F);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityGoldenChicken entity)
-    {
+    protected ResourceLocation getEntityTexture(EntityGoldenChicken entity) {
         return RenderGoldenChicken.GOLDEN_CHICKEN_TEXTURE;
     }
 
     @Override
-    public void doRender(EntityGoldenChicken entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
+    public void doRender(EntityGoldenChicken entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 }
