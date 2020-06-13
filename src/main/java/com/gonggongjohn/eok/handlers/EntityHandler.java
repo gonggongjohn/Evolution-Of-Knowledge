@@ -2,10 +2,7 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.entity.*;
-import com.gonggongjohn.eok.entity.render.RenderMoInk;
-import com.gonggongjohn.eok.entity.render.RenderOsIr;
-import com.gonggongjohn.eok.entity.render.RenderSmalldew;
-import com.gonggongjohn.eok.entity.render.RenderZijing;
+import com.gonggongjohn.eok.entity.render.*;
 import com.gonggongjohn.eok.utils.EntityRenderFactory;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -28,7 +25,6 @@ public class EntityHandler {
         // "entity_chenwe_i_lin", 2, EOK.instance, 64, 1, true, 0x916B94, 0x99CCFF);
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.osir"), EntityOsIr.class,
                 "eok.entity_osir", 3, EOK.instance, 64, 1, true, 0xFF99FF, 0x99FF99);
-<<<<<<< HEAD
 
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.zijing"), EntityZijing.class,
                 "eok.entity_zijing", 4, EOK.instance, 64, 1, true, 0xB3FFFF, 0x4D94FF);
@@ -41,12 +37,12 @@ public class EntityHandler {
 
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.goldenegg"), EntityGoldenEgg.class,
                 "eok.entity_goldenegg", 7, EOK.instance, 64, 1, true);
-=======
+
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.zijing"), EntityZijing.class,
                 "eok.entity_zijing", 4, EOK.instance, 64, 1, true, 0xB3FFFF, 0x4D94FF);
+
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.moink"), EntityMoInk.class,
                 "eok.entity_moink", 5, EOK.instance, 64, 1, true, 0xffffb3, 0x66b2ff);
->>>>>>> upstream/master
     }
 
     @SuppressWarnings("unchecked")
@@ -57,19 +53,13 @@ public class EntityHandler {
         registerEntityRender(EntityOsIr.class, RenderOsIr.class);
         registerEntityRender(EntityZijing.class, RenderZijing.class);
         registerEntityRender(EntityMoInk.class, RenderMoInk.class);
-<<<<<<< HEAD
         registerEntityRender(EntityGoldenChicken.class, RenderGoldenChicken.class);
         registerEntityRender(EntityGoldenEgg.class, RenderGoldenEgg.class);
-=======
->>>>>>> upstream/master
     }
 
     @SideOnly(Side.CLIENT)
     private static <T extends Entity, E extends Render<T>> void registerEntityRender(Class<T> entityClass, Class<E> render) {
-<<<<<<< HEAD
         RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRenderFactory<T>(render));
-=======
         RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRenderFactory<>(render));
->>>>>>> upstream/master
     }
 }

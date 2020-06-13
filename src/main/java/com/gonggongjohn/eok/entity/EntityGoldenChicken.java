@@ -2,7 +2,6 @@ package com.gonggongjohn.eok.entity;
 
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.world.World;
 
