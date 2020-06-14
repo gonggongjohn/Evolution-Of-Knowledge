@@ -20,6 +20,8 @@ item.eok.fire_stick.name=起火棍
 item.eok.machine_gun.name=枪
 item.eok.eok_manual.name=EOK手册
 item.eok.golden_egg.name=金蛋
+item.eok.redstone_pickaxe.name=红石镐
+item.eok.redstone_apple.name=红石苹果
 
 item.eok.pickaxe.name=镐
 item.eok.axe.name=斧

@@ -1,14 +1,10 @@
 package com.gonggongjohn.eok.items;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.entity.EntityGoldenChicken;
 import com.gonggongjohn.eok.entity.EntityGoldenEgg;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityEgg;
-import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
