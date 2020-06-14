@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:apple"
+    },
+    "#": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "eok:redstone_apple"
+  }
+}
