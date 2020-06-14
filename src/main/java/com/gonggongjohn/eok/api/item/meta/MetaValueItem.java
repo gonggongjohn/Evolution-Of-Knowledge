@@ -2,19 +2,21 @@ package com.gonggongjohn.eok.api.item.meta;
 
 import org.apache.commons.lang3.Validate;
 
+import com.gonggongjohn.eok.api.item.meta.module.IContainerItemProvider;
+import com.gonggongjohn.eok.api.item.meta.module.IDurabilityBarProvider;
+import com.gonggongjohn.eok.api.item.meta.module.IItemInteraction;
 import com.gonggongjohn.eok.api.item.meta.module.IItemModelProvider;
 import com.gonggongjohn.eok.api.item.meta.module.IItemModule;
+import com.gonggongjohn.eok.api.item.meta.module.IItemNameProvider;
+import com.gonggongjohn.eok.api.item.meta.module.IItemTooltipProvider;
+import com.gonggongjohn.eok.api.item.meta.module.IItemUse;
+import com.gonggongjohn.eok.api.item.meta.module.IToolDamage;
 import com.gonggongjohn.eok.api.item.meta.module.ItemArmorModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemAttributesModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemBehaviorModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemContainerModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemDurabilityModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemEnchantmentModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemEntityModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemFuelModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemHorseArmorModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemInteractionModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemNameAndTooltipModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemToolModule;
 
 import net.minecraft.item.ItemStack;
@@ -26,18 +28,20 @@ public class MetaValueItem {
 	protected String unlocalizedName;
 
 	protected IItemModelProvider modelProvider;
+	protected IItemNameProvider nameProvider;
+	protected IItemTooltipProvider tooltipProvider;
+	protected IContainerItemProvider containerModule;
+	protected IDurabilityBarProvider durabilityBarProvider;
+	protected IToolDamage toolDamage;
+	protected IItemUse itemUse;
+	protected IItemInteraction itemInteraction;
 
 	protected ItemArmorModule armorModule = new ItemArmorModule();
 	protected ItemAttributesModule attributesModule = new ItemAttributesModule();
-	protected ItemBehaviorModule behaviorModule = new ItemBehaviorModule();
-	protected ItemContainerModule containerModule = new ItemContainerModule();
-	protected ItemDurabilityModule durabilityModule = new ItemDurabilityModule();
 	protected ItemEnchantmentModule enchantmentModule = new ItemEnchantmentModule();
 	protected ItemEntityModule entityModule = new ItemEntityModule();
 	protected ItemFuelModule fuelModule = new ItemFuelModule();
 	protected ItemHorseArmorModule horseArmorModule = new ItemHorseArmorModule();
-	protected ItemInteractionModule interactionModule = new ItemInteractionModule();
-	protected ItemNameAndTooltipModule nameAndTooltipModule = new ItemNameAndTooltipModule();
 	protected ItemToolModule toolModule = new ItemToolModule();
 
 	public MetaValueItem(MetaItem metaItem, short id, String unlocalizedName) {
@@ -52,30 +56,20 @@ public class MetaValueItem {
 	public MetaValueItem addModule(IItemModule module) {
 		if (module instanceof IItemModelProvider) {
 			this.modelProvider = (IItemModelProvider) module;
-		} else if (module instanceof ItemArmorModule) {
-			this.armorModule = (ItemArmorModule) module;
-		} else if (module instanceof ItemAttributesModule) {
-			this.attributesModule = (ItemAttributesModule) module;
-		} else if (module instanceof ItemBehaviorModule) {
-			this.behaviorModule = (ItemBehaviorModule) module;
-		} else if (module instanceof ItemContainerModule) {
-			this.containerModule = (ItemContainerModule) module;
-		} else if (module instanceof ItemDurabilityModule) {
-			this.durabilityModule = (ItemDurabilityModule) module;
-		} else if (module instanceof ItemEnchantmentModule) {
-			this.enchantmentModule = (ItemEnchantmentModule) module;
-		} else if (module instanceof ItemEntityModule) {
-			this.entityModule = (ItemEntityModule) module;
-		} else if (module instanceof ItemFuelModule) {
-			this.fuelModule = (ItemFuelModule) module;
-		} else if (module instanceof ItemHorseArmorModule) {
-			this.horseArmorModule = (ItemHorseArmorModule) module;
-		} else if (module instanceof ItemInteractionModule) {
-			this.interactionModule = (ItemInteractionModule) module;
-		} else if (module instanceof ItemNameAndTooltipModule) {
-			this.nameAndTooltipModule = (ItemNameAndTooltipModule) module;
-		} else if (module instanceof ItemToolModule) {
-			this.toolModule = (ItemToolModule) module;
+		} else if (module instanceof IItemNameProvider) {
+			this.nameProvider = (IItemNameProvider) module;
+		} else if (module instanceof IItemTooltipProvider) {
+			this.tooltipProvider = (IItemTooltipProvider) module;
+		} else if (module instanceof IContainerItemProvider) {
+			this.containerModule = (IContainerItemProvider) module;
+		} else if (module instanceof IDurabilityBarProvider) {
+			this.durabilityBarProvider = (IDurabilityBarProvider) module;
+		} else if (module instanceof IToolDamage) {
+			this.toolDamage = (IToolDamage) module;
+		} else if (module instanceof IItemUse) {
+			this.itemUse = (IItemUse) module;
+		} else if (module instanceof IItemInteraction) {
+			this.itemInteraction = (IItemInteraction) module;
 		} else {
 			throw new IllegalArgumentException("Invalid module type, add it to other type MetaValueItem");
 		}
