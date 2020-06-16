@@ -34,10 +34,6 @@ public class MetaItemHandler {
 		}
 	});
 
-	public static void setup() {
-		META_ITEM.setCreativeTab(EOK.tabEOK);
-	}
-
 	@SubscribeEvent
 	public static void onItemRegister(Register<Item> event) {
 		event.getRegistry().register(META_ITEM);

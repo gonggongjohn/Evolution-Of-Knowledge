@@ -32,13 +32,11 @@ metaitem.eok.elementary_research_table.name=Blueprint de la table de recherche
 metaitem.eok.test_2d_core.name=Blueprint de la structure en deux dimension(en test)
 metaitem.eok.test_3d_core.name=Blueprint de la structure en trois dimension(en test)
 
-metaitem.eok.others.eok_symbol.name=Symbole d'EOK
+metaitem.eok.eok_symbol.name=Symbole d'EOK
 metaitem.eok.convex_lens.name=lentille convexe
 metaitem.eok.concave_lens.name=lentille concave
 metaitem.eok.grinded_flint.name=Galet Aigu
 metaitem.eok.chipped_flint.name=Galet Taillé
-
-metaitem.eok.meta_item0.others.eok_symbol.name=Symbole d'EOK
 
 item.eok.machine_gun.description=en construction...
 
