@@ -3,7 +3,18 @@ package com.gonggongjohn.eok.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gonggongjohn.eok.blocks.*;
+import com.gonggongjohn.eok.blocks.BlockBasketBall;
+import com.gonggongjohn.eok.blocks.BlockDecomposedHaystack;
+import com.gonggongjohn.eok.blocks.BlockDriedHaystack;
+import com.gonggongjohn.eok.blocks.BlockElementaryResearchTable;
+import com.gonggongjohn.eok.blocks.BlockHaystack;
+import com.gonggongjohn.eok.blocks.BlockStick;
+import com.gonggongjohn.eok.blocks.BlockStoneMill;
+import com.gonggongjohn.eok.blocks.BlockStoneRock;
+import com.gonggongjohn.eok.blocks.BlockStoneTable;
+import com.gonggongjohn.eok.blocks.BlockTest2DCore;
+import com.gonggongjohn.eok.blocks.BlockTest3DCore;
+import com.gonggongjohn.eok.blocks.BlockTwoBarrelVacuumPump;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -24,6 +35,7 @@ public class BlockHandler {
 	public static final Block blockStoneRock = new BlockStoneRock();
 	public static final Block blockStick = new BlockStick();
 	public static final Block blockBasketBall = new BlockBasketBall();
+	public static final Block blockStoneMill = new BlockStoneMill();
 
 	public static final Block blockTest2DCore = new BlockTest2DCore();
 	public static final Block blockTest3DCore = new BlockTest3DCore();

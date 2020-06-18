@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok;
 
+import com.gonggongjohn.eok.client.animation.EmptyStateMapper;
+import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
 
 import net.minecraft.client.Minecraft;
@@ -19,6 +21,7 @@ public class ClientProxy extends CommonProxy{
 	public void preInit(FMLPreInitializationEvent event){
     	EntityHandler.registerRenders();
     	super.preInit(event);
+    	ModelLoader.setCustomStateMapper(BlockHandler.blockStoneMill, new EmptyStateMapper());
     }
 
     @Override

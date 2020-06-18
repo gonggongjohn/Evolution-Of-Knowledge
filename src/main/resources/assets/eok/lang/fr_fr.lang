@@ -49,6 +49,7 @@ tile.eok.decomposed_haystack.name=Bloc d'herbe pourrie
 tile.eok.basket_ball.name=Basketball
 tile.eok.block_stone_rock.name=Bloc de roche
 tile.eok.block_stick.name=Baton de bois
+tile.eok.stone_mill.name=石磨
 
 itemGroup.eoktab=De l'Ignorance au Prophète
 
