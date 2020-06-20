@@ -22,6 +22,10 @@ item.eok.eok_manual.name=EOK Manual
 item.eok.golden_egg.name=Golden Egg
 item.eok.redstone_pickaxe.name=Redstone Pickaxe
 item.eok.redstone_apple.name=Redstone Apple
+item.eok.redstone_helmet.name=Redstone Helmet
+item.eok.redstone_chestplate.name=Redstone Chestplate
+item.eok.redstone_leggings.name=Redstone Leggings
+item.eok.redstone_boots.name=Redstone Boots
 
 item.eok.pickaxe.name=Pickaxe
 item.eok.axe.name=Axe
