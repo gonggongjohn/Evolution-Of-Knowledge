@@ -1,14 +1,13 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gonggongjohn.eok.items.*;
-
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber
 public class ItemHandler {
@@ -24,8 +23,12 @@ public class ItemHandler {
 	public static final Item fireStick = new ItemFireStick();
 	public static final Item EOKManual = new ItemEOKManual();
 	public static final Item Golden_Egg = new ItemGoldenEgg();
-	public static final Item Redstone_Pickaxe = new ItemRedstonePickaxe();
 	public static final Item Redstone_Apple = new ItemRedstoneApple();
+	public static final Item Redstone_Sword = new ItemRedstoneSword();
+	public static final Item Redstone_Pickaxe = new ItemRedstonePickaxe();
+	public static final Item Redstone_Axe = new ItemRedstoneAxe();
+	public static final Item Redstone_Hoe = new ItemRedstoneHoe();
+	public static final Item Redstone_Spade = new ItemRedstoneSpade();
 	public static final Item Redstone_Helmet = new ItemRedstoneHelmet();
 	public static final Item Redstone_Chestplate = new ItemRedstoneChestplate();
 	public static final Item Redstone_Leggings = new ItemRedstoneLeggings();

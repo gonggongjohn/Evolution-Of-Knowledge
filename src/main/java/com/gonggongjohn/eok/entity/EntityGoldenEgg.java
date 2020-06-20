@@ -6,6 +6,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -36,6 +37,8 @@ public class EntityGoldenEgg extends EntityThrowable {
             } else {
                 this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ,
                         new ItemStack(ItemHandler.Golden_Egg)));
+                if (movingObjectPosition.entityHit != null)
+                    movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.0F);
             }
             this.setDead();
         }
