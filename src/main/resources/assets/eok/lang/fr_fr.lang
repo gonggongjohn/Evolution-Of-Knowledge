@@ -22,6 +22,10 @@ item.eok.eok_manual.name=EOK manuel
 item.eok.golden_egg.name=Oeuf d'or
 item.eok.redstone_pickaxe.name=Pioche de Redstone
 item.eok.redstone_apple.name=Pomme de Redstone
+item.eok.redstone_helmet.name=红石头盔
+item.eok.redstone_chestplate.name=红石胸甲
+item.eok.redstone_leggings.name=红石护腿
+item.eok.redstone_boots.name=红石靴子
 
 item.eok.pickaxe.name=Pioche
 item.eok.axe.name=Hache

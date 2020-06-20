@@ -26,6 +26,10 @@ public class ItemHandler {
 	public static final Item Golden_Egg = new ItemGoldenEgg();
 	public static final Item Redstone_Pickaxe = new ItemRedstonePickaxe();
 	public static final Item Redstone_Apple = new ItemRedstoneApple();
+	public static final Item Redstone_Helmet = new ItemRedstoneHelmet();
+	public static final Item Redstone_Chestplate = new ItemRedstoneChestplate();
+	public static final Item Redstone_Leggings = new ItemRedstoneLeggings();
+	public static final Item Redstone_Boots = new ItemRedstoneBoots();
 
 	public static final Item metaTool = new MetaItemTool();
 	public static final Item eokSymbol = new ItemMaterialBase("eok_symbol");

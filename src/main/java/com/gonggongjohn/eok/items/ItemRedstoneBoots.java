@@ -3,18 +3,13 @@ package com.gonggongjohn.eok.items;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraft.inventory.EntityEquipmentSlot;
 
-public class ItemRedstonePickaxe extends ItemPickaxe implements IHasModel {
+public class ItemRedstoneBoots extends ItemRedstoneArmor implements IHasModel {
+    private final String name = "redstone_boots";
 
-    public static final Item.ToolMaterial REDSTONE = EnumHelper.addToolMaterial("REDSTONE", 3, 192, 13.0F, 1.5F, 12);
-
-    private final String name = "redstone_pickaxe";
-
-    public ItemRedstonePickaxe() {
-        super(REDSTONE);
+    public ItemRedstoneBoots() {
+        super(EntityEquipmentSlot.FEET);
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
