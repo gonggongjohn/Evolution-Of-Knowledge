@@ -4,13 +4,13 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 import com.gonggongjohn.eok.utils.ToolMaterials;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemHoe;
 
-public class ItemRedstonePickaxe extends ItemPickaxe implements IHasModel {
+public class ItemRedstoneHoe extends ItemHoe implements IHasModel {
 
-    private final String name = "redstone_pickaxe";
+    private final String name = "redstone_hoe";
 
-    public ItemRedstonePickaxe() {
+    public ItemRedstoneHoe() {
         super(ToolMaterials.REDSTONE);
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
