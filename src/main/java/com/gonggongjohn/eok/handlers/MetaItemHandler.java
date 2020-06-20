@@ -2,8 +2,18 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.item.meta.MetaItem;
+import com.gonggongjohn.eok.api.item.meta.MetaValueItem;
+import com.gonggongjohn.eok.api.item.meta.module.IItemInteraction;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -11,15 +21,21 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @EventBusSubscriber(modid = EOK.MODID)
 public class MetaItemHandler {
 
-    private static final MetaItem METAITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
+	private static final MetaItem META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
 
-    public static void setup() {
-        METAITEM.setCreativeTab(EOK.tabEOK);
-        METAITEM.addItem((short) 0, "others.eok_symbol");
-    }
+	public static final MetaValueItem EOK_SYMBOL = META_ITEM.addItem(0, "eok_symbol").addModule(new IItemInteraction() {
+		@Override
+		public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+			if (world.isRemote) {
+				player.sendStatusMessage(new TextComponentTranslation("eok.messages.welcome_to_eok"), false);
+				player.swingArm(hand);
+			}
+			return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
+		}
+	});
 
-    @SubscribeEvent
-    public static void onItemRegister(Register<Item> event) {
-        event.getRegistry().register(METAITEM);
-    }
+	@SubscribeEvent
+	public static void onItemRegister(Register<Item> event) {
+		event.getRegistry().register(META_ITEM);
+	}
 }

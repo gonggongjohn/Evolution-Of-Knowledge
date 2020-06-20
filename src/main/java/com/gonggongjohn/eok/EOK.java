@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
-import com.gonggongjohn.eok.handlers.MetaItemHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.network.PacketGuiButton;
@@ -27,8 +26,6 @@ import net.minecraft.util.ReportedException;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.ProgressManager;
-import net.minecraftforge.fml.common.ProgressManager.ProgressBar;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -61,12 +58,6 @@ public class EOK {
 	public static InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;
 	public static BluePrintDict bluePrintDict;
-	
-	public EOK() {
-		ProgressBar progress = ProgressManager.push("Initializing MetaItem", 0);
-		MetaItemHandler.setup();
-		ProgressManager.pop(progress);
-	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

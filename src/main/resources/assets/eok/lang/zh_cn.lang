@@ -32,13 +32,11 @@ metaitem.eok.elementary_research_table.name=研究台蓝图
 metaitem.eok.test_2d_core.name=二维多方块结构蓝图 (测试用)
 metaitem.eok.test_3d_core.name=三维多方块结构蓝图 (测试用)
 
-metaitem.eok.others.eok_symbol.name=EOK的标志
+metaitem.eok.eok_symbol.name=EOK的标志
 metaitem.eok.convex_lens.name=凸透镜
 metaitem.eok.concave_lens.name=凹透镜
 metaitem.eok.grinded_flint.name=磨制燧石
 metaitem.eok.chipped_flint.name=打制燧石
-
-metaitem.eok.meta_item0.others.eok_symbol.name=EOK的标志
 
 item.eok.machine_gun.description=仍处于开发阶段
 
@@ -51,6 +49,7 @@ tile.eok.decomposed_haystack.name=腐烂的草垛
 tile.eok.basket_ball.name=篮球——纪念科比
 tile.eok.block_stone_rock.name=小石块
 tile.eok.block_stick.name=小木棍
+tile.eok.stone_mill.name=石磨
 
 itemGroup.eoktab=从无知到先知
 
