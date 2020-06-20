@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "#": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:redstone_block"
     }
   },
   "result": {

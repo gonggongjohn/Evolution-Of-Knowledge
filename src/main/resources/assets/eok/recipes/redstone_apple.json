@@ -10,7 +10,7 @@
       "item": "minecraft:apple"
     },
     "#": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:redstone_block"
     }
   },
   "result": {

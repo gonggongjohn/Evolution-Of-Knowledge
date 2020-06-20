@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemRedstonePickaxe extends ItemPickaxe implements IHasModel {
 
-    public static final Item.ToolMaterial REDSTONE = EnumHelper.addToolMaterial("REDSTONE", 3, 16, 16.0F, 0.0F, 10);
+    public static final Item.ToolMaterial REDSTONE = EnumHelper.addToolMaterial("REDSTONE", 3, 192, 13.0F, 1.5F, 12);
 
     private final String name = "redstone_pickaxe";
 
