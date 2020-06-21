@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok.api.item.meta;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.Validate;
 
 import com.gonggongjohn.eok.api.item.meta.module.IContainerItemProvider;
@@ -76,6 +78,19 @@ public class MetaValueItem {
 		return this;
 	}
 
+	public boolean containsModule(String name) {
+		return Arrays.stream(this.getClass().getDeclaredFields()).filter((field) -> field.getName() == name)
+				.filter((field) -> {
+					try {
+						field.setAccessible(true);
+						return IItemModule.class.isInstance(field.get(this));
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
+					}
+					return false;
+				}).findFirst().isPresent();
+	}
+
 	public MetaValueItem setModelCount(int count) {
 		if (count < 1) {
 			throw new IllegalArgumentException("Model count must be a positive number");
@@ -102,7 +117,7 @@ public class MetaValueItem {
 	}
 
 	public ItemStack getItemStack(int count) {
-		return new ItemStack(this.metaItem, this.id, count);
+		return new ItemStack(this.metaItem, count, this.id);
 	}
 
 	public short getId() {

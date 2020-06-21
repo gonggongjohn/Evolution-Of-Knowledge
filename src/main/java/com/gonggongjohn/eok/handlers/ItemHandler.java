@@ -1,13 +1,33 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.items.*;
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gonggongjohn.eok.items.ItemChippedFlintFragment;
+import com.gonggongjohn.eok.items.ItemEOKManual;
+import com.gonggongjohn.eok.items.ItemFireStick;
+import com.gonggongjohn.eok.items.ItemFlintFragment;
+import com.gonggongjohn.eok.items.ItemGoldenEgg;
+import com.gonggongjohn.eok.items.ItemMachineGun;
+import com.gonggongjohn.eok.items.ItemMaterialBase;
+import com.gonggongjohn.eok.items.ItemPapyrus;
+import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
+import com.gonggongjohn.eok.items.ItemRedstoneApple;
+import com.gonggongjohn.eok.items.ItemRedstoneAxe;
+import com.gonggongjohn.eok.items.ItemRedstoneBoots;
+import com.gonggongjohn.eok.items.ItemRedstoneChestplate;
+import com.gonggongjohn.eok.items.ItemRedstoneHelmet;
+import com.gonggongjohn.eok.items.ItemRedstoneHoe;
+import com.gonggongjohn.eok.items.ItemRedstoneLeggings;
+import com.gonggongjohn.eok.items.ItemRedstonePickaxe;
+import com.gonggongjohn.eok.items.ItemRedstoneSpade;
+import com.gonggongjohn.eok.items.ItemRedstoneSword;
+import com.gonggongjohn.eok.items.ItemRefractingTelescope;
+import com.gonggongjohn.eok.items.MetaItemTool;
+import com.gonggongjohn.eok.items.Torcherino;
+
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber
 public class ItemHandler {
@@ -45,10 +65,5 @@ public class ItemHandler {
 
 	public static void registerItem(Item item) {
 		ITEM_REGISTRY.add(item);
-	}
-
-	@SubscribeEvent
-	public static void onBlockRegister(Register<Item> e) {
-		e.getRegistry().registerAll(ITEM_REGISTRY.toArray(new Item[0]));
 	}
 }

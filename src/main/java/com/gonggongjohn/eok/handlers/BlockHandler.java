@@ -18,9 +18,7 @@ import com.gonggongjohn.eok.blocks.BlockTwoBarrelVacuumPump;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @EventBusSubscriber
 public class BlockHandler {
@@ -43,10 +41,5 @@ public class BlockHandler {
 	public static void registerBlock(Block block, Item item) {
 		BLOCK_REGISTRY.add(block);
 		ItemHandler.ITEM_REGISTRY.add(item);
-	}
-
-	@SubscribeEvent
-	public static void onBlockRegister(Register<Block> e) {
-		e.getRegistry().registerAll(BLOCK_REGISTRY.toArray(new Block[0]));
 	}
 }

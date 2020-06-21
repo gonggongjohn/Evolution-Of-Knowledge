@@ -1,5 +1,7 @@
 package com.gonggongjohn.eok.api.item.meta;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -15,6 +17,8 @@ import com.gonggongjohn.eok.api.item.meta.module.IToolDamage;
 
 import gnu.trove.map.TShortObjectMap;
 import gnu.trove.map.hash.TShortObjectHashMap;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -28,16 +32,25 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MetaItem extends Item implements IMetaItem {
+	protected static final ModelResourceLocation EMPTY_MODEL = new ModelResourceLocation("builtin/missing",
+			"inventory");
+
 	protected String modid;
 
 	/**
 	 * 用于存储MetaValueItem的注册表
 	 */
 	protected TShortObjectMap<MetaValueItem> metaItem;
+
+	/**
+	 * 用于存储MetaValueItem模型的注册表
+	 */
+	protected TShortObjectMap<List<ModelResourceLocation>> itemModel;
 
 	public MetaItem(ResourceLocation registryName) {
 		super();
@@ -46,14 +59,62 @@ public class MetaItem extends Item implements IMetaItem {
 		this.setNoRepair();
 		this.setRegistryName(registryName);
 		this.modid = registryName.getResourceDomain();
-		this.metaItem = new TShortObjectHashMap();
+		this.metaItem = new TShortObjectHashMap<MetaValueItem>();
+		this.itemModel = new TShortObjectHashMap<List<ModelResourceLocation>>();
 	}
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (tab == EOK.tabEOK) {
-			this.metaItem.forEachValue((metaValueItem) -> items.add(metaValueItem.getItemStack()));
+			this.metaItem.forEachValue((metaValueItem) -> {
+				items.add(metaValueItem.getItemStack());
+				return true;
+			});
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void registerItemModel() {
+		this.metaItem.forEachEntry((id, metaValueItem) -> {
+			int modelCount = metaValueItem.modelCount;
+			if (modelCount == 1) {
+				ResourceLocation location = this.getItemModel(metaValueItem);
+				ModelBakery.registerItemVariants(this, location);
+				this.itemModel.put(id, Arrays.asList(new ModelResourceLocation(location, "inventory")));
+			} else if (modelCount > 1) {
+				List<ModelResourceLocation> models = new ArrayList<ModelResourceLocation>();
+				for (int i = 0; i < modelCount; i++) {
+					ResourceLocation location = this.getItemModel(metaValueItem, i);
+					ModelBakery.registerItemVariants(this, location);
+					models.add(new ModelResourceLocation(location, "inventory"));
+				}
+				this.itemModel.put(id, models);
+			}
+			return true;
+		});
+		ModelLoader.setCustomMeshDefinition(this, (stack) -> {
+			short metadate = (short) stack.getMetadata();
+			MetaValueItem metaValueItem = this.getMetaValueItem(stack);
+			int modelCount = metaValueItem.modelCount;
+			List<ModelResourceLocation> models = this.itemModel.get(metadate);
+			if (modelCount == 1 && !models.isEmpty()) {
+				return models.get(0);
+			} else if (modelCount > 1 && !models.isEmpty()) {
+				if (metaValueItem.containsModule("modelProvider")) {
+					return models.get(metaValueItem.modelProvider.getModelIndex(stack));
+				}
+				return models.get(0);
+			}
+			return EMPTY_MODEL;
+		});
+	}
+
+	public ResourceLocation getItemModel(MetaValueItem metaValueItem, int id) {
+		return new ResourceLocation(this.modid, "metaitem/" + metaValueItem.unlocalizedName);
+	}
+
+	public ResourceLocation getItemModel(MetaValueItem metaValueItem) {
+		return new ResourceLocation(this.modid, "metaitem/" + metaValueItem.unlocalizedName);
 	}
 
 	protected MetaValueItem createMetaValueItem(short id, String unlocalizedName) {
@@ -88,7 +149,7 @@ public class MetaItem extends Item implements IMetaItem {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return this.getMetaValueItem(stack).getUnlocalizedName();
+		return "metaitem." + this.modid + "." + this.getMetaValueItem(stack).getUnlocalizedName();
 	}
 
 	@Override

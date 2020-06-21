@@ -14,14 +14,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @EventBusSubscriber(modid = EOK.MODID)
 public class MetaItemHandler {
-
-	private static final MetaItem META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
+	public static final MetaItem META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
 
 	public static final MetaValueItem EOK_SYMBOL = META_ITEM.addItem(0, "eok_symbol").addModule(new IItemInteraction() {
 		@Override
@@ -33,6 +33,11 @@ public class MetaItemHandler {
 			return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
 		}
 	});
+
+	@SubscribeEvent
+	public static void registerModels(ModelRegistryEvent event) {
+		META_ITEM.registerItemModel();
+	}
 
 	@SubscribeEvent
 	public static void onItemRegister(Register<Item> event) {
