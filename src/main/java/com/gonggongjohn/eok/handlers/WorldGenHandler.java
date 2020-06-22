@@ -8,6 +8,6 @@ public class WorldGenHandler {
 
     public WorldGenHandler()
     {
-        GameRegistry.registerWorldGenerator(new WorldGenBlockStoneAndStick(),10002);
+        GameRegistry.registerWorldGenerator(new WorldGenBlockStoneAndStick(), 10002);
     }
 }

@@ -29,7 +29,7 @@ public class TEStoneMill extends TileEntity implements ITickable, ILockableConta
     }
 
     public boolean receiveClientEvent(int id, int type)
-    {
+    {	
         if (id == 1) {
         	
             this.numPlayersUsing = type;

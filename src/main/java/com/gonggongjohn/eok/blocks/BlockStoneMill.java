@@ -20,17 +20,20 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityShulkerBox;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
@@ -77,18 +80,18 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
     
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-
+    	
     	ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
     	
-        //这个GUIChest没懂原理所以不会改，运行到这一步会打开身上的背包界面（0.1s）
-        playerIn.displayGUIChest(ilockablecontainer);
-        //我加了这个用来关闭GUI，的确不会出现闪烁的背包GUI界面了，但是十字准星会有0.1s变成鼠标，吐血了
-        playerIn.closeScreen();
+	    //这个GUIChest没懂原理所以不会改，运行到这一步会打开身上的背包界面（0.1s）
+	    //playerIn.displayGUIChest(ilockablecontainer);
+	    playerIn.displayGui(ilockablecontainer);
+	    //我加了这个用来关闭GUI，的确不会出现闪烁的背包GUI界面了，但是十字准星会有0.1s变成鼠标，吐血了，而且会有刷物品bug
+	    //playerIn.closeScreen();
 
         return true;
-    }
+    }  
     
-
     @Nullable
     public ILockableContainer getLockableContainer(World worldIn, BlockPos pos) {
     	
@@ -105,15 +108,14 @@ public class BlockStoneMill extends BlockContainer implements IHasModel {
             return null;
         }
         else {
+        	
+        	//神奇语句！！！
+            ILockableContainer ilockablecontainer = new InventoryLargeChest("", null, (TEStoneMill)worldIn.getTileEntity(pos));
 
-            ILockableContainer ilockablecontainer = (TEStoneMill)tileentity;
-
-            TileEntity anothorTileEntity = worldIn.getTileEntity(pos);
-            //神奇语句！！！
-            ilockablecontainer = new InventoryLargeChest("", null, (TEStoneMill)anothorTileEntity);
             return ilockablecontainer;
         }
 	}
+	
 
 	public void registerModel() {
     	

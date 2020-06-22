@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderStoneMill extends TileEntitySpecialRenderer<TEStoneMill> {
 	
-    private static final ResourceLocation TEXTURE = new ResourceLocation(EOK.MODID, "textures/blocks/stone_mill_texture.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(EOK.MODID, "textures/blocks/stone_mill.png");
     private final ModelStoneMill MODEL = new ModelStoneMill();
 
     @Override
