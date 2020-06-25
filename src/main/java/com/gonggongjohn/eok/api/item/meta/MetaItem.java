@@ -389,4 +389,15 @@ public class MetaItem extends Item implements IMetaItem {
 		}
 		return super.onItemUseFinish(stack, world, player);
 	}
+
+	/* ---------- ItemFuelModule ---------- */
+
+	@Override
+	public int getItemBurnTime(ItemStack stack) {
+		MetaValueItem metaValueItem = this.getMetaValueItem(stack);
+		if (metaValueItem != null && metaValueItem.containsModule("itemFuel")) {
+			return metaValueItem.itemFuel.getItemBurnTime(stack);
+		}
+		return super.getItemBurnTime(stack);
+	}
 }

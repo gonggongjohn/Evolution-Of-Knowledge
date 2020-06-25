@@ -6,6 +6,7 @@ import org.apache.commons.lang3.Validate;
 
 import com.gonggongjohn.eok.api.item.meta.module.IContainerItemProvider;
 import com.gonggongjohn.eok.api.item.meta.module.IDurabilityBarProvider;
+import com.gonggongjohn.eok.api.item.meta.module.IItemFuel;
 import com.gonggongjohn.eok.api.item.meta.module.IItemInteraction;
 import com.gonggongjohn.eok.api.item.meta.module.IItemModelProvider;
 import com.gonggongjohn.eok.api.item.meta.module.IItemModule;
@@ -17,7 +18,6 @@ import com.gonggongjohn.eok.api.item.meta.module.ItemArmorModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemAttributesModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemEnchantmentModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemEntityModule;
-import com.gonggongjohn.eok.api.item.meta.module.ItemFuelModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemHorseArmorModule;
 import com.gonggongjohn.eok.api.item.meta.module.ItemToolModule;
 
@@ -35,6 +35,7 @@ public class MetaValueItem {
 	protected IContainerItemProvider containerModule;
 	protected IDurabilityBarProvider durabilityBarProvider;
 	protected IToolDamage toolDamage;
+	protected IItemFuel itemFuel;
 	protected IItemUse itemUse;
 	protected IItemInteraction itemInteraction;
 
@@ -42,7 +43,6 @@ public class MetaValueItem {
 	protected ItemAttributesModule attributesModule = new ItemAttributesModule();
 	protected ItemEnchantmentModule enchantmentModule = new ItemEnchantmentModule();
 	protected ItemEntityModule entityModule = new ItemEntityModule();
-	protected ItemFuelModule fuelModule = new ItemFuelModule();
 	protected ItemHorseArmorModule horseArmorModule = new ItemHorseArmorModule();
 	protected ItemToolModule toolModule = new ItemToolModule();
 
@@ -68,6 +68,8 @@ public class MetaValueItem {
 			this.durabilityBarProvider = (IDurabilityBarProvider) module;
 		} else if (module instanceof IToolDamage) {
 			this.toolDamage = (IToolDamage) module;
+		} else if (module instanceof IItemFuel) {
+			this.itemFuel = (IItemFuel) module;
 		} else if (module instanceof IItemUse) {
 			this.itemUse = (IItemUse) module;
 		} else if (module instanceof IItemInteraction) {
@@ -79,7 +81,7 @@ public class MetaValueItem {
 	}
 
 	public boolean containsModule(String name) {
-		return Arrays.stream(this.getClass().getDeclaredFields()).filter((field) -> field.getName() == name)
+		return Arrays.stream(this.getClass().getDeclaredFields()).filter((field) -> field.getName().equals(name))
 				.filter((field) -> {
 					try {
 						field.setAccessible(true);

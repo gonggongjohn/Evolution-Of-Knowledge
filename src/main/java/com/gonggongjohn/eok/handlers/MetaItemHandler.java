@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.item.meta.MetaItem;
 import com.gonggongjohn.eok.api.item.meta.MetaValueItem;
+import com.gonggongjohn.eok.api.item.meta.module.IItemFuel;
 import com.gonggongjohn.eok.api.item.meta.module.IItemInteraction;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +33,8 @@ public class MetaItemHandler {
 			}
 			return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
 		}
+	}).addModule((IItemFuel) (stack) -> {
+		return 200;
 	});
 
 	@SubscribeEvent
