@@ -52,6 +52,7 @@ minecraft {
 
 dependencies {
 	compile 'com.osir.tmc:tmc-api:1.3.2.1'
+    compile 'com.github.zi_jing.cuckoolib:CuckooLib:1.0.1'
 }
 
 processResources {
