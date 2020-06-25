@@ -6,12 +6,14 @@ This is the development repository of the Minecraft mod The Evolution Of Knowled
 
 # Table Of Contents
 
-* [Introduction](#Introduction)
-* [About Development](#About Development)
-* [Features](#Features)
-* [Development Guide](#Development Guide)
-  * [How to Build](#How to Build)
-  * [Working with CuckooLib](#Working with CuckooLib)
+- [Evolution Of Knowledge 1.12](#evolution-of-knowledge-112)
+- [Table Of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [About Development](#about-development)
+- [Features](#features)
+- [Development Guide](#development-guide)
+  - [How to Build](#how-to-build)
+  - [Working with CuckooLib](#working-with-cuckoolib)
 
 # Introduction
 The Evolution Of Knowledge is a Minecraft mod trying to redefine the general idea of existing technology mods. 
