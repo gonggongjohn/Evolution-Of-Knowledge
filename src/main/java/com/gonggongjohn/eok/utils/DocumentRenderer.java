@@ -1,34 +1,16 @@
 package com.gonggongjohn.eok.utils;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.opengl.GL11;
-
+import com.github.zi_jing.cuckoolib.client.gui.Colors;
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.GuiControl;
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiConstants;
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiScreen;
+import com.github.zi_jing.cuckoolib.client.render.GLUtils;
+import com.github.zi_jing.cuckoolib.client.util.ClientUtils;
+import com.github.zi_jing.cuckoolib.common.util.DataUtils;
+import com.github.zi_jing.cuckoolib.util.ColorRGB;
+import com.github.zi_jing.cuckoolib.util.Size2i;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.gui.Colors;
-import com.gonggongjohn.eok.api.gui.meta.GuiControl;
-import com.gonggongjohn.eok.api.gui.meta.MetaGuiConstants;
-import com.gonggongjohn.eok.api.gui.meta.MetaGuiScreen;
-import com.gonggongjohn.eok.api.render.GLUtils;
-import com.gonggongjohn.eok.api.utils.DataUtils;
-import com.gonggongjohn.eok.api.utils.Utils;
-import com.gonggongjohn.eok.api.utils.datatypes.ColorRGB;
-import com.gonggongjohn.eok.api.utils.datatypes.Size2i;
 import com.google.common.collect.Lists;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -41,6 +23,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * 用来读取并显示EOK文档。<br><br>
@@ -355,10 +347,12 @@ public class DocumentRenderer {
 			elements.add(new Element.TextLine(line));
 		}
 	}
-	
+
 	/**
 	 * 将一个字符串按一定的宽度限制分成若干行(忽略样式标识)
-	 * @param 输入的字符串
+	 *
+	 * @param str   输入的字符串
+	 * @param limit 宽度限制(像素)
 	 * @return 一个List，每行一个字符串
 	 */
 	private List<String> trimStringToWidthWithoutStyleMarks(String str, int limit) {
@@ -662,25 +656,25 @@ public class DocumentRenderer {
 			}
 		}
 	}
-	
+
 	private void displayLoadingGui() {
 		this.loadingScreen.reset();
 		this.parentGui = Minecraft.getMinecraft().currentScreen;
 		this.loadingScreen.initGui();
 		Minecraft.getMinecraft().currentScreen = this.loadingScreen;
 	}
-	
+
 	private void closeLoadingGui() {
 		Minecraft.getMinecraft().currentScreen = this.parentGui;
 	}
-	
-	public static class GuiLoading extends MetaGuiScreen {
+
+	public static class GuiLoading extends ModularGuiScreen {
 
 		protected GuiControl.ProgressBar progress;
 		protected String status;
-		
+
 		public GuiLoading() {
-			super(MetaGuiConstants.GUI_NOT_PAUSE_GAME | MetaGuiConstants.GUI_HAS_CUSTOM_BACKGROUND);
+			super(ModularGuiConstants.GUI_NOT_PAUSE_GAME | ModularGuiConstants.GUI_HAS_CUSTOM_BACKGROUND);
 			this.setTitle(I18n.format("eok.message.documentrenderer.loadingscreen.title"));
 			this.setWindowSize(250, 70);
 			this.setPreRenderFunction((gui) -> {
@@ -941,10 +935,10 @@ public class DocumentRenderer {
 			protected void draw(int x, int y, DocumentRenderer renderer) {
 				this.x = x;
 				this.y = y;
-				int mouseX = Utils.getMouseX();
-				int mouseY = Utils.getMouseY();
+				int mouseX = ClientUtils.getMouseX();
+				int mouseY = ClientUtils.getMouseY();
 				boolean mouseOn = mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10;
-				if(!mouseOn) {
+				if (!mouseOn) {
 					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
 				} else {
 					GLUtils.drawCenteredString(this.text, x + renderer.width / 2, y, 0x00FF00);
@@ -954,9 +948,9 @@ public class DocumentRenderer {
 
 			@Override
 			protected void onClicked(DocumentRenderer renderer) {
-				int mouseX = Utils.getMouseX();
-				int mouseY = Utils.getMouseY();
-				if(mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10) {
+				int mouseX = ClientUtils.getMouseX();
+				int mouseY = ClientUtils.getMouseY();
+				if (mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10) {
 					renderer.reload(this.isExternal, this.link);
 				}
 			}

@@ -1,32 +1,31 @@
 package com.gonggongjohn.eok.client.gui;
 
-import java.io.IOException;
-
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.GuiControl;
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiConstants;
+import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiScreen;
+import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.gui.meta.GuiControl;
-import com.gonggongjohn.eok.api.gui.meta.MetaGuiConstants;
-import com.gonggongjohn.eok.api.gui.meta.MetaGuiScreen;
-import com.gonggongjohn.eok.api.render.GLUtils;
 import com.gonggongjohn.eok.utils.DocumentRenderer;
-
 import net.minecraft.util.ResourceLocation;
+
+import java.io.IOException;
 
 /**
  * This is an example of MetaGuiScreen
  * Send /eoktestscreen command in the game to open this interface
- * 
- * @see MetaGuiScreen
+ *
+ * @see ModularGuiScreen
  */
-public class GuiEOKManual extends MetaGuiScreen {
+public class GuiEOKManual extends ModularGuiScreen {
 
 	private GuiControl.Button pageUp;
 	private GuiControl.Button pageDown;
 	protected DocumentRenderer renderer;
 	private int pageIndex;
 	private boolean initialized = false;
-	
+
 	public GuiEOKManual() {
-		super(MetaGuiConstants.NORMAL);
+		super(ModularGuiConstants.NORMAL);
 		this.setTexture(new ResourceLocation(EOK.MODID + ":textures/gui/screen/eok_manual.png"));
 		this.setTextureSize(512, 512);
 		this.setWindowSize(279, 180);
@@ -34,7 +33,7 @@ public class GuiEOKManual extends MetaGuiScreen {
 		pageUp = controlFactory.createButton(20, 20, 0, 181, 21, 181, this::pageUp);
 		pageDown = controlFactory.createButton(20, 20, 0, 202, 21, 202, this::pageDown);
 		this.setPreRenderFunction((gui) -> {
-			if(!initialized) {
+			if (!initialized) {
 				this.initDocument();
 			}
 		});
@@ -65,21 +64,21 @@ public class GuiEOKManual extends MetaGuiScreen {
 		pageUp.setPos(13, 151);
 		pageDown.setPos(248, 151);
 	}
-	
-	private void pageUp(MetaGuiScreen gui) {
-		if(this.pageIndex < 2) return;
+
+	private void pageUp(ModularGuiScreen gui) {
+		if (this.pageIndex < 2) return;
 		this.pageIndex -= 2;
 	}
-	
-	private void pageDown(MetaGuiScreen gui) {
-		if(this.pageIndex + 2 >= renderer.getPages()) return;
+
+	private void pageDown(ModularGuiScreen gui) {
+		if (this.pageIndex + 2 >= renderer.getPages()) return;
 		this.pageIndex += 2;
 	}
 
 	@Override
 	public void onGuiClosed() {
 		super.onGuiClosed();
-		if(renderer != null)
+		if (renderer != null)
 			renderer.remove();
 		GLUtils.deleteTempTexture();
 	}

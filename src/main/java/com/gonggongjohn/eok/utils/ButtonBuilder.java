@@ -1,15 +1,13 @@
 package com.gonggongjohn.eok.utils;
 
-import org.lwjgl.opengl.GL11;
-
-import com.gonggongjohn.eok.api.gui.Colors;
-
+import com.github.zi_jing.cuckoolib.client.gui.Colors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class ButtonBuilder {
 	

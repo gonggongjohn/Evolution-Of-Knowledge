@@ -1,18 +1,12 @@
 package com.gonggongjohn.eok.client.gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
+import com.github.zi_jing.cuckoolib.client.gui.Colors;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.gui.Colors;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
 import com.gonggongjohn.eok.utils.ButtonBuilder;
 import com.gonggongjohn.eok.utils.ButtonData;
 import com.gonggongjohn.eok.utils.MerchantTradeData;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -20,6 +14,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUIMerchant extends GuiContainer {
 
@@ -321,8 +319,8 @@ public class GUIMerchant extends GuiContainer {
 
 	/**
 	 * choose deal item. the chosen item will be highlighted.
-	 * 
-	 * @param id The position of the chosen deal in the trade column GUI (1 - 5)
+	 *
+	 * @param deal The position of the chosen deal in the trade column GUI (1 - 5)
 	 */
 	public void selectDeal(int deal) {
 		container.currentDeal = deal;
