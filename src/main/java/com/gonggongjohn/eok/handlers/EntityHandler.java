@@ -53,7 +53,7 @@ public class EntityHandler {
 
     @SideOnly(Side.CLIENT)
     private static <T extends Entity, E extends Render<T>> void registerEntityRender(Class<T> entityClass, Class<E> render) {
-        RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRenderFactory<T>(render));
+        RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRenderFactory<>(render));
         RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRenderFactory<>(render));
     }
 }

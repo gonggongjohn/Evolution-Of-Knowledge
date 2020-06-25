@@ -1,8 +1,9 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.client.gui.*;
-import com.gonggongjohn.eok.inventory.*;
-
+import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
+import com.gonggongjohn.eok.inventory.ContainerMerchant;
+import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,7 +24,7 @@ public class GUIHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
-    	
+
         switch (ID) {
         	case GUIEOKManual:
         		return null;
@@ -44,9 +45,9 @@ public class GUIHandler implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
-    	
+
         switch (ID){
-        
+
         	case GUIEOKManual:
         		return null;
             case GUIRefractingTelescope:

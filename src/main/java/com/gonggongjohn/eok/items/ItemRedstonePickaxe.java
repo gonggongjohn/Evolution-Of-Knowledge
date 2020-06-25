@@ -8,10 +8,9 @@ import net.minecraft.item.ItemPickaxe;
 
 public class ItemRedstonePickaxe extends ItemPickaxe implements IHasModel {
 
-    private final String name = "redstone_pickaxe";
-
     public ItemRedstonePickaxe() {
         super(ToolMaterials.REDSTONE);
+        String name = "redstone_pickaxe";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

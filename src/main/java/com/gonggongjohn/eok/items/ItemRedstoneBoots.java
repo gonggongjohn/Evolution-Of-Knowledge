@@ -11,10 +11,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemRedstoneBoots extends ItemRedstoneArmor implements IHasModel {
-    private final String name = "redstone_boots";
 
     public ItemRedstoneBoots() {
         super(EntityEquipmentSlot.FEET);
+        String name = "redstone_boots";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -25,8 +25,8 @@ public class ItemRedstoneBoots extends ItemRedstoneArmor implements IHasModel {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack item) {
         if (!world.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST,300,0));
-            player.addPotionEffect(new PotionEffect(MobEffects.SPEED,300,1));
+            player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 1));
         }
     }
 

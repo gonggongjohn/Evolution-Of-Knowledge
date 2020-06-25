@@ -1,29 +1,16 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gonggongjohn.eok.blocks.BlockApple;
-import com.gonggongjohn.eok.blocks.BlockBasketBall;
-import com.gonggongjohn.eok.blocks.BlockDecomposedHaystack;
-import com.gonggongjohn.eok.blocks.BlockDriedHaystack;
-import com.gonggongjohn.eok.blocks.BlockElementaryResearchTable;
-import com.gonggongjohn.eok.blocks.BlockHaystack;
-import com.gonggongjohn.eok.blocks.BlockStick;
-import com.gonggongjohn.eok.blocks.BlockStoneMill;
-import com.gonggongjohn.eok.blocks.BlockStoneRock;
-import com.gonggongjohn.eok.blocks.BlockStoneTable;
-import com.gonggongjohn.eok.blocks.BlockTest2DCore;
-import com.gonggongjohn.eok.blocks.BlockTest3DCore;
-import com.gonggongjohn.eok.blocks.BlockTwoBarrelVacuumPump;
-
+import com.gonggongjohn.eok.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EventBusSubscriber
 public class BlockHandler {
-	public static final List<Block> BLOCK_REGISTRY = new ArrayList<Block>();
+	public static final List<Block> BLOCK_REGISTRY = new ArrayList<>();
 
 	public static final Block blockStoneTable = new BlockStoneTable();
 	public static final Block blockTwoBarrelVacuumPump = new BlockTwoBarrelVacuumPump();

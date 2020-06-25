@@ -54,7 +54,7 @@ Then you can find the archives in the directory `build/libs`.
 
 [CuckooLib](https://github.com/zi-jing/CuckooLib) is a dependency library of the EOK project. It includes plenty of reusable code which is used by Cuckoo Dev Team.
 
-If you want to debug EOK more easily or you want to debug CuckooLib with EOK, you can clone the [CuckooLib repository](https://github.com/zi-jing/CuckooLib), then create the file `gradle.properties` in the EOK project's root directory, add the folllowing contents:
+If you want to debug EOK more easily, or you want to debug CuckooLib with EOK, you can clone the [CuckooLib repository](https://github.com/zi-jing/CuckooLib), then create the file `gradle.properties` in the EOK project's root directory, add the folllowing contents:
 
 ```properties
 CuckooLibIncludeBuildPath=../CuckooLib

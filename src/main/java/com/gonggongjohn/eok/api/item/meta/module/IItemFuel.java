@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 @FunctionalInterface
 public interface IItemFuel extends IItemModule {
-	int getItemBurnTime(ItemStack stack);
+    int getItemBurnTime(ItemStack stack);
 }

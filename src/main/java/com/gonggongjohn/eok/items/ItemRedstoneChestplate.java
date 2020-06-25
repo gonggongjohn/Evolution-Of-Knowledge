@@ -11,10 +11,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemRedstoneChestplate extends ItemRedstoneArmor implements IHasModel {
-    private final String name = "redstone_chestplate";
 
     public ItemRedstoneChestplate() {
         super(EntityEquipmentSlot.CHEST);
+        String name = "redstone_chestplate";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -25,9 +25,9 @@ public class ItemRedstoneChestplate extends ItemRedstoneArmor implements IHasMod
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack item) {
         if (!world.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST,300,0));
-            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION,300,2));
-            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION,300,1));
+            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 300, 2));
+            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 1));
         }
     }
 

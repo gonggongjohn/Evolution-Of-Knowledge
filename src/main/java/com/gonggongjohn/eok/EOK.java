@@ -1,25 +1,11 @@
 package com.gonggongjohn.eok;
 
-import org.apache.logging.log4j.Logger;
-
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
-import com.gonggongjohn.eok.network.PacketGUIMerchant;
-import com.gonggongjohn.eok.network.PacketGuiButton;
-import com.gonggongjohn.eok.network.PacketGuiScreen;
-import com.gonggongjohn.eok.network.PacketInverseReseachData;
-import com.gonggongjohn.eok.network.PacketPlayerState;
-import com.gonggongjohn.eok.network.PacketResearchData;
-import com.gonggongjohn.eok.network.PacketSlotChange;
-import com.gonggongjohn.eok.network.PacketTestGuiScreen;
+import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
-import com.gonggongjohn.eok.utils.BluePrintDict;
-import com.gonggongjohn.eok.utils.InspirationDict;
-import com.gonggongjohn.eok.utils.MathUtils;
-import com.gonggongjohn.eok.utils.MultiBlockDict;
-import com.gonggongjohn.eok.utils.ResearchDict;
-
+import com.gonggongjohn.eok.utils.*;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
@@ -34,6 +20,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = EOK.MODID, name = EOK.NAME, version = EOK.VERSION, dependencies = EOK.DEPENDENCIES, useMetadata = true)
 public class EOK {
@@ -53,9 +40,9 @@ public class EOK {
 
 	private SimpleNetworkWrapper network;
 
-	public static MathUtils mathUtils = new MathUtils();
-	public static ResearchDict researchDict = new ResearchDict();
-	public static InspirationDict inspirationDict = new InspirationDict();
+	public static final MathUtils mathUtils = new MathUtils();
+	public static final ResearchDict researchDict = new ResearchDict();
+	public static final InspirationDict inspirationDict = new InspirationDict();
 	public static MultiBlockDict multiBlockDict;
 	public static BluePrintDict bluePrintDict;
 
@@ -64,7 +51,7 @@ public class EOK {
 		logger = event.getModLog();
 		if (Loader.isModLoaded("torcherino") || Loader.isModLoaded("projecte")) {
 			CrashReport report = CrashReport.makeCrashReport(new IllegalAccessError(),
-					String.format("You have ENRAGED the FOREST BAT because some mods are loaded"));
+                    "You have ENRAGED the FOREST BAT because some mods are loaded");
 			throw new ReportedException(report);
 		}
 		proxy.preInit(event);

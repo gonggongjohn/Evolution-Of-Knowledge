@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.commands.*;
-
+import com.gonggongjohn.eok.commands.CommandInspiration;
+import com.gonggongjohn.eok.commands.CommandTestGuiScreen;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CommandHandler {

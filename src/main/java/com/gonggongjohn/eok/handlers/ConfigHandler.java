@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.common.ProgressManager.ProgressBar;

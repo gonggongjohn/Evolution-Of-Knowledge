@@ -13,7 +13,7 @@
 - [模组基本信息](#模组基本信息)
 - [开发者指南](#开发者指南)
   - [如何构建](#如何构建)
-  - [与CuckooLib协同开发](#与cuckoolib协同开发)
+  - [与CuckooLib协同开发](#与CuckooLib协同开发)
 
 # 模组介绍
 Evolution Of Knowledge是一个尝试重新定义已有的科技模组思路的模组。

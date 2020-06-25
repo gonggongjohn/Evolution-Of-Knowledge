@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.tweakers;
 
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;

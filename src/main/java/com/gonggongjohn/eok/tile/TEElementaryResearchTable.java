@@ -1,7 +1,5 @@
 package com.gonggongjohn.eok.tile;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -10,15 +8,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
+
 public class TEElementaryResearchTable extends TileEntity implements ITickable {
-    protected ItemStackHandler paperInputSlot = new ItemStackHandler();
-    protected ItemStackHandler penSlot = new ItemStackHandler();
-    protected ItemStackHandler inkSlot = new ItemStackHandler();
-    protected ItemStackHandler paperOutputSlot = new ItemStackHandler();
+    protected final ItemStackHandler paperInputSlot = new ItemStackHandler();
+    protected final ItemStackHandler penSlot = new ItemStackHandler();
+    protected final ItemStackHandler inkSlot = new ItemStackHandler();
+    protected final ItemStackHandler paperOutputSlot = new ItemStackHandler();
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)){
+        if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)) {
             return true;
         }
         return super.hasCapability(capability, facing);
@@ -27,10 +27,10 @@ public class TEElementaryResearchTable extends TileEntity implements ITickable {
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)){
+        if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability)) {
             @SuppressWarnings("unchecked")
             T result = (T) inkSlot;
-            if(facing != null) {
+            if (facing != null) {
                 switch (facing) {
                     case DOWN:
                         result = (T) paperInputSlot;
@@ -72,7 +72,7 @@ public class TEElementaryResearchTable extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        if(!this.world.isRemote){
+        if (!this.world.isRemote) {
             //TODO
         }
     }

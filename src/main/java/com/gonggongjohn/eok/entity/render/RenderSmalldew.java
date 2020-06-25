@@ -1,20 +1,19 @@
 package com.gonggongjohn.eok.entity.render;
 
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderSmalldew<T extends EntityLiving> extends RenderNPCBase<T> {
 
-	public RenderSmalldew(RenderManager rendermanagerIn) {
-		super(rendermanagerIn);
-	}
+    public RenderSmalldew(RenderManager rendermanagerIn) {
+        super(rendermanagerIn);
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(T entity) {
-		return new ResourceLocation(EOK.MODID + ":textures/entity/smalldew.png");
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(T entity) {
+        return new ResourceLocation(EOK.MODID + ":textures/entity/smalldew.png");
+    }
 
 }

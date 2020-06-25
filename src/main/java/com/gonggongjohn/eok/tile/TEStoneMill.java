@@ -11,43 +11,39 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.LockCode;
 
 public class TEStoneMill extends TileEntity implements ITickable, ILockableContainer {
-	
+
     public float prevRotationAngle = 0F;
     public float rotationAngle = 0F;
     public int numPlayersUsing;
-    
+
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-    	
+
         super.readFromNBT(compound);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    	
+
         return super.writeToNBT(compound);
     }
 
-    public boolean receiveClientEvent(int id, int type)
-    {	
+    public boolean receiveClientEvent(int id, int type) {
         if (id == 1) {
-        	
+
             this.numPlayersUsing = type;
             this.numPlayersUsing++;
             return true;
-        }
-        else {
-        	
+        } else {
+
             return super.receiveClientEvent(id, type);
         }
     }
 
-    public void openInventory(EntityPlayer player)
-    {
-        if (!player.isSpectator())
-        {
+    public void openInventory(EntityPlayer player) {
+        if (!player.isSpectator()) {
             if (this.numPlayersUsing < 0) {
-            	
+
                 this.numPlayersUsing = 0;
             }
 
@@ -59,143 +55,142 @@ public class TEStoneMill extends TileEntity implements ITickable, ILockableConta
     public void closeInventory(EntityPlayer player) {
 
     }
-    
+
     @Override
     public void update() {
 
-        if(this.numPlayersUsing > 0) {
-        	
-			this.prevRotationAngle = this.rotationAngle;
-	        if(this.rotationAngle >= 1.1F) {
-	
-	        	this.prevRotationAngle = 0.0F;
-	            this.rotationAngle = 0.0F; 
-	            this.numPlayersUsing = 0;
-	        }
-	        else {
-	        	
-	        	this.rotationAngle += 0.03F;
-	        }
+        if (this.numPlayersUsing > 0) {
+
+            this.prevRotationAngle = this.rotationAngle;
+            if (this.rotationAngle >= 1.1F) {
+
+                this.prevRotationAngle = 0.0F;
+                this.rotationAngle = 0.0F;
+                this.numPlayersUsing = 0;
+            } else {
+
+                this.rotationAngle += 0.03F;
+            }
         }
     }
 
-	@Override
-	public int getSizeInventory() {
+    @Override
+    public int getSizeInventory() {
 
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
-	public boolean isEmpty() {
+    @Override
+    public boolean isEmpty() {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int index) {
+    @Override
+    public ItemStack getStackInSlot(int index) {
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public ItemStack decrStackSize(int index, int count) {
+    @Override
+    public ItemStack decrStackSize(int index, int count) {
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public ItemStack removeStackFromSlot(int index) {
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		
-	}
+    @Override
+    public void setInventorySlotContents(int index, ItemStack stack) {
 
-	@Override
-	public int getInventoryStackLimit() {
-		
-		return 0;
-	}
+    }
 
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player) {
+    @Override
+    public int getInventoryStackLimit() {
 
-		return false;
-	}
+        return 0;
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+    @Override
+    public boolean isUsableByPlayer(EntityPlayer player) {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public int getField(int id) {
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
 
-		return 0;
-	}
+        return false;
+    }
 
-	@Override
-	public void setField(int id, int value) {
-		
-	}
+    @Override
+    public int getField(int id) {
 
-	@Override
-	public int getFieldCount() {
-		
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
-	public void clear() {
-		
-	}
+    @Override
+    public void setField(int id, int value) {
 
-	@Override
-	public String getName() {
+    }
 
-		return null;
-	}
+    @Override
+    public int getFieldCount() {
 
-	@Override
-	public boolean hasCustomName() {
+        return 0;
+    }
 
-		return false;
-	}
+    @Override
+    public void clear() {
 
-	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
+    }
 
-		return null;
-	}
+    @Override
+    public String getName() {
 
-	@Override
-	public String getGuiID() {
+        return null;
+    }
 
-		return null;
-	}
+    @Override
+    public boolean hasCustomName() {
 
-	@Override
-	public boolean isLocked() {
+        return false;
+    }
 
-		return false;
-	}
+    @Override
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
 
-	@Override
-	public void setLockCode(LockCode code) {
-		
-	}
+        return null;
+    }
 
-	@Override
-	public LockCode getLockCode() {
-		
-		return null;
-	}
+    @Override
+    public String getGuiID() {
 
-	public void setCustomInventoryName(String displayName) {
-		
-	}
+        return null;
+    }
+
+    @Override
+    public boolean isLocked() {
+
+        return false;
+    }
+
+    @Override
+    public LockCode getLockCode() {
+
+        return null;
+    }
+
+    @Override
+    public void setLockCode(LockCode code) {
+
+    }
+
+    public void setCustomInventoryName(String displayName) {
+
+    }
 }

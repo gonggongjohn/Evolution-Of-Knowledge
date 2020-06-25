@@ -1,8 +1,5 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.List;
-import java.util.Random;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
@@ -10,7 +7,6 @@ import com.gonggongjohn.eok.capabilities.IPlayerState;
 import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.network.PacketPlayerState;
 import com.gonggongjohn.eok.network.PacketResearchData;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -42,6 +38,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.List;
+import java.util.Random;
+
 @EventBusSubscriber(modid = EOK.MODID)
 public class EventHandlerServer {
 	@SubscribeEvent
@@ -57,8 +56,8 @@ public class EventHandlerServer {
 						e.getDrops().add(new ItemStack(Items.STICK));
 					}
 				}
-				NBTTagCompound nbtStack = null;
-				NBTTagCompound nbt = null;
+				NBTTagCompound nbtStack;
+				NBTTagCompound nbt;
 				if (!stack.hasTagCompound()) {
 					nbtStack = new NBTTagCompound();
 					stack.setTagCompound(nbtStack);

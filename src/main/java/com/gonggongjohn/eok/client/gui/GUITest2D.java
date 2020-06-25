@@ -1,20 +1,17 @@
 package com.gonggongjohn.eok.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GUITest2D extends GuiScreen {
-    private ResourceLocation background = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/book.png");
-    private int offsetX, offsetY;
+    private final ResourceLocation background = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/book.png");
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.offsetX = (this.width - 249) / 2;
-        this.offsetY = (this.height - 175) / 2;
+        int offsetX = (this.width - 249) / 2;
+        int offsetY = (this.height - 175) / 2;
         super.drawScreen(mouseX, mouseY, partialTicks);
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);

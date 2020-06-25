@@ -1,14 +1,8 @@
 package com.gonggongjohn.eok;
 
 import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
-import com.gonggongjohn.eok.handlers.ConfigHandler;
-import com.gonggongjohn.eok.handlers.EntityHandler;
-import com.gonggongjohn.eok.handlers.GTMetaItemsHandler;
-import com.gonggongjohn.eok.handlers.GUIHandler;
-import com.gonggongjohn.eok.handlers.TileEntityHandler;
-import com.gonggongjohn.eok.handlers.TradeHandler;
+import com.gonggongjohn.eok.handlers.*;
 import com.gonggongjohn.eok.render.StructureHighlightRenderer;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.IThreadListener;

@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.tweakers;
 
 import com.gonggongjohn.eok.handlers.ConfigHandler;
-
 import net.minecraft.client.Minecraft;
 
 public class BrightnessTweaker {

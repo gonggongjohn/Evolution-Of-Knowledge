@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.capabilities.*;
-
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;

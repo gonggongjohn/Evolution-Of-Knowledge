@@ -1,11 +1,11 @@
 package com.gonggongjohn.eok.capabilities;
 
 public interface IPlayerState {
-	public float getConsciousness();
+	float getConsciousness();
 
-	public void setConsciousness(float value);
+	void setConsciousness(float value);
 
-	public float getMindActivity();
+	float getMindActivity();
 
-	public void setMindActivity(float value);
+	void setMindActivity(float value);
 }

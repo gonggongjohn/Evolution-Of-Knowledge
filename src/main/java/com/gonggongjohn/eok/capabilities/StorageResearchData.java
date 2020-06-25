@@ -1,12 +1,12 @@
 package com.gonggongjohn.eok.capabilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StorageResearchData implements Capability.IStorage<IResearchData> {
 	@Override
@@ -25,9 +25,9 @@ public class StorageResearchData implements Capability.IStorage<IResearchData> {
 	public void readNBT(Capability<IResearchData> capability, IResearchData instance, EnumFacing side, NBTBase nbt) {
 		NBTTagCompound tag = (NBTTagCompound) nbt;
 		int[] array = tag.getIntArray("data");
-		List<Integer> data = new ArrayList<Integer>();
-		for (int i = 0; i < array.length; i++) {
-			data.add(array[i]);
+		List<Integer> data = new ArrayList<>();
+		for (int value : array) {
+			data.add(value);
 		}
 		instance.setFinishedResearch(data);
 	}

@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.inventory;
 
 import com.gonggongjohn.eok.handlers.ItemHandler;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -11,8 +10,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerRefractingTelescope extends Container implements IButtonHandler{
-    protected Slot paperSlot;
-    private ItemStackHandler items = new ItemStackHandler(1);
+    protected final Slot paperSlot;
+    private final ItemStackHandler items = new ItemStackHandler(1);
 
     public ContainerRefractingTelescope(EntityPlayer player) {
         super();

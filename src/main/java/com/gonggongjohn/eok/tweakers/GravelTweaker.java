@@ -1,10 +1,7 @@
 package com.gonggongjohn.eok.tweakers;
 
-import java.util.Random;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,6 +10,8 @@ import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Random;
 
 @EventBusSubscriber(modid = EOK.MODID)
 public class GravelTweaker {

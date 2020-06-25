@@ -1,10 +1,7 @@
 package com.gonggongjohn.eok.inventory;
 
-import javax.annotation.Nonnull;
-
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.tile.TEElementaryResearchTable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
@@ -16,11 +13,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerElementaryResearchTable extends Container implements IButtonHandler, ISlotHandler{
-    protected Slot paperInputSlot;
-    protected Slot penSlot;
-    protected Slot inkSlot;
-    protected Slot paperOutputSlot;
+    protected final Slot paperInputSlot;
+    protected final Slot penSlot;
+    protected final Slot inkSlot;
+    protected final Slot paperOutputSlot;
 
     protected TEElementaryResearchTable teERT;
 

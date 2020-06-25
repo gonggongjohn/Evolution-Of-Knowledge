@@ -8,10 +8,9 @@ import net.minecraft.item.ItemSpade;
 
 public class ItemRedstoneSpade extends ItemSpade implements IHasModel {
 
-    private final String name = "redstone_shovel";
-
     public ItemRedstoneSpade() {
         super(ToolMaterials.REDSTONE);
+        String name = "redstone_shovel";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

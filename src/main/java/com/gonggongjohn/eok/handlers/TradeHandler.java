@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.utils.MerchantTradeData;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

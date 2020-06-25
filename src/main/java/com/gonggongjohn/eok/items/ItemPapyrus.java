@@ -3,15 +3,14 @@ package com.gonggongjohn.eok.items;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class ItemPapyrus extends Item implements IHasModel {
-    private final String name = "papyrus";
-    public ItemPapyrus(){
+    public ItemPapyrus() {
+        String name = "papyrus";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setHasSubtypes(true);
@@ -29,22 +28,22 @@ public class ItemPapyrus extends Item implements IHasModel {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if(tab == EOK.tabEOK) {
-            for(EnumPapyrus papyrus : EnumPapyrus.values()){
+        if (tab == EOK.tabEOK) {
+            for (EnumPapyrus papyrus : EnumPapyrus.values()) {
                 items.add(new ItemStack(this, 1, papyrus.getMeta()));
             }
         }
     }
 
     @Override
-    public void registerModel(){
-        for(EnumPapyrus papyrus : EnumPapyrus.values()) {
+    public void registerModel() {
+        for (EnumPapyrus papyrus : EnumPapyrus.values()) {
             int meta = papyrus.getMeta();
-            EOK.proxy.registerItemRenderer(this, meta, EOK.MODID + ":" + papyrus.getName().toLowerCase(),  "inventory");
+            EOK.proxy.registerItemRenderer(this, meta, EOK.MODID + ":" + papyrus.getName().toLowerCase(), "inventory");
         }
     }
 
-    public enum EnumPapyrus{
+    public enum EnumPapyrus {
         PAPYRUS_EMPTY(0, "papyrus"),
         PAPYRUS_USED(1, "papyrus_used"),
         PAPYRUS_PILE(2, "papyrus_pile");
@@ -52,9 +51,9 @@ public class ItemPapyrus extends Item implements IHasModel {
         private final int meta;
         private final String name;
 
-        private EnumPapyrus(int meta, String name){
+        EnumPapyrus(int meta, String name) {
             this.meta = meta;
-            this.name=name;
+            this.name = name;
         }
 
         public int getMeta() {

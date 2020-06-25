@@ -8,10 +8,9 @@ import net.minecraft.item.ItemHoe;
 
 public class ItemRedstoneHoe extends ItemHoe implements IHasModel {
 
-    private final String name = "redstone_hoe";
-
     public ItemRedstoneHoe() {
         super(ToolMaterials.REDSTONE);
+        String name = "redstone_hoe";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

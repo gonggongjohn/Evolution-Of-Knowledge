@@ -16,9 +16,8 @@ import net.minecraft.world.World;
 
 public class ItemGoldenEgg extends Item implements IHasModel {
 
-    private final String name = "golden_egg";
-
     public ItemGoldenEgg() {
+        String name = "golden_egg";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

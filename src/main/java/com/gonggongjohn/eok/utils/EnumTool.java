@@ -9,12 +9,12 @@ public enum EnumTool {
     private final int meta;
     private final String name;
 
-    private EnumTool(int meta, String name) {
+    EnumTool(int meta, String name) {
         this.meta = meta;
         this.name = name;
     }
 
-    public int getMeta(){
+    public int getMeta() {
         return this.meta;
     }
 

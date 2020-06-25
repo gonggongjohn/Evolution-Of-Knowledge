@@ -8,10 +8,9 @@ import net.minecraft.item.ItemAxe;
 
 public class ItemRedstoneAxe extends ItemAxe implements IHasModel {
 
-    private final String name = "redstone_axe";
-
     public ItemRedstoneAxe() {
         super(ToolMaterials.REDSTONE, 7.0F, -3.1F);
+        String name = "redstone_axe";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

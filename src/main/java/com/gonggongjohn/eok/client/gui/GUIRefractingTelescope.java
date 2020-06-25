@@ -1,37 +1,30 @@
 package com.gonggongjohn.eok.client.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.opengl.GL11;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
 import com.gonggongjohn.eok.network.PacketGuiButton;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GUIRefractingTelescope extends GuiContainer {
     private static final String TEXTURE_BACK = EOK.MODID + ":" + "textures/gui/container/refractingtelescope.png";
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/componenttelescope.png";
     private static final ResourceLocation TEXTUREBACK = new ResourceLocation(TEXTURE_BACK);
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    @SuppressWarnings("unused")
-	private ContainerRefractingTelescope containerRT;
 
     public GUIRefractingTelescope(ContainerRefractingTelescope inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 256;
         this.ySize = 256;
-        this.containerRT = inventorySlotsIn;
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
@@ -52,13 +45,13 @@ public class GUIRefractingTelescope extends GuiContainer {
     }
 
     @Override
-    public void initGui(){
+    public void initGui() {
         super.initGui();
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + 10, offsetY + 200, 18, 18, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + 10, offsetY + 200, 18, 18, "") {
             @Override
-            public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks){
-                if(this.visible){
+            public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+                if (this.visible) {
                     GlStateManager.color(1.0F, 1.0F, 1.0F);
                     mc.getTextureManager().bindTexture(TEXTURECOMP);
                     this.drawTexturedModalRect(this.x, this.y, 0, 0, this.width, this.height);
@@ -68,8 +61,8 @@ public class GUIRefractingTelescope extends GuiContainer {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException {
-        if(button.id == 0){
+    protected void actionPerformed(GuiButton button) {
+        if (button.id == 0) {
             EOK.getNetwork().sendToServer(new PacketGuiButton(button.id));
         }
     }

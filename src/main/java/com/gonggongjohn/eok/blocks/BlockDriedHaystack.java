@@ -4,7 +4,6 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,24 +12,24 @@ import net.minecraft.item.ItemBlock;
 
 public class BlockDriedHaystack extends Block implements IHasModel {
 
-	public final String name = "dried_haystack";
+    public final String name = "dried_haystack";
 
-	public BlockDriedHaystack() {
+    public BlockDriedHaystack() {
 
-		super(Material.GRASS);
-		this.setRegistryName(name);
-		this.setHardness(0.5F);
-		this.setCreativeTab(EOK.tabEOK);
-		this.setUnlocalizedName("eok." + name);
-		this.setSoundType(SoundType.PLANT);
+        super(Material.GRASS);
+        this.setRegistryName(name);
+        this.setHardness(0.5F);
+        this.setCreativeTab(EOK.tabEOK);
+        this.setUnlocalizedName("eok." + name);
+        this.setSoundType(SoundType.PLANT);
 
-		BlockHandler.BLOCK_REGISTRY.add(this);
-		ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
-	}
+        BlockHandler.BLOCK_REGISTRY.add(this);
+        ItemHandler.ITEM_REGISTRY.add(new ItemBlock(this).setRegistryName(name));
+    }
 
-	@Override
-	public void registerModel() {
+    @Override
+    public void registerModel() {
 
-		EOK.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
+        EOK.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+    }
 }

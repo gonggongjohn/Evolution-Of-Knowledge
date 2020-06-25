@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class StructureHighlightRenderer {
     @SubscribeEvent
-    public void renderWorld(RenderWorldLastEvent event){
+    public void renderWorld(RenderWorldLastEvent event) {
         EntityPlayer player = Minecraft.getMinecraft().player;
         Tessellator t = Tessellator.getInstance();
         BufferBuilder bb = t.getBuffer();
@@ -36,7 +36,7 @@ public class StructureHighlightRenderer {
         GlStateManager.popMatrix();
     }
 
-    public void drawCube(Tessellator t, BufferBuilder bb, double offsetX, double offsetY, double offsetZ, float r, float g, float b, float a){
+    public void drawCube(Tessellator t, BufferBuilder bb, double offsetX, double offsetY, double offsetZ, float r, float g, float b, float a) {
         bb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         bb.pos(offsetX + 0.0D, offsetY + 0.0D, offsetZ + 0.0D).color(r, g, b, a).endVertex();
         bb.pos(offsetX + 1.0D, offsetY + 0.0D, offsetZ + 0.0D).color(r, g, b, a).endVertex();

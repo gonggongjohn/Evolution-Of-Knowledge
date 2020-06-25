@@ -1,14 +1,11 @@
 package com.gonggongjohn.eok.blocks;
 
-import javax.annotation.Nullable;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.tile.TEElementaryResearchTable;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -28,13 +25,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class BlockElementaryResearchTable extends BlockContainer implements IHasModel {
-    public final String name = "elementary_research_table";
-    private AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_S = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 2.0D);
-    private AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_N = new AxisAlignedBB(0.0D, 0.0D, -1.0D, 1.0D, 1.0D, 1.0D);
-    private AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_E = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 2.0D, 1.0D, 1.0D);
-    private AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_W = new AxisAlignedBB(-1.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    public final String name = "elementary_research_table";
+    private final AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_S = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 2.0D);
+    private final AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_N = new AxisAlignedBB(0.0D, 0.0D, -1.0D, 1.0D, 1.0D, 1.0D);
+    private final AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_E = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 2.0D, 1.0D, 1.0D);
+    private final AxisAlignedBB ELEMENTARY_RESEARCH_TABLE_AABB_W = new AxisAlignedBB(-1.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
     public BlockElementaryResearchTable() {
         super(Material.ROCK);
@@ -76,12 +75,17 @@ public class BlockElementaryResearchTable extends BlockContainer implements IHas
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         EnumFacing facing = state.getValue(FACING);
-        switch (facing){
-            case NORTH: return ELEMENTARY_RESEARCH_TABLE_AABB_S;
-            case SOUTH: return ELEMENTARY_RESEARCH_TABLE_AABB_N;
-            case WEST: return ELEMENTARY_RESEARCH_TABLE_AABB_E;
-            case EAST: return ELEMENTARY_RESEARCH_TABLE_AABB_W;
-            default: return ELEMENTARY_RESEARCH_TABLE_AABB_S;
+        switch (facing) {
+            case NORTH:
+                return ELEMENTARY_RESEARCH_TABLE_AABB_S;
+            case SOUTH:
+                return ELEMENTARY_RESEARCH_TABLE_AABB_N;
+            case WEST:
+                return ELEMENTARY_RESEARCH_TABLE_AABB_E;
+            case EAST:
+                return ELEMENTARY_RESEARCH_TABLE_AABB_W;
+            default:
+                return ELEMENTARY_RESEARCH_TABLE_AABB_S;
         }
     }
 
@@ -110,7 +114,7 @@ public class BlockElementaryResearchTable extends BlockContainer implements IHas
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if(!worldIn.isRemote){
+        if (!worldIn.isRemote) {
             int id = GUIHandler.GUIElementaryResearchTable;
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

@@ -18,56 +18,56 @@ import net.minecraft.util.EnumHand;
  */
 
 
-@Deprecated	//别看这个，这是段垃圾代码
+@Deprecated    //别看这个，这是段垃圾代码
 public class EntityAISelfDefense extends EntityAIBase {
 
-	private final EntityLiving entity;
+    private final EntityLiving entity;
 
-	
-	public EntityAISelfDefense(EntityLiving entity) {
-		this.entity = entity;
-	}
 
-	@Override
-	public boolean shouldExecute() {
+    public EntityAISelfDefense(EntityLiving entity) {
+        this.entity = entity;
+    }
 
-		if (entity.getRevengeTarget() == null) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+    @Override
+    public boolean shouldExecute() {
 
-	@Override
-	public void updateTask() {
+        if (entity.getRevengeTarget() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-		if (entity.isDead)
-			return;
+    @Override
+    public void updateTask() {
 
-		entity.attackEntityAsMob(entity.getRevengeTarget());
-		super.updateTask();
-	}
+        if (entity.isDead)
+            return;
 
-	@Override
-	public boolean isInterruptible() {
-		return true;
-	}
+        entity.attackEntityAsMob(entity.getRevengeTarget());
+        super.updateTask();
+    }
 
-	@Override
-	public void startExecuting() {
-		entity.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD, 1));
-		entity.setAttackTarget(entity.getRevengeTarget());
-		super.startExecuting();
-	}
+    @Override
+    public boolean isInterruptible() {
+        return true;
+    }
 
-	@Override
-	public boolean shouldContinueExecuting() {
-		return super.shouldContinueExecuting();
-	}
+    @Override
+    public void startExecuting() {
+        entity.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD, 1));
+        entity.setAttackTarget(entity.getRevengeTarget());
+        super.startExecuting();
+    }
 
-	@Override
-	public void resetTask() {
-		super.resetTask();
-	}
+    @Override
+    public boolean shouldContinueExecuting() {
+        return super.shouldContinueExecuting();
+    }
+
+    @Override
+    public void resetTask() {
+        super.resetTask();
+    }
 
 }

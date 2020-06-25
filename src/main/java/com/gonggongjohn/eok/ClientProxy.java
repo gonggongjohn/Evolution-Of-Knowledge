@@ -3,7 +3,6 @@ package com.gonggongjohn.eok;
 import com.gonggongjohn.eok.client.animation.EmptyStateMapper;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.EntityHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;

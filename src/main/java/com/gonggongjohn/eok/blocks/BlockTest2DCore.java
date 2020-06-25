@@ -5,7 +5,6 @@ import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.JudgeWithFacing;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,10 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockTest2DCore extends MultiBlockCompBase {
-    private final String name = "test_2d_core";
 
     public BlockTest2DCore() {
         super(Material.ROCK);
+        String name = "test_2d_core";
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -41,7 +40,7 @@ public class BlockTest2DCore extends MultiBlockCompBase {
         String structureName = EOK.multiBlockDict.structureNameDict.get(this.getUnlocalizedName());
         int dimensionNum = EOK.multiBlockDict.structureDimensionDict.get(structureName);
         JudgeWithFacing checkResult = checkStructure(worldIn, pos, state, dimensionNum, structureName);
-        if(checkResult.isComplete() && checkResult.getFacing() != null){
+        if (checkResult.isComplete() && checkResult.getFacing() != null) {
             int id = GUIHandler.GUITest2D;
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
             EOK.getLogger().info("Structure Complete!");

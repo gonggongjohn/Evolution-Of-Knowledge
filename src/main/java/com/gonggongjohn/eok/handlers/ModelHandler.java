@@ -3,7 +3,6 @@ package com.gonggongjohn.eok.handlers;
 import com.gonggongjohn.eok.api.render.ICustomModel;
 import com.gonggongjohn.eok.api.render.IStateMapperModel;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;

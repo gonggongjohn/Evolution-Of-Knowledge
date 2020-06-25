@@ -3,7 +3,6 @@ package com.gonggongjohn.eok.commands;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.network.PacketGuiScreen;
 import com.gonggongjohn.eok.network.PacketTestGuiScreen;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

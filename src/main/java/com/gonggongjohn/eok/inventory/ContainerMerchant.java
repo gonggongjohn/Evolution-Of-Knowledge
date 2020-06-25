@@ -1,9 +1,6 @@
 package com.gonggongjohn.eok.inventory;
 
-import java.util.ArrayList;
-
 import com.gonggongjohn.eok.utils.MerchantTradeData;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -11,9 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import java.util.ArrayList;
+
 public class ContainerMerchant extends Container {
 
-	private ItemStackHandler items = new ItemStackHandler(18);
+	private final ItemStackHandler items = new ItemStackHandler(18);
 
 	public int currentPage = 1;
 	public int currentDeal = 1;
@@ -22,7 +21,7 @@ public class ContainerMerchant extends Container {
 	/* 玩家可以进行的全部交易列表 */
 	public ArrayList<MerchantTradeData> tradeList;
 
-	protected Slot slot1 = new SlotItemHandler(items, currentSlotId++, 130, 48) {
+	protected final Slot slot1 = new SlotItemHandler(items, currentSlotId++, 130, 48) {
 
 		@Override
 		public boolean isItemValid(ItemStack stack) {
@@ -36,7 +35,7 @@ public class ContainerMerchant extends Container {
 
 	};
 
-	protected Slot slot2 = new SlotItemHandler(items, currentSlotId++, 156, 48) {
+	protected final Slot slot2 = new SlotItemHandler(items, currentSlotId++, 156, 48) {
 		@Override
 		public boolean isItemValid(ItemStack stack) {
 			return true;
@@ -48,7 +47,7 @@ public class ContainerMerchant extends Container {
 		}
 
 	};
-	protected Slot slot3 = new SlotItemHandler(items, currentSlotId++, 144, 105) {
+	protected final Slot slot3 = new SlotItemHandler(items, currentSlotId++, 144, 105) {
 		@Override
 		public boolean isItemValid(ItemStack stack) {
 			return true;
@@ -220,7 +219,7 @@ public class ContainerMerchant extends Container {
 		// 起始点和结束点（从1开始）
 		int s = page * 5 - 4;
 		int e = page * 5;
-		ArrayList<MerchantTradeData> result = new ArrayList<MerchantTradeData>();
+		ArrayList<MerchantTradeData> result = new ArrayList<>();
 		for (int i = s - 1; i <= e - 1; i++) {
 			if (i < 0 || i > tradeList.size() - 1)
 				break;
@@ -248,7 +247,7 @@ public class ContainerMerchant extends Container {
 	 * 
 	 * @param currentStack 当前给定的ItemStack
 	 * @param tradeData    正常交易的价格
-	 * @return
+	 * @return 能否完成交易
 	 */
 	private boolean canTrade(ItemStack currentStack, ItemStack tradeData) {
 		if (currentStack.getItem() != tradeData.getItem())

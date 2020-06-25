@@ -5,5 +5,5 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IMultiBlock {
-    public JudgeWithFacing checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName);
+    JudgeWithFacing checkStructure(World worldIn, BlockPos pos, IBlockState state, int dimensionNum, String structureName);
 }

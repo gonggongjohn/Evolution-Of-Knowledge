@@ -9,35 +9,35 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityOsIr extends EntityNPCBase {
-	public EntityOsIr(World worldIn) {
-		super(worldIn);
-	}
+    public EntityOsIr(World worldIn) {
+        super(worldIn);
+    }
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-	}
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+    }
 
-	@Override
-	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-		ItemStack egg = new ItemStack(Items.SPAWN_EGG, 1);
-		ItemMonsterPlacer.applyEntityIdToItemStack(egg, new ResourceLocation("eok:entity.osir"));
-		this.entityDropItem(egg, 0.0F);
-		super.dropFewItems(wasRecentlyHit, lootingModifier);
-	}
+    @Override
+    protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
+        ItemStack egg = new ItemStack(Items.SPAWN_EGG, 1);
+        ItemMonsterPlacer.applyEntityIdToItemStack(egg, new ResourceLocation("eok:entity.osir"));
+        this.entityDropItem(egg, 0.0F);
+        super.dropFewItems(wasRecentlyHit, lootingModifier);
+    }
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+    }
 
-	@Override
-	protected void initEntityAI() {
-		super.initEntityAI();
-	}
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+    }
 
-	@Override
-	protected boolean processInteract(EntityPlayer player, EnumHand hand) {
-		return super.processInteract(player, hand);
-	}
+    @Override
+    protected boolean processInteract(EntityPlayer player, EnumHand hand) {
+        return super.processInteract(player, hand);
+    }
 }

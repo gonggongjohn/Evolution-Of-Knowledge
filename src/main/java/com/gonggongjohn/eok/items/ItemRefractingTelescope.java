@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemRefractingTelescope extends Item implements IHasModel {
-    private final String name = "refracting_telescope";
-    public ItemRefractingTelescope(){
+    public ItemRefractingTelescope() {
+        String name = "refracting_telescope";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -28,14 +28,14 @@ public class ItemRefractingTelescope extends Item implements IHasModel {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
-        if(!worldIn.isRemote){
-            if(playerIn.isSneaking()){
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (!worldIn.isRemote) {
+            if (playerIn.isSneaking()) {
                 BlockPos pos = playerIn.getPosition();
                 int id = GUIHandler.GUIRefractingTelescope;
                 playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
         }
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 }

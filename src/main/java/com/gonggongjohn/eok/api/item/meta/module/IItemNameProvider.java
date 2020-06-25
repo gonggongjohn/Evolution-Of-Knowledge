@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 @FunctionalInterface
 public interface IItemNameProvider extends IItemModule {
-	String getItemStackDisplayName(ItemStack stack);
+    String getItemStackDisplayName(ItemStack stack);
 }

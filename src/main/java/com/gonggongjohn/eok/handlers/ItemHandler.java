@@ -1,37 +1,15 @@
 package com.gonggongjohn.eok.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.gonggongjohn.eok.items.ItemChippedFlintFragment;
-import com.gonggongjohn.eok.items.ItemEOKManual;
-import com.gonggongjohn.eok.items.ItemFireStick;
-import com.gonggongjohn.eok.items.ItemFlintFragment;
-import com.gonggongjohn.eok.items.ItemGoldenEgg;
-import com.gonggongjohn.eok.items.ItemMachineGun;
-import com.gonggongjohn.eok.items.ItemMaterialBase;
-import com.gonggongjohn.eok.items.ItemPapyrus;
-import com.gonggongjohn.eok.items.ItemPolishedFlintFragment;
-import com.gonggongjohn.eok.items.ItemRedstoneApple;
-import com.gonggongjohn.eok.items.ItemRedstoneAxe;
-import com.gonggongjohn.eok.items.ItemRedstoneBoots;
-import com.gonggongjohn.eok.items.ItemRedstoneChestplate;
-import com.gonggongjohn.eok.items.ItemRedstoneHelmet;
-import com.gonggongjohn.eok.items.ItemRedstoneHoe;
-import com.gonggongjohn.eok.items.ItemRedstoneLeggings;
-import com.gonggongjohn.eok.items.ItemRedstonePickaxe;
-import com.gonggongjohn.eok.items.ItemRedstoneSpade;
-import com.gonggongjohn.eok.items.ItemRedstoneSword;
-import com.gonggongjohn.eok.items.ItemRefractingTelescope;
-import com.gonggongjohn.eok.items.MetaItemTool;
-import com.gonggongjohn.eok.items.Torcherino;
-
+import com.gonggongjohn.eok.items.*;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EventBusSubscriber
 public class ItemHandler {
-	public static final List<Item> ITEM_REGISTRY = new ArrayList<Item>();
+	public static final List<Item> ITEM_REGISTRY = new ArrayList<>();
 
 	public static final Item papyrus = new ItemPapyrus();
 	public static final Item refractingTelescope = new ItemRefractingTelescope();

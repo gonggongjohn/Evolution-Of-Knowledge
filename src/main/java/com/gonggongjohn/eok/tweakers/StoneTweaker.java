@@ -1,9 +1,6 @@
 package com.gonggongjohn.eok.tweakers;
 
-import java.util.Arrays;
-
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
@@ -11,6 +8,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.Arrays;
 
 @EventBusSubscriber(modid = EOK.MODID)
 public class StoneTweaker {

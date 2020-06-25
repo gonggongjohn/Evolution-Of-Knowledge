@@ -1,16 +1,15 @@
 package com.gonggongjohn.eok.capabilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CapabilityResearchData implements IResearchData, ICapabilitySerializable<NBTTagCompound> {
 	public static final ResourceLocation KEY = new ResourceLocation(EOK.MODID, "research_data");
@@ -52,9 +51,9 @@ public class CapabilityResearchData implements IResearchData, ICapabilitySeriali
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) {
 		int[] array = nbt.getIntArray("data");
-		List<Integer> data = new ArrayList<Integer>();
-		for (int i = 0; i < array.length; i++) {
-			data.add(array[i]);
+		List<Integer> data = new ArrayList<>();
+		for (int value : array) {
+			data.add(value);
 		}
 		this.setFinishedResearch(data);
 	}

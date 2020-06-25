@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 @FunctionalInterface
 public interface IItemModelProvider extends IItemModule {
-	int getModelIndex(ItemStack stack);
+    int getModelIndex(ItemStack stack);
 }

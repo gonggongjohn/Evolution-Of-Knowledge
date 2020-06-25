@@ -2,7 +2,6 @@ package com.gonggongjohn.eok.capabilities;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;

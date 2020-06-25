@@ -1,20 +1,18 @@
 package com.gonggongjohn.eok.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import com.gonggongjohn.eok.EOK;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class ButtonElementaryResearchTable extends GuiButton {
     private static final String TEXTURE_COMP = EOK.MODID + ":" + "textures/gui/container/elementary_research_table_components.png";
     private static final ResourceLocation TEXTURECOMP = new ResourceLocation(TEXTURE_COMP);
-    private int offsetY;
-    private int researchId;
+    private final int offsetY;
+    private final int researchId;
 
     public ButtonElementaryResearchTable(int buttonId, int researchId, int x, int y, int widthIn, int heightIn, int offsetY) {
         super(buttonId, x, y, widthIn, heightIn, "");
@@ -36,7 +34,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
             mc.getTextureManager().bindTexture(TEXTURECOMP);
             this.drawTexturedModalRect(this.x, this.y, 66, 0, this.width, this.height);
             int relx = mouseX - this.x, rely = mouseY - this.y;
-            if(relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
+            if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height) {
                 String name = I18n.format("eok.research.gui.pre") + I18n.format("research." + EOK.researchDict.researchNameDict.get(researchId) + ".name");
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
             }
@@ -45,7 +43,7 @@ public class ButtonElementaryResearchTable extends GuiButton {
         }
     }
 
-    public int getResearchId(){
+    public int getResearchId() {
         return this.researchId;
     }
 }

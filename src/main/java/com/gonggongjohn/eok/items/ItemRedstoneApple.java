@@ -12,12 +12,10 @@ import net.minecraft.world.World;
 
 public class ItemRedstoneApple extends ItemFood implements IHasModel {
 
-    private final String name = "redstone_apple";
-
-    public ItemRedstoneApple()
-    {
+    public ItemRedstoneApple() {
         super(4, 0.6F, false);
         this.setAlwaysEdible();
+        String name = "redstone_apple";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);
@@ -26,8 +24,7 @@ public class ItemRedstoneApple extends ItemFood implements IHasModel {
     }
 
     @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
-    {
+    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!worldIn.isRemote) {
             player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 250, 2));
             player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 100, 1));

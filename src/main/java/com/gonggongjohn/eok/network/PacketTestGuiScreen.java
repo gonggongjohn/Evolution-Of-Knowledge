@@ -1,7 +1,6 @@
 package com.gonggongjohn.eok.network;
 
 import com.gonggongjohn.eok.client.gui.GuiEOKManual;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

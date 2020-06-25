@@ -8,10 +8,9 @@ import net.minecraft.item.ItemSword;
 
 public class ItemRedstoneSword extends ItemSword implements IHasModel {
 
-    private final String name = "redstone_sword";
-
     public ItemRedstoneSword() {
         super(ToolMaterials.REDSTONE);
+        String name = "redstone_sword";
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

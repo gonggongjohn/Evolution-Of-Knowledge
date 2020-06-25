@@ -3,7 +3,6 @@ package com.gonggongjohn.eok.network;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.capabilities.IResearchData;
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

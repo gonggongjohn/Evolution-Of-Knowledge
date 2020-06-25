@@ -1,12 +1,12 @@
 package com.gonggongjohn.eok.utils;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.util.EnumFacing;
 
+import javax.annotation.Nullable;
+
 public class JudgeWithFacing {
-    protected boolean judge;
-    protected EnumFacing facing;
+    protected final boolean judge;
+    protected final EnumFacing facing;
 
     public JudgeWithFacing(boolean judge, @Nullable EnumFacing facing) {
         this.judge = judge;

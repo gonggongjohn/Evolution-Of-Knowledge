@@ -3,11 +3,10 @@ package com.gonggongjohn.eok.items;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
-
 import net.minecraft.item.Item;
 
 public class ItemMaterialBase extends Item implements IHasModel {
-    public ItemMaterialBase(String name){
+    public ItemMaterialBase(String name) {
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
         this.setCreativeTab(EOK.tabEOK);

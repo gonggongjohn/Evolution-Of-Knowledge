@@ -12,29 +12,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IItemUse extends IItemModule {
-	EnumAction getItemUseAction(ItemStack stack);
+    EnumAction getItemUseAction(ItemStack stack);
 
-	int getMaxItemUseDuration(ItemStack stack);
+    int getMaxItemUseDuration(ItemStack stack);
 
-	default EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX,
-			float hitY, float hitZ, EnumHand hand) {
-		return EnumActionResult.PASS;
-	}
+    default EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX,
+                                            float hitY, float hitZ, EnumHand hand) {
+        return EnumActionResult.PASS;
+    }
 
-	default ActionResult<ItemStack> onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
-	}
+    default ActionResult<ItemStack> onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand,
+                                              EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
+    }
 
-	default void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
+    default void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 
-	}
+    }
 
-	default void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft) {
+    default void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft) {
 
-	}
+    }
 
-	default ItemStack onItemUseFinish(ItemStack stack, EntityLivingBase player) {
-		return stack;
-	}
+    default ItemStack onItemUseFinish(ItemStack stack, EntityLivingBase player) {
+        return stack;
+    }
 }
