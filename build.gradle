@@ -18,7 +18,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
 // 在这里更改版本
-version = "1.12.2-1.0.1.7-alpha"
+version = "1.12.2-1.0.1.9-alpha"
 group = "com.gonggongjohn.eok"
 archivesBaseName = "eok"
 
