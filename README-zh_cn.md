@@ -51,6 +51,8 @@ gradlew build
 
 构建完成后，你可以在`build/libs`目录找到生成的归档文件。
 
+**注意：如果你遇到了像“找不到xxx”这样的编译错误，你可以试试[引入CuckooLib仓库](#与CuckooLib协同开发)，这可能会解决问题。**
+
 ## 与CuckooLib协同开发
 
 [CuckooLib](https://github.com/zi-jing/CuckooLib)是EOK项目的一个依赖库，包含了Cuckoo Dev Team需要用到的大量可重用代码。

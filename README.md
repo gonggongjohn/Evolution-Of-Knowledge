@@ -50,6 +50,8 @@ or if you're using Linux/Unix:
 
 Then you can find the archives in the directory `build/libs`.
 
+**NOTICE: If you meet some compilation errors like "xxx not found", You can try [Importing CuckooLib Repository](#Working with CuckooLib). It may solve your problems.**
+
 ## Working with CuckooLib
 
 [CuckooLib](https://github.com/zi-jing/CuckooLib) is a dependency library of the EOK project. It includes plenty of reusable code which is used by Cuckoo Dev Team.
