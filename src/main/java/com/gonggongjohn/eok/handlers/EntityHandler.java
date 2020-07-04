@@ -1,9 +1,23 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.entity.*;
-import com.gonggongjohn.eok.entity.render.*;
+import com.gonggongjohn.eok.entity.EntityBullet;
+import com.gonggongjohn.eok.entity.EntityGoldenChicken;
+import com.gonggongjohn.eok.entity.EntityGoldenEgg;
+import com.gonggongjohn.eok.entity.EntityMoInk;
+import com.gonggongjohn.eok.entity.EntityNat;
+import com.gonggongjohn.eok.entity.EntityOsIr;
+import com.gonggongjohn.eok.entity.EntitySmalldew;
+import com.gonggongjohn.eok.entity.EntityZijing;
+import com.gonggongjohn.eok.entity.render.RenderGoldenChicken;
+import com.gonggongjohn.eok.entity.render.RenderGoldenEgg;
+import com.gonggongjohn.eok.entity.render.RenderMoInk;
+import com.gonggongjohn.eok.entity.render.RenderNat;
+import com.gonggongjohn.eok.entity.render.RenderOsIr;
+import com.gonggongjohn.eok.entity.render.RenderSmalldew;
+import com.gonggongjohn.eok.entity.render.RenderZijing;
 import com.gonggongjohn.eok.utils.EntityRenderFactory;
+
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +33,7 @@ public class EntityHandler {
 
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.smalldew"), EntitySmalldew.class,
                 "eok.entity_smalldew", 1, EOK.instance, 64, 1, true, 0x0066CC, 0xCCE5FF);
-        // 暂时不迫害咸猫
+        // 鏆傛椂涓嶈揩瀹冲捀鐚�
         // EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID,
         // "entity.chenweilin"), EntityChenweilin.class,
         // "entity_chenwe_i_lin", 2, EOK.instance, 64, 1, true, 0x916B94, 0x99CCFF);
@@ -37,6 +51,9 @@ public class EntityHandler {
 
         EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.goldenegg"), EntityGoldenEgg.class,
                 "eok.entity_goldenegg", 7, EOK.instance, 64, 1, true);
+        
+        EntityRegistry.registerModEntity(new ResourceLocation(EOK.MODID, "entity.nat"), EntityNat.class,
+                "eok.entity_nat", 8, EOK.instance, 64, 1, true, 0xFF88FF, 0x88FF88);
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +66,7 @@ public class EntityHandler {
         registerEntityRender(EntityMoInk.class, RenderMoInk.class);
         registerEntityRender(EntityGoldenChicken.class, RenderGoldenChicken.class);
         registerEntityRender(EntityGoldenEgg.class, RenderGoldenEgg.class);
+        registerEntityRender(EntityNat.class, RenderNat.class);
     }
 
     @SideOnly(Side.CLIENT)
