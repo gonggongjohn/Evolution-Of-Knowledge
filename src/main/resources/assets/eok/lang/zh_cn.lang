@@ -98,6 +98,7 @@ eok.manual.error.element_too_large=元素的大小超过了限制(%d*%d)! 加载
 eok.manual.error.illegal_arguments=只能有%d个参数。
 eok.manual.error.syntax_error=语法错误。
 eok.manual.hyperlink.mouseon=点击跳转
+eok.manual.error.render_error=文档渲染出错。
 
 eok.research.gui.pre=研究节点：
 eok.research.root.name=根研究
@@ -120,7 +121,4 @@ entity.eok.entity_goldenegg.name=Golden Egg
 entity.eok.entity_goldenchicken.name=金鸡
 
 eok.gui.merchant.title=商人
-eok.gui.merchant.button.buy=购买item.eok.redstoneHelmet.name=Redstone Helmet
-item.eok.redstoneChestplate.name=Redstone Chestplate
-item.eok.redstoneLeggings.name=Redstone Leggings
-item.eok.redstoneBoots.name=Redstone Boots
+eok.gui.merchant.button.buy=购买

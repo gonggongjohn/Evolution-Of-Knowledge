@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.gonggongjohn.eok.utils.DocumentRenderer;
+import com.gonggongjohn.eok.client.manual.DocumentRenderer;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;

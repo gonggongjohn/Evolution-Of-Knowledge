@@ -98,6 +98,7 @@ eok.manual.error.element_too_large=L'élément est supérieur à (%d*%d)! Le cha
 eok.manual.error.illegal_arguments=Il ne peut y avoir %d paramètres.
 eok.manual.error.syntax_error=Erreur de syntaxe
 eok.manual.hyperlink.mouseon=Click to Jump!
+eok.manual.error.render_error=文档渲染出错。
 
 eok.research.gui.pre=Noeud de Recherche:
 eok.research.root.name=Base de Recherche

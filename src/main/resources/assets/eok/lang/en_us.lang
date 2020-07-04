@@ -98,6 +98,7 @@ eok.manual.error.element_too_large=This element's size exceeds the limit(%d*%d)!
 eok.manual.error.illegal_arguments=There must be only %d argument(s).
 eok.manual.error.syntax_error=Syntax error.
 eok.manual.hyperlink.mouseon=Click to jump
+eok.manual.error.render_error=Error while rendering document.
 
 eok.research.gui.pre=Research Node:
 eok.research.root.name=Root Research

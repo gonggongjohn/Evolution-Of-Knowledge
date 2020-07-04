@@ -5,13 +5,13 @@ import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiConstants;
 import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiScreen;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.DocumentRenderer;
+import com.gonggongjohn.eok.client.manual.DocumentRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 
 /**
- * This is an example of MetaGuiScreen
+ * This is an example of ModularGuiScreen
  * Send /eoktestscreen command in the game to open this interface
  *
  * @see ModularGuiScreen
@@ -79,8 +79,7 @@ public class GuiEOKManual extends ModularGuiScreen {
     public void onGuiClosed() {
         super.onGuiClosed();
         if (renderer != null)
-            renderer.remove();
-        GLUtils.deleteTempTexture();
+            renderer.removePages();
     }
 
     @Override
