@@ -58,6 +58,7 @@ tile.eok.basket_ball.name=Basketball
 tile.eok.block_stone_rock.name=Stone Rock
 tile.eok.block_stick.name=Stick
 tile.eok.stone_mill.name=Stone Mill
+tile.eok.redstone_log.name=Redstone Log
 
 itemGroup.eoktab=Evolution Of Knowledge
 

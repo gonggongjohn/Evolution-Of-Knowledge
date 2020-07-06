@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "eok:blocks/redstone_log_top",
+        "side": "eok:blocks/redstone_log"
+    }
+}

@@ -23,6 +23,7 @@ public class BlockHandler {
 	public static final Block blockBasketBall = new BlockBasketBall();
 	public static final Block blockStoneMill = new BlockStoneMill();
 	public static final Block blockApple = new BlockApple();
+	public static final Block blockRedstoneLog = new BlockRedstoneLog();
 
 	public static final Block blockTest2DCore = new BlockTest2DCore();
 	public static final Block blockTest3DCore = new BlockTest3DCore();

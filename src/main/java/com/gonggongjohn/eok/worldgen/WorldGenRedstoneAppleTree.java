@@ -77,7 +77,7 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
     private boolean canSustainSt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
         boolean flag1 = world.isAirBlock(pos.up()) || world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER;
-        boolean flag2 = block == Blocks.GRASS;
+        boolean flag2 = block == Blocks.GRASS || block == Blocks.DIRT;
         return flag1 & flag2;
     }
 }
