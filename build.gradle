@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = 'https://files.minecraftforge.net/maven' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -10,21 +10,31 @@ buildscript {
 
 repositories {
 	jcenter()
-    maven { url = "https://files.minecraftforge.net/maven" }
-	maven { url = "https://zi-jing.github.io/cuckoo-maven/maven" }
+    maven { url = 'https://files.minecraftforge.net/maven' }
+	maven { url = 'https://zi-jing.github.io/cuckoo-maven/maven' }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
 // 在这里更改版本
-version = "1.12.2-1.0.1.10-alpha"
-group = "com.gonggongjohn.eok"
-archivesBaseName = "eok"
+version = '1.0.1.10-alpha'
+group = 'com.gonggongjohn.eok'
+archivesBaseName = 'eok'
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+// 添加前缀后缀
+String mcVersion = '1.12.2'
+version = mcVersion + '-' + version + getVersionAppendage()
+
+sourceCompatibility = targetCompatibility = '1.8' // 使"eclipse" task正确生成启动方案
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
+}
+
+static String getVersionAppendage() {
+    def proc = 'git rev-parse --short HEAD'.execute()
+    proc.waitFor()
+    return '-' + (proc.exitValue() ? 'NO-GIT' : proc.text.trim())
 }
 
 task apiJar(type: Jar) {
@@ -40,15 +50,15 @@ artifacts {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
+    version = '1.12.2-14.23.5.2847'
+    runDir = 'run'
 
-    mappings = "snapshot_20171003"
+    mappings = 'snapshot_20171003'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
     // 替换EOK版本号
-	replaceIn "EOK.java"
-	replace "@EOKVERSION@", project.version
+	replaceIn 'EOK.java'
+	replace '@EOKVERSION@', project.version
 }
 
 dependencies {
@@ -58,8 +68,8 @@ dependencies {
 
 processResources {
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
@@ -78,5 +88,5 @@ processResources {
 // 强制UTF-8构建
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+	options.encoding = 'UTF-8'
 }
