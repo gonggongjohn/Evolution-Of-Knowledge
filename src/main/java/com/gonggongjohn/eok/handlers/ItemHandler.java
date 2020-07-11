@@ -31,6 +31,7 @@ public class ItemHandler {
 	public static final Item Redstone_Chestplate = new ItemRedstoneChestplate();
 	public static final Item Redstone_Leggings = new ItemRedstoneLeggings();
 	public static final Item Redstone_Boots = new ItemRedstoneBoots();
+	public static final Item bluePrint = new ItemBluePrint();
 
 	public static final Item metaTool = new MetaItemTool();
 	public static final Item eokSymbol = new ItemMaterialBase("eok_symbol");

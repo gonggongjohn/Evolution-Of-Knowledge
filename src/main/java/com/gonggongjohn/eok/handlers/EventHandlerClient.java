@@ -1,9 +1,12 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.structure.StructureData;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -12,6 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
@@ -40,6 +44,21 @@ public class EventHandlerClient {
                     strResearch += I18n
                             .format("research." + EOK.researchDict.researchNameDict.get(researchID) + ".name");
                     tooltip.add(strResearch);
+                }
+            }
+            if(compound != null && compound.hasKey("blueprint.structure")){
+                StructureData data = new StructureData(compound);
+                List<String> tooltip = event.getToolTip();
+                String str = "";
+                str += I18n.format("eok.tooltip.blueprint.structure.pre");
+                tooltip.add(str);
+                ArrayList<Vec3i> indexList = data.getIndexList();
+                for(Vec3i index : indexList){
+                    String strStructure = "";
+                    Block content = data.query(index);
+                    strStructure += I18n.format("eok.tooltip.blueprint.structure.data", index.getX(), index.getY(), index.getZ());
+                    strStructure += content.getLocalizedName();
+                    tooltip.add(strStructure);
                 }
             }
         }

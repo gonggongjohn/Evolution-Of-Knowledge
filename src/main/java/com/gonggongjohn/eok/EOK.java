@@ -70,6 +70,7 @@ public class EOK {
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
 		network.registerMessage(new PacketSlotChange.Handler(), PacketSlotChange.class, 8, Side.SERVER);
 		network.registerMessage(new PacketGuiScreen.Handler(), PacketGuiScreen.class, 9, Side.CLIENT);
+		network.registerMessage(new PacketBlueprintTable.Handler(), PacketBlueprintTable.class, 10, Side.SERVER);
 	}
 
 	@EventHandler

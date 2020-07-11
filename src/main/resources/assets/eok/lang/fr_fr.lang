@@ -30,6 +30,7 @@ item.eok.redstone_helmet.name=红石头盔
 item.eok.redstone_chestplate.name=红石胸甲
 item.eok.redstone_leggings.name=红石护腿
 item.eok.redstone_boots.name=红石靴子
+item.eok.blue_print.name=蓝图
 
 item.eok.pickaxe.name=Pioche
 item.eok.axe.name=Hache
@@ -51,6 +52,7 @@ item.eok.machine_gun.description=en construction...
 tile.eok.stone_table.name=Table en Pierre
 tile.eok.two_barrel_vacuum_pump.name=Pompe à Vide en Deux Yuyaux
 tile.eok.elementary_research_table.name=Table de Recherche Basique
+tile.eok.blueprint_table.name=蓝图桌
 tile.eok.haystack.name=Bloc d'herbe
 tile.eok.dried_haystack.name=Bloc d'herbe sec
 tile.eok.decomposed_haystack.name=Bloc d'herbe pourrie
@@ -69,6 +71,8 @@ eok.tooltip.toolbase.attack_damage=§aAttaque: §d%5f(%6f de point d'attaque)
 eok.tooltip.toolbase.durability=§aDurabilité: §d%3d / %4d
 eok.tooltip.torcherino=§4Attention!Sûr à utiliser cela?
 eok.tooltip.data.research=Les recerches contiennent：
+eok.tooltip.blueprint.structure.pre=包含的结构：
+eok.tooltip.blueprint.structure.data=第 %d 层第 %d 行第 %d 列：
 
 eok.messages.torcherino_crafted.msg=§4Êtes-vous sûr de l'utiliser
 eok.messages.torcherino_use.msg=§4Vous avez irrité les chauves-souris!!!
@@ -105,6 +109,8 @@ eok.research.root.name=Base de Recherche
 eok.research.elementary_arithmetic.name=Mathématiques: Calcul arithmétique
 eok.research.power.name=Mathématiques: Calcul de puissance
 eok.research.logarithm.name=Mathématiques: Calcul logarithmique
+
+eok.blueprint.component.pre=蓝图组件：
 
 eok.inspiration.query.pre=Vous avez les inspirations suivantes:
 eok.inspiration.get.pre=Gagner l'inspiration:

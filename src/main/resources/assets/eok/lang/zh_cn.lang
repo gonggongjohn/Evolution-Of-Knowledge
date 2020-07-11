@@ -30,6 +30,7 @@ item.eok.redstone_helmet.name=红石头盔
 item.eok.redstone_chestplate.name=红石胸甲
 item.eok.redstone_leggings.name=红石护腿
 item.eok.redstone_boots.name=红石靴子
+item.eok.blue_print.name=蓝图
 
 item.eok.pickaxe.name=镐
 item.eok.axe.name=斧
@@ -51,6 +52,7 @@ item.eok.machine_gun.description=仍处于开发阶段
 tile.eok.stone_table.name=石桌
 tile.eok.two_barrel_vacuum_pump.name=双筒真空泵
 tile.eok.elementary_research_table.name=初级研究台
+tile.eok.blueprint_table.name=蓝图桌
 tile.eok.haystack.name=草垛
 tile.eok.dried_haystack.name=干草垛
 tile.eok.decomposed_haystack.name=腐烂的草垛
@@ -69,6 +71,8 @@ eok.tooltip.toolbase.attack_damage=§a攻击伤害: §d%5f(%6f 心)
 eok.tooltip.toolbase.durability=§a耐久度: §d%3d / %4d 
 eok.tooltip.torcherino=§4请自己承担它带来的风险。
 eok.tooltip.data.research=包含的研究：
+eok.tooltip.blueprint.structure.pre=包含的结构：
+eok.tooltip.blueprint.structure.data=第 %d 层第 %d 行第 %d 列：
 
 eok.messages.torcherino_crafted.msg=§4你真的要使用它吗?
 eok.messages.torcherino_use.msg=§4你激怒了森林蝙蝠!!!
@@ -105,6 +109,8 @@ eok.research.root.name=根研究
 eok.research.elementary_arithmetic.name=数学：初等算术
 eok.research.power.name=数学：乘方
 eok.research.logarithm.name=数学: 对数运算
+
+eok.blueprint.component.pre=蓝图组件：
 
 eok.inspiration.query.pre=你已经获得了以下这些灵感：
 eok.inspiration.get.pre=获得灵感:
