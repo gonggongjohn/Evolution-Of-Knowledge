@@ -79,34 +79,18 @@ public class ModelNPC extends ModelBiped {
         if (this.isChild) {
             GlStateManager.scale(0.5F, 0.5F, 0.5F);
             GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
-            this.bipedLeftLegwear.render(scale);
-            this.bipedRightLegwear.render(scale);
-            this.bipedLeftArmwear.render(scale);
-            this.bipedRightArmwear.render(scale);
-            this.bipedBodyWear.render(scale);
         } else {
             if (entityIn.isSneaking()) {
                 GlStateManager.translate(0.0F, 0.2F, 0.0F);
             }
 
-            this.bipedLeftLegwear.render(scale);
-            this.bipedRightLegwear.render(scale);
-            this.bipedLeftArmwear.render(scale);
-            this.bipedRightArmwear.render(scale);
-            this.bipedBodyWear.render(scale);
         }
+        this.bipedLeftLegwear.render(scale);
+        this.bipedRightLegwear.render(scale);
+        this.bipedLeftArmwear.render(scale);
+        this.bipedRightArmwear.render(scale);
+        this.bipedBodyWear.render(scale);
         GlStateManager.popMatrix();
-    }
-
-    public void renderDeadmau5Head(float scale) {
-        copyModelAngles(this.bipedHead, this.bipedDeadmau5Head);
-        this.bipedDeadmau5Head.rotationPointX = 0.0F;
-        this.bipedDeadmau5Head.rotationPointY = 0.0F;
-        this.bipedDeadmau5Head.render(scale);
-    }
-
-    public void renderCape(float scale) {
-        this.bipedCape.render(scale);
     }
 
     /**
