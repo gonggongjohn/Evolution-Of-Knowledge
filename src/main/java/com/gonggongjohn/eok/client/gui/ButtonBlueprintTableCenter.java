@@ -43,4 +43,8 @@ public class ButtonBlueprintTableCenter extends GuiButton {
     public void setContent(Block content) {
         this.content = content;
     }
+
+    public Block getContent() {
+        return this.content;
+    }
 }

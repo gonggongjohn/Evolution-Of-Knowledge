@@ -5,16 +5,15 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.Vec3i;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class StructureData {
     private int layerNum;
     private ArrayList<Vec3i> indexList;
     private HashMap<Vec3i, Block> structure;
+
 
     public StructureData(){
         this.layerNum = 0;
@@ -38,6 +37,7 @@ public class StructureData {
                 this.indexList.add(index);
                 this.structure.put(index, Block.getBlockFromName(blockName));
             }
+            indexList.sort(new VectorComparator());
         }
     }
 
@@ -45,6 +45,7 @@ public class StructureData {
         if(layer > layerNum) this.layerNum++;
         Vec3i index = new Vec3i(layer, row, column);
         this.indexList.add(index);
+        indexList.sort(new VectorComparator());
         this.structure.put(index, block);
     }
 

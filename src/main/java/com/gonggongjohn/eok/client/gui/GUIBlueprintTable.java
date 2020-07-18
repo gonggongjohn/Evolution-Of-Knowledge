@@ -233,10 +233,12 @@ public class GUIBlueprintTable extends GuiContainer {
             else activeBlock = null;
         }
         if(button.id >= 4 && button.id <= 12 && activeBlock != null){
-            ((ButtonBlueprintTableCenter)button).setContent(activeBlock);
-            int row = (button.id - 4) / 3;
-            int column = (button.id - 4) % 3;
-            this.onBuildingStructure.set(this.layerNum, row, column, activeBlock);
+            if(((ButtonBlueprintTableCenter)button).getContent() != activeBlock) {
+                ((ButtonBlueprintTableCenter) button).setContent(activeBlock);
+                int row = (button.id - 4) / 3;
+                int column = (button.id - 4) % 3;
+                this.onBuildingStructure.set(this.layerNum, row, column, activeBlock);
+            }
         }
     }
 
