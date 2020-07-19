@@ -1,6 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.structure.StructureData;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
 import com.gonggongjohn.eok.capabilities.IPlayerState;
@@ -229,5 +230,14 @@ public class EventHandlerServer {
 //			event.setDropChance(0.0F);
 //			world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STICK)));
 //		}
+	}
+
+	@SubscribeEvent
+	public static void onStructureDetect(RightClickBlock event){
+		ItemStack stack = event.getItemStack();
+		NBTTagCompound compound = stack.getTagCompound();
+		if(stack.getItem() == ItemHandler.bluePrint && compound != null && compound.hasKey("blueprint.structure")){
+			StructureData data = new StructureData(compound);
+		}
 	}
 }
