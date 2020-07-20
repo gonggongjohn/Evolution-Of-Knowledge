@@ -2,6 +2,7 @@ package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.structure.StructureData;
+import com.gonggongjohn.eok.api.structure.StructureUtils;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
 import com.gonggongjohn.eok.capabilities.IPlayerState;
@@ -25,6 +26,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -232,12 +234,15 @@ public class EventHandlerServer {
 //		}
 	}
 
+	/*  */
 	@SubscribeEvent
 	public static void onStructureDetect(RightClickBlock event){
 		ItemStack stack = event.getItemStack();
 		NBTTagCompound compound = stack.getTagCompound();
 		if(stack.getItem() == ItemHandler.bluePrint && compound != null && compound.hasKey("blueprint.structure")){
 			StructureData data = new StructureData(compound);
+			boolean result = StructureUtils.checkStructure(event.getWorld(), event.getPos(), data);
+			if(result) event.getEntityPlayer().sendMessage(new TextComponentTranslation("eok.structure.complete"));
 		}
 	}
 }

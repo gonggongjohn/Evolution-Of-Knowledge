@@ -112,6 +112,8 @@ eok.research.logarithm.name=Math:Logarithm
 
 eok.blueprint.component.pre=Blueprint Component :
 
+eok.structure.complete=Structure Complete!
+
 eok.inspiration.query.pre=You have acquired following inspirations:
 eok.inspiration.get.pre=Get Inspiration:
 eok.inspiration.root.name=Root Inspiration
