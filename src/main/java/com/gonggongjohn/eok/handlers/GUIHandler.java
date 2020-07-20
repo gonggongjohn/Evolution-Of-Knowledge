@@ -1,6 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.client.gui.*;
+import com.gonggongjohn.eok.inventory.ContainerBlueprintTable;
 import com.gonggongjohn.eok.inventory.ContainerElementaryResearchTable;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.inventory.ContainerRefractingTelescope;
@@ -21,6 +22,7 @@ public class GUIHandler implements IGuiHandler {
     // public static final int GUIHayTorchBaseLit = 7;
     public static final int GUIBluePrint = 8;
     public static final int GUITest2D = 9;
+    public static final int GUIBlueprintTable = 10;
 
     @Override
     public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
@@ -38,6 +40,8 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIBluePrint();
             case GUITest2D:
                 return new GUITest2D();
+            case GUIBlueprintTable:
+                return new ContainerBlueprintTable(player, world.getTileEntity(new BlockPos(x, y, z)));
             default:
 				return null;
 		}
@@ -47,7 +51,6 @@ public class GUIHandler implements IGuiHandler {
     public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
 
         switch (ID){
-
         	case GUIEOKManual:
         		return null;
             case GUIRefractingTelescope:
@@ -60,6 +63,8 @@ public class GUIHandler implements IGuiHandler {
                 return new GUIBluePrint();
             case GUITest2D:
                 return new GUITest2D();
+            case GUIBlueprintTable:
+                return new GUIBlueprintTable(new ContainerBlueprintTable(player, world.getTileEntity(new BlockPos(x, y, z))));
             default:
                 return null;
         }

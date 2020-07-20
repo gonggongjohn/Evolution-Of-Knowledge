@@ -27,7 +27,7 @@ public class EOK {
 	public static final String MODID = "eok";
 	public static final String NAME = "Evolution Of Knowledge";
 	public static final String VERSION = "@EOKVERSION@";
-	public static final String DEPENDENCIES = "required-after:tmc@[1.3.1.1,);required-after:gregtech@[1.8.13.465,)";
+	public static final String DEPENDENCIES = "required-after:tmc@[1.3.1.1,);required-after:cuckoolib;required-after:gregtech@[1.8.13.465,)";
 
 	@Mod.Instance
 	public static EOK instance;
@@ -70,6 +70,7 @@ public class EOK {
 		network.registerMessage(new PacketTestGuiScreen.Handler(), PacketTestGuiScreen.class, 7, Side.CLIENT);
 		network.registerMessage(new PacketSlotChange.Handler(), PacketSlotChange.class, 8, Side.SERVER);
 		network.registerMessage(new PacketGuiScreen.Handler(), PacketGuiScreen.class, 9, Side.CLIENT);
+		network.registerMessage(new PacketBlueprintTable.Handler(), PacketBlueprintTable.class, 10, Side.SERVER);
 	}
 
 	@EventHandler

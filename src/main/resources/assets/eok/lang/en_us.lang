@@ -30,6 +30,7 @@ item.eok.redstone_helmet.name=Redstone Helmet
 item.eok.redstone_chestplate.name=Redstone Chestplate
 item.eok.redstone_leggings.name=Redstone Leggings
 item.eok.redstone_boots.name=Redstone Boots
+item.eok.blue_print.name=Blueprint
 
 item.eok.pickaxe.name=Pickaxe
 item.eok.axe.name=Axe
@@ -51,6 +52,7 @@ item.eok.machine_gun.description=Still Developing
 tile.eok.stone_table.name=Stone Table
 tile.eok.two_barrel_vacuum_pump.name=Two Barrel Vacuum Pump
 tile.eok.elementary_research_table.name=Elementary Research Table
+tile.eok.blueprint_table.name=Blueprint Table
 tile.eok.haystack.name=Haystack
 tile.eok.dried_haystack.name=Dried Haystack
 tile.eok.decomposed_haystack.name=Decomposed Haystack
@@ -70,6 +72,8 @@ eok.tooltip.toolbase.attack_damage=§aAttack Damage: §d%5f(%6f hearts)
 eok.tooltip.toolbase.durability=§aDurability: §d%3d / %4d 
 eok.tooltip.torcherino=§4Please take the risks it brings by yourself.
 eok.tooltip.data.research=Contain Research :
+eok.tooltip.blueprint.structure.pre=Contain Structure :
+eok.tooltip.blueprint.structure.data=Layer %d Row %d Column %d :
 
 eok.messages.torcherino_crafted.msg=§4Do you really want to use it?
 eok.messages.torcherino_use.msg=§4You have ENRAGED the FOREST BAT!!!
@@ -106,6 +110,8 @@ eok.research.root.name=Root Research
 eok.research.elementary_arithmetic.name=Math:Elementary Arithmetic
 eok.research.power.name=Math:Power
 eok.research.logarithm.name=Math:Logarithm
+
+eok.blueprint.component.pre=Blueprint Component :
 
 eok.inspiration.query.pre=You have acquired following inspirations:
 eok.inspiration.get.pre=Get Inspiration:
