@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 
 public class BlockApple extends Block implements ICustomModel {
 
-    public final static AxisAlignedBB APPLE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public final static AxisAlignedBB APPLE_AABB = new AxisAlignedBB(0.25D, 0.55D, 0.25D, 0.75D, 1.0D, 0.75D);
     public final String name = "apple";
 
     public BlockApple() {
@@ -30,6 +31,16 @@ public class BlockApple extends Block implements ICustomModel {
         this.setRegistryName(name);
         this.setHardness(0.1F);
         BlockHandler.registerBlock(this, new ItemBlock(this).setRegistryName(name));
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
     }
 
     @Override
@@ -50,16 +61,6 @@ public class BlockApple extends Block implements ICustomModel {
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
@@ -67,6 +68,11 @@ public class BlockApple extends Block implements ICustomModel {
     @Override
     public ModelResourceLocation getBlockModel(ModelRegistryEvent e) {
         return new ModelResourceLocation(name, "inventory");
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
