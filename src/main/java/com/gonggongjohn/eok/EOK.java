@@ -43,8 +43,7 @@ public class EOK {
 	public static final MathUtils mathUtils = new MathUtils();
 	public static final ResearchDict researchDict = new ResearchDict();
 	public static final InspirationDict inspirationDict = new InspirationDict();
-	public static MultiBlockDict multiBlockDict;
-	public static BluePrintDict bluePrintDict;
+	//public static BluePrintDict bluePrintDict;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -76,11 +75,8 @@ public class EOK {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
-		multiBlockDict = new MultiBlockDict();
-		multiBlockDict.initStructure();
-		multiBlockDict.initDict();
-		bluePrintDict = new BluePrintDict();
-		bluePrintDict.init();
+		//bluePrintDict = new BluePrintDict();
+		//bluePrintDict.init();
 		new WorldGenHandler();
 		TweakersMain.init();
 	}

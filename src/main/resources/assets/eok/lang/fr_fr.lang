@@ -9,12 +9,6 @@ item.eok.flint_fragment.name=pièce du silex
 item.eok.chipped_flint_fragment.name=Galet Taillé
 item.eok.polished_flint_fragment.name=Galet Aigu
 
-item.eok.plant_fiber.name=Fibre Végétale
-item.eok.short_stick.name=Bâton Courts
-item.eok.tube.name=Tube à Essai
-item.eok.rubber_mat.name=Tapis en Caoutchouc
-item.eok.simple_hemp_rope.name=Chanvre Corde
-item.eok.strong_hemp_rope.name=Chanvre Corde Renforfée
 item.eok.torcherino.name=Ne touchez pas ça!
 item.eok.fire_stick.name=Bois au Feu
 item.eok.machine_gun.name=Mitrailleuse
@@ -32,20 +26,19 @@ item.eok.redstone_leggings.name=红石护腿
 item.eok.redstone_boots.name=红石靴子
 item.eok.blue_print.name=蓝图
 
-item.eok.pickaxe.name=Pioche
-item.eok.axe.name=Hache
-item.eok.shovel.name=Pelle
-item.eok.sword.name=Épée
-
 metaitem.eok.elementary_research_table.name=Blueprint de la table de recherche
-metaitem.eok.test_2d_core.name=Blueprint de la structure en deux dimension(en test)
-metaitem.eok.test_3d_core.name=Blueprint de la structure en trois dimension(en test)
 
 metaitem.eok.eok_symbol.name=Symbole d'EOK
 metaitem.eok.convex_lens.name=lentille convexe
 metaitem.eok.concave_lens.name=lentille concave
-metaitem.eok.grinded_flint.name=Galet Aigu
+metaitem.eok.ground_flint.name=Galet Aigu
 metaitem.eok.chipped_flint.name=Galet Taillé
+metaitem.eok.plant_fiber.name=Fibre Végétale
+metaitem.eok.rubber_mat.name=Tapis en Caoutchouc
+metaitem.eok.short_stick.name=Bâton Courts
+metaitem.eok.tube.name=Tube à Essai
+metaitem.eok.simple_hemp_rope.name=Chanvre Corde
+metaitem.eok.strong_hemp_rope.name=Chanvre Corde Renforfée
 
 item.eok.machine_gun.description=en construction...
 
@@ -60,6 +53,7 @@ tile.eok.basket_ball.name=Basketball
 tile.eok.block_stone_rock.name=Bloc de roche
 tile.eok.block_stick.name=Baton de bois
 tile.eok.stone_mill.name=石磨
+tile.eok.redstone_log.name=红石木
 
 itemGroup.eoktab=De l'Ignorance au Prophète
 

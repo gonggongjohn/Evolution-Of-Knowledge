@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "eok:items/simple_hemp_rope"
+        "layer0": "eok:items/metaitem/short_stick"
     }
 }

@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"1": "eok:blocks/apple"
+		"1": "eok:blocks/apple",
+		"particle": "eok:blocks/apple_particle"
 	},
 	"elements": [
 		{

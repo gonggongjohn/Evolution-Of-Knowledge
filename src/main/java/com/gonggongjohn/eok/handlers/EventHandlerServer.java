@@ -1,7 +1,9 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.item.meta.MetaItem;
 import com.gonggongjohn.eok.api.structure.StructureData;
+import com.gonggongjohn.eok.api.structure.StructureUtils;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
 import com.gonggongjohn.eok.capabilities.CapabilityResearchData;
 import com.gonggongjohn.eok.capabilities.IPlayerState;
@@ -25,6 +27,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -49,7 +52,7 @@ public class EventHandlerServer {
 		if (e.getHarvester() != null) {
 			EntityPlayer player = e.getHarvester();
 			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (GTMetaItemsHandler.GRINDED_FLINT.isItemEqual(stack)) {
+			if (stack.getItem() instanceof MetaItem && ((MetaItem)stack.getItem()).getMetaValueItem(stack) == MetaItemHandler.GROUND_FLINT) {
 				Block block = e.getState().getBlock();
 				Random rand = new Random(System.currentTimeMillis());
 				if (block == Blocks.LEAVES || block == Blocks.LEAVES2) {
@@ -108,9 +111,9 @@ public class EventHandlerServer {
 		stack.shrink(1);
 		ItemStack result;
 		if (vec.x >= 0.25 && vec.x <= 0.75 && vec.z >= 0.25 && vec.z <= 0.75) {
-			result = GTMetaItemsHandler.GRINDED_FLINT.getStackForm();
+			result = MetaItemHandler.GROUND_FLINT.getItemStack();
 		} else {
-			result = GTMetaItemsHandler.CHIPPED_FLINT.getStackForm();
+			result = MetaItemHandler.CHIPPED_FLINT.getItemStack();
 		}
 		player.inventory.addItemStackToInventory(result);
 		if (!result.isEmpty()) {
@@ -232,12 +235,15 @@ public class EventHandlerServer {
 //		}
 	}
 
+	/*  */
 	@SubscribeEvent
 	public static void onStructureDetect(RightClickBlock event){
 		ItemStack stack = event.getItemStack();
 		NBTTagCompound compound = stack.getTagCompound();
 		if(stack.getItem() == ItemHandler.bluePrint && compound != null && compound.hasKey("blueprint.structure")){
 			StructureData data = new StructureData(compound);
+			boolean result = StructureUtils.checkStructure(event.getWorld(), event.getPos(), data);
+			if(result) event.getEntityPlayer().sendMessage(new TextComponentTranslation("eok.structure.complete"));
 		}
 	}
 }

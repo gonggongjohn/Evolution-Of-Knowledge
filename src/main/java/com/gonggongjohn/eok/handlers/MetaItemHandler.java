@@ -33,6 +33,19 @@ public class MetaItemHandler {
 		}
 	});
 
+	public static final MetaValueItem CONVEX_LENS = META_ITEM.addItem(1, "convex_lens");
+	public static final MetaValueItem CONCAVE_LENS = META_ITEM.addItem(2, "concave_lens");
+	public static final MetaValueItem CHIPPED_FLINT = META_ITEM.addItem(3, "chipped_flint");
+	public static final MetaValueItem GROUND_FLINT = META_ITEM.addItem(4, "ground_flint");
+	public static final MetaValueItem PLANT_FIBER = META_ITEM.addItem(5, "plant_fiber");
+	public static final MetaValueItem RUBBER_MAT = META_ITEM.addItem(6, "rubber_mat");
+	public static final MetaValueItem SIMPLE_HEMP_ROPE = META_ITEM.addItem(7, "simple_hemp_rope");
+	public static final MetaValueItem STRONG_HEMP_ROPE = META_ITEM.addItem(8, "strong_hemp_rope");
+	public static final MetaValueItem SHORT_STICK = META_ITEM.addItem(9, "short_stick");
+	public static final MetaValueItem TUBE = META_ITEM.addItem(10, "tube");
+
+
+
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {
 		META_ITEM.registerItemModel();
