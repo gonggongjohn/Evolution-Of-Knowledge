@@ -1,6 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.item.meta.MetaItem;
 import com.gonggongjohn.eok.api.structure.StructureData;
 import com.gonggongjohn.eok.api.structure.StructureUtils;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;
@@ -51,7 +52,7 @@ public class EventHandlerServer {
 		if (e.getHarvester() != null) {
 			EntityPlayer player = e.getHarvester();
 			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (GTMetaItemsHandler.GRINDED_FLINT.isItemEqual(stack)) {
+			if (stack.getItem() instanceof MetaItem && ((MetaItem)stack.getItem()).getMetaValueItem(stack) == MetaItemHandler.GROUND_FLINT) {
 				Block block = e.getState().getBlock();
 				Random rand = new Random(System.currentTimeMillis());
 				if (block == Blocks.LEAVES || block == Blocks.LEAVES2) {
@@ -110,9 +111,9 @@ public class EventHandlerServer {
 		stack.shrink(1);
 		ItemStack result;
 		if (vec.x >= 0.25 && vec.x <= 0.75 && vec.z >= 0.25 && vec.z <= 0.75) {
-			result = GTMetaItemsHandler.GRINDED_FLINT.getStackForm();
+			result = MetaItemHandler.GROUND_FLINT.getItemStack();
 		} else {
-			result = GTMetaItemsHandler.CHIPPED_FLINT.getStackForm();
+			result = MetaItemHandler.CHIPPED_FLINT.getItemStack();
 		}
 		player.inventory.addItemStackToInventory(result);
 		if (!result.isEmpty()) {

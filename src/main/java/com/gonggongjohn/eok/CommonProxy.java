@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
-		GTMetaItemsHandler.init();
 		TileEntityHandler.register();
 		new ConfigHandler(event);
 		EntityHandler.register();

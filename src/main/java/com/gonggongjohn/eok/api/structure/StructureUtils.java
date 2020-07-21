@@ -1,10 +1,6 @@
 package com.gonggongjohn.eok.api.structure;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.utils.ComponentRelation;
-import com.gonggongjohn.eok.utils.JudgeWithFacing;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -25,7 +21,7 @@ public class StructureUtils {
                         break;
                     }
                 }
-                if(checkFlag) return true;
+                if (checkFlag) return true;
             }
         }
         return false;

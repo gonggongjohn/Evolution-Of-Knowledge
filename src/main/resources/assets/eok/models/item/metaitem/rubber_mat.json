@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "eok:items/rubber_mat"
+    "layer0": "eok:items/metaitem/rubber_mat"
   }
 }

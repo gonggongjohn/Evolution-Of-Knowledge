@@ -9,12 +9,6 @@ item.eok.flint_fragment.name=Flint Fragment
 item.eok.chipped_flint_fragment.name=Chipped Flint Fragment
 item.eok.polished_flint_fragment.name=Polished Flint Fragment
 
-item.eok.plant_fiber.name=Plant Fiber
-item.eok.short_stick.name=Short Stick
-item.eok.tube.name=Tube
-item.eok.rubber_mat.name=Rubber Mat
-item.eok.simple_hemp_rope.name=Simple Hemp Rope
-item.eok.strong_hemp_rope.name=Strong Hemp Rope
 item.eok.torcherino.name=Torcherino
 item.eok.fire_stick.name=Fire Stick
 item.eok.machine_gun.name=Machine Gun
@@ -32,20 +26,19 @@ item.eok.redstone_leggings.name=Redstone Leggings
 item.eok.redstone_boots.name=Redstone Boots
 item.eok.blue_print.name=Blueprint
 
-item.eok.pickaxe.name=Pickaxe
-item.eok.axe.name=Axe
-item.eok.shovel.name=Shovel
-item.eok.sword.name=Sword
-
 metaitem.eok.elementary_research_table.name=BluePrint of Elementary Research Table
-metaitem.eok.test_2d_core.name=BluePrint of Test 2D Core (for debug)
-metaitem.eok.test_3d_core.name=BluePrint of Test 3D core (for debug)
 
 metaitem.eok.eok_symbol.name=The EOK Symbol
 metaitem.eok.convex_lens.name=Convex Lens
 metaitem.eok.concave_lens.name=Concave Lens
-metaitem.eok.grinded_flint.name=Grinded Flint
+metaitem.eok.ground_flint.name=Ground Flint
 metaitem.eok.chipped_flint.name=Chipped Flint
+metaitem.eok.plant_fiber.name=Plant Fiber
+metaitem.eok.rubber_mat.name=Rubber Mat
+metaitem.eok.simple_hemp_rope.name=Simple Hemp Rope
+metaitem.eok.strong_hemp_rope.name=Strong Hemp Rope
+metaitem.eok.short_stick.name=Short Stick
+metaitem.eok.tube.name=Tube
 
 item.eok.machine_gun.description=Still Developing
 

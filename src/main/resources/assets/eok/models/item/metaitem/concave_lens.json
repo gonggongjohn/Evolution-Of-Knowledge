@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "eok:items/pickaxe"
+    "layer0": "eok:items/metaitem/concave_lens"
   }
 }
