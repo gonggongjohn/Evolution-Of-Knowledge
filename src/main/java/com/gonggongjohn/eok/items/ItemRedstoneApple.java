@@ -26,9 +26,10 @@ public class ItemRedstoneApple extends ItemFood implements IHasModel {
     @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if (!worldIn.isRemote) {
-            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 250, 2));
-            player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 100, 1));
-            player.addExperience(10);
+            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 600, 1));
+            player.addPotionEffect(new PotionEffect(MobEffects.SATURATION, 100, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 160, 0));
+            player.addExperience(5);
         }
     }
 
