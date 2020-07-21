@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.gui.Colors;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
@@ -32,7 +32,7 @@ public class ElementHyperLink extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         this.x = x;
         this.y = y;
         int mouseX = ClientUtils.getMouseX();
@@ -47,7 +47,7 @@ public class ElementHyperLink extends Element {
     }
 
     @Override
-    protected void onClicked(DocumentRenderer renderer) {
+    protected void onClicked(DocumentRendererOld renderer) {
         int mouseX = ClientUtils.getMouseX();
         int mouseY = ClientUtils.getMouseY();
         if (mouseX > x && mouseX < x + renderer.width && mouseY > y && mouseY < y + 10) {

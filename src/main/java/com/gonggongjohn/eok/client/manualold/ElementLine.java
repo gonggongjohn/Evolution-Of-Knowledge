@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -38,7 +38,7 @@ class ElementLine extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         BufferBuilder bb = renderer.bufferBuilder;
         GLUtils.glLineWidth(width);
         GLUtils.enableBlend();

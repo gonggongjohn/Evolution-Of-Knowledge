@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.gonggongjohn.eok.client.manual.DocumentRenderer;
+import com.gonggongjohn.eok.client.manualold.DocumentRendererOld;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.File;
  * Want to load a document from your file system? Use this.
  *
  * @see GuiEOKManual
- * @see DocumentRenderer
+ * @see DocumentRendererOld
  */
 public class GuiDocumentPreview extends GuiEOKManual {
 
@@ -22,6 +22,6 @@ public class GuiDocumentPreview extends GuiEOKManual {
 
     @Override
     protected void initDocument() {
-        renderer = new DocumentRenderer(17, 13, 149, 13, 115, 135, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRenderer.localManualPath + path));
+        renderer = new DocumentRendererOld(17, 13, 149, 13, 115, 135, new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + DocumentRendererOld.localManualPath + path));
     }
 }

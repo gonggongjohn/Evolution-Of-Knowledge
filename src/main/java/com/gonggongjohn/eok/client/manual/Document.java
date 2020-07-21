@@ -1,18 +1,12 @@
 package com.gonggongjohn.eok.client.manual;
 
+import java.util.ArrayList;
 import java.util.List;
 
 final class Document {
+    private List<Element> elementList = new ArrayList<>();
 
-    protected final List<Page> pages;
-
-    public Document(List<Page> pages) {
-        this.pages = pages;
-    }
-
-    public void remove() {
-        for (Page p : pages) {
-            p.remove();
-        }
+    void addElement(Element element) {
+        this.elementList.add(element);
     }
 }

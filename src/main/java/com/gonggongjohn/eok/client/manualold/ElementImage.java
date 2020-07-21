@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import com.github.zi_jing.cuckoolib.util.Size2i;
@@ -71,7 +71,7 @@ class ElementImage extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         GLUtils.bindTexture(this.location);
         GLUtils.drawScaledCustomSizeModalRect(x + renderer.width / 2 - realWidth / 2, y, 0, 0, width, height, realWidth, realHeight, width, height);
     }

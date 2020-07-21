@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 class ElementEndOfPage extends Element {
 
@@ -13,7 +13,7 @@ class ElementEndOfPage extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
 
     }
 }

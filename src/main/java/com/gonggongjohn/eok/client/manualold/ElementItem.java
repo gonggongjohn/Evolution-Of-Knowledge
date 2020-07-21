@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 public class ElementItem extends Element {
 
@@ -19,7 +19,7 @@ public class ElementItem extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         // TODO 自动生成的方法存根
 
     }

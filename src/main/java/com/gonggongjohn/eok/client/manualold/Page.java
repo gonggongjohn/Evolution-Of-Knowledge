@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import net.minecraft.client.Minecraft;
@@ -15,7 +15,7 @@ final class Page {
         this.elements = elements;
     }
 
-    public void draw(int orgX, int orgY, DocumentRenderer renderer) {
+    public void draw(int orgX, int orgY, DocumentRendererOld renderer) {
         int currentX = orgX;
         int currentY = orgY;
         for (Element element : elements) {

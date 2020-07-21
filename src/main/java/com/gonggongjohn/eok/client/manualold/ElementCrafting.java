@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 class ElementCrafting extends Element {
 
@@ -16,7 +16,7 @@ class ElementCrafting extends Element {
     // TODO
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         // TODO 自动生成的方法存根
 
     }

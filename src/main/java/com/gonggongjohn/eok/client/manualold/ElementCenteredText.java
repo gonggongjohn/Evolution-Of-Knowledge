@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.client.manual;
+package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.gui.Colors;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
@@ -22,7 +22,7 @@ class ElementCenteredText extends Element {
     }
 
     @Override
-    protected void draw(int x, int y, DocumentRenderer renderer) {
+    protected void draw(int x, int y, DocumentRendererOld renderer) {
         GLUtils.drawCenteredString(str, x + renderer.width / 2, y, Colors.DEFAULT_BLACK);
     }
 }
