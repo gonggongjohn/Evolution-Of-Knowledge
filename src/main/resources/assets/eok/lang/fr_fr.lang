@@ -14,16 +14,7 @@ item.eok.fire_stick.name=Bois au Feu
 item.eok.machine_gun.name=Mitrailleuse
 item.eok.eok_manual.name=EOK manuel
 item.eok.golden_egg.name=Oeuf d'or
-item.eok.redstone_pickaxe.name=Pioche de Redstone
-item.eok.redstone_axe.name=红石斧
-item.eok.redstone_sword.name=红石剑
-item.eok.redstone_shovel.name=红石锹
-item.eok.redstone_hoe.name=红石锄
 item.eok.redstone_apple.name=Pomme de Redstone
-item.eok.redstone_helmet.name=红石头盔
-item.eok.redstone_chestplate.name=红石胸甲
-item.eok.redstone_leggings.name=红石护腿
-item.eok.redstone_boots.name=红石靴子
 item.eok.blue_print.name=蓝图
 
 metaitem.eok.elementary_research_table.name=Blueprint de la table de recherche
@@ -39,6 +30,15 @@ metaitem.eok.short_stick.name=Bâton Courts
 metaitem.eok.tube.name=Tube à Essai
 metaitem.eok.simple_hemp_rope.name=Chanvre Corde
 metaitem.eok.strong_hemp_rope.name=Chanvre Corde Renforfée
+metaitem.eok.redstone_helmet.name=红石头盔
+metaitem.eok.redstone_chestplate.name=红石胸甲
+metaitem.eok.redstone_leggings.name=红石护腿
+metaitem.eok.redstone_boots.name=红石靴子
+metaitem.eok.redstone_pickaxe.name=Pioche de Redstone
+metaitem.eok.redstone_axe.name=红石斧
+metaitem.eok.redstone_sword.name=红石剑
+metaitem.eok.redstone_shovel.name=红石锹
+metaitem.eok.redstone_hoe.name=红石锄
 
 item.eok.machine_gun.description=en construction...
 

@@ -14,17 +14,8 @@ item.eok.fire_stick.name=Fire Stick
 item.eok.machine_gun.name=Machine Gun
 item.eok.eok_manual.name=EOK Manual
 item.eok.golden_egg.name=Golden Egg
-item.eok.redstone_pickaxe.name=Redstone Pickaxe
-item.eok.redstone_axe.name=Redstone Axe
-item.eok.redstone_sword.name=Redstone Sword
-item.eok.redstone_shovel.name=Redstone Shovel
-item.eok.redstone_hoe.name=Redstone Hoe
-item.eok.redstone_apple.name=Redstone Apple
-item.eok.redstone_helmet.name=Redstone Helmet
-item.eok.redstone_chestplate.name=Redstone Chestplate
-item.eok.redstone_leggings.name=Redstone Leggings
-item.eok.redstone_boots.name=Redstone Boots
 item.eok.blue_print.name=Blueprint
+item.eok.redstone_apple.name=Redstone Apple
 
 metaitem.eok.elementary_research_table.name=BluePrint of Elementary Research Table
 
@@ -39,6 +30,15 @@ metaitem.eok.simple_hemp_rope.name=Simple Hemp Rope
 metaitem.eok.strong_hemp_rope.name=Strong Hemp Rope
 metaitem.eok.short_stick.name=Short Stick
 metaitem.eok.tube.name=Tube
+metaitem.eok.redstone_pickaxe.name=Redstone Pickaxe
+metaitem.eok.redstone_axe.name=Redstone Axe
+metaitem.eok.redstone_sword.name=Redstone Sword
+metaitem.eok.redstone_shovel.name=Redstone Shovel
+metaitem.eok.redstone_hoe.name=Redstone Hoe
+metaitem.eok.redstone_helmet.name=Redstone Helmet
+metaitem.eok.redstone_chestplate.name=Redstone Chestplate
+metaitem.eok.redstone_leggings.name=Redstone Leggings
+metaitem.eok.redstone_boots.name=Redstone Boots
 
 item.eok.machine_gun.description=Still Developing
 
