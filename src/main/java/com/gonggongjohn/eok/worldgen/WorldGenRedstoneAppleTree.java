@@ -38,7 +38,7 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
 
                             for (int k1 = pos.getZ() - l2; k1 <= pos.getZ() + l2; ++k1) {
                                 BlockPos blockpos = new BlockPos(i3, i2 + 6, k1);
-                                if(world.isAirBlock(blockpos))
+                                if (world.isAirBlock(blockpos))
                                     world.setBlockState(blockpos, LEAF);
                             }
                         }
@@ -66,7 +66,8 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
                     }
 
                     for (int j = 1; j < 6; j++) {
-                        world.setBlockState(pos.up(j), BlockHandler.blockRedstoneLog.getDefaultState());
+                        if (world.isAirBlock(pos))
+                            world.setBlockState(pos.up(j), BlockHandler.blockRedstoneLog.getDefaultState());
                     }
                 }
             }
