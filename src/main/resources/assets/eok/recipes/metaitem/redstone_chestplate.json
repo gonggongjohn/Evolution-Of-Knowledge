@@ -1,9 +1,9 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "###",
     "# #",
-    "# #"
+    "###",
+    "###"
   ],
   "key": {
     "#": {
@@ -11,6 +11,6 @@
     }
   },
   "result": {
-    "item": "eok:redstone_leggings"
+    "item": "eok:meta_item0:17"
   }
 }

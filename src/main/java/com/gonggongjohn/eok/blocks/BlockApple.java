@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok.blocks;
 
+import com.github.zi_jing.cuckoolib.item.ItemStackUtil;
 import com.gonggongjohn.eok.api.render.ICustomModel;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
@@ -8,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
@@ -78,5 +80,12 @@ public class BlockApple extends Block implements ICustomModel {
     @Override
     public int getMetaData(ModelRegistryEvent e) {
         return 0;
+    }
+
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (worldIn.getBlockState(pos.up()).getBlock() != Blocks.LEAVES) {
+            ItemStackUtil.dropItem(worldIn, pos, new ItemStack(ItemHandler.Redstone_Apple));
+            worldIn.setBlockToAir(pos);
+        }
     }
 }
