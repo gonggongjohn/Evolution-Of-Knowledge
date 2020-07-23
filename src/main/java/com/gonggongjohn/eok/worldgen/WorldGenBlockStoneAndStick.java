@@ -34,7 +34,7 @@ public class WorldGenBlockStoneAndStick implements IWorldGenerator {
 
     private boolean canSustainSt(World world, BlockPos pos) {
         Block block = world.getBlockState(pos).getBlock();
-        boolean flag1 = world.isAirBlock(pos.up()) || world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER;
+        boolean flag1 = world.isAirBlock(pos.up()) || world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER || world.getBlockState(pos.up()).getBlock() == Blocks.TALLGRASS;
         boolean flag2 = block == Blocks.GRASS || block == Blocks.STONE || block == Blocks.SAND;
         return flag1 & flag2;
     }

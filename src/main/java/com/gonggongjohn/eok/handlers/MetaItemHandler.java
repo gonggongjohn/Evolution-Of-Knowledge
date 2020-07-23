@@ -1,11 +1,9 @@
 package com.gonggongjohn.eok.handlers;
 
+import com.github.zi_jing.cuckoolib.metaitem.MetaItem;
+import com.github.zi_jing.cuckoolib.metaitem.MetaValueItem;
+import com.github.zi_jing.cuckoolib.metaitem.module.IItemInteraction;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.item.meta.MetaItem;
-import com.gonggongjohn.eok.api.item.meta.MetaValueItem;
-import com.gonggongjohn.eok.api.item.meta.module.IItemInteraction;
-import com.gonggongjohn.eok.items.*;
-import com.gonggongjohn.eok.utils.ToolMaterials;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,16 +43,15 @@ public class MetaItemHandler {
 	public static final MetaValueItem STRONG_HEMP_ROPE = META_ITEM.addItem(8, "strong_hemp_rope");
 	public static final MetaValueItem SHORT_STICK = META_ITEM.addItem(9, "short_stick");
 	public static final MetaValueItem TUBE = META_ITEM.addItem(10, "tube");
-	public static final MetaValueItem REDSTONE_SWORD = META_ITEM.addItem(11,"redstone_sword");
-	public static final MetaValueItem REDSTONE_PICKAXE = META_ITEM.addItem(12,"redstone_pickaxe");
-	public static final MetaValueItem REDSTONE_AXE = META_ITEM.addItem(13,"redstone_axe");
-	public static final MetaValueItem REDSTONE_HOE = META_ITEM.addItem(14,"redstone_hoe");
-	public static final MetaValueItem REDSTONE_SPADE = META_ITEM.addItem(15,"redstone_shovel");
-	public static final MetaValueItem REDSTONE_HELMET = META_ITEM.addItem(16,"redstone_helmet");
-	public static final MetaValueItem REDSTONE_CHESTPLATE = META_ITEM.addItem(17,"redstone_chestplate");
-	public static final MetaValueItem REDSTONE_LEGGINGS = META_ITEM.addItem(18,"redstone_leggings");
-	public static final MetaValueItem REDSTONE_BOOTS = META_ITEM.addItem(19,"redstone_boots");
-
+	public static final MetaValueItem REDSTONE_SWORD = META_ITEM.addItem(11, "redstone_sword");
+	public static final MetaValueItem REDSTONE_PICKAXE = META_ITEM.addItem(12, "redstone_pickaxe");
+	public static final MetaValueItem REDSTONE_AXE = META_ITEM.addItem(13, "redstone_axe");
+	public static final MetaValueItem REDSTONE_HOE = META_ITEM.addItem(14, "redstone_hoe");
+	public static final MetaValueItem REDSTONE_SPADE = META_ITEM.addItem(15, "redstone_shovel");
+	public static final MetaValueItem REDSTONE_HELMET = META_ITEM.addItem(16, "redstone_helmet");
+	public static final MetaValueItem REDSTONE_CHESTPLATE = META_ITEM.addItem(17, "redstone_chestplate");
+	public static final MetaValueItem REDSTONE_LEGGINGS = META_ITEM.addItem(18, "redstone_leggings");
+	public static final MetaValueItem REDSTONE_BOOTS = META_ITEM.addItem(19, "redstone_boots");
 
 
 	@SubscribeEvent
@@ -65,5 +62,6 @@ public class MetaItemHandler {
 	@SubscribeEvent
 	public static void onItemRegister(Register<Item> event) {
 		event.getRegistry().register(META_ITEM);
+		META_ITEM.setCreativeTab(EOK.tabEOK);
 	}
 }

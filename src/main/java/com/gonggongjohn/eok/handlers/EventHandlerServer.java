@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.handlers;
 
+import com.github.zi_jing.cuckoolib.metaitem.MetaItem;
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.item.meta.MetaItem;
 import com.gonggongjohn.eok.api.structure.StructureData;
 import com.gonggongjohn.eok.api.structure.StructureUtils;
 import com.gonggongjohn.eok.capabilities.CapabilityPlayerState;

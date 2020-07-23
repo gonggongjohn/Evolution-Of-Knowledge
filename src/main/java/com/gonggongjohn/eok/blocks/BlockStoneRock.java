@@ -30,8 +30,8 @@ import java.util.Random;
 public class BlockStoneRock extends Block implements IHasModel {
     public static final PropertyInteger MODELTYPE = PropertyInteger.create("model_type", 0, 7);
     private static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0D, 0D, 0D, 0D, 0D, 0D);
+
     private static final AxisAlignedBB STONE_ROCK_AABB_0 = new AxisAlignedBB(0.000000D, 0.000000D, 0.187500D, 0.500000D, 0.125000D, 0.687500D);
-    ;
     private static final AxisAlignedBB STONE_ROCK_AABB_1 = new AxisAlignedBB(0.375000D, 0.000000D, 0.250000D, 0.875000D, 0.125000D, 0.812500D);
     private static final AxisAlignedBB STONE_ROCK_AABB_2 = new AxisAlignedBB(0.250000D, 0.000000D, 0.250000D, 0.875000D, 0.125000D, 0.812500D);
     private static final AxisAlignedBB STONE_ROCK_AABB_3 = new AxisAlignedBB(0.437500D, 0.000000D, 0.187500D, 0.812500D, 0.125000D, 0.812500D);
