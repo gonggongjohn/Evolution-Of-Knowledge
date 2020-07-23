@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.client.manualold;
 
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
-import com.github.zi_jing.cuckoolib.util.Size2i;
+import com.github.zi_jing.cuckoolib.util.math.Size2i;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.util.ResourceLocation;
