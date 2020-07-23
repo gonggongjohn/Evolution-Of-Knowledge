@@ -2,10 +2,13 @@ package com.gonggongjohn.eok;
 
 import com.gonggongjohn.eok.handlers.CapabilityHandler;
 import com.gonggongjohn.eok.handlers.CommandHandler;
+import com.gonggongjohn.eok.handlers.MetaItemHandler;
 import com.gonggongjohn.eok.handlers.WorldGenHandler;
 import com.gonggongjohn.eok.network.*;
 import com.gonggongjohn.eok.tweakers.TweakersMain;
-import com.gonggongjohn.eok.utils.*;
+import com.gonggongjohn.eok.utils.InspirationDict;
+import com.gonggongjohn.eok.utils.MathUtils;
+import com.gonggongjohn.eok.utils.ResearchDict;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ReportedException;
@@ -28,6 +31,10 @@ public class EOK {
 	public static final String NAME = "Evolution Of Knowledge";
 	public static final String VERSION = "@EOKVERSION@";
 	public static final String DEPENDENCIES = "required-after:tmc@[1.3.1.1,);required-after:cuckoolib;required-after:gregtech@[1.8.13.465,)";
+
+	public EOK() {
+		MetaItemHandler.setup();
+	}
 
 	@Mod.Instance
 	public static EOK instance;

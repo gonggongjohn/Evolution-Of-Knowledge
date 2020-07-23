@@ -5,7 +5,6 @@ import com.github.zi_jing.cuckoolib.metaitem.MetaValueItem;
 import com.github.zi_jing.cuckoolib.metaitem.module.IItemInteraction;
 import com.gonggongjohn.eok.EOK;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -13,11 +12,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@SuppressWarnings("unused")
 @EventBusSubscriber(modid = EOK.MODID)
 public class MetaItemHandler {
     public static final MetaItem META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
@@ -29,9 +26,13 @@ public class MetaItemHandler {
                 player.sendStatusMessage(new TextComponentTranslation("eok.messages.welcome_to_eok"), false);
                 player.swingArm(hand);
             }
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
+            return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
         }
     });
+
+    static {
+        META_ITEM.setCreativeTab(EOK.tabEOK);
+    }
 
     public static final MetaValueItem CONVEX_LENS = META_ITEM.addItem(1, "convex_lens");
     public static final MetaValueItem CONCAVE_LENS = META_ITEM.addItem(2, "concave_lens");
@@ -53,15 +54,9 @@ public class MetaItemHandler {
     public static final MetaValueItem REDSTONE_LEGGINGS = META_ITEM.addItem(18, "redstone_leggings");
     public static final MetaValueItem REDSTONE_BOOTS = META_ITEM.addItem(19, "redstone_boots");
 
-
-    @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
-        META_ITEM.registerItemModel();
-    }
-
-    @SubscribeEvent
-    public static void onItemRegister(Register<Item> event) {
-        event.getRegistry().register(META_ITEM);
-        META_ITEM.setCreativeTab(EOK.tabEOK);
+    /**
+     * 没有任何用途，它仅被用来加载{@link MetaItemHandler}这个类
+     */
+    public static void setup() {
     }
 }
