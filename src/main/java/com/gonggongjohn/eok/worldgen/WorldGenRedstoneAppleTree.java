@@ -66,8 +66,7 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
                     }
 
                     for (int j = 1; j < 6; j++) {
-                        if (world.isAirBlock(pos))
-                            world.setBlockState(pos.up(j), BlockHandler.blockRedstoneLog.getDefaultState());
+                        world.setBlockState(pos.up(j), BlockHandler.blockRedstoneLog.getDefaultState());
                     }
                 }
             }
