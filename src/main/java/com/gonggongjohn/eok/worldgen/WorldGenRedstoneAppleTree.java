@@ -31,6 +31,20 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
                 if (this.canSustainSt(world, pos)) {
 
                     for (int i2 = pos.getY() - 3 + i; i2 <= pos.getY() + i; ++i2) {
+                        int k2 = i2 - (pos.getY() + i);
+                        int l2 = 1 - k2 / 2;
+
+                        for (int i3 = pos.getX() - l2; i3 <= pos.getX() + l2; ++i3) {
+
+                            for (int k1 = pos.getZ() - l2; k1 <= pos.getZ() + l2; ++k1) {
+                                BlockPos blockpos = new BlockPos(i3, i2 + 6, k1);
+                                if(world.isAirBlock(blockpos))
+                                    world.setBlockState(blockpos, LEAF);
+                            }
+                        }
+                    }
+
+                    for (int i2 = pos.getY() - 3 + i; i2 <= pos.getY() + i; ++i2) {
 
                         int k2 = i2 - (pos.getY() + i);
                         int l2 = 1 - k2 / 2;
@@ -43,8 +57,7 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
 
                                     BlockPos fruitPos = new BlockPos(i3, i2 + 5, k1);
 
-                                    if (random.nextInt(3) == 1) {
-
+                                    if (random.nextInt(7) < 2 && world.isAirBlock(fruitPos) && world.getBlockState(fruitPos.up()).getBlock() == Blocks.LEAVES) {
                                         world.setBlockState(fruitPos, BlockHandler.blockApple.getDefaultState());
                                     }
                                 }
@@ -52,22 +65,7 @@ public class WorldGenRedstoneAppleTree implements IWorldGenerator {
                         }
                     }
 
-                    for (int i2 = pos.getY() - 3 + i; i2 <= pos.getY() + i; ++i2) {
-                        int k2 = i2 - (pos.getY() + i);
-                        int l2 = 1 - k2 / 2;
-
-                        for (int i3 = pos.getX() - l2; i3 <= pos.getX() + l2; ++i3) {
-
-                            for (int k1 = pos.getZ() - l2; k1 <= pos.getZ() + l2; ++k1) {
-                                BlockPos blockpos = new BlockPos(i3, i2 + 6, k1);
-
-                                world.setBlockState(blockpos, LEAF);
-                            }
-                        }
-                    }
-
-                    for (int j = 0; j < 6; j++) {
-
+                    for (int j = 1; j < 6; j++) {
                         world.setBlockState(pos.up(j), BlockHandler.blockRedstoneLog.getDefaultState());
                     }
                 }

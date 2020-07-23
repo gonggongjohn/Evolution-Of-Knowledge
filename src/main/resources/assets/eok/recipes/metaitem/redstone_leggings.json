@@ -1,19 +1,16 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    " # ",
-    " X ",
-    " X "
+    "###",
+    "# #",
+    "# #"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:stick"
-    },
     "#": {
       "item": "minecraft:redstone_block"
     }
   },
   "result": {
-    "item": "eok:redstone_shovel"
+    "item": "eok:meta_item0:18"
   }
 }
