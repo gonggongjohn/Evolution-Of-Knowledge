@@ -72,7 +72,6 @@ public class BlockStoneRock extends Block implements IHasModel {
     @Nonnull
     @Override
     public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
-        // System.out.println(this.getMetaFromState(state) + pos.toString());
         switch (this.getMetaFromState(state)) {
             case 0:
                 return STONE_ROCK_AABB_0;
