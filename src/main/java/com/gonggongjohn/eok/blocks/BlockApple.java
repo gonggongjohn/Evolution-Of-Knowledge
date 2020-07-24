@@ -23,7 +23,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 
 public class BlockApple extends Block implements ICustomModel {
 
-    public final static AxisAlignedBB APPLE_AABB = new AxisAlignedBB(0.25D, 0.55D, 0.25D, 0.75D, 1.0D, 0.75D);
+    public final static AxisAlignedBB APPLE_AABB = new AxisAlignedBB(0.312500D, 0.625000D, 0.312500D, 0.687500D, 1.000000D, 0.687500D);
     public final String name = "apple";
 
     public BlockApple() {
