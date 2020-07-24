@@ -35,14 +35,14 @@ public class BlockStoneRock extends Block implements IHasModel {
     public static final PropertyInteger MODELTYPE = PropertyInteger.create("model_type", 0, 7);
     private static final AxisAlignedBB EMPTY_AABB = new AxisAlignedBB(0D, 0D, 0D, 0D, 0D, 0D);
 
-    private static final AxisAlignedBB STONE_ROCK_AABB_0 = new AxisAlignedBB(0.000000D, 0.000000D, 0.187500D, 0.500000D, 0.125000D, 0.687500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_1 = new AxisAlignedBB(0.375000D, 0.000000D, 0.250000D, 0.875000D, 0.125000D, 0.812500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_2 = new AxisAlignedBB(0.250000D, 0.000000D, 0.250000D, 0.875000D, 0.125000D, 0.812500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_3 = new AxisAlignedBB(0.437500D, 0.000000D, 0.187500D, 0.812500D, 0.125000D, 0.812500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_4 = new AxisAlignedBB(0.062500D, 0.000000D, 0.500000D, 0.625000D, 0.062500D, 0.812500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_5 = new AxisAlignedBB(0.250000D, 0.000000D, 0.125000D, 0.750000D, 0.125000D, 0.687500D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_6 = new AxisAlignedBB(0.312500D, 0.000000D, 0.062500D, 1.000000D, 0.125000D, 0.625000D);
-    private static final AxisAlignedBB STONE_ROCK_AABB_7 = new AxisAlignedBB(0.250000D, 0.000000D, 0.312500D, 0.875000D, 0.125000D, 0.750000D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_0 = new AxisAlignedBB(0D, 0D, 0.1875D, 0.5D, 0.125D, 0.6875D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_1 = new AxisAlignedBB(0.375D, 0D, 0.25D, 0.875D, 0.125D, 0.8125D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_2 = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.875D, 0.125D, 0.8125D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_3 = new AxisAlignedBB(0.4375D, 0D, 0.1875D, 0.8125D, 0.125D, 0.8125D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_4 = new AxisAlignedBB(0.0625D, 0D, 0.5D, 0.625D, 0.0625D, 0.8125D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_5 = new AxisAlignedBB(0.25D, 0D, 0.125D, 0.75D, 0.125D, 0.6875D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_6 = new AxisAlignedBB(0.3125D, 0D, 0.0625D, 1D, 0.125D, 0.625D);
+    private static final AxisAlignedBB STONE_ROCK_AABB_7 = new AxisAlignedBB(0.25D, 0D, 0.3125D, 0.875D, 0.125D, 0.75D);
 
     public BlockStoneRock() {
         super(Material.ROCK);
