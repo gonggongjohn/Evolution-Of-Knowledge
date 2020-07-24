@@ -106,6 +106,8 @@ eok.research.logarithm.name=Mathématiques: Calcul logarithmique
 
 eok.blueprint.component.pre=蓝图组件：
 
+eok.structure.complete=Structure Complete!
+
 eok.inspiration.query.pre=Vous avez les inspirations suivantes:
 eok.inspiration.get.pre=Gagner l'inspiration:
 eok.inspiration.root.name=Racine d'inspiration
@@ -122,3 +124,4 @@ entity.eok.entity_goldenchicken.name=Poule dorée
 
 eok.gui.merchant.title=Marchand
 eok.gui.merchant.button.buy=Acheter
+
