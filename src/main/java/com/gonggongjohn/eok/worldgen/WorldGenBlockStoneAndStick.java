@@ -17,7 +17,7 @@ public class WorldGenBlockStoneAndStick implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         for (int i = 0; i < 3; i++)
-            if (random.nextInt(13) < 7) {
+            if (random.nextInt(13) < 8) {
                 BlockPos pos = new BlockPos(chunkX * 16 + 8 + random.nextInt(15), 0, chunkZ * 16 + 8 + random.nextInt(15));
                 pos = world.getTopSolidOrLiquidBlock(pos).down();
                 if (this.canSustainSt(world, pos)) {
@@ -25,7 +25,7 @@ public class WorldGenBlockStoneAndStick implements IWorldGenerator {
                 }
             }
         for (int i = 0; i < 2; i++)
-            if (random.nextInt(13) < 7) {
+            if (random.nextInt(13) < 8) {
                 BlockPos pos = new BlockPos(chunkX * 16 + 8 + random.nextInt(15), 0, chunkZ * 16 + 8 + random.nextInt(15));
                 pos = world.getTopSolidOrLiquidBlock(pos).down();
                 if (this.canSustainSt(world, pos)) {
