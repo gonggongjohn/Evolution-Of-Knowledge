@@ -1,7 +1,9 @@
 package com.gonggongjohn.eok.blocks;
 
+import com.github.zi_jing.cuckoolib.item.ItemStackUtil;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
+import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,6 +13,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -130,6 +134,13 @@ public class BlockStoneRock extends Block implements IHasModel {
 
     public IBlockState getRandomState() {
         return this.getDefaultState().withProperty(MODELTYPE, new Random().nextInt(8));
+    }
+
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.AIR) {
+            ItemStackUtil.dropItem(worldIn, pos, new ItemStack(BlockHandler.blockStoneRock));
+            worldIn.setBlockToAir(pos);
+        }
     }
 
     @Override

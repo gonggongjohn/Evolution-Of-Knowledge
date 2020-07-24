@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok.blocks;
 
+import com.github.zi_jing.cuckoolib.item.ItemStackUtil;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
@@ -11,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -49,6 +51,13 @@ public class BlockStick extends Block implements IHasModel {
     @Override
     public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
         return new ItemStack(Items.STICK);
+    }
+
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.AIR) {
+            ItemStackUtil.dropItem(worldIn, pos, new ItemStack(Items.STICK));
+            worldIn.setBlockToAir(pos);
+        }
     }
 
     @Override
