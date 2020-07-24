@@ -44,7 +44,7 @@ public class BlockStick extends Block implements IHasModel {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-        drops.add(new ItemStack(BlockHandler.blockStick));
+        drops.add(new ItemStack(Items.STICK));
     }
 
     @Nonnull
