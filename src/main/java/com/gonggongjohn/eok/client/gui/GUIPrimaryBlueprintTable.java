@@ -25,6 +25,14 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
     private static final ResourceLocation TEXTURE_BLUEPRINT = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/blueprint_in_table.png");
     private ContainerPrimaryBlueprintTable inventoryIn;
     private int offsetX, offsetY;
+    private int pageNum;
+    private int switchButtonSize = 20;
+    private int switchBackButtonOffsetX = 9;
+    private int switchBackButtonOffsetY = 3;
+    private int switchNextButtonOffsetX = 38;
+    private int switchNextButtonOffsetY = 3;
+    private int switchButtonTextureU = 227;
+    private int switchButtonTextureV = 215;
     private int writeButtonOffsetX = 222;
     private int writeButtonOffsetY = 103;
     private int writeButtonSize = 24;
@@ -88,8 +96,8 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
             this.mc.getTextureManager().bindTexture(TEXTURE_BLUEPRINT);
             this.drawTexturedModalRect(offsetX + this.blueprintOffsetX, offsetY + this.blueprintOffsetY, 0, 0, this.blueprintWidth, this.blueprintHeight);
             if(!isBlueprintSlotUsing){
-                for(int i = 4; i <= 12; i++){
-                    this.buttonList.add(new ButtonPrimaryBlueprintTableCenter(i, calcBlueprintAnchorX(i - 4), calcBlueprintAnchorY(i - 4), 18, 18, this));
+                for(int i = 6; i <= 14; i++){
+                    this.buttonList.add(new ButtonPrimaryBlueprintTableCenter(i, calcBlueprintAnchorX(i - 6), calcBlueprintAnchorY(i - 6), 18, 18, this));
                 }
                 NBTTagCompound compound = this.inventoryIn.getBlueprintSlot().getStack().getTagCompound();
                 if(compound != null && compound.hasKey("blueprint.category") && compound.hasKey("blueprint.structure")){
@@ -124,10 +132,43 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
     public void initGui() {
         super.initGui();
         isBlueprintSlotUsing = false;
+        pageNum = 0;
         layerNum = 0;
         offsetX = (this.width - this.xSize) / 2;
         offsetY = (this.height - this.ySize) / 2;
-        this.buttonList.add(new GuiButton(0, offsetX + this.writeButtonOffsetX, offsetY + this.writeButtonOffsetY, this.writeButtonSize, this.writeButtonSize, ""){
+        this.buttonList.add(new GuiButton(0, offsetX + this.switchNextButtonOffsetX, offsetY + this.switchNextButtonOffsetY, this.switchButtonSize, this.switchButtonSize, ""){
+            @Override
+            public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+                if(this.visible){
+                    GL11.glPushMatrix();
+                    GL11.glEnable(GL11.GL_BLEND);
+                    OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    mc.getTextureManager().bindTexture(TEXTURE_BACK);
+                    this.drawTexturedModalRect(this.x, this.y, switchButtonTextureU, switchButtonTextureV, this.width, this.height);
+                    GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glPopMatrix();
+                }
+            }
+        });
+        this.buttonList.add(new GuiButton(1, offsetX + this.switchBackButtonOffsetX, offsetY + this.switchBackButtonOffsetY, this.switchButtonSize, this.switchButtonSize, ""){
+            @Override
+            public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+                if(this.visible){
+                    GL11.glPushMatrix();
+                    GL11.glEnable(GL11.GL_BLEND);
+                    OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    mc.getTextureManager().bindTexture(TEXTURE_BACK);
+                    this.drawTexturedModalRect(this.x, this.y, switchButtonTextureU, switchButtonTextureV, this.width, this.height);
+                    GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glPopMatrix();
+                }
+            }
+        });
+        this.buttonList.add(new GuiButton(2, offsetX + this.writeButtonOffsetX, offsetY + this.writeButtonOffsetY, this.writeButtonSize, this.writeButtonSize, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
                 if(this.visible){
@@ -147,7 +188,7 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
                 }
             }
         });
-        this.buttonList.add(new GuiButton(1, offsetX + this.layerUpButtonOffsetX, offsetY + this.layerUpButtonOffsetY, this.layerButtonSize, this.layerButtonSize, ""){
+        this.buttonList.add(new GuiButton(3, offsetX + this.layerUpButtonOffsetX, offsetY + this.layerUpButtonOffsetY, this.layerButtonSize, this.layerButtonSize, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
                 if(this.visible){
@@ -167,7 +208,7 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
                 }
             }
         });
-        this.buttonList.add(new GuiButton(2, offsetX + this.layerDownButtonOffsetX, offsetY + this.layerDownButtonOffsetY, this.layerButtonSize, this.layerButtonSize, ""){
+        this.buttonList.add(new GuiButton(4, offsetX + this.layerDownButtonOffsetX, offsetY + this.layerDownButtonOffsetY, this.layerButtonSize, this.layerButtonSize, ""){
             @Override
             public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
                 if(this.visible){
@@ -187,58 +228,64 @@ public class GUIPrimaryBlueprintTable extends GuiContainer {
                 }
             }
         });
-        this.buttonList.add(new ButtonPrimaryBlueprintTableComponent(3, offsetX + componentBracketOffsetX, offsetY + componentBracketOffsetY, this.componentBracketCommonTextureU, this.componentBracketCommonTextureV,
+        this.buttonList.add(new ButtonPrimaryBlueprintTableComponent(5, offsetX + componentBracketOffsetX, offsetY + componentBracketOffsetY, this.componentBracketCommonTextureU, this.componentBracketCommonTextureV,
                 this.componentBracketChosenTextureU, this.componentBracketChosenTextureV, this.componentBracketSize, this.componentBracketSize, "", TEXTURE_BACK, this));
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
-        if(button.id == 0 && onBuildingStructure != null){
+        if(button.id == 0 && this.pageNum == 0){
+            this.pageNum++;
+        }
+        if(button.id == 1 && this.pageNum == 1){
+            this.pageNum--;
+        }
+        if(button.id == 2 && onBuildingStructure != null){
             EOK.getNetwork().sendToServer(new PacketBlueprintTable(onBuildingStructure.toNBT()));
         }
-        if(button.id == 1){
+        if(button.id == 3){
             if(isBlueprintSlotUsing){
                 layerNum++;
                 for(int i = 0; i < 9; i++){
-                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
+                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 6)).setContent(null);
                 }
                 ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
-                        int id = 4 + index.getY() * 3 + index.getZ();
+                        int id = 6 + index.getY() * 3 + index.getZ();
                         Block content = this.onBuildingStructure.query(index);
                         ((ButtonPrimaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }
             }
         }
-        if(button.id == 2){
+        if(button.id == 4){
             if(isBlueprintSlotUsing && layerNum > 0) {
                 layerNum--;
                 for(int i = 0; i < 9; i++){
-                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
+                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 6)).setContent(null);
                 }
                 ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
-                        int id = 4 + index.getY() * 3 + index.getZ();
+                        int id = 6 + index.getY() * 3 + index.getZ();
                         Block content = this.onBuildingStructure.query(index);
                         ((ButtonPrimaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }
             }
         }
-        if(button.id == 3){
+        if(button.id == 5){
             ButtonPrimaryBlueprintTableComponent btn = ((ButtonPrimaryBlueprintTableComponent)button);
             btn.flipActive();
             if(btn.isActive()) activeBlock = Blocks.IRON_BLOCK;
             else activeBlock = null;
         }
-        if(button.id >= 4 && button.id <= 12 && activeBlock != null){
+        if(button.id >= 6 && button.id <= 14 && activeBlock != null){
             if(((ButtonPrimaryBlueprintTableCenter)button).getContent() != activeBlock) {
                 ((ButtonPrimaryBlueprintTableCenter) button).setContent(activeBlock);
-                int row = (button.id - 4) / 3;
-                int column = (button.id - 4) % 3;
+                int row = (button.id - 6) / 3;
+                int column = (button.id - 6) % 3;
                 this.onBuildingStructure.set(this.layerNum, row, column, activeBlock);
             }
         }

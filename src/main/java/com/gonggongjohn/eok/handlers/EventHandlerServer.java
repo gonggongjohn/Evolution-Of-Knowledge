@@ -240,10 +240,12 @@ public class EventHandlerServer {
 	public static void onStructureDetect(RightClickBlock event){
 		ItemStack stack = event.getItemStack();
 		NBTTagCompound compound = stack.getTagCompound();
-		if(stack.getItem() == ItemHandler.bluePrint && compound != null && compound.hasKey("blueprint.structure")){
-			PrimaryStructureData data = new PrimaryStructureData(compound);
-			boolean result = StructureUtils.checkStructure(event.getWorld(), event.getPos(), data);
-			if(result) event.getEntityPlayer().sendMessage(new TextComponentTranslation("eok.structure.complete"));
+		if(stack.getItem() == ItemHandler.bluePrint && compound != null && compound.hasKey("blueprint.category") && compound.hasKey("blueprint.structure")){
+			if(compound.getString("blueprint.category").equals("primary")) {
+				PrimaryStructureData data = new PrimaryStructureData(compound);
+				boolean result = StructureUtils.checkStructure(event.getWorld(), event.getPos(), data);
+				if (result) event.getEntityPlayer().sendMessage(new TextComponentTranslation("eok.structure.complete"));
+			}
 		}
 	}
 }
