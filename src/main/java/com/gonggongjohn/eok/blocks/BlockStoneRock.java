@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.blocks;
 import com.github.zi_jing.cuckoolib.item.ItemStackUtil;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
+import com.gonggongjohn.eok.handlers.MetaItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -52,13 +53,13 @@ public class BlockStoneRock extends Block implements IHasModel {
 
     @Override
     public void getDrops(NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
-        drops.add(new ItemStack(BlockHandler.blockStoneRock));
+        drops.add(new ItemStack(MetaItemHandler.META_ITEM,1,11));
     }
 
     @Nonnull
     @Override
     public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player) {
-        return new ItemStack(Item.getItemFromBlock(this));
+        return new ItemStack(MetaItemHandler.META_ITEM,1,11);
     }
 
     @Override
@@ -136,7 +137,7 @@ public class BlockStoneRock extends Block implements IHasModel {
 
     public void neighborChanged(@Nonnull IBlockState state, World worldIn, BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos) {
         if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.AIR) {
-            ItemStackUtil.dropItem(worldIn, pos, new ItemStack(BlockHandler.blockStoneRock));
+            ItemStackUtil.dropItem(worldIn, pos, new ItemStack(MetaItemHandler.META_ITEM,1,11));
             worldIn.setBlockToAir(pos);
         }
     }

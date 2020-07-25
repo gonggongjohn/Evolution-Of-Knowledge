@@ -39,6 +39,7 @@ metaitem.eok.redstone_axe.name=红石斧
 metaitem.eok.redstone_sword.name=红石剑
 metaitem.eok.redstone_shovel.name=红石锹
 metaitem.eok.redstone_hoe.name=红石锄
+metaitem.eok.stone_rock.name=Bloc de roche
 
 item.eok.machine_gun.description=en construction...
 

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "eok:items/redstone_axe"
+    "layer0": "eok:items/metaitem/redstone_axe"
   }
 }

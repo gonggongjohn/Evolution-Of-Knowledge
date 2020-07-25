@@ -39,6 +39,7 @@ metaitem.eok.redstone_helmet.name=红石头盔
 metaitem.eok.redstone_chestplate.name=红石胸甲
 metaitem.eok.redstone_leggings.name=红石护腿
 metaitem.eok.redstone_boots.name=红石靴子
+metaitem.eok.stone_rock.name=小石块
 
 item.eok.machine_gun.description=仍处于开发阶段
 

@@ -39,6 +39,7 @@ metaitem.eok.redstone_helmet.name=Redstone Helmet
 metaitem.eok.redstone_chestplate.name=Redstone Chestplate
 metaitem.eok.redstone_leggings.name=Redstone Leggings
 metaitem.eok.redstone_boots.name=Redstone Boots
+metaitem.eok.stone_rock.name=Small Stone Rock
 
 item.eok.machine_gun.description=Still Developing
 
@@ -51,7 +52,7 @@ tile.eok.haystack.name=Haystack
 tile.eok.dried_haystack.name=Dried Haystack
 tile.eok.decomposed_haystack.name=Decomposed Haystack
 tile.eok.basket_ball.name=Basketball
-tile.eok.block_stone_rock.name=Stone Rock
+tile.eok.block_stone_rock.name=Small Stone Rock
 tile.eok.block_stick.name=Stick
 tile.eok.stone_mill.name=Stone Mill
 tile.eok.redstone_log.name=Redstone Log

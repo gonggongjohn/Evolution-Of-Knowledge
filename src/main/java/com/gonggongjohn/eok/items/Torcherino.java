@@ -59,10 +59,8 @@ public class Torcherino extends Item implements IHasModel {
         }
         //手上的火把越多，爆炸威力越强
         playerIn.attackEntityFrom(DamageSource.causeExplosionDamage(
-                worldIn.newExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 5.0F * count, false, true)),
+                worldIn.createExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, 6.0F * count, true)),
                 1000);
-
-        // worldIn.newExplosion(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ,
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
