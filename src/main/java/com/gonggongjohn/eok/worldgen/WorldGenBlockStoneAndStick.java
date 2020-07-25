@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok.worldgen;
 
+import com.gonggongjohn.eok.blocks.BlockStick;
 import com.gonggongjohn.eok.blocks.BlockStoneRock;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import net.minecraft.block.Block;
@@ -29,7 +30,7 @@ public class WorldGenBlockStoneAndStick implements IWorldGenerator {
                 BlockPos pos = new BlockPos(chunkX * 16 + 8 + random.nextInt(15), 0, chunkZ * 16 + 8 + random.nextInt(15));
                 pos = world.getTopSolidOrLiquidBlock(pos).down();
                 if (this.canSustainSt(world, pos)) {
-                    world.setBlockState(pos.up(), BlockHandler.blockStick.getDefaultState());
+                    world.setBlockState(pos.up(), ((BlockStick) BlockHandler.blockStick).getRandomState());
                 }
             }
     }

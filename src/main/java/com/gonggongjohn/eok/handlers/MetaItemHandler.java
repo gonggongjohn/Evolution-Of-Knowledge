@@ -45,6 +45,7 @@ public class MetaItemHandler {
     public static final MetaValueItem STRONG_HEMP_ROPE = META_ITEM.addItem(8, "strong_hemp_rope");
     public static final MetaValueItem SHORT_STICK = META_ITEM.addItem(9, "short_stick");
     public static final MetaValueItem TUBE = META_ITEM.addItem(10, "tube");
+    public static final MetaValueItem SMALL_STONE = META_ITEM.addItem(11, "small_stone");
 
     public static final MetaValueItem REDSTONE_SWORD = REDSTONE_META_ITEM.addItem(0, "redstone_sword");
     public static final MetaValueItem REDSTONE_PICKAXE = REDSTONE_META_ITEM.addItem(1, "redstone_pickaxe");

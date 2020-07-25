@@ -1,5 +1,39 @@
 {
-  "variants":{
-    "normal": { "model": "eok:block_stick" }
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "eok:blocks/rotated_oak_wood"
+    }
+  },
+  "variants": {
+    "normal": {
+      "model": "eok:stone_and_stick/block_stick_0"
+    },
+    "model_type": {
+      "0": {
+        "model": "eok:stone_and_stick/block_stick_0"
+      },
+      "1": {
+        "model": "eok:stone_and_stick/block_stick_1"
+      },
+      "2": {
+        "model": "eok:stone_and_stick/block_stick_2"
+      },
+      "3": {
+        "model": "eok:stone_and_stick/block_stick_3"
+      },
+      "4": {
+        "model": "eok:stone_and_stick/block_stick_4"
+      },
+      "5": {
+        "model": "eok:stone_and_stick/block_stick_5"
+      },
+      "6": {
+        "model": "eok:stone_and_stick/block_stick_6"
+      },
+      "7": {
+        "model": "eok:stone_and_stick/block_stick_7"
+      }
+    }
   }
 }
