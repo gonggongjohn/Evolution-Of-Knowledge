@@ -1,3 +1,7 @@
+# WARNING: EOK 1.7.10 IS NOT DEVELOPED AND SUPPORTED NOW, PLEASE GO TO THE BRANCH "1.12.2" OR "1.16".
+
+# 警告：EOK 1.7.10目前不再被开发和维护，请前往"1.12.2"或"1.16"分支。
+
 # Evolution Of Knowledge
 
 This is the official source code repository of the Minecraft mod Evolution Of Knowledge. Here you can get the up-to-date information about this mod.
