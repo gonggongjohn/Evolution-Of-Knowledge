@@ -12,18 +12,18 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 
-public class ContainerBlueprintTable extends Container implements ICBTHandler{
+public class ContainerSecondaryBlueprintTable extends Container implements ICBTHandler {
     protected final Slot penSlot;
     protected final Slot blueprintSlot;
-    private int penSlotOffsetX = 454 / 2;
-    private int penSlotOffsetY = 58 / 2;
-    private int blueprintSlotOffsetX = 454 / 2;
-    private int blueprintSlotOffsetY = 132 / 2;
-    private int inventorySlotOffsetX = 96 / 2;
-    private int inventorySlotOffsetY = 356 / 2;
-    public ContainerBlueprintTable(EntityPlayer player, TileEntity tileEntity){
+    private int penSlotOffsetX = 224;
+    private int penSlotOffsetY = 29;
+    private int blueprintSlotOffsetX = 224;
+    private int blueprintSlotOffsetY = 68;
+    private int inventorySlotOffsetX = 47;
+    private int inventorySlotOffsetY = 177;
+
+    public ContainerSecondaryBlueprintTable(EntityPlayer player, TileEntity tileEntity){
         super();
         this.penSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), 0, penSlotOffsetX, penSlotOffsetY);
         this.blueprintSlot = new SlotItemHandler(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN), 0, blueprintSlotOffsetX, blueprintSlotOffsetY){
@@ -46,6 +46,15 @@ public class ContainerBlueprintTable extends Container implements ICBTHandler{
     }
 
     @Override
+    public void onWriteActive(NBTTagCompound compound) {
+        ItemStack blueprintStack = this.blueprintSlot.getStack();
+        if (!blueprintStack.isEmpty()) {
+            blueprintStack.setTagCompound(compound);
+            this.blueprintSlot.putStack(blueprintStack);
+        }
+    }
+
+    @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return true;
     }
@@ -53,15 +62,6 @@ public class ContainerBlueprintTable extends Container implements ICBTHandler{
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         return null;
-    }
-
-    @Override
-    public void onWriteActive(NBTTagCompound compound) {
-        ItemStack blueprintStack = this.blueprintSlot.getStack();
-        if (!blueprintStack.isEmpty()) {
-            blueprintStack.setTagCompound(compound);
-            this.blueprintSlot.putStack(blueprintStack);
-        }
     }
 
     public Slot getPenSlot() {

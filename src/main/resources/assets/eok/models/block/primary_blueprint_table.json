@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "eok:blocks/blueprint_table_side",
-		"1": "eok:blocks/blueprint_table_top",
-		"particle": "eok:blocks/blueprint_table_side"
+		"0": "eok:blocks/primary_blueprint_table_side",
+		"1": "eok:blocks/primary_blueprint_table_top",
+		"particle": "eok:blocks/primary_blueprint_table_side"
 	},
 	"elements": [
 		{

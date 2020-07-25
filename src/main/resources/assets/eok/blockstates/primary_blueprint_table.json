@@ -1,0 +1,5 @@
+{
+  "variants":{
+    "normal": { "model": "eok:primary_blueprint_table" }
+  }
+}

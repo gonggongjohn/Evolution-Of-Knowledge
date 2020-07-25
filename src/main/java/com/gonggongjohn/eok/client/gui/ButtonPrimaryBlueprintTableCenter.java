@@ -9,11 +9,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
-public class ButtonBlueprintTableCenter extends GuiButton {
+public class ButtonPrimaryBlueprintTableCenter extends GuiButton {
     private Block content;
-    private GUIBlueprintTable fatherInstance;
+    private GUIPrimaryBlueprintTable fatherInstance;
 
-    public ButtonBlueprintTableCenter(int buttonId, int x, int y, int widthIn, int heightIn, GUIBlueprintTable fatherInstance) {
+    public ButtonPrimaryBlueprintTableCenter(int buttonId, int x, int y, int widthIn, int heightIn, GUIPrimaryBlueprintTable fatherInstance) {
         super(buttonId, x, y, widthIn, heightIn, "");
         this.fatherInstance = fatherInstance;
     }

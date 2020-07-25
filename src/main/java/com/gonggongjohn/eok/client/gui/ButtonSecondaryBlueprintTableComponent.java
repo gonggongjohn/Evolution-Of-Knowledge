@@ -4,22 +4,21 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class ButtonBlueprintTableComponent extends GuiButton {
+public class ButtonSecondaryBlueprintTableComponent extends GuiButton {
     private boolean activeTag;
     private int textureCommonU;
     private int textureCommonV;
     private int textureActiveU;
     private int textureActiveV;
     private ResourceLocation texturePath;
-    private GUIBlueprintTable fatherInstance;
+    private GUISecondaryBlueprintTable fatherInstance;
 
-    public ButtonBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, String buttonText, ResourceLocation texturePath, GUIBlueprintTable fatherInstance) {
+    public ButtonSecondaryBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, String buttonText, ResourceLocation texturePath, GUISecondaryBlueprintTable fatherInstance) {
         super(buttonId, x, y, widthIn, heightIn, buttonText);
         this.activeTag = false;
         this.textureCommonU = textureCommonU;
@@ -40,14 +39,14 @@ public class ButtonBlueprintTableComponent extends GuiButton {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             mc.getTextureManager().bindTexture(texturePath);
             if(activeTag)
-                drawModalRectWithCustomSizedTexture(this.x, this.y, this.textureActiveU, this.textureActiveV, this.width, this.height, 256.0F, 256.0F);
+                drawTexturedModalRect(this.x, this.y, this.textureActiveU, this.textureActiveV, this.width, this.height);
             else
-                drawModalRectWithCustomSizedTexture(this.x, this.y, this.textureCommonU, this.textureCommonV, this.width, this.height, 256.0F, 256.0F);
-            ItemStack stack = new ItemStack(Item.getItemFromBlock(Blocks.IRON_BLOCK));
+                drawTexturedModalRect(this.x, this.y, this.textureCommonU, this.textureCommonV, this.width, this.height);
+            ItemStack stack = new ItemStack(Items.IRON_INGOT);
             fatherInstance.drawItemStack(stack, this.x + 1, this.y + 1, "");
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
-                String name = I18n.format("eok.blueprint.component.pre") + Blocks.IRON_BLOCK.getLocalizedName();
+                String name = I18n.format("eok.blueprint.component.pre") + Items.IRON_INGOT.getUnlocalizedName();
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
             }
             GL11.glDisable(GL11.GL_BLEND);

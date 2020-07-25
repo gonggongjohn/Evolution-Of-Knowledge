@@ -10,7 +10,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TEBlueprintTable extends TileEntity implements ITickable {
+public class TESecondaryBlueprintTable extends TileEntity implements ITickable {
     protected final ItemStackHandler penSlot = new ItemStackHandler();
     protected final ItemStackHandler blueprintSlot = new ItemStackHandler();
 
@@ -61,6 +61,6 @@ public class TEBlueprintTable extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        //TODO
+
     }
 }

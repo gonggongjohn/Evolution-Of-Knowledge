@@ -1,8 +1,8 @@
 package com.gonggongjohn.eok.client.gui;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.structure.StructureData;
-import com.gonggongjohn.eok.inventory.ContainerBlueprintTable;
+import com.gonggongjohn.eok.api.structure.PrimaryStructureData;
+import com.gonggongjohn.eok.inventory.ContainerPrimaryBlueprintTable;
 import com.gonggongjohn.eok.network.PacketBlueprintTable;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -20,49 +20,49 @@ import org.lwjgl.opengl.GL11;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GUIBlueprintTable extends GuiContainer {
+public class GUIPrimaryBlueprintTable extends GuiContainer {
     private static final ResourceLocation TEXTURE_BACK = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/blueprint_table.png");
     private static final ResourceLocation TEXTURE_BLUEPRINT = new ResourceLocation(EOK.MODID + ":" + "textures/gui/container/blueprint_in_table.png");
-    private ContainerBlueprintTable inventoryIn;
+    private ContainerPrimaryBlueprintTable inventoryIn;
     private int offsetX, offsetY;
-    private int writeButtonOffsetX = 446 / 2;
-    private int writeButtonOffsetY = 206 / 2;
-    private int writeButtonSize = 47 / 2 + 1;
-    private int writeButtonCommonTextureU = 4 / 2;
-    private int writeButtonCommonTextureV = 426 / 2;
-    private int writeButtonHoverTextureU = 78 / 2;
-    private int writeButtonHoverTextureV = 426 / 2;
-    private int componentBracketSize = 36 / 2;
-    private int componentBracketCommonTextureU = 166 / 2;
-    private int componentBracketCommonTextureV = 432 / 2;
-    private int componentBracketChosenTextureU = 228 / 2;
-    private int componentBracketChosenTextureV = 432 / 2;
-    private int componentBracketOffsetX = 26 / 2;
-    private int componentBracketOffsetY = 66 / 2;
-    private int blueprintOffsetX = 88 / 2;
-    private int blueprintOffsetY = 56 / 2;
+    private int writeButtonOffsetX = 222;
+    private int writeButtonOffsetY = 103;
+    private int writeButtonSize = 24;
+    private int writeButtonCommonTextureU = 3;
+    private int writeButtonCommonTextureV = 214;
+    private int writeButtonHoverTextureU = 40;
+    private int writeButtonHoverTextureV = 214;
+    private int componentBracketSize = 18;
+    private int componentBracketCommonTextureU = 83;
+    private int componentBracketCommonTextureV = 215;
+    private int componentBracketChosenTextureU = 115;
+    private int componentBracketChosenTextureV = 215;
+    private int componentBracketOffsetX = 13;
+    private int componentBracketOffsetY = 35;
+    private int blueprintOffsetX = 53;
+    private int blueprintOffsetY = 42;
     private int blueprintWidth = 150;
     private int blueprintHeight = 110;
     private int blueprintAnchorOffsetX = 22;
     private int blueprintAnchorOffsetY = 10;
-    private int layerButtonSize = 47 / 2 + 1;
-    private int layerButtonCommonTextureU = 306 / 2;
-    private int layerButtonCommonTextureV = 428 / 2;
-    private int layerButtonHoverTextureU = 380 / 2;
-    private int layerButtonHoverTextureV = 428 / 2;
-    private int layerUpButtonOffsetX = 446 / 2;
-    private int layerUpButtonOffsetY = 282 / 2;
-    private int layerDownButtonOffsetX = 446 / 2;
-    private int layerDownButtonOffsetY = 338 / 2;
-    private StructureData onBuildingStructure;
+    private int layerButtonSize = 24;
+    private int layerButtonCommonTextureU = 153;
+    private int layerButtonCommonTextureV = 214;
+    private int layerButtonHoverTextureU = 190;
+    private int layerButtonHoverTextureV = 214;
+    private int layerUpButtonOffsetX = 222;
+    private int layerUpButtonOffsetY = 142;
+    private int layerDownButtonOffsetX = 222;
+    private int layerDownButtonOffsetY = 173;
+    private PrimaryStructureData onBuildingStructure;
     private int layerNum;
     private boolean isBlueprintSlotUsing;
     private Block activeBlock;
 
-    public GUIBlueprintTable(ContainerBlueprintTable inventorySlotsIn) {
+    public GUIPrimaryBlueprintTable(ContainerPrimaryBlueprintTable inventorySlotsIn) {
         super(inventorySlotsIn);
         this.inventoryIn = inventorySlotsIn;
-        this.xSize = 256;
+        this.xSize = 251;
         this.ySize = 203;
     }
 
@@ -83,28 +83,30 @@ public class GUIBlueprintTable extends GuiContainer {
         this.mc.getTextureManager().bindTexture(TEXTURE_BACK);
         offsetX = (this.width - this.xSize) / 2;
         offsetY = (this.height - this.ySize) / 2;
-        drawModalRectWithCustomSizedTexture(offsetX, offsetY, 0.0F, 3.0F, this.xSize, this.ySize, 256.0F, 256.0F);
+        this.drawTexturedModalRect(offsetX, offsetY, 3, 3, this.xSize, this.ySize);
         if(this.inventoryIn.getBlueprintSlot().getHasStack()){
             this.mc.getTextureManager().bindTexture(TEXTURE_BLUEPRINT);
             this.drawTexturedModalRect(offsetX + this.blueprintOffsetX, offsetY + this.blueprintOffsetY, 0, 0, this.blueprintWidth, this.blueprintHeight);
             if(!isBlueprintSlotUsing){
                 for(int i = 4; i <= 12; i++){
-                    this.buttonList.add(new ButtonBlueprintTableCenter(i, calcBlueprintAnchorX(i - 4), calcBlueprintAnchorY(i - 4), 18, 18, this));
+                    this.buttonList.add(new ButtonPrimaryBlueprintTableCenter(i, calcBlueprintAnchorX(i - 4), calcBlueprintAnchorY(i - 4), 18, 18, this));
                 }
                 NBTTagCompound compound = this.inventoryIn.getBlueprintSlot().getStack().getTagCompound();
-                if(compound != null && compound.hasKey("blueprint.structure")){
-                    this.onBuildingStructure = new StructureData(compound);
-                    ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
-                    if(!indexList.isEmpty()) {
-                        for (Vec3i index : indexList) {
-                            int id = 4 + index.getY() * 3 + index.getZ();
-                            Block content = this.onBuildingStructure.query(index);
-                            ((ButtonBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
+                if(compound != null && compound.hasKey("blueprint.category") && compound.hasKey("blueprint.structure")){
+                    if(compound.getString("blueprint.category").equals("primary")) {
+                        this.onBuildingStructure = new PrimaryStructureData(compound);
+                        ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
+                        if (!indexList.isEmpty()) {
+                            for (Vec3i index : indexList) {
+                                int id = 4 + index.getY() * 3 + index.getZ();
+                                Block content = this.onBuildingStructure.query(index);
+                                ((ButtonPrimaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
+                            }
                         }
                     }
                 }
                 else {
-                    this.onBuildingStructure = new StructureData();
+                    this.onBuildingStructure = new PrimaryStructureData();
                 }
                 isBlueprintSlotUsing = true;
             }
@@ -137,9 +139,9 @@ public class GUIBlueprintTable extends GuiContainer {
                     mc.getTextureManager().bindTexture(TEXTURE_BACK);
                     int relx = mouseX - this.x, rely = mouseY - this.y;
                     if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, writeButtonHoverTextureU, writeButtonHoverTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, writeButtonHoverTextureU, writeButtonHoverTextureV, this.width, this.height);
                     else
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, writeButtonCommonTextureU, writeButtonCommonTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, writeButtonCommonTextureU, writeButtonCommonTextureV, this.width, this.height);
                     GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                 }
@@ -157,9 +159,9 @@ public class GUIBlueprintTable extends GuiContainer {
                     mc.getTextureManager().bindTexture(TEXTURE_BACK);
                     int relx = mouseX - this.x, rely = mouseY - this.y;
                     if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, layerButtonHoverTextureU, layerButtonHoverTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, layerButtonHoverTextureU, layerButtonHoverTextureV, this.width, this.height);
                     else
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, layerButtonCommonTextureU, layerButtonCommonTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, layerButtonCommonTextureU, layerButtonCommonTextureV, this.width, this.height);
                     GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                 }
@@ -177,15 +179,15 @@ public class GUIBlueprintTable extends GuiContainer {
                     mc.getTextureManager().bindTexture(TEXTURE_BACK);
                     int relx = mouseX - this.x, rely = mouseY - this.y;
                     if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height)
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, layerButtonHoverTextureU, layerButtonHoverTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, layerButtonHoverTextureU, layerButtonHoverTextureV, this.width, this.height);
                     else
-                        drawModalRectWithCustomSizedTexture(this.x, this.y, layerButtonCommonTextureU, layerButtonCommonTextureV, this.width, this.height, 256.0F, 256.0F);
+                        this.drawTexturedModalRect(this.x, this.y, layerButtonCommonTextureU, layerButtonCommonTextureV, this.width, this.height);
                     GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                 }
             }
         });
-        this.buttonList.add(new ButtonBlueprintTableComponent(3, offsetX + componentBracketOffsetX, offsetY + componentBracketOffsetY, this.componentBracketCommonTextureU, this.componentBracketCommonTextureV,
+        this.buttonList.add(new ButtonPrimaryBlueprintTableComponent(3, offsetX + componentBracketOffsetX, offsetY + componentBracketOffsetY, this.componentBracketCommonTextureU, this.componentBracketCommonTextureV,
                 this.componentBracketChosenTextureU, this.componentBracketChosenTextureV, this.componentBracketSize, this.componentBracketSize, "", TEXTURE_BACK, this));
     }
 
@@ -198,14 +200,14 @@ public class GUIBlueprintTable extends GuiContainer {
             if(isBlueprintSlotUsing){
                 layerNum++;
                 for(int i = 0; i < 9; i++){
-                    ((ButtonBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
+                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
                 }
                 ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
                         int id = 4 + index.getY() * 3 + index.getZ();
                         Block content = this.onBuildingStructure.query(index);
-                        ((ButtonBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
+                        ((ButtonPrimaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }
             }
@@ -214,27 +216,27 @@ public class GUIBlueprintTable extends GuiContainer {
             if(isBlueprintSlotUsing && layerNum > 0) {
                 layerNum--;
                 for(int i = 0; i < 9; i++){
-                    ((ButtonBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
+                    ((ButtonPrimaryBlueprintTableCenter)this.buttonList.get(i + 4)).setContent(null);
                 }
                 ArrayList<Vec3i> indexList = this.onBuildingStructure.getLayerIndexList(layerNum);
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
                         int id = 4 + index.getY() * 3 + index.getZ();
                         Block content = this.onBuildingStructure.query(index);
-                        ((ButtonBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
+                        ((ButtonPrimaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }
             }
         }
         if(button.id == 3){
-            ButtonBlueprintTableComponent btn = ((ButtonBlueprintTableComponent)button);
+            ButtonPrimaryBlueprintTableComponent btn = ((ButtonPrimaryBlueprintTableComponent)button);
             btn.flipActive();
             if(btn.isActive()) activeBlock = Blocks.IRON_BLOCK;
             else activeBlock = null;
         }
         if(button.id >= 4 && button.id <= 12 && activeBlock != null){
-            if(((ButtonBlueprintTableCenter)button).getContent() != activeBlock) {
-                ((ButtonBlueprintTableCenter) button).setContent(activeBlock);
+            if(((ButtonPrimaryBlueprintTableCenter)button).getContent() != activeBlock) {
+                ((ButtonPrimaryBlueprintTableCenter) button).setContent(activeBlock);
                 int row = (button.id - 4) / 3;
                 int column = (button.id - 4) % 3;
                 this.onBuildingStructure.set(this.layerNum, row, column, activeBlock);

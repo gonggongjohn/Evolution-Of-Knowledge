@@ -1,7 +1,8 @@
 package com.gonggongjohn.eok.handlers;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.api.structure.StructureData;
+import com.gonggongjohn.eok.api.structure.PrimaryStructureData;
+import com.gonggongjohn.eok.api.structure.SecondaryStructureData;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -46,18 +47,35 @@ public class EventHandlerClient {
                     tooltip.add(strResearch);
                 }
             }
-            if(compound != null && compound.hasKey("blueprint.structure")){
-                StructureData data = new StructureData(compound);
-                List<String> tooltip = event.getToolTip();
-                String str = "";
-                str += I18n.format("eok.tooltip.blueprint.structure.pre");
-                tooltip.add(str);
-                ArrayList<Vec3i> indexList = data.getIndexList();
-                for(Vec3i index : indexList){
+            if(compound != null && compound.hasKey("blueprint.category") && compound.hasKey("blueprint.structure")){
+                if(compound.getString("blueprint.category").equals("primary")) {
+                    PrimaryStructureData data = new PrimaryStructureData(compound);
+                    List<String> tooltip = event.getToolTip();
+                    String str = "";
+                    str += I18n.format("eok.tooltip.blueprint.structure.pre");
+                    tooltip.add(str);
+                    String strCat = "";
+                    strCat += I18n.format("eok.tooltip.blueprint.structure.category");
+                    strCat += I18n.format("eok.tooltip.blueprint.structure.primary");
+                    tooltip.add(strCat);
+                    ArrayList<Vec3i> indexList = data.getIndexList();
                     String strStructure = "";
-                    Block content = data.query(index);
-                    strStructure += I18n.format("eok.tooltip.blueprint.structure.data", index.getX(), index.getY(), index.getZ());
-                    strStructure += content.getLocalizedName();
+                    strStructure += I18n.format("eok.tooltip.blueprint.structure.data.primary", indexList.size());
+                    tooltip.add(strStructure);
+                }
+                else{
+                    SecondaryStructureData data = new SecondaryStructureData(compound);
+                    List<String> tooltip = event.getToolTip();
+                    String str = "";
+                    str += I18n.format("eok.tooltip.blueprint.structure.pre");
+                    tooltip.add(str);
+                    String strCat = "";
+                    strCat += I18n.format("eok.tooltip.blueprint.structure.category");
+                    strCat += I18n.format("eok.tooltip.blueprint.structure.secondary");
+                    tooltip.add(strCat);
+                    ArrayList<Vec3i> indexList = data.getIndexList();
+                    String strStructure = "";
+                    strStructure += I18n.format("eok.tooltip.blueprint.structure.data.secondary", indexList.size());
                     tooltip.add(strStructure);
                 }
             }

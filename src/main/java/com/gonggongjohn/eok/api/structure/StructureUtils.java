@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 
 public class StructureUtils {
-    public static boolean checkStructure(World worldIn, BlockPos pos, StructureData data) {
+    public static boolean checkStructure(World worldIn, BlockPos pos, PrimaryStructureData data) {
         if (data != null) {
             for (int i = 0; i < 4; i++) {
                 boolean checkFlag = true;

@@ -4,7 +4,7 @@ import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.BlockHandler;
 import com.gonggongjohn.eok.handlers.GUIHandler;
 import com.gonggongjohn.eok.handlers.ItemHandler;
-import com.gonggongjohn.eok.tile.TEBlueprintTable;
+import com.gonggongjohn.eok.tile.TESecondaryBlueprintTable;
 import com.gonggongjohn.eok.utils.IHasModel;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,9 +21,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockBlueprintTable extends BlockContainer implements IHasModel {
-    public final String name = "blueprint_table";
-    public BlockBlueprintTable() {
+public class BlockSecondaryBlueprintTable extends BlockContainer implements IHasModel {
+    public final String name = "secondary_blueprint_table";
+    public BlockSecondaryBlueprintTable() {
         super(Material.ROCK);
         this.setUnlocalizedName("eok." + name);
         this.setRegistryName(name);
@@ -56,13 +56,13 @@ public class BlockBlueprintTable extends BlockContainer implements IHasModel {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TEBlueprintTable();
+        return new TESecondaryBlueprintTable();
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(!worldIn.isRemote){
-            int id = GUIHandler.GUIBlueprintTable;
+            int id = GUIHandler.GUISecondaryBlueprintTable;
             playerIn.openGui(EOK.instance, id, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
