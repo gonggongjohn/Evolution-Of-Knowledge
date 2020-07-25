@@ -1,67 +1,65 @@
-[English](README.md)  [简体中文](README-zh_cn.md)
+# Evolution Of Knowledge
 
-# Evolution Of Knowledge 1.12
+This is the official source code repository of the Minecraft mod Evolution Of Knowledge. Here you can get the up-to-date information about this mod.
+* P.S:The mod is still developing and it is the very early version of the mod.If you have any issues or suggestions on the mod, you can directly contact the author.
 
-This is the development repository of the Minecraft mod The Evolution Of Knowledge on Minecraft 1.12.2.
-
-# Table Of Contents
-
-- [Evolution Of Knowledge 1.12](#evolution-of-knowledge-112)
-- [Table Of Contents](#table-of-contents)
-- [Introduction](#introduction)
-- [About Development](#about-development)
-- [Features](#features)
-- [Development Guide](#development-guide)
-  - [How to Build](#how-to-build)
-  - [Working with CuckooLib](#working-with-cuckoolib)
-
-# Introduction
-The Evolution Of Knowledge is a Minecraft mod trying to redefine the general idea of existing technology mods. 
-Rather than simply adding a huge number of components and recipes to recurrent the work flow of modern industrial productions, EOK try to recurrent the human civilization from a developmental perspective. By introducing the concept of REIM (Research-Experiment-Improvement-Manufacturing), EOK can give players a panoramic and intuitive understanding of developments of science and technology in human history.
-
-# About Development
-1. EOK is maintained by Cuckoo Dev Team and the mod is still under development. There is no open-release version of this mod for now. If you have any issues or suggestions on the mod, you can directly contact us or [start an issue](https://github.com/gonggongjohn/EOK-1.12/issues).
-2. EOK has 4 dependencies so far. The following links can directly point to the repositories of these dependencies:
-* GregTech Community Edition [Github Repo](https://github.com/GregTechCE/GregTech)
-* Code Chicken Lib [Github Repo](https://github.com/TheCBProject/CodeChickenLib)
-* Terra Metal Craft [Github Repo](https://github.com/Os-Ir/Terra-Metal-Craft)
-* Manor Life [Github Repo](https://github.com/gonggongjohn/Manor-Life-1.12)
 
 # Features
-* Minecraft Version: 1.12.2
-* Forge Version: 14.23.5.2847
-* Current Mod Version: 1.12.2-1.0.1.9-alpha
+* Minecraft Version:1.7.10
 
-# Development Guide
+* Forge Version:10.13.4.1614
 
-## How to Build
+* Current Mod Version:0.0.7
 
-If you are using Windows, execute the command below in the project root directory:
+## Changelogs
+* Alpha0.0.2：
+1、增加了全新的“可拖动式GUI界面”
+2、完成了部分研究系统的模板代码
+3、全新的研究台GUI
+4、全新的创造模式列表
 
-```
-gradlew build
-```
+* Alpha0.0.3:
+1、全新的研究台GUI及其子GUI
+2、构建了基本的研究系统雏形，第一个研究已初步成型
+3、构建了玩家存档/读档的基本雏形
+4、修复了部分GUI显示问题，但仍有部分问题......
 
-or if you're using Linux/Unix:
+* Alpha0.0.4:
+1、修正了一个导致研究永远能一步解锁的算法错误
+2、修复了GUI需要刷新才能正常显示的问题
+3、修复了研究id不统一的问题
+4、添加了全新的二级GUI元素
+5、现在模组终于可以自动识别研究并进行对应计算了
+6、全新的按钮位置算法
 
-```
-./gradlew build
-```
+* Alpha0.0.5:
+** 大量的研究台内容更新 **
+1、改进了研究的算法防止出现抽象距离恒大于0的问题
+2、增加了研究存档系统，现在玩家的研究记录可以被自动保存
+3、正式增加了部分基础研究，现在已经可以开始正确的进行研究了
+4、新增了大量GUI元素已经高亮按钮，界面更易使用
+5、修复了研究总时长变为NaN的问题
+** 现在的研究流程应为：选择一个研究方法，选择一个研究节点，点击“开始研究”即可 **
 
-Then you can find the archives in the directory `build/libs`.
+* Alpha0.0.6:
+1、彻底重置的研究台GUI界面，大量新特性：更大的GUI，浏览/研究选择框，半透明效果，滚动式研究浏览器
+2、重写了研究的数据结构及过程，现在除了部分微yan小zhong的问题已经可以正常添加研究。
+3、玩家现在只能使用斧头砍树
+4、现在通过破坏树叶有60%的几率掉落木棍
+5、打草现在可以获得植物纤维
+6、初步添加蓄水池主方块的雏形
 
-**NOTICE: If you meet some compilation errors like "xxx not found", You can try [Importing CuckooLib Repository](#Working with CuckooLib). It may solve your problems.**
-
-## Working with CuckooLib
-
-[CuckooLib](https://github.com/zi-jing/CuckooLib) is a dependency library of the EOK project. It includes plenty of reusable code which is used by Cuckoo Dev Team.
-
-If you want to debug EOK more easily, or you want to debug CuckooLib with EOK, you can clone the [CuckooLib repository](https://github.com/zi-jing/CuckooLib), then create the file `gradle.properties` in the EOK project's root directory, add the folllowing contents:
-
-```properties
-CuckooLibIncludeBuildPath=../CuckooLib
-```
-
-In the above code, key `CuckooLibIncludeBuildPath` refers to the CuckooLib project's root path.
-
-Save the files, refresh the Gradle project in your IDE, then the CuckooLib project will be imported.
+* Alpha0.0.7:
+1、全新的多方块检测系统，蓄水槽雏形已初步完成（但还不可使用）。目前蓄水槽材质为石头，结构为：
+底层：石头   石头   石头
+          石头   石头   石头
+          石头 主方块  石头
+中层：石头   石头  石头
+          石头   空     石头
+          石头  石头   石头
+顶层：石头   石头  石头
+          石头   空     石头
+          石头  石头   石头
+2、新增工具：枪，可对生物造成伤害（贴图暂时未完成）
+3、新增物品：燧石碎片，挖掘沙砾有30%概率掉落，不再掉落原版燧石
+4、修复了部分BUG

@@ -1,39 +1,44 @@
 package com.gonggongjohn.eok.handlers;
 
-import com.gonggongjohn.eok.items.*;
+import com.gonggongjohn.eok.EOK;
+import com.gonggongjohn.eok.api.HeatableTool;
+import com.gonggongjohn.eok.items.ItemFlintFragment;
+import com.gonggongjohn.eok.items.ItemGun;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@EventBusSubscriber
 public class ItemHandler {
-    public static final List<Item> ITEM_REGISTRY = new ArrayList<>();
+	public static Item itemEOKSymbol;
+	public static Item itemPlantFiber;
+	public static Item itemFlintFragment;
+	public static Item itemChippedFlintFragment;
+	public static Item itemGunRevolver;
+	public static Item itemAirGun;
+	public static Item itemAutomaticRifle;
 
-    public static final Item papyrus = new ItemPapyrus();
-    public static final Item refractingTelescope = new ItemRefractingTelescope();
-    public static final Item flintFragment = new ItemFlintFragment();
-    public static final Item chippedFlintFragment = new ItemChippedFlintFragment();
-    public static final Item polishedFlintFragment = new ItemPolishedFlintFragment();
-    public static final Item Torcherino = new Torcherino();
-    public static final Item MACHINE_GUN = new ItemMachineGun();
-    public static final Item fireStick = new ItemFireStick();
-    public static final Item EOKManual = new ItemEOKManual();
-    public static final Item Golden_Egg = new ItemGoldenEgg();
-    public static final Item Redstone_Apple = new ItemRedstoneApple();
-    //public static final Item Redstone_Sword = new ItemRedstoneSword();
-    //public static final Item Redstone_Pickaxe = new ItemRedstonePickaxe();
-    //public static final Item Redstone_Axe = new ItemRedstoneAxe();
-    //public static final Item Redstone_Hoe = new ItemRedstoneHoe();
-    //public static final Item Redstone_Spade = new ItemRedstoneSpade();
-    //public static final Item Redstone_Helmet = new ItemRedstoneHelmet();
-    //public static final Item Redstone_Chestplate = new ItemRedstoneChestplate();
-    //public static final Item Redstone_Leggings = new ItemRedstoneLeggings();
-    //public static final Item Redstone_Boots = new ItemRedstoneBoots();
-    public static final Item bluePrint = new ItemBluePrint();
+	public static void setupItem() {
+		itemEOKSymbol = new Item().setUnlocalizedName("eokSymbol").setTextureName(EOK.MODID + ":itemEOKSymbol")
+				.setCreativeTab(EOK.tabEOK);
+		itemPlantFiber = new Item().setUnlocalizedName("plantFiber").setTextureName(EOK.MODID + ":itemPlantFiber")
+				.setCreativeTab(EOK.tabEOK);
+		itemFlintFragment = new ItemFlintFragment().setUnlocalizedName("flintFragment")
+				.setTextureName(EOK.MODID + ":itemFlintFragment").setCreativeTab(EOK.tabEOK);
+		itemChippedFlintFragment = new Item().setUnlocalizedName("chippedFlintFragment")
+				.setTextureName(EOK.MODID + ":itemChippedFlintFragment").setCreativeTab(EOK.tabEOK);
+		itemGunRevolver = new ItemGun("revolver", "pistolBullet", 6, 40);
+		itemAirGun = new ItemGun("airGun", "airBullet", 12, 20);
+		itemAutomaticRifle = new ItemGun("automaticRifle", "rifleBullet", 40, 4);
+	}
 
-    public static void registerItem(Item item) {
-        ITEM_REGISTRY.add(item);
-    }
+	public static void registerItem() {
+		GameRegistry.registerItem(itemEOKSymbol, "itemEOKSymbol");
+		GameRegistry.registerItem(itemPlantFiber, "itemPlantFiber");
+		GameRegistry.registerItem(itemFlintFragment, "itemFlintFragment");
+		GameRegistry.registerItem(itemChippedFlintFragment, "itemChippedFlintFragment");
+		GameRegistry.registerItem(itemGunRevolver, "gun_revolver");
+		GameRegistry.registerItem(itemAirGun, "gun_airGun");
+		GameRegistry.registerItem(itemAutomaticRifle, "gun_automaticRifle");
+	}
 }

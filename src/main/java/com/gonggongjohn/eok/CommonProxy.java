@@ -1,56 +1,30 @@
 package com.gonggongjohn.eok;
 
-import com.gonggongjohn.eok.client.gui.overlay.PlayerVitalSigns;
-import com.gonggongjohn.eok.handlers.*;
-import com.gonggongjohn.eok.render.StructureHighlightRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.util.IThreadListener;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import com.gonggongjohn.eok.entity.EntityAirBullet;
+import com.gonggongjohn.eok.entity.EntityBullet;
+import com.gonggongjohn.eok.entity.EntityRifleBullet;
+import com.gonggongjohn.eok.handlers.BlockHandler;
+import com.gonggongjohn.eok.handlers.ConfigHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class CommonProxy {
-    public void preInit(FMLPreInitializationEvent event) {
-        TileEntityHandler.register();
-        new ConfigHandler(event);
-        EntityHandler.register();
-    }
+	public void preInit(FMLPreInitializationEvent event) {
+		new ConfigHandler(event);
+		HeatableItemHandler.setup();
+		HeatableItemHandler.register();
+		EntityRegistry.registerModEntity(EntityAirBullet.class, "AirBullet", 0, EOK.instance, 256, 1, true);
+		EntityRegistry.registerModEntity(EntityPistolBullet.class, "PistolBullet", 0, EOK.instance, 256, 1, true);
+		EntityRegistry.registerModEntity(EntityRifleBullet.class, "RifleBullet", 0, EOK.instance, 256, 1, true);
+	}
 
-    public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new PlayerVitalSigns());
-        MinecraftForge.EVENT_BUS.register(new StructureHighlightRenderer());
-        NetworkRegistry.INSTANCE.registerGuiHandler(EOK.instance, new GUIHandler());
-        TradeHandler.setup();
-        new RecipeHandler();
-    }
+	public void init(FMLInitializationEvent event) {
 
-    public void postInit(FMLPostInitializationEvent event) {
+	}
 
-    }
+	public void postInit(FMLPostInitializationEvent event) {
 
-    public void registerItemRenderer(Item item, int meta, String id) {
-
-    }
-
-    public void registerItemRenderer(Item item, int meta, String pathName, String id) {
-
-    }
-
-    public IThreadListener getThreadListener(MessageContext context) {
-        if (context.side.isServer()) {
-            return context.getServerHandler().player.mcServer;
-        } else
-            return null;
-    }
-
-    public EntityPlayer getPlayer(MessageContext context) {
-        if (context.side.isServer()) {
-            return context.getServerHandler().player;
-        } else
-            return null;
-    }
+	}
 }

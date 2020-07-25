@@ -2,13 +2,12 @@
 {
   "modid": "eok",
   "name": "Evolution Of Knowledge",
-  "description": "A MC Mod Giving A Panoramic Overview Of S&T Evolution In Human History.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "description": "A MC Mod Giving A Panoramic Overview Of S&T Evolution In Human History",
+  "version": "0.0.1",
+  "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
-  "authorList": ["GONGGONGJOHN","Os-Ir","zi_jing","molybdenum","NathanGX"],
-  "credits": "Mojang, Forge Development Team and Cuckoo Mod Development Team",
+  "authorList": ["GONGGONGJOHN", "Os-Ir", "zijing"],
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

@@ -1,29 +1,51 @@
 package com.gonggongjohn.eok.entity;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBullet extends EntityArrow {
-    public EntityBullet(World world) {
-        super(world);
-    }
+public abstract class EntityBullet extends EntityThrowable {
+	public static DamageSource damageSourceBullet = new DamageSource("byBullet");
 
-    public EntityBullet(World world, EntityLivingBase thrower) {
-        super(world, thrower);
-    }
+	public EntityBullet(World worldIn) {
+		super(worldIn);
+	}
 
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (this.inGround) {
-            this.setDead();
-        }
-    }
+	public EntityBullet(World worldIn, EntityLivingBase throwerIn) {
+		super(worldIn, throwerIn);
+	}
 
-    @Override
-    protected ItemStack getArrowStack() {
-        return ItemStack.EMPTY;
-    }
+	public EntityBullet(World worldIn, int x, int y, int z) {
+		super(worldIn, x, y, z);
+	}
+
+	@Override
+	protected void onImpact(MovingObjectPosition movingObjectPosition) {
+		if (worldObj.isRemote) {
+			return;
+		}
+		Entity entityHit = movingObjectPosition.entityHit;
+		int i;
+		if (entityHit instanceof EntityLiving) {
+			EntityLiving living = (EntityLiving) movingObjectPosition.entityHit;
+			living.attackEntityFrom(EntityBullet.damageSourceBullet, this.getDamage());
+		}
+		this.setDead();
+	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if (ticksExisted > 200) {
+			this.setDead();
+		}
+	}
+
+	protected float getDamage() {
+		return 0F;
+	}
 }
