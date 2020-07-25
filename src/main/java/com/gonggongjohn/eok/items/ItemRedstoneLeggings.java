@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.items;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.handlers.ItemHandler;
 import com.gonggongjohn.eok.utils.IHasModel;
+import com.gonggongjohn.eok.utils.RedstoneArmorMaterial;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -10,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemRedstoneLeggings extends ItemRedstoneArmor implements IHasModel {
+public class ItemRedstoneLeggings extends RedstoneArmorMaterial implements IHasModel {
 
     public ItemRedstoneLeggings() {
         super(EntityEquipmentSlot.LEGS);
