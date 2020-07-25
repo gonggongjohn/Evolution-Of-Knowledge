@@ -57,7 +57,7 @@ gradlew build
 
 [CuckooLib](https://github.com/zi-jing/CuckooLib)是EOK项目的一个依赖库，包含了Cuckoo Dev Team需要用到的大量可重用代码。
 
-如果你想更好地调试EOK项目或利用EOK项目来调试CuckooLib，你可以clone [CuckooLib仓库](https://github.com/zi-jing/CuckooLib)，然后在项目根目录创建文件`gradle.properties`，添加以下内容：
+如果你想更好地调试EOK项目或利用EOK项目来调试CuckooLib，你可以clone [CuckooLib仓库](https://github.com/zi-jing/CuckooLib)，然后在EOK项目根目录创建文件`gradle.properties`，添加以下内容：
 
 ```properties
 CuckooLibIncludeBuildPath=../CuckooLib
