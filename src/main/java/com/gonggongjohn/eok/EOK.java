@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 
 @Mod("eok")
 public class EOK {
+
     public static final ItemGroup eokItemGroup = new EOKItemGroup();
-    // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger("TestMod");
 
     public EOK() {

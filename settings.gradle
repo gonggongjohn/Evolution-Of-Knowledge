@@ -1,0 +1,12 @@
+rootProject.name = 'EvolutionOfKnowledge-1.16'
+
+Properties properties = new Properties()
+String includeBuildPropKey = 'CuckooLibIncludeBuildPath'
+File propFile = new File(rootProject.projectDir.getPath() + File.separator + 'gradle.properties')
+if (propFile.exists()) {
+    properties.load(new StringReader(propFile.text))
+}
+
+if (properties.containsKey(includeBuildPropKey)) {
+    includeBuild(properties.getProperty(includeBuildPropKey))
+}
