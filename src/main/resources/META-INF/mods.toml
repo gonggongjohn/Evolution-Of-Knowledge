@@ -18,7 +18,7 @@ displayName="Evolution Of Knowledge" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits="Mojang, MCP, Forge Development Team and Cuckoo Mod Development Team" #optional
+# credits="Mojang, MCP, Forge Development Team and Cuckoo Mod Development Team" #optional
 # A text field displayed in the mod UI
 authors="GONGGONGJOHN, Os-Ir, zi_jing, molybdenum, NathanGX" #optional
 # The description text for the mod (multi line!) (#mandatory)

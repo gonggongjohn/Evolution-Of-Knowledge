@@ -1,4 +1,4 @@
-package com.github.zi_jing.testmod.handler;
+package com.gonggongjohn.eok.handler;
 
 import net.minecraft.item.Item;
 

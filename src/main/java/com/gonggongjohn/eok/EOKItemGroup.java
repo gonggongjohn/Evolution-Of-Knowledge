@@ -1,11 +1,11 @@
-package com.github.zi_jing.testmod;
+package com.gonggongjohn.eok;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class TestModItemGroup extends ItemGroup {
-    public TestModItemGroup() {
+public class EOKItemGroup extends ItemGroup {
+    public EOKItemGroup() {
         super("testmod_group");
     }
 
