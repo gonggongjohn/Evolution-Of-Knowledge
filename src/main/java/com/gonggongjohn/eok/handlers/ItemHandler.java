@@ -32,6 +32,7 @@ public class ItemHandler {
     //public static final Item Redstone_Leggings = new ItemRedstoneLeggings();
     //public static final Item Redstone_Boots = new ItemRedstoneBoots();
     public static final Item bluePrint = new ItemBluePrint();
+    public static final Item testMath = new ItemTestMath();
 
     public static void registerItem(Item item) {
         ITEM_REGISTRY.add(item);
