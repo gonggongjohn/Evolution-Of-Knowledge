@@ -1,8 +1,9 @@
 package com.gonggongjohn.eok.worldgen;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockStateBase;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -12,12 +13,20 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.HashMap;
 
 public class WorldGenVein implements IWorldGenerator {
 
-    public final static int VEIN_TOTAL_SEED = 2000;
+    public static int VEIN_TOTAL_SEED = 0;
     public final static int ORE_GENERATE_DENSITY_REFERENCE = 100;   //the reference density for ores.
 
     public static class Vein{
@@ -27,29 +36,23 @@ public class WorldGenVein implements IWorldGenerator {
 
         //the ores and their weights in a vein. (for ores!)
         //the weights can be reference by the const value ORE_GENERATE_DENSITY_REFERENCE
-        public final Dictionary<String, Integer> oreContained;
+        public final Map<String, Integer> oreContained;
         public final int ID;
 
         public final int yMax, yMin;
-        public int yCenterDefault;
 
         public Vein(String name,
                     int id,
                     int yMax,
                     int yMin,
                     int generateWeight,
-                    Dictionary<String, Integer> oreContained) {
+                    Map<String, Integer> oreContained) {
             this.name = name;
             this.ID = id;
             this.generateWeight = generateWeight;
             this.oreContained = oreContained;
             this.yMax = yMax;
             this.yMin = yMin;
-            this.yCenterDefault = (yMax + yMin)/2;
-        }
-        public void setYCenter(int yCenter)
-        {
-            this.yCenterDefault = yCenter;
         }
     }
     public final ArrayList<Vein> VeinList = new ArrayList<>();
@@ -59,43 +62,69 @@ public class WorldGenVein implements IWorldGenerator {
                             int yMax,
                             int yMin,
                             int veinGenerateWeight,
-                            Dictionary<String, Integer> oreContained)
+                            Map<String, Integer> oreContained)
     {
         Vein vein = new Vein(veinName, id, yMax, yMin, veinGenerateWeight, oreContained);
         VeinList.add(vein);
         veinIDMap.put(veinName, id);
     }
-    public void addVeinList(String veinName,
-                            int id,
-                            int yMax,
-                            int yMin,
-                            int veinGenerateWeight,
-                            Dictionary<String, Integer> oreContained,
-                            int yCenter)
-    {
-        Vein vein = new Vein(veinName, id, yMax, yMin, veinGenerateWeight, oreContained);
-        vein.setYCenter(yCenter);
-        VeinList.add(vein);
-        veinIDMap.put(veinName, id);
-    }
 
-    public WorldGenVein()
-    {
-        //以后这里使用zijing的documentrender从json文件里读取所有矿脉数据组成一个list
-
+    public WorldGenVein(){
+        StringBuilder laststr= new StringBuilder();
+        FileSystem json = null;
+        try {
+            URI sample = WorldGenVein.class.getResource("/assets/eok/assets.root").toURI();
+            Path file;
+            json = FileSystems.newFileSystem(sample, Collections.emptyMap());
+            file = json.getPath("/assets/eok/database/vein.json");
+            BufferedReader reader = Files.newBufferedReader(file);;
+            String tempString = null;
+            while ((tempString = reader.readLine()) != null) {
+                laststr.append(tempString);
+            }
+            String veinData = laststr.toString();
+            JsonParser parser = new JsonParser();
+            JsonObject veinObject = parser.parse(veinData).getAsJsonObject();
+            JsonArray veinArray = veinObject.getAsJsonArray("vein");
+            for(int i=0;i<veinArray.size();i++)
+            {
+                JsonObject vein = veinArray.get(i).getAsJsonObject();
+                String vein_name = vein.get("name").getAsString();
+                int vein_id = vein.get("id").getAsInt();
+                int vein_ymax = vein.get("ymax").getAsInt();
+                int vein_ymin = vein.get("ymin").getAsInt();
+                int vein_generate_weight = vein.get("weight").getAsInt();
+                VEIN_TOTAL_SEED = VEIN_TOTAL_SEED + vein_generate_weight;
+                JsonArray oreContained = vein.get("ore_contained").getAsJsonArray();
+                Map<String,Integer> oreContain = new HashMap<String, Integer>();
+                for(int j=0;j<oreContained.size();j++)
+                {
+                    JsonObject ore = oreContained.get(i).getAsJsonObject();
+                    String oreName = ore.get("ore_name").getAsString();
+                    int oreWeight = ore.get("weight").getAsInt();
+                    oreContain.put(oreName,oreWeight);
+                }
+                this.addVeinList(vein_name,vein_id,vein_ymax,vein_ymin,vein_generate_weight,oreContain);
+            }
+        }
+        catch(IOException | URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         //triple chunk generate method
-        if(chunkX%3==2&&chunkZ%3==1) {
+        if(chunkX%3==2&&chunkZ%3==1&&false) {
             //the position of the center of a ore vein
 
             //determine the vein that generates
             int generateSeed = random.nextInt(VEIN_TOTAL_SEED);
             Vein veinChosen = chooseVein(generateSeed);
             if (veinChosen != null) {
-                BlockPos centerPos = new BlockPos(chunkX * 16 + 8, veinChosen.yCenterDefault, chunkZ * 16 + 8);
+                int yCenter = random.nextInt(veinChosen.yMax-veinChosen.yMin)+ veinChosen.yMin;
+                BlockPos centerPos = new BlockPos(chunkX * 16 + 8, yCenter, chunkZ * 16 + 8);
                 int oreGenerateSeed = random.nextInt(ORE_GENERATE_DENSITY_REFERENCE);
                 //generate ore:
 
@@ -139,12 +168,9 @@ public class WorldGenVein implements IWorldGenerator {
     }
     private boolean generateOre(int seed, Vein vein, World world, BlockPos pos)
     {
-        Enumeration<String> oreNameContained = vein.oreContained.keys();
-        String oreName;
         int oreWeight;
         if(world.getBlockState(pos).getBlock() ==Blocks.STONE) {
-            while (oreNameContained.hasMoreElements()) {
-                oreName = oreNameContained.nextElement();
+            for(String oreName : vein.oreContained.keySet()) {
                 oreWeight = vein.oreContained.get(oreName);
                 Block oreGenerate = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(oreName));
                 if(oreWeight>seed&&oreGenerate!=null)
