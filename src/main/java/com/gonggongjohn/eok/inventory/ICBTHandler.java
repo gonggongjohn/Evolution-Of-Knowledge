@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface ICBTHandler {
     void onWriteActive(NBTTagCompound compound);
+    void onSecondaryInput();
 }

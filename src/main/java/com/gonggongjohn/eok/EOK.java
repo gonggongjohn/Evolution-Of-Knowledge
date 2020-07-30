@@ -77,6 +77,7 @@ public class EOK {
 		network.registerMessage(new PacketSlotChange.Handler(), PacketSlotChange.class, 8, Side.SERVER);
 		network.registerMessage(new PacketGuiScreen.Handler(), PacketGuiScreen.class, 9, Side.CLIENT);
 		network.registerMessage(new PacketBlueprintTable.Handler(), PacketBlueprintTable.class, 10, Side.SERVER);
+		network.registerMessage(new PacketInverseBlueprintTable.Handler(), PacketInverseBlueprintTable.class, 11, Side.CLIENT);
 	}
 
 	@EventHandler

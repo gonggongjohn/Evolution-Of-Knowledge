@@ -1,5 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -18,14 +19,16 @@ public class ButtonPrimaryBlueprintTableComponent extends GuiButton {
     private int textureActiveV;
     private ResourceLocation texturePath;
     private GUIPrimaryBlueprintTable fatherInstance;
+    private Block content;
 
-    public ButtonPrimaryBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, String buttonText, ResourceLocation texturePath, GUIPrimaryBlueprintTable fatherInstance) {
-        super(buttonId, x, y, widthIn, heightIn, buttonText);
+    public ButtonPrimaryBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, Block content, ResourceLocation texturePath, GUIPrimaryBlueprintTable fatherInstance) {
+        super(buttonId, x, y, widthIn, heightIn, "");
         this.activeTag = false;
         this.textureCommonU = textureCommonU;
         this.textureCommonV = textureCommonV;
         this.textureActiveU = textureActiveU;
         this.textureActiveV = textureActiveV;
+        this.content = content;
         this.texturePath = texturePath;
         this.fatherInstance = fatherInstance;
     }
@@ -43,11 +46,11 @@ public class ButtonPrimaryBlueprintTableComponent extends GuiButton {
                 drawTexturedModalRect(this.x, this.y, this.textureActiveU, this.textureActiveV, this.width, this.height);
             else
                 drawTexturedModalRect(this.x, this.y, this.textureCommonU, this.textureCommonV, this.width, this.height);
-            ItemStack stack = new ItemStack(Item.getItemFromBlock(Blocks.IRON_BLOCK));
+            ItemStack stack = new ItemStack(Item.getItemFromBlock(this.content));
             fatherInstance.drawItemStack(stack, this.x + 1, this.y + 1, "");
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
-                String name = I18n.format("eok.blueprint.component.pre") + Blocks.IRON_BLOCK.getLocalizedName();
+                String name = I18n.format("eok.blueprint.component.pre") + this.content.getLocalizedName();
                 mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
             }
             GL11.glDisable(GL11.GL_BLEND);
@@ -61,5 +64,9 @@ public class ButtonPrimaryBlueprintTableComponent extends GuiButton {
 
     public void flipActive() {
         this.activeTag = !this.activeTag;
+    }
+
+    public Block getContent() {
+        return content;
     }
 }

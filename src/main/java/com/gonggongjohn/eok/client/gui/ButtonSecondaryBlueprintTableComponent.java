@@ -5,12 +5,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class ButtonSecondaryBlueprintTableComponent extends GuiButton {
     private boolean activeTag;
+    private Item content;
     private int textureCommonU;
     private int textureCommonV;
     private int textureActiveU;
@@ -18,13 +20,14 @@ public class ButtonSecondaryBlueprintTableComponent extends GuiButton {
     private ResourceLocation texturePath;
     private GUISecondaryBlueprintTable fatherInstance;
 
-    public ButtonSecondaryBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, String buttonText, ResourceLocation texturePath, GUISecondaryBlueprintTable fatherInstance) {
-        super(buttonId, x, y, widthIn, heightIn, buttonText);
+    public ButtonSecondaryBlueprintTableComponent(int buttonId, int x, int y, int textureCommonU, int textureCommonV, int textureActiveU, int textureActiveV, int widthIn, int heightIn, Item content, ResourceLocation texturePath, GUISecondaryBlueprintTable fatherInstance) {
+        super(buttonId, x, y, widthIn, heightIn, "");
         this.activeTag = false;
         this.textureCommonU = textureCommonU;
         this.textureCommonV = textureCommonV;
         this.textureActiveU = textureActiveU;
         this.textureActiveV = textureActiveV;
+        this.content = content;
         this.texturePath = texturePath;
         this.fatherInstance = fatherInstance;
     }
@@ -42,7 +45,7 @@ public class ButtonSecondaryBlueprintTableComponent extends GuiButton {
                 drawTexturedModalRect(this.x, this.y, this.textureActiveU, this.textureActiveV, this.width, this.height);
             else
                 drawTexturedModalRect(this.x, this.y, this.textureCommonU, this.textureCommonV, this.width, this.height);
-            ItemStack stack = new ItemStack(Items.IRON_INGOT);
+            ItemStack stack = new ItemStack(this.content);
             fatherInstance.drawItemStack(stack, this.x + 1, this.y + 1, "");
             int relx = mouseX - this.x, rely = mouseY - this.y;
             if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
@@ -60,5 +63,9 @@ public class ButtonSecondaryBlueprintTableComponent extends GuiButton {
 
     public void flipActive() {
         this.activeTag = !this.activeTag;
+    }
+
+    public Item getContent() {
+        return content;
     }
 }

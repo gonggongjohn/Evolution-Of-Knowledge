@@ -45,9 +45,11 @@ public class SecondaryStructureData {
     public void set(int layer, int row, int column, Item item){
         if(layer > layerNum) this.layerNum++;
         Vec3i index = new Vec3i(layer, row, column);
-        this.indexList.add(index);
-        indexList.sort(new VectorComparator());
-        this.structure.put(index, item);
+        if (!structure.containsKey(index)) {
+            this.indexList.add(index);
+            indexList.sort(new VectorComparator());
+        }
+        structure.put(index, item);
     }
 
     public Item query(int layer, int row, int column){

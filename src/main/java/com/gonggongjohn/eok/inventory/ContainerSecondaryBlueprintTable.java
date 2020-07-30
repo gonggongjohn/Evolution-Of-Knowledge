@@ -16,12 +16,12 @@ import javax.annotation.Nonnull;
 public class ContainerSecondaryBlueprintTable extends Container implements ICBTHandler {
     protected final Slot penSlot;
     protected final Slot blueprintSlot;
-    private int penSlotOffsetX = 224;
-    private int penSlotOffsetY = 29;
-    private int blueprintSlotOffsetX = 224;
-    private int blueprintSlotOffsetY = 68;
-    private int inventorySlotOffsetX = 47;
-    private int inventorySlotOffsetY = 177;
+    private int penSlotOffsetX = 228;
+    private int penSlotOffsetY = 24;
+    private int blueprintSlotOffsetX = 228;
+    private int blueprintSlotOffsetY = 60;
+    private int inventorySlotOffsetX = 58;
+    private int inventorySlotOffsetY = 178;
 
     public ContainerSecondaryBlueprintTable(EntityPlayer player, TileEntity tileEntity){
         super();
@@ -52,6 +52,11 @@ public class ContainerSecondaryBlueprintTable extends Container implements ICBTH
             blueprintStack.setTagCompound(compound);
             this.blueprintSlot.putStack(blueprintStack);
         }
+    }
+
+    @Override
+    public void onSecondaryInput() {
+        //Unused in secondary blueprint table
     }
 
     @Override
