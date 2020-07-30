@@ -28,7 +28,7 @@ public class ButtonPrimaryBlueprintTableCenter extends GuiButton {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             if(content != null) {
                 ItemStack stack = new ItemStack(Item.getItemFromBlock(content));
-                fatherInstance.drawItemStack(stack, this.x + 2, this.y + 2, "");
+                fatherInstance.drawItemStack(stack, this.x + 1, this.y + 1, "");
                 int relx = mouseX - this.x, rely = mouseY - this.y;
                 if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
                     String name = I18n.format("eok.blueprint.component.pre") + this.content.getLocalizedName();

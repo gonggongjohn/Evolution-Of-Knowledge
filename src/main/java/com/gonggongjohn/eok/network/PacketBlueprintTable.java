@@ -12,22 +12,30 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketBlueprintTable implements IMessage {
     public NBTTagCompound nbt;
+    public int type;
 
     public PacketBlueprintTable() {
     }
 
-    public PacketBlueprintTable(NBTTagCompound compound){
+    public PacketBlueprintTable(int type) {
+        this.type = type;
+    }
+
+    public PacketBlueprintTable(int type, NBTTagCompound compound){
+        this.type = type;
         this.nbt = compound;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         nbt = ByteBufUtils.readTag(buf);
+        type = buf.readInt();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         ByteBufUtils.writeTag(buf, nbt);
+        buf.writeInt(type);
     }
 
     public static class Handler implements IMessageHandler<PacketBlueprintTable, IMessage> {
@@ -38,7 +46,10 @@ public class PacketBlueprintTable implements IMessage {
             if (player != null) {
                 EOK.getProxy().getThreadListener(ctx).addScheduledTask(() -> {
                     if (player.openContainer instanceof ICBTHandler){
-                        ((ICBTHandler) player.openContainer).onWriteActive(message.nbt);
+                        if(message.type == 1)
+                            ((ICBTHandler) player.openContainer).onWriteActive(message.nbt);
+                        else if(message.type == 2)
+                            ((ICBTHandler) player.openContainer).onSecondaryInput();
                     }
                 });
             }
