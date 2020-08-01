@@ -1,0 +1,21 @@
+{
+  "vein": [
+    {
+      "name": "none",
+      "id": 0,
+      "weight": 30,
+      "ymax": 256,
+      "ymin": 1,
+      "ore_contained": [
+        {
+          "ore_name": "minecraft:stone",
+          "weight": 30
+        },
+        {
+          "ore_name": "minecraft:dirt",
+          "weight": 20
+        }
+      ]
+    }
+  ]
+}
