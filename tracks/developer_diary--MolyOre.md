@@ -5,7 +5,7 @@
 矿脉定义包括：\
 矿脉名（请勿随便取矿脉名称，因为它将与矿脉核心（矿源）的name有关,参见worldGenVein的说明)。\
 矿脉生成权重\
-矿脉的y坐标上界与下界，矿脉中心的y坐标（如果不进行特殊指定，矿脉中心默认为上界与下界的平均值）\
+矿脉的y坐标上界与下界\
 
 
 矿脉核心的生成（目前指定三区块法中的坐标中心和矿脉中心的y坐标指定为矿脉中心，矿脉中心如果是石头方块，则会在其周围六个方块及其本体上生成矿脉核心)\
@@ -31,3 +31,9 @@ ore_name使用的是矿石方块的registername，请记得加模组前标识符
 GameRegistry.registerWorldGenerator(new WorldGenVein(), 10001);
 ”“\
 一行,并及时与molyOre联系\
+
+#2020/8/2
+完成了矿脉生成的代码\
+目前只可以使用runclient运行矿脉生成的代码，若使用minecraft client启动会崩端，如要使用minecraft client请按上述所说注释掉那一行\
+若要看到测试矿脉，请将WorldGenVein.java中的generateOre函数中
+"if(world.getBlockState(pos).getBlock() ==Blocks.STONE) "中的括号内的后面加上||true（即永远为真的条件判断）

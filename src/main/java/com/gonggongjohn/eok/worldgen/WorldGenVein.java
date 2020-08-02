@@ -97,9 +97,9 @@ public class WorldGenVein implements IWorldGenerator {
                 VEIN_TOTAL_SEED = VEIN_TOTAL_SEED + vein_generate_weight;
                 JsonArray oreContained = vein.get("ore_contained").getAsJsonArray();
                 Map<String,Integer> oreContain = new HashMap<String, Integer>();
-                for(int j=0;j<oreContained.size();j++)
+                for(int j=0;j<oreContained.size();j=j+1)
                 {
-                    JsonObject ore = oreContained.get(i).getAsJsonObject();
+                    JsonObject ore = oreContained.get(j).getAsJsonObject();
                     String oreName = ore.get("ore_name").getAsString();
                     int oreWeight = ore.get("weight").getAsInt();
                     oreContain.put(oreName,oreWeight);
@@ -107,7 +107,7 @@ public class WorldGenVein implements IWorldGenerator {
                 this.addVeinList(vein_name,vein_id,vein_ymax,vein_ymin,vein_generate_weight,oreContain);
             }
         }
-        catch(IOException | URISyntaxException e)
+        catch(Exception e)
         {
             e.printStackTrace();
         }
@@ -116,22 +116,19 @@ public class WorldGenVein implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         //triple chunk generate method
-        if(chunkX%3==2&&chunkZ%3==1&&false) {
-            //the position of the center of a ore vein
-
+        if(Math.abs(chunkX%3)==2&&Math.abs(chunkZ%3)==1) {
             //determine the vein that generates
             int generateSeed = random.nextInt(VEIN_TOTAL_SEED);
             Vein veinChosen = chooseVein(generateSeed);
             if (veinChosen != null) {
                 int yCenter = random.nextInt(veinChosen.yMax-veinChosen.yMin)+ veinChosen.yMin;
                 BlockPos centerPos = new BlockPos(chunkX * 16 + 8, yCenter, chunkZ * 16 + 8);
-                int oreGenerateSeed = random.nextInt(ORE_GENERATE_DENSITY_REFERENCE);
                 //generate ore:
 
                 ArrayList<BlockPos> orePosList = chooseOrePos(veinChosen, centerPos, random);
-                for(int i=0;i<orePosList.size();i++)
+                for(BlockPos orePos : orePosList)
                 {
-                    BlockPos orePos = orePosList.get(i);
+                    int oreGenerateSeed = random.nextInt(ORE_GENERATE_DENSITY_REFERENCE);
                     generateOre(oreGenerateSeed, veinChosen, world, orePos);
                 }
 
@@ -187,6 +184,26 @@ public class WorldGenVein implements IWorldGenerator {
     private ArrayList<BlockPos> chooseOrePos(Vein vein, BlockPos centerPos, Random random)
     {
         ArrayList<BlockPos> orePosList = new ArrayList<>(200);
+        int xBound = 24;
+        int zBound = 24;
+        int yBound = random.nextInt(5)+5;
+        double maxdistance = Math.sqrt(xBound*xBound+
+                yBound*yBound+
+                zBound*zBound);
+        for(int y = centerPos.getY()-yBound;y< centerPos.getY()+yBound;y++)
+            for(int x= centerPos.getX()-xBound;x< centerPos.getX()+xBound;x++)
+                for(int z = centerPos.getZ()-zBound;z<centerPos.getZ()+zBound;z++)
+                {
+                    double distance = Math.sqrt((x-centerPos.getX())*(x-centerPos.getX())+
+                            (y-centerPos.getY())*(y-centerPos.getY())+
+                            (z-centerPos.getZ())*(z-centerPos.getZ()));
+                    if(random.nextDouble()>(distance/maxdistance)&&y>vein.yMin&&y<vein.yMax)
+                    {
+                        BlockPos orePos = new BlockPos(x,y,z);
+                        orePosList.add(orePos);
+                    }
+                }
+
 
         return orePosList;
     }
