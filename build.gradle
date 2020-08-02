@@ -1,3 +1,6 @@
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+
 /*
 注意：如要更改版本请修改version.properties
  */
@@ -10,6 +13,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'commons-io', name: 'commons-io', version: '2.7'
     }
 }
 
@@ -19,7 +23,15 @@ apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-Properties versionProperties = new Properties();
+def cuckooLibPath
+if (project.hasProperty('CuckooLibProjectPath')) {
+    def cpath = (project.property('CuckooLibProjectPath') as String).replace('\\', '/')
+    cuckooLibPath = cpath.endsWith('/') ? cpath : cpath + '/'
+} else {
+    cuckooLibPath = ''
+}
+
+def versionProperties = new Properties();
 versionProperties.load(new StringReader(project.file('version.properties').getText('UTF-8')))
 
 version = versionProperties.getOrDefault('modVersion', 'unknown')
@@ -31,6 +43,21 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 repositories {
+    if (project.hasProperty('useLocalBuildMaven') && project.property('useLocalBuildMaven') == 'true') {
+        maven {
+            name = 'LocalBuildMaven'
+            url = 'file:///' + project.projectDir.absolutePath + '/LocalBuildMaven'
+        }
+    }
+    if (project.hasProperty('CuckooLibProjectPath')) {
+        def file = new File(cuckooLibPath)
+        if (file.exists()) {
+            maven {
+                name = 'CuckooLibLocalBuildMaven'
+                url = 'file:///' + file.absolutePath + '/LocalBuildMaven'
+            }
+        }
+    }
     maven {
         name = 'AliyunMaven'
         url = 'http://maven.aliyun.com/nexus/content/groups/public'
@@ -59,6 +86,69 @@ processResources {
         expand 'version': project.version
     }
 }
+
+println '\n########################################################\n'
+println ' IMPORTANT: IF YOU WANT TO GENERATE RUN CONTIGURATIONS '
+println ' FOR INTELLIJ IDEA, YOU MUST RUN THE "genIntellijRunsForEOK"'
+println ' TASK INSTEAD OF "genIntellijRuns" !!!!!!!!'
+println '\n########################################################\n'
+
+// 用暴力方法纠正EOK启动方案中的错误
+def fixRunConfiguration(fileName) {
+    def confRoot = rootProject.projectDir.getAbsolutePath() + '/.idea/runConfigurations'
+    def lines = Files.readAllLines(new File(confRoot + '/' + fileName).toPath(), StandardCharsets.UTF_8)
+    def clFile = new File(project.property('CuckooLibProjectPath') as String).getAbsoluteFile()
+    def clPath = clFile.getAbsolutePath().replace('\\', '/')
+    clPath += clPath.endsWith('/') ? '' : '/'
+    def builder = new StringBuilder()
+    for (int i = 0; i < 6; i++)
+        builder.append(' ')
+    def lineNumber = 1
+    for (def str : lines) {
+        if (str.contains('name="MOD_CLASSES"')) {
+            break
+        } else {
+            lineNumber++
+        }
+    }
+    if (lineNumber == 1) {
+        System.err.println('ERROR: Run Configuration corruption!')
+        throw new IllegalStateException('Run Configuration corruption!')
+    }
+    builder.append('<env name="MOD_CLASSES" value="')
+    builder.append('cuckooLib%%')
+    builder.append(clPath)
+    builder.append('build/resources/main;')
+    builder.append('cuckooLib%%')
+    builder.append(clPath)
+    builder.append('build/classes/java/main;')
+    builder.append('eok%%$PROJECT_DIR$/build/resources/main;')
+    builder.append('eok%%$PROJECT_DIR$/build/classes/java/main"')
+    builder.append(' />')
+    lines.set(lineNumber - 1, builder.toString())
+    def outputBuilder = new StringBuilder()
+    for (def str : lines) {
+        outputBuilder.append(str)
+        outputBuilder.append('\n')
+    }
+    new File(confRoot + '/' + fileName).setText(outputBuilder.toString(), 'UTF-8')
+}
+
+// 用暴力方法纠正EOK启动方案中的错误
+def genIntellijRunsForEOK = tasks.create('genIntellijRunsForEOK') {
+    group = 'fg_runs'
+    description = 'Generates the run configurations for EOK, please use this instead of "genIntellijRuns"'
+    doLast {
+        if (project.hasProperty('CuckooLibProjectPath')) {
+            fixRunConfiguration('runClient.xml');
+            fixRunConfiguration('runServer.xml');
+            fixRunConfiguration('runData.xml');
+        }
+    }
+}
+
+// 用暴力方法纠正EOK启动方案中的错误
+genIntellijRunsForEOK.dependsOn('genIntellijRuns')
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -95,6 +185,11 @@ minecraft {
             mods {
                 eok {
                     source sourceSets.main
+                }
+                if (project.hasProperty('CuckooLibProjectPath')) {
+                    cuckooLib {
+                        source project(':CuckooLib').sourceSets.main
+                    }
                 }
             }
         }
@@ -149,15 +244,11 @@ dependencies {
     compileOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.1-beta-4:api')
     runtimeOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.1-beta-4')
 
-    String cuckooLibVersion = '3.0.0.0'
-    if (project.hasProperty('CuckooLibIncludeBuildPath')) {
-        compile('com.github.zi_jing.cuckoolib:CuckooLib:' + cuckooLibVersion) {
-            transitive = false
-        }
+    def cuckooLibVersion = versionProperties.getOrDefault('cuckooLibVersion', 'unknown')
+    if (project.hasProperty('CuckooLibProjectPath')) {
+        compile project(':CuckooLib')
     } else {
-        compile(fg.deobf('com.github.zi_jing.cuckoolib:CuckooLib:' + cuckooLibVersion)) {
-            transitive = false
-        }
+        compile(fg.deobf('com.github.zi_jing.cuckoolib:CuckooLib:' + cuckooLibVersion))
     }
 
 }
@@ -215,8 +306,13 @@ publishing.publications {
 }
 
 publishing.repositories {
-    maven {
-        url 'file:///${project.projectDir}/mcmodsrepo'
+    publishing.repositories {
+        if (project.hasProperty('useLocalBuildMaven') && project.property('useLocalBuildMaven') == 'true') {
+            maven {
+                name = 'LocalBuildMaven'
+                url = 'file:///' + project.projectDir.absolutePath + '/LocalBuildMaven'
+            }
+        }
     }
 }
 

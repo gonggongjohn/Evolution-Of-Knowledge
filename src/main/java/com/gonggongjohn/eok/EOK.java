@@ -15,8 +15,9 @@ import org.apache.logging.log4j.Logger;
 @Mod("eok")
 public class EOK {
 
-    public static final ItemGroup eokItemGroup = new EOKItemGroup();
+    public static final ItemGroup EOK_ITEMGROUP = new EOKItemGroup();
     private static final Logger LOGGER = LogManager.getLogger("TestMod");
+    public static final String MODID = "EOK";
 
     public EOK() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -51,4 +52,5 @@ public class EOK {
     public void onServerStarting(final FMLServerStartingEvent event) {
         // do something when the server starts
     }
+
 }

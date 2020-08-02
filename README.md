@@ -2,6 +2,9 @@
 
 # Evolution Of Knowledge 1.16
 
-This is the development repository of the Minecraft mod The Evolution Of Knowledge on Minecraft 1.6.1.
+This is the development repository of the Minecraft mod The Evolution Of Knowledge on Minecraft 1.16.1.
 
 ### Still under construction
+
+## For mod authors
+

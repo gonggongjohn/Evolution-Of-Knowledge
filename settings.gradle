@@ -1,12 +1,14 @@
+import com.sun.javafx.fxml.PropertyNotFoundException
+
 rootProject.name = 'EvolutionOfKnowledge-1.16'
 
-Properties properties = new Properties()
-String includeBuildPropKey = 'CuckooLibIncludeBuildPath'
-File propFile = new File(rootProject.projectDir.getPath() + File.separator + 'gradle.properties')
-if (propFile.exists()) {
-    properties.load(new StringReader(propFile.text))
-}
-
-if (properties.containsKey(includeBuildPropKey)) {
-    includeBuild(properties.getProperty(includeBuildPropKey))
+def propFile = new File(rootProject.projectDir.getPath() + File.separator + 'gradle.properties')
+def properties = new Properties()
+if (propFile.exists())
+    properties.load(new StringReader(propFile.getText('UTF-8')))
+if (properties.containsKey('CuckooLibProjectPath')) {
+    include 'CuckooLib'
+    project(':CuckooLib').projectDir = new File(properties.getProperty('CuckooLibProjectPath'))
+} else {
+    throw new PropertyNotFoundException('Missing necassary property "CuckooLibProjectPath" in ' + propFile.getAbsolutePath())
 }
