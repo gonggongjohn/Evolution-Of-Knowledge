@@ -1,5 +1,6 @@
 {
   "itemGroup.eok_group": "Evolution Of Knowledge",
   "eok.status_message.eok_symbol_click": "Welcome to EOK",
-  "item.eok.eok_symbol": "The Symbol Of EOK"
+  "item.eok.eok_symbol": "The Symbol Of EOK",
+  "item.eok.eok_manual": "EOK Manual"
 }
