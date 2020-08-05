@@ -16,6 +16,8 @@ item.eok.eok_manual.name=EOK manuel
 item.eok.golden_egg.name=Oeuf d'or
 item.eok.redstone_apple.name=Pomme de Redstone
 item.eok.blue_print.name=蓝图
+item.eok.bighammer80.name=大锤八十(懒得翻译就算了。。）
+item.eok.smallhammer40.name=小锤四十（同上）
 
 metaitem.eok.elementary_research_table.name=Blueprint de la table de recherche
 

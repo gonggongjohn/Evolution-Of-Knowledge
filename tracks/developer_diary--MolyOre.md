@@ -37,3 +37,9 @@ GameRegistry.registerWorldGenerator(new WorldGenVein(), 10001);
 目前只可以使用runclient运行矿脉生成的代码，若使用minecraft client启动会崩端，如要使用minecraft client请按上述所说注释掉那一行\
 若要看到测试矿脉，请将WorldGenVein.java中的generateOre函数中
 "if(world.getBlockState(pos).getBlock() ==Blocks.STONE) "中的括号内的后面加上||true（即永远为真的条件判断）
+
+#2020/8/5
+完成了两个查看矿物生成的工具item\
+大锤八十！小锤四十！\
+大锤八十：清除人所在区块的全部方块，只留下y=1的基岩。\
+小锤四十：清除人所在区块的所有石头、泥土、草方块、沙子、沙砾等地底常见方块，保留所有矿石（在岩层系统加入后要进一步修改）

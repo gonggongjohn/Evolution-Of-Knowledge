@@ -16,6 +16,8 @@ item.eok.eok_manual.name=EOK手册
 item.eok.golden_egg.name=金蛋
 item.eok.blue_print.name=蓝图
 item.eok.redstone_apple.name=红石苹果
+item.eok.bighammer80.name=大锤八十
+item.eok.smallhammer40.name=小锤四十
 
 metaitem.eok.elementary_research_table.name=研究台蓝图
 

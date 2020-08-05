@@ -71,14 +71,14 @@ public class WorldGenVein implements IWorldGenerator {
 
     public WorldGenVein(){
         StringBuilder laststr= new StringBuilder();
-        FileSystem json = null;
+        FileSystem json;
         try {
             URI sample = WorldGenVein.class.getResource("/assets/eok/assets.root").toURI();
             Path file;
             json = FileSystems.newFileSystem(sample, Collections.emptyMap());
             file = json.getPath("/assets/eok/database/vein.json");
-            BufferedReader reader = Files.newBufferedReader(file);;
-            String tempString = null;
+            BufferedReader reader = Files.newBufferedReader(file);
+            String tempString;
             while ((tempString = reader.readLine()) != null) {
                 laststr.append(tempString);
             }
@@ -96,7 +96,7 @@ public class WorldGenVein implements IWorldGenerator {
                 int vein_generate_weight = vein.get("weight").getAsInt();
                 VEIN_TOTAL_SEED = VEIN_TOTAL_SEED + vein_generate_weight;
                 JsonArray oreContained = vein.get("ore_contained").getAsJsonArray();
-                Map<String,Integer> oreContain = new HashMap<String, Integer>();
+                Map<String,Integer> oreContain = new HashMap<>();
                 for(int j=0;j<oreContained.size();j=j+1)
                 {
                     JsonObject ore = oreContained.get(j).getAsJsonObject();
@@ -137,7 +137,7 @@ public class WorldGenVein implements IWorldGenerator {
                  * the rule of naming orecore:
                  * registryName: "orecore+'name of the vein'"(cautious: name of vein, 意味着一个矿脉对应一种矿脉核心）
                  * */
-                Block blockOreCore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("orecore"+veinChosen.name));
+                Block blockOreCore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("eok:orecore"+veinChosen.name));
                 if(blockOreCore != null && world.getBlockState(centerPos).getBlock()== Blocks.STONE) {
                     world.setBlockState(centerPos, blockOreCore.getDefaultState());
                     world.setBlockState(centerPos.up(), blockOreCore.getDefaultState());
@@ -153,10 +153,8 @@ public class WorldGenVein implements IWorldGenerator {
 
     private Vein chooseVein(int generateSeed)
     {
-        for(int i=0;i<VeinList.size();i++)
-        {
-            Vein tmpVein=VeinList.get(i);
-            if(generateSeed>tmpVein.generateWeight)
+        for (Vein tmpVein : VeinList) {
+            if (generateSeed > tmpVein.generateWeight)
                 generateSeed = generateSeed - tmpVein.generateWeight;
             else
                 return tmpVein;

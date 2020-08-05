@@ -16,6 +16,8 @@ item.eok.eok_manual.name=EOK Manual
 item.eok.golden_egg.name=Golden Egg
 item.eok.blue_print.name=Blueprint
 item.eok.redstone_apple.name=Redstone Apple
+item.eok.bighammer80.name=Big Hammer 80
+item.eok.smallhammer40.name=Small Hammer 40
 
 metaitem.eok.elementary_research_table.name=BluePrint of Elementary Research Table
 

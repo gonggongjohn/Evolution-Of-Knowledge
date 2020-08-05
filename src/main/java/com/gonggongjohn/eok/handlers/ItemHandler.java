@@ -33,6 +33,8 @@ public class ItemHandler {
     //public static final Item Redstone_Boots = new ItemRedstoneBoots();
     public static final Item bluePrint = new ItemBluePrint();
     public static final Item testMath = new ItemTestMath();
+    public static final Item bighammer80 = new ItemBigHammer80();
+    public static final Item smallhammer40 = new ItemSmallHammer40();
 
     public static void registerItem(Item item) {
         ITEM_REGISTRY.add(item);
