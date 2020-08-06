@@ -1,1 +1,0 @@
-## This repository is used to track the progress of each developers.

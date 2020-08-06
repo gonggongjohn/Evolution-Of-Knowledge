@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "eok:items/chipped_flint_fragment"
-    }
-}

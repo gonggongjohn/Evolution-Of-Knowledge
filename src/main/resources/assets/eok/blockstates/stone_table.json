@@ -1,8 +1,0 @@
-{
-  "variants":{
-    "facing=east": { "model": "eok:stone_table", "y": 90 },
-    "facing=south": { "model": "eok:stone_table", "y": 180 },
-    "facing=west": { "model": "eok:stone_table", "y": 270 },
-    "facing=north": { "model": "eok:stone_table" }
-  }
-}
