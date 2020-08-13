@@ -20,13 +20,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clone CuckooLib Repository
+    - name: Clone CuckooLib repository
       uses: actions/checkout@v2
       with:
         repository: zi-jing/CuckooLib
         ref: 1.12
         path: CuckooLib-1.12
-    - name: Clone EOK Repository
+    - name: Clone EOK repository
       uses: actions/checkout@v2
       with:
         path: EOK-1.12
@@ -41,6 +41,8 @@ jobs:
         # For instance, jobs with different JDK versions can't share caches
         # RUNNER_OS is added to job-id automatically
         job-id: eok
+    - name: Switch to EOK repository
+      run: cd EOK-1.12
     - name: test
       run: pwd && ls -lh && ls -lh ../
     #- uses: axel-op/googlejavaformat-action@v3
