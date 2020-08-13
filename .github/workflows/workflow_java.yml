@@ -39,8 +39,6 @@ jobs:
         # For instance, jobs with different JDK versions can't share caches
         # RUNNER_OS is added to job-id automatically
         job-id: eok
-    - name: Switch to EOK repository
-      run: cd Evolution-Of-Knowledge
     - name: test
       run: pwd && ls -lh && ls -lh ../
     #- uses: axel-op/googlejavaformat-action@v3
