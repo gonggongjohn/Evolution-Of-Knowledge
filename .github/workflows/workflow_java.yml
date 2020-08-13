@@ -42,7 +42,7 @@ jobs:
         # RUNNER_OS is added to job-id automatically
         job-id: eok
     - name: Copy gradle.properties
-      run: cp ./EOK-1.12/.github/gradle.properties ./EOK-1.12/
+      run: cp ./EOK-1.12/.github/gradle.properties ./EOK-1.12/ && ls -lh ./EOK-1.12/
     #- uses: axel-op/googlejavaformat-action@v3
     #  with:
     #    args: "--skip-sorting-imports --replace"
