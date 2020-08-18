@@ -51,4 +51,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.12/gradlew && chmod +x ./EOK-1.12/gradlew
     - name: Build with Gradle
-      run: cd ./EOK-1.12/ && ./gradlew --no-daemon clean setupDevWorkspace build
+      run: cd ./EOK-1.12/ && ./gradlew --no-daemon clean build
