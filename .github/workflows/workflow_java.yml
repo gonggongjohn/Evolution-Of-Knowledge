@@ -53,3 +53,11 @@ jobs:
       run: cd ./EOK-1.12/ && ./gradlew setupCIWorkspace
     - name: Build
       run: cd ./EOK-1.12/ && ./gradlew build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: EOK snapshot
+        path: ./EOK-1.12/build/libs
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CuckooLib snapshot for EOK
+        path: ./CuckooLib-1.12/build/libs
