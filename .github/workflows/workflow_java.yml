@@ -41,8 +41,7 @@ jobs:
         # For instance, jobs with different JDK versions can't share caches
         # RUNNER_OS is added to job-id automatically
         job-id: eok
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        path: ~/.gradle
     - name: Copy gradle.properties
       run: cp ./EOK-1.12/.github/gradle.properties ./EOK-1.12/
     #- uses: axel-op/googlejavaformat-action@v3
@@ -51,4 +50,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.12/gradlew && chmod +x ./EOK-1.12/gradlew
     - name: Build with Gradle
-      run: cd ./EOK-1.12/ && ./gradlew --no-daemon clean build
+      run: cd ./EOK-1.12/ && ./gradlew setupCIWorkspace
