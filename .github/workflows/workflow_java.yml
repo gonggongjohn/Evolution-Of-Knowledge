@@ -49,5 +49,7 @@ jobs:
     #    args: "--skip-sorting-imports --replace"
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.12/gradlew && chmod +x ./EOK-1.12/gradlew
-    - name: Build with Gradle
-      run: cd ./EOK-1.12/ && ./gradlew setupCIWorkspace build
+    - name: CI Setup
+      run: cd ./EOK-1.12/ && ./gradlew setupCIWorkspace
+    - name: Build
+      run: cd ./EOK-1.12/ && ./gradlew build
