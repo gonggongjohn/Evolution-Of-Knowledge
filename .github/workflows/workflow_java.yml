@@ -49,7 +49,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.16/gradlew && chmod +x ./EOK-1.16/gradlew
     - name: Clean
-      run: cd ./EOK-1.16/ && ./gradlew cleanCache
+      run: rm -rf ./gradle/*
     - name: Build
       run: cd ./EOK-1.16/ && ./gradlew build
     - uses: actions/upload-artifact@v2
