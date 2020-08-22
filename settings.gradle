@@ -1,4 +1,3 @@
-import com.sun.javafx.fxml.PropertyNotFoundException
 
 rootProject.name = 'EvolutionOfKnowledge-1.16'
 
@@ -10,5 +9,5 @@ if (properties.containsKey('CuckooLibProjectPath')) {
     include 'CuckooLib'
     project(':CuckooLib').projectDir = new File(properties.getProperty('CuckooLibProjectPath'))
 } else {
-    throw new PropertyNotFoundException('Missing necassary property "CuckooLibProjectPath" in ' + propFile.getAbsolutePath())
+    throw new RuntimeException('Missing necassary property "CuckooLibProjectPath" in ' + propFile.getAbsolutePath())
 }
