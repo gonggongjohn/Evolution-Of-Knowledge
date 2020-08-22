@@ -43,22 +43,20 @@ jobs:
         job-id: eok
     - name: Copy gradle.properties
       run: cp ./EOK-1.16/.github/gradle.properties ./EOK-1.16/
-    #- uses: axel-op/googlejavaformat-action@v3
-    #  with:
-    #    args: "--skip-sorting-imports --replace"
+    - uses: axel-op/googlejavaformat-action@v3
+      with:
+        args: "--skip-sorting-imports --replace"
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.16/gradlew && chmod +x ./EOK-1.16/gradlew
-    #- name: Clean
-    #  run: rm -rf ./gradle/*
-    - name: debug
-      run: ls -lh .
-    #- name: Build
-    #  run: cd ./EOK-1.16/ && ./gradlew build
-    #- uses: actions/upload-artifact@v2
-    #  with:
-    #    name: EOK snapshot
-    #    path: ./EOK-1.16/build/libs
-    #- uses: actions/upload-artifact@v2
-    #  with:
-    #    name: CuckooLib snapshot for EOK
-    #    path: ./CuckooLib-1.16/build/libs
+    - name: Clean
+      run: rm -rf ./gradle/*
+    - name: Build
+      run: cd ./EOK-1.16/ && ./gradlew build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: EOK snapshot
+        path: ./EOK-1.16/build/libs
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CuckooLib snapshot for EOK
+        path: ./CuckooLib-1.16/build/libs
