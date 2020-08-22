@@ -41,7 +41,6 @@ jobs:
         # For instance, jobs with different JDK versions can't share caches
         # RUNNER_OS is added to job-id automatically
         job-id: eok
-        path: ~/.gradle
     - name: Copy gradle.properties
       run: cp ./EOK-1.12/.github/gradle.properties ./EOK-1.12/
     #- uses: axel-op/googlejavaformat-action@v3
