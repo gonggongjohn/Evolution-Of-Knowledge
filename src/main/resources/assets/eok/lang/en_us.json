@@ -3,5 +3,10 @@
   "eok.status_message.eok_symbol_click": "Welcome to EOK",
   "item.eok.eok_symbol": "The Symbol Of EOK",
   "item.eok.eok_manual": "EOK Manual",
-  "item.eok.redstone_apple": "Redstone Apple"
+  "item.eok.redstone_apple": "Redstone Apple",
+  "item.eok.redstone_axe": "Redstone Axe",
+  "item.eok.redstone_hoe": "Redstone Hoe",
+  "item.eok.redstone_pickaxe": "Redstone Pickaxe",
+  "item.eok.redstone_shovel": "Redstone Shovel",
+  "item.eok.redstone_sword": "Redstone Sword"
 }

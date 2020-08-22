@@ -3,5 +3,10 @@
   "eok.status_message.eok_symbol_click": "欢迎来到EOK",
   "item.eok.eok_symbol": "EOK的标志",
   "item.eok.eok_manual": "EOK手册",
-  "item.eok.redstone_apple": "红石苹果"
+  "item.eok.redstone_apple": "红石苹果",
+  "item.eok.redstone_axe": "红石斧",
+  "item.eok.redstone_hoe": "红石锄",
+  "item.eok.redstone_pickaxe": "红石镐",
+  "item.eok.redstone_shovel": "红石锹",
+  "item.eok.redstone_sword": "红石剑"
 }
