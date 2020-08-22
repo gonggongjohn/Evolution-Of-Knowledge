@@ -62,16 +62,16 @@ repositories {
         name = 'AliyunMaven'
         url = 'http://maven.aliyun.com/nexus/content/groups/public'
     }
-    maven {
-        // location of the maven that hosts JEI files
-        name = 'Progwml6 maven'
-        url = 'https://dvs1.progwml6.com/files/maven/'
-    }
-    maven {
+	maven {
         // location of a maven mirror for JEI files, as a fallback
         // TOP mirror
         name = 'ModMaven'
         url = 'https://modmaven.k-4u.nl'
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = 'Progwml6 maven'
+        url = 'https://dvs1.progwml6.com/files/maven/'
     }
     maven {
         // CuckooLib
