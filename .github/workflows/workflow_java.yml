@@ -51,7 +51,7 @@ jobs:
     #- name: Clean
     #  run: rm -rf ./gradle/*
     - name: debug
-      run: ls -lh ./gradle/caches/forge_gradle
+      run: ls -lh .
     #- name: Build
     #  run: cd ./EOK-1.16/ && ./gradlew build
     #- uses: actions/upload-artifact@v2
