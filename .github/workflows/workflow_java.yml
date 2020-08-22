@@ -1,0 +1,63 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: EOK Snapshot Build
+
+on:
+  push:
+    branches: 
+      - '1.12.2'
+      - '1.16'
+  pull_request:
+    branches: 
+      - '1.12.2'
+      - '1.16'
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone CuckooLib repository
+      uses: actions/checkout@v2
+      with:
+        repository: zi-jing/CuckooLib
+        ref: 1.16
+        path: CuckooLib-1.16
+    - name: Clone EOK repository
+      uses: actions/checkout@v2
+      with:
+        path: EOK-1.16
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - uses: burrunan/gradle-cache-action@v1
+      name: Cache .gradle
+      with:
+        # If you have multiple jobs, use distinct job-id in in case you want to split caches
+        # For instance, jobs with different JDK versions can't share caches
+        # RUNNER_OS is added to job-id automatically
+        job-id: eok
+        path: ~/.gradle
+    - name: Copy gradle.properties
+      run: cp ./EOK-1.16/.github/gradle.properties ./EOK-1.16/
+    #- uses: axel-op/googlejavaformat-action@v3
+    #  with:
+    #    args: "--skip-sorting-imports --replace"
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./CuckooLib-1.16/gradlew && chmod +x ./EOK-1.16/gradlew
+    - name: Build
+      run: cd ./EOK-1.16/ && ./gradlew build
+    - name: CuckooLib reobfJar
+      run: ./CuckooLib-1.16/gradlew reobfJar
+    - uses: actions/upload-artifact@v2
+      with:
+        name: EOK snapshot
+        path: ./EOK-1.16/build/libs
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CuckooLib snapshot for EOK
+        path: ./CuckooLib-1.16/build/libs
