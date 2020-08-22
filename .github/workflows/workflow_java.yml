@@ -60,3 +60,5 @@ jobs:
       with:
         name: CuckooLib snapshot for EOK
         path: ./CuckooLib-1.16/build/libs
+    - name: debug
+      run: tree -a ./gradle/caches/forge_gradle
