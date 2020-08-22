@@ -48,8 +48,10 @@ jobs:
     #    args: "--skip-sorting-imports --replace"
     - name: Grant execute permission for gradlew
       run: chmod +x ./CuckooLib-1.16/gradlew && chmod +x ./EOK-1.16/gradlew
-    - name: Clean
-      run: rm -rf ./gradle/*
+    #- name: Clean
+    #  run: rm -rf ./gradle/*
+    - name: debug
+      run: tree -a ./gradle/caches/forge_gradle
     - name: Build
       run: cd ./EOK-1.16/ && ./gradlew build
     - uses: actions/upload-artifact@v2
@@ -60,5 +62,3 @@ jobs:
       with:
         name: CuckooLib snapshot for EOK
         path: ./CuckooLib-1.16/build/libs
-    - name: debug
-      run: tree -a ./gradle/caches/forge_gradle
