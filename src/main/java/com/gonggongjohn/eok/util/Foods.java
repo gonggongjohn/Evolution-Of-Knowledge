@@ -1,10 +1,10 @@
-package com.gonggongjohn.eok.handler;
+package com.gonggongjohn.eok.util;
 
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
-public class FoodHandler {
+public class Foods {
     public static final Food REDSTONE_APPLE = (new Food.Builder())
             .hunger(4)
             .saturation(0.6F)
