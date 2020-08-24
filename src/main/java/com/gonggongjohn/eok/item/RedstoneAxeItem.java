@@ -1,7 +1,7 @@
 package com.gonggongjohn.eok.item;
 
 import com.gonggongjohn.eok.EOK;
-import com.gonggongjohn.eok.tier.RedstoneTier;
+import com.gonggongjohn.eok.util.RedstoneTier;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
 

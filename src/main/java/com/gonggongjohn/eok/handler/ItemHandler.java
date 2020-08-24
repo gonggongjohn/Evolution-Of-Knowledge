@@ -20,6 +20,10 @@ public class ItemHandler {
     public static final Item itemRedstoneShovel = register("redstone_shovel", new RedstoneShovelItem());
     public static final Item itemRedstoneSword = register("redstone_sword", new RedstoneSwordItem());
     public static final Item itemRedstonePickaxe = register("redstone_pickaxe", new RedstonePickaxeItem());
+    public static final Item itemRedstoneHelmet = register("redstone_helmet", new RedstoneHelmetItem());
+    public static final Item itemRedstoneChestplate = register("redstone_chestplate", new RedstoneChestplateItem());
+    public static final Item itemRedstoneBoots = register("redstone_boots", new RedstoneBootsItem());
+    public static final Item itemRedstoneLeggings = register("redstone_leggings", new RedstoneLeggingsItem());
 
     private static Item register(String unlocalizedName, Item item) {
         item.setRegistryName(EOK.MODID, unlocalizedName);

@@ -8,5 +8,9 @@
   "item.eok.redstone_hoe": "红石锄",
   "item.eok.redstone_pickaxe": "红石镐",
   "item.eok.redstone_shovel": "红石锹",
-  "item.eok.redstone_sword": "红石剑"
+  "item.eok.redstone_sword": "红石剑",
+  "item.eok.redstone_helmet": "红石头盔",
+  "item.eok.redstone_chestplate": "红石胸甲",
+  "item.eok.redstone_boots": "红石靴子",
+  "item.eok.redstone_leggings": "红石护腿"
 }

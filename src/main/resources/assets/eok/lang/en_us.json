@@ -8,5 +8,9 @@
   "item.eok.redstone_hoe": "Redstone Hoe",
   "item.eok.redstone_pickaxe": "Redstone Pickaxe",
   "item.eok.redstone_shovel": "Redstone Shovel",
-  "item.eok.redstone_sword": "Redstone Sword"
+  "item.eok.redstone_sword": "Redstone Sword",
+  "item.eok.redstone_helmet": "Redstone Helmet",
+  "item.eok.redstone_chestplate": "Redstone Chestplate",
+  "item.eok.redstone_boots": "Redstone Boots",
+  "item.eok.redstone_leggings": "Redstone Leggings"
 }

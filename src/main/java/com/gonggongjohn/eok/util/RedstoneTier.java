@@ -1,4 +1,4 @@
-package com.gonggongjohn.eok.tier;
+package com.gonggongjohn.eok.util;
 
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
