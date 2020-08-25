@@ -17,7 +17,7 @@ public class EOK {
 
     public static final ItemGroup EOK_ITEMGROUP = new EOKItemGroup();
     private static final Logger LOGGER = LogManager.getLogger("EvolutionOfKnowledge");
-    public static final String MODID = "EOK";
+    public static final String MODID = "eok";
 
     public EOK() {
         MinecraftForge.EVENT_BUS.register(this);

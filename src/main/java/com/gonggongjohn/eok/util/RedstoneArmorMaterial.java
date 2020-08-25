@@ -1,6 +1,5 @@
 package com.gonggongjohn.eok.util;
 
-import com.gonggongjohn.eok.EOK;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Items;
@@ -49,7 +48,7 @@ public class RedstoneArmorMaterial implements IArmorMaterial {
     @OnlyIn(Dist.CLIENT)
     @Nonnull
     public String getName() {
-        return EOK.MODID + ":" + "redstone";
+        return "eok:redstone";
     }
 
     @Override
