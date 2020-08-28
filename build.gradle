@@ -62,21 +62,17 @@ repositories {
         name = 'AliyunMaven'
         url = 'http://maven.aliyun.com/nexus/content/groups/public'
     }
-	maven {
-        // location of a maven mirror for JEI files, as a fallback
-        // TOP mirror
-        name = 'ModMaven'
-        url = 'https://modmaven.k-4u.nl'
-    }
+
     maven {
-        // location of the maven that hosts JEI files
+        // JEI
         name = 'Progwml6 maven'
         url = 'https://dvs1.progwml6.com/files/maven/'
     }
+
     maven {
-        // CuckooLib
-        name = 'CuckooMaven'
-        url = 'https://zi-jing.github.io/cuckoo-maven/maven'
+        // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
     }
 }
 
@@ -234,15 +230,15 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.106'
+    minecraft 'net.minecraftforge:forge:1.16.2-33.0.22'
 
     // JEI
-    compileOnly fg.deobf('mezz.jei:jei-1.16.1:7.0.0.6:api')
-    runtimeOnly fg.deobf('mezz.jei:jei-1.16.1:7.0.0.6')
+    compileOnly fg.deobf('mezz.jei:jei-1.16.2:7.1.3.20:api')
+    runtimeOnly fg.deobf('mezz.jei:jei-1.16.2:7.1.3.20')
 
     // TOP
-    compileOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.1-beta-4:api')
-    runtimeOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.1-beta-4')
+    compileOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.4-beta-7:api')
+    runtimeOnly fg.deobf('mcjty.theoneprobe:TheOneProbe-1.16:1.16-3.0.4-beta-7')
 
     def cuckooLibVersion = versionProperties.getOrDefault('cuckooLibVersion', 'unknown')
     if (project.hasProperty('CuckooLibProjectPath')) {
@@ -250,10 +246,8 @@ dependencies {
     } else {
         compile(fg.deobf('com.github.zi_jing.cuckoolib:CuckooLib:' + cuckooLibVersion))
     }
-
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
