@@ -1,0 +1,13 @@
+# clean gradle cache
+
+name: Clean Gradle Cache
+on: 
+  workflow_dispatch:
+  
+jobs:
+  clean:
+    name: Clean
+    runs-on: ununtu-latest
+    steps:
+      - name: Clean
+        run: rm -rf ./gradle/*
