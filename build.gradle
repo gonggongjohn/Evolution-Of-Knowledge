@@ -58,9 +58,13 @@ repositories {
             }
         }
     }
-    maven {
-        name = 'AliyunMaven'
-        url = 'http://maven.aliyun.com/nexus/content/groups/public'
+    if (System.getenv().containsKey("GITHUB_ACTIONS") || System.getenv().containsKey("CI")) {
+        println 'Detected Github Actions environment, Aliyun Maven will be disabled'
+    } else {
+        maven {
+            name = 'AliyunMaven'
+            url = 'http://maven.aliyun.com/nexus/content/groups/public'
+        }
     }
 
     maven {
