@@ -48,7 +48,7 @@ jobs:
     #- name: Clean
      # run: rm -rf ./gradle/*
     - name: Build
-      run: cd ./EOK-1.16/ && ./gradlew build -i --debug --stacktrace
+      run: cd ./EOK-1.16/ && ./gradlew build
     - uses: actions/upload-artifact@v2
       with:
         name: EOK snapshot
