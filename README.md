@@ -2,7 +2,7 @@
 
 # Evolution Of Knowledge 1.16
 
-这是Minecraft 1.16.1版本的模组Evolution Of Knowledge（知识的进化）的代码仓库。
+这是Minecraft 1.16.2版本的模组Evolution Of Knowledge（知识的进化）的代码仓库。
 
 ## 目录
 
