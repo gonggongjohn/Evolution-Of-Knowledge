@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 public class EOK {
 
     public static final ItemGroup EOK_ITEMGROUP = new EOKItemGroup();
-    private static final Logger LOGGER = LogManager.getLogger("EvolutionOfKnowledge");
     public static final String MODID = "eok";
+    private static final Logger LOGGER = LogManager.getLogger("EvolutionOfKnowledge");
 
     public EOK() {
         MinecraftForge.EVENT_BUS.register(this);
