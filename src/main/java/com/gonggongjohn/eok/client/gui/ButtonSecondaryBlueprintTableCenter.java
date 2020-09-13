@@ -1,41 +1,31 @@
 package com.gonggongjohn.eok.client.gui;
 
+import com.github.zi_jing.cuckoolib.client.gui.widget.EasyButton;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
-public class ButtonSecondaryBlueprintTableCenter extends GuiButton {
+public class ButtonSecondaryBlueprintTableCenter extends EasyButton {
     private Item content;
-    private GUISecondaryBlueprintTable fatherInstance;
 
-    public ButtonSecondaryBlueprintTableCenter(int buttonId, int x, int y, int widthIn, int heightIn, GUISecondaryBlueprintTable fatherInstance) {
-        super(buttonId, x, y, widthIn, heightIn, "");
-        this.fatherInstance = fatherInstance;
+    public ButtonSecondaryBlueprintTableCenter(int buttonId) {
+        super(buttonId);
     }
 
     @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-        if(this.visible) {
-            GL11.glPushMatrix();
-            GL11.glEnable(GL11.GL_BLEND);
-            OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            if(content != null) {
-                ItemStack stack = new ItemStack(content);
-                fatherInstance.drawItemStack(stack, this.x + 1, this.y + 1, "");
-                int relx = mouseX - this.x, rely = mouseY - this.y;
-                if (relx >= 0 && rely >= 0 && relx < this.width && rely < this.height){
-                    String name = I18n.format("eok.blueprint.component.pre") + this.content.getUnlocalizedName();
-                    mc.fontRenderer.drawString(name, mouseX + 5, mouseY + 5, 0xFF0000);
-                }
-            }
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glPopMatrix();
+    public void updateButton(Minecraft mc, int mouseX, int mouseY) {
+        if(content != null){
+            ItemStack stack = new ItemStack(content);
+            setItemStack(stack, x + 1, y + 1);
+            String name = I18n.format("eok.blueprint.component.pre") + this.content.getUnlocalizedName();
+            setHoverTips(name, mouseX + 5, mouseY + 5, 0xFF0000);
+        }
+        else{
+            setNullItemStack();
+            setNullHoverTips();
         }
     }
 
