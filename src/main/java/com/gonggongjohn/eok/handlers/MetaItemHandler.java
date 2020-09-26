@@ -1,7 +1,10 @@
 package com.gonggongjohn.eok.handlers;
 
+import com.github.zi_jing.cuckoolib.material.SolidShapes;
+import com.github.zi_jing.cuckoolib.metaitem.MaterialMetaItem;
 import com.github.zi_jing.cuckoolib.metaitem.MetaItem;
 import com.github.zi_jing.cuckoolib.metaitem.MetaValueItem;
+import com.github.zi_jing.cuckoolib.metaitem.NormalMetaItem;
 import com.github.zi_jing.cuckoolib.metaitem.module.IItemInteraction;
 import com.gonggongjohn.eok.EOK;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +20,11 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = EOK.MODID)
 public class MetaItemHandler {
-    public static final MetaItem META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "meta_item0"));
-    public static final MetaItem REDSTONE_META_ITEM = new MetaItem(new ResourceLocation(EOK.MODID, "redstone_meta_item"));
+    public static final MetaItem META_ITEM = new NormalMetaItem(EOK.MODID, "meta_item0");
+
+    public static final MaterialMetaItem MATERIAL_ITEM = new MaterialMetaItem(EOK.MODID, "material_item0", SolidShapes.DUST, SolidShapes.PLATE);
+
+    public static final MetaItem REDSTONE_META_ITEM = new NormalMetaItem(EOK.MODID, "redstone_meta_item");
 
     public static final MetaValueItem EOK_SYMBOL = META_ITEM.addItem(0, "eok_symbol").addModule(new IItemInteraction() {
         @Override
@@ -54,6 +60,7 @@ public class MetaItemHandler {
 
     static {
         META_ITEM.setCreativeTab(EOK.tabEOK);
+        MATERIAL_ITEM.setCreativeTab(EOK.tabEOK);
         REDSTONE_META_ITEM.setCreativeTab(EOK.tabEOK);
 
         REDSTONE_SWORD.setItemStackLimit(1);

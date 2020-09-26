@@ -3,6 +3,7 @@ package com.gonggongjohn.eok.client.gui;
 import com.github.zi_jing.cuckoolib.client.gui.widget.EasyButton;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.structure.SecondaryStructureData;
+import com.gonggongjohn.eok.handlers.MetaItemHandler;
 import com.gonggongjohn.eok.inventory.ContainerSecondaryBlueprintTable;
 import com.gonggongjohn.eok.network.PacketBlueprintTable;
 import net.minecraft.client.Minecraft;
@@ -80,7 +81,7 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
     private final int componentBackButtonTextureV = 216;
     private SecondaryStructureData onBuildingStructure;
     private int layerNum;
-    private Item activeItem;
+    private ItemStack activeItem;
     private boolean isBlueprintSlotUsing;
     private int componentStartIndex;
     private int blueprintAnchorStartIndex;
@@ -128,7 +129,7 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
                         if (!indexList.isEmpty()) {
                             for (Vec3i index : indexList) {
                                 int id = blueprintAnchorStartIndex + index.getY() * 3 + index.getZ();
-                                Item content = this.onBuildingStructure.query(index);
+                                ItemStack content = this.onBuildingStructure.query(index);
                                 ((ButtonSecondaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                             }
                         }
@@ -208,14 +209,22 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
         btnComponentBack.setCommonTextureUV(componentBackButtonTextureU, componentBackButtonTextureV);
         btnComponentBack.setHoverTextureUV(componentBackButtonTextureU, componentBackButtonTextureV);
         this.buttonList.add(btnComponentBack);
+        initGUIStructure();
+    }
+
+    private void initGUIStructure(){
         ButtonSecondaryBlueprintTableComponent btnComponent = new ButtonSecondaryBlueprintTableComponent(componentStartIndex);
         btnComponent.setPos(calcComponentX(0), calcComponentY(0));
         btnComponent.setSize(componentBracketSize, componentBracketSize);
         btnComponent.setTexture(TEXTURE_BACK);
         btnComponent.setCommonTextureUV(componentBracketCommonTextureU, componentBracketCommonTextureV);
         btnComponent.setActiveTextureUV(componentBracketChosenTextureU, componentBracketChosenTextureV);
-        btnComponent.setContent(Items.IRON_INGOT);
+        btnComponent.setContent(new ItemStack(MetaItemHandler.MATERIAL_ITEM, 1, 1027));
         this.buttonList.add(btnComponent);
+    }
+
+    private void initGUIFunction(){
+
     }
 
     @Override
@@ -223,17 +232,11 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
         if(button.id == 0 && this.pageNum == 0){
             this.pageNum++;
             this.buttonList.remove(buttonList.size() - 1);
+            initGUIFunction();
         }
         if(button.id == 1 && this.pageNum == 1){
             this.pageNum--;
-            ButtonSecondaryBlueprintTableComponent btnComponent = new ButtonSecondaryBlueprintTableComponent(componentStartIndex);
-            btnComponent.setPos(calcComponentX(0), calcComponentY(0));
-            btnComponent.setSize(componentBracketSize, componentBracketSize);
-            btnComponent.setTexture(TEXTURE_BACK);
-            btnComponent.setCommonTextureUV(componentBracketCommonTextureU, componentBracketCommonTextureV);
-            btnComponent.setActiveTextureUV(componentBracketChosenTextureU, componentBracketChosenTextureV);
-            btnComponent.setContent(Items.IRON_INGOT);
-            this.buttonList.add(btnComponent);
+            initGUIStructure();
         }
         if(button.id == 2 && onBuildingStructure != null){
             EOK.getNetwork().sendToServer(new PacketBlueprintTable(1, onBuildingStructure.toNBT()));
@@ -248,7 +251,7 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
                         int id = blueprintAnchorStartIndex + index.getY() * 3 + index.getZ();
-                        Item content = this.onBuildingStructure.query(index);
+                        ItemStack content = this.onBuildingStructure.query(index);
                         ((ButtonSecondaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }
@@ -264,7 +267,7 @@ public class GUISecondaryBlueprintTable extends GuiContainer {
                 if(!indexList.isEmpty()) {
                     for (Vec3i index : indexList) {
                         int id = blueprintAnchorStartIndex + index.getY() * 3 + index.getZ();
-                        Item content = this.onBuildingStructure.query(index);
+                        ItemStack content = this.onBuildingStructure.query(index);
                         ((ButtonSecondaryBlueprintTableCenter) this.buttonList.get(id)).setContent(content);
                     }
                 }

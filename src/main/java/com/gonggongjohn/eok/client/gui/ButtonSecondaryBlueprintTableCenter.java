@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 public class ButtonSecondaryBlueprintTableCenter extends EasyButton {
-    private Item content;
+    private ItemStack content;
 
     public ButtonSecondaryBlueprintTableCenter(int buttonId) {
         super(buttonId);
@@ -18,9 +18,8 @@ public class ButtonSecondaryBlueprintTableCenter extends EasyButton {
     @Override
     public void updateButton(Minecraft mc, int mouseX, int mouseY) {
         if(content != null){
-            ItemStack stack = new ItemStack(content);
-            setItemStack(stack, x + 1, y + 1);
-            String name = I18n.format("eok.blueprint.component.pre") + this.content.getUnlocalizedName();
+            setItemStack(content, x + 1, y + 1);
+            String name = I18n.format("eok.blueprint.component.pre") + this.content.getDisplayName();
             setHoverTips(name, mouseX + 5, mouseY + 5, 0xFF0000);
         }
         else{
@@ -29,11 +28,11 @@ public class ButtonSecondaryBlueprintTableCenter extends EasyButton {
         }
     }
 
-    public void setContent(Item content) {
+    public void setContent(ItemStack content) {
         this.content = content;
     }
 
-    public Item getContent() {
+    public ItemStack getContent() {
         return this.content;
     }
 }
