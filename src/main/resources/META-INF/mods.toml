@@ -43,12 +43,12 @@ side = "BOTH"
 [[dependencies.eok]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.16.2]"
+versionRange = "[1.16.2,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.eok]]
 modId = "cuckoolib"
 mandatory = true
-versionRange = "[3.1.0.0,)"
+versionRange = "[1.0.1,)"
 ordering = "AFTER"
 side = "BOTH"
