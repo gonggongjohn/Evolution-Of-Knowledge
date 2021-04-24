@@ -1,8 +1,8 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.GuiControl;
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiConstants;
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiScreen;
+import com.github.zi_jing.cuckoolib.gui.modulargui.GuiControl;
+import com.github.zi_jing.cuckoolib.gui.modulargui.ModularGuiConstants;
+import com.github.zi_jing.cuckoolib.gui.modulargui.ModularGuiScreen;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.client.manualold.DocumentRendererOld;
