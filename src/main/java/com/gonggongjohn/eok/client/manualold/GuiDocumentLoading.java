@@ -1,9 +1,9 @@
 package com.gonggongjohn.eok.client.manualold;
 
-import com.github.zi_jing.cuckoolib.client.gui.Colors;
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.GuiControl;
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiConstants;
-import com.github.zi_jing.cuckoolib.client.gui.modulargui.ModularGuiScreen;
+import com.github.zi_jing.cuckoolib.gui.Colors;
+import com.github.zi_jing.cuckoolib.gui.modulargui.GuiControl;
+import com.github.zi_jing.cuckoolib.gui.modulargui.ModularGuiConstants;
+import com.github.zi_jing.cuckoolib.gui.modulargui.ModularGuiScreen;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import net.minecraft.client.resources.I18n;
 

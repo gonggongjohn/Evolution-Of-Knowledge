@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.github.zi_jing.cuckoolib.client.gui.widget.EasyButton;
+import com.github.zi_jing.cuckoolib.gui.widget.EasyButton;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.api.structure.PrimaryStructureData;
 import com.gonggongjohn.eok.api.structure.SecondaryStructureData;

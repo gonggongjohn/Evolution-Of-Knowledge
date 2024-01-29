@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.github.zi_jing.cuckoolib.client.gui.Colors;
+import com.github.zi_jing.cuckoolib.gui.Colors;
 import com.gonggongjohn.eok.EOK;
 import com.gonggongjohn.eok.inventory.ContainerMerchant;
 import com.gonggongjohn.eok.network.PacketGUIMerchant;
