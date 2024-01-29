@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.manualold;
 
-import com.github.zi_jing.cuckoolib.client.gui.Colors;
+import com.github.zi_jing.cuckoolib.gui.Colors;
 import com.github.zi_jing.cuckoolib.client.render.GLUtils;
 import com.github.zi_jing.cuckoolib.util.DataUtils;
 import com.github.zi_jing.cuckoolib.util.TextUtil;

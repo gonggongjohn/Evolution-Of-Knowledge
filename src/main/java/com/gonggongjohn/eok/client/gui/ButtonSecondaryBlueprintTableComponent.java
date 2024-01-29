@@ -1,6 +1,6 @@
 package com.gonggongjohn.eok.client.gui;
 
-import com.github.zi_jing.cuckoolib.client.gui.widget.EasyButton;
+import com.github.zi_jing.cuckoolib.gui.widget.EasyButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
