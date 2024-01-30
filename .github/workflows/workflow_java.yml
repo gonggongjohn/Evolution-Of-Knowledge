@@ -22,9 +22,6 @@ jobs:
         distribution: 'zulu'
         cache: 'gradle'
 
-    - name: Copy gradle.properties
-      run: cp ./EOK-1.12/.github/gradle.properties ./EOK-1.12/
-
     - name: Grant execute permission for gradlew
       run: chmod +x ./EOK-1.12/gradlew
  
