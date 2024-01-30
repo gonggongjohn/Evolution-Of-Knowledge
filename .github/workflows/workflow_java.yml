@@ -22,7 +22,7 @@ jobs:
         distribution: 'zulu'
         cache: 'gradle'
 
-    - name: Grant execute permission for gradlew
+    - name: Grant Execute Permission
       run: chmod +x ./EOK-1.12/gradlew
  
     - name: CI Setup
