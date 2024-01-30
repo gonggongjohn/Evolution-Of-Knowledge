@@ -3,7 +3,14 @@
 
 name: EOK Snapshot Build
 
-on: [ push ]
+on:
+  push:
+    branches: 
+      - '1.12.2'
+  pull_request:
+    branches: 
+      - '1.12.2'
+  workflow_dispatch:
 
 jobs:
   build:
